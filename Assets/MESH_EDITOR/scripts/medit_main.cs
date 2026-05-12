@@ -38,12 +38,16 @@ public class medit_main : MonoBehaviour
             }
         }
     }
-
-    public Texture2D[] ins_widgetIcons;
     public static Texture2D[] widgetIcons;
+    [Header("************")]
     [Header("CONSOLE")]
     public bool spawnNewObject;
+    [Header("************")]
 
+
+    [Space(12)]
+
+    public Texture2D[] ins_widgetIcons;
     public GameObject p_object;
     public Transform t_objectContainer;
 
