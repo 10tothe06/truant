@@ -1,0 +1,156 @@
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+// 2nd in command, basically, after Program.cs
+
+// the UIManager script is probably the only thing that's stayed consistent in my projects
+public class UIManager : MonoBehaviour
+{
+    private static UIManager _instance;
+
+    public static UIManager Instance
+    {
+        get => _instance;
+        private set
+        {
+            if (_instance == null)
+            {
+                _instance = value;
+            }
+            else if (_instance != value)
+            {
+                Debug.Log("You messed up buddy.");
+                Destroy(value);
+            }
+        }
+    }
+
+    void Awake()
+    {
+        Instance = this;
+        
+        LoadMenuObjects();
+    }
+
+    void Start()
+    {
+        inventory.Initialize();
+    }
+
+    public static bool isTyping;
+
+    public void StartTyping()
+    {
+        isTyping = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+    public void StopTyping()
+    {
+        isTyping = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public Transform t_canvas;
+
+    public GameObject g_console;
+
+    public List<string> menuNames;
+    public List<int> menuSiblingIndices;
+
+    // for convinience
+    public bool isInMapView;
+
+    [Space(30)]
+    [Header("Component References")]
+    public Inventory inventory;
+
+    public void EnterMainMenu()
+    {
+        SwitchMenu("main menu");
+        g_console.SetActive(false);
+    }
+
+    public void EnterConnectionMenu()
+    {
+        SwitchMenu("join server menu");
+        g_console.SetActive(false);
+    }
+
+    public void InMenuUpdate()
+    {
+        CameraController.Instance.UpdateCamera();
+    }
+
+
+    // not just 'update', because i only want to run this sometimes
+    public void InGameUpdate()
+    {
+        CameraController.Instance.UpdateCamera();
+
+        if (Keyboard.current.backquoteKey.wasPressedThisFrame)
+        {
+            ToggleConsole();
+        }
+
+        if (!isTyping)
+        {
+
+            // keypress checks
+        }
+    }
+
+    public void ShowConsole()
+    {
+        g_console.SetActive(true);
+    }
+
+    public void HideConsole()
+    {
+        g_console.SetActive(false);
+    }
+
+    public void ToggleConsole()
+    {
+        g_console.SetActive(!g_console.activeSelf);
+        if (g_console.activeSelf)
+        {
+            StartTyping();
+        } else
+        {
+            StopTyping();
+        }
+    }
+
+    public void LoadMenuObjects()
+    {
+        for (int i = 0; i < t_canvas.childCount; i++)
+        {
+            if (t_canvas.GetChild(i).name[0] != '[') {continue;}
+
+            char tag = t_canvas.GetChild(i).name[1];
+            if (tag == 'm')
+            {
+                menuSiblingIndices.Add(i);
+                menuNames.Add(t_canvas.GetChild(i).name.Substring(4));
+            }
+        }
+    }
+
+    public void SwitchMenu(string name)
+    {
+        int index = -1;
+        for (int i = 0; i < menuNames.Count; i++)
+        {
+            t_canvas.GetChild(menuSiblingIndices[i]).gameObject.SetActive(false);
+            if (menuNames[i] == name)
+            {
+                index = menuSiblingIndices[i];
+            }
+        }
+
+        if (index == -1) {Debug.Log("Menu name not found!"); return;}
+
+        t_canvas.GetChild(index).gameObject.SetActive(true);
+    }
+}

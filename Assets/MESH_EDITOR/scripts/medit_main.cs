@@ -45,7 +45,7 @@ public class medit_main : MonoBehaviour
     [Header("************")]
 
 
-    [Space(12)]
+    [Space(24)]
 
     public Texture2D[] ins_widgetIcons;
     public GameObject p_object;

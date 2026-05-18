@@ -19,14 +19,14 @@ public class medit_widget_generic : MonoBehaviour
         {
             isSelected = true;
             // select the widget
-            obj.selectedEdges.Add(this);
+            obj.selected.Add(this);
 
             SetWidgetIcon(medit_main.Instance.ins_widgetIcons[(ushort)type + 8]);
         } else if (!select && isSelected)
         {
             isSelected = false;
             // un-select the widget on the object
-            obj.selectedEdges.Remove(this);
+            obj.selected.Remove(this);
 
             ushort numType = (ushort)type;
             if (numType == 1)

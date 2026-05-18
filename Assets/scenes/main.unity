@@ -119,6 +119,89 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &89862480
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 89862481}
+  - component: {fileID: 89862484}
+  - component: {fileID: 89862483}
+  - component: {fileID: 89862482}
+  m_Layer: 0
+  m_Name: face widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: 3ea76abe7da77fd4bbd5b3552510c353, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &89862481
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89862480}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1006059416}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &89862482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89862480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 140000001500000016000000170000000000000001000000040000000500000008000000090000000c0000000d00000018000000190000001a0000001b000000
+  controllingTriangles: 1e00000021000000
+  oldPosition: {x: 0.5, y: 0.5, z: 0}
+--- !u!114 &89862483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89862480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d69347a5ef39f6f4fbf4c15f76268fd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_face
+  g: {fileID: 89862484}
+  slvr: {fileID: 89862482}
+  flipNormals: 0
+  inset: 0
+  extrude: 0
+  removeFace: 0
+--- !u!114 &89862484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89862480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 3
+  select: 0
 --- !u!1 &174602561
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,7 +295,10 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1444619482}
+  - {fileID: 1465307143}
+  - {fileID: 195716226}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -220,6 +306,1128 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &183849557
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 183849558}
+  - component: {fileID: 183849559}
+  - component: {fileID: 183849561}
+  - component: {fileID: 183849560}
+  m_Layer: 0
+  m_Name: object(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &183849558
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183849557}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1641098398}
+  - {fileID: 1111961822}
+  - {fileID: 1613404833}
+  - {fileID: 1006059416}
+  - {fileID: 1152803878}
+  m_Father: {fileID: 1495939269}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &183849559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183849557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a30a55ccf1473748b7928d8474a5cec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_object
+  renderMesh: 0
+  renderWidgets: 0
+  renderMode: 0
+  showRawVertices: 0
+  vertexRadius: 0.1
+  drawEdgeLines: 0
+  flipAllNormals: 0
+  extrudeSelected: 0
+  fillSelected: 0
+  clearMesh: 0
+  generateMesh: 0
+  type: 0
+  resetShapeWidgets: 0
+  generateContinuously: 0
+  mf: {fileID: 183849561}
+  mr: {fileID: 183849560}
+  selected:
+  - {fileID: 372371173}
+  - {fileID: 1245480771}
+  - {fileID: 2114255985}
+  - {fileID: 2003464099}
+  t_shapeWidgetContainer: {fileID: 1641098398}
+  p_shapeWidget: {fileID: 6377185100441888474, guid: c46ef2628c7cd074d9ed4d372c2bf8fc, type: 3}
+  t_vertexWidgetContainer: {fileID: 1111961822}
+  p_vertexWidget: {fileID: 2523406536200096685, guid: f81165a7be622a247b7f96222ea1ac55, type: 3}
+  t_edgeWidgetContainer: {fileID: 1613404833}
+  p_edgeWidget: {fileID: 2523406536200096685, guid: 1ab7fd9fb9000714692ec2e3f4ff73c3, type: 3}
+  t_faceWidgetContainer: {fileID: 1006059416}
+  p_faceWidget: {fileID: 6377185100441888474, guid: ff544b9f9b4fb324784cd01c5cb0742f, type: 3}
+  t_tempWidgetContainer: {fileID: 1152803878}
+--- !u!23 &183849560
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183849557}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 73df376bfeb9f594e8f51ff33a3a4e7d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &183849561
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183849557}
+  m_Mesh: {fileID: 847418623}
+--- !u!1 &195716225
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 195716226}
+  m_Layer: 5
+  m_Name: console
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &195716226
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195716225}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1129438789}
+  - {fileID: 320216587}
+  m_Father: {fileID: 174602565}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &262057378
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 262057379}
+  - component: {fileID: 262057382}
+  - component: {fileID: 262057381}
+  - component: {fileID: 262057380}
+  m_Layer: 0
+  m_Name: edge widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: c2115e95457d3ac4e91dcfdfe0f5673e, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &262057379
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262057378}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 1, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1613404833}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &262057380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262057378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 010000000200000008000000170000000b00000012000000
+  controllingTriangles: 
+  oldPosition: {x: 1, y: 1, z: 0.5}
+--- !u!114 &262057381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262057378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f10941fc2127a9499ddeef1d4e37776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_edge
+  slvr: {fileID: 262057380}
+  extrude: 0
+--- !u!114 &262057382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262057378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 2
+  select: 0
+--- !u!1 &275711810
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 275711811}
+  - component: {fileID: 275711814}
+  - component: {fileID: 275711813}
+  - component: {fileID: 275711812}
+  m_Layer: 0
+  m_Name: edge widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: c2115e95457d3ac4e91dcfdfe0f5673e, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &275711811
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275711810}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.8232233, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1613404833}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &275711812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275711810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 1b00000018000000
+  controllingTriangles: 
+  oldPosition: {x: 0.8232233, y: 0.5, z: 0}
+--- !u!114 &275711813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275711810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f10941fc2127a9499ddeef1d4e37776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_edge
+  slvr: {fileID: 275711812}
+  extrude: 0
+--- !u!114 &275711814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275711810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 2
+  select: 0
+--- !u!1 &320216586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 320216587}
+  m_Layer: 5
+  m_Name: output
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &320216587
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 320216586}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 195716226}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &336375691
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 336375692}
+  - component: {fileID: 336375695}
+  - component: {fileID: 336375694}
+  - component: {fileID: 336375693}
+  m_Layer: 0
+  m_Name: edge widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: c2115e95457d3ac4e91dcfdfe0f5673e, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &336375692
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336375691}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 0.8232233, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1613404833}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &336375693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336375691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 1a0000001b000000
+  controllingTriangles: 
+  oldPosition: {x: 0.5, y: 0.8232233, z: 0}
+--- !u!114 &336375694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336375691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f10941fc2127a9499ddeef1d4e37776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_edge
+  slvr: {fileID: 336375693}
+  extrude: 0
+--- !u!114 &336375695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336375691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 2
+  select: 0
+--- !u!1 &372371172
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 372371176}
+  - component: {fileID: 372371173}
+  - component: {fileID: 372371175}
+  - component: {fileID: 372371174}
+  m_Layer: 0
+  m_Name: vertex widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: 92b1634fb31de7c49be52b3aa5c7025d, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &372371173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372371172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 1
+  select: 1
+--- !u!114 &372371174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372371172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 18000000
+  controllingTriangles: 
+  oldPosition: {x: 0.8232233, y: 0.17677669, z: 0}
+--- !u!114 &372371175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372371172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e02f907d14577439093269ea26792c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_vertex
+  slvr: {fileID: 372371174}
+  extrude: 0
+--- !u!4 &372371176
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372371172}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.8232233, y: 0.17677669, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1111961822}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &375814163
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 375814164}
+  m_Layer: 0
+  m_Name: levels
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &375814164
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375814163}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.74829, y: 0, z: 0.94911}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &399377453
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 399377454}
+  - component: {fileID: 399377457}
+  - component: {fileID: 399377456}
+  - component: {fileID: 399377455}
+  m_Layer: 0
+  m_Name: vertex widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: 3ad01921bbde2b24794aa86735db0135, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &399377454
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399377453}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1111961822}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &399377455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399377453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 060000000f00000010000000
+  controllingTriangles: 
+  oldPosition: {x: 0, y: 0, z: 1}
+--- !u!114 &399377456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399377453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e02f907d14577439093269ea26792c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_vertex
+  slvr: {fileID: 399377455}
+  extrude: 0
+--- !u!114 &399377457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399377453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 1
+  select: 0
+--- !u!1 &521690900
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 521690901}
+  - component: {fileID: 521690904}
+  - component: {fileID: 521690903}
+  - component: {fileID: 521690902}
+  m_Layer: 0
+  m_Name: vertex widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: 3ad01921bbde2b24794aa86735db0135, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &521690901
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521690900}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1111961822}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &521690902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521690900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 040000000900000016000000
+  controllingTriangles: 
+  oldPosition: {x: 0, y: 1, z: 0}
+--- !u!114 &521690903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521690900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e02f907d14577439093269ea26792c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_vertex
+  slvr: {fileID: 521690902}
+  extrude: 0
+--- !u!114 &521690904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521690900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 1
+  select: 0
+--- !u!1 &532381399
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 532381400}
+  - component: {fileID: 532381403}
+  - component: {fileID: 532381402}
+  - component: {fileID: 532381401}
+  m_Layer: 0
+  m_Name: edge widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: c2115e95457d3ac4e91dcfdfe0f5673e, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &532381400
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532381399}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1613404833}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &532381401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532381399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 040000000500000009000000160000000c00000015000000
+  controllingTriangles: 
+  oldPosition: {x: 0, y: 0.5, z: 0}
+--- !u!114 &532381402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532381399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f10941fc2127a9499ddeef1d4e37776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_edge
+  slvr: {fileID: 532381401}
+  extrude: 0
+--- !u!114 &532381403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532381399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 2
+  select: 0
+--- !u!1 &576746835
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 576746836}
+  - component: {fileID: 576746837}
+  m_Layer: 0
+  m_Name: sys
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &576746836
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 576746835}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.74829, y: 0, z: 0.94911}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &576746837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 576746835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3945ae5252b431489ed8032045fab5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Program
+--- !u!1 &611107201
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 611107202}
+  - component: {fileID: 611107205}
+  - component: {fileID: 611107204}
+  - component: {fileID: 611107203}
+  m_Layer: 0
+  m_Name: edge widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: c2115e95457d3ac4e91dcfdfe0f5673e, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &611107202
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611107201}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1613404833}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &611107203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611107201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 06000000030000000f000000100000000e00000011000000
+  controllingTriangles: 
+  oldPosition: {x: 0.5, y: 0, z: 1}
+--- !u!114 &611107204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611107201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f10941fc2127a9499ddeef1d4e37776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_edge
+  slvr: {fileID: 611107203}
+  extrude: 0
+--- !u!114 &611107205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611107201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 2
+  select: 0
+--- !u!1 &620821982
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 620821983}
+  - component: {fileID: 620821986}
+  - component: {fileID: 620821985}
+  - component: {fileID: 620821984}
+  m_Layer: 0
+  m_Name: edge widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: c2115e95457d3ac4e91dcfdfe0f5673e, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &620821983
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620821982}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1613404833}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &620821984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620821982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 05000000060000000c000000150000000f00000010000000
+  controllingTriangles: 
+  oldPosition: {x: 0, y: 0, z: 0.5}
+--- !u!114 &620821985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620821982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f10941fc2127a9499ddeef1d4e37776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_edge
+  slvr: {fileID: 620821984}
+  extrude: 0
+--- !u!114 &620821986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620821982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 2
+  select: 0
+--- !u!1 &678671341
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 678671342}
+  - component: {fileID: 678671343}
+  m_Layer: 0
+  m_Name: shape widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: 9440c1b5ca54aef4bb602dedc5207e5e, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &678671342
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678671341}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1641098398}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &678671343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678671341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 0
+  select: 0
+--- !u!1 &679284346
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 679284347}
+  - component: {fileID: 679284350}
+  - component: {fileID: 679284349}
+  - component: {fileID: 679284348}
+  m_Layer: 0
+  m_Name: vertex widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: 3ad01921bbde2b24794aa86735db0135, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &679284347
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679284346}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1111961822}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &679284348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679284346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 070000000a00000013000000
+  controllingTriangles: 
+  oldPosition: {x: 0, y: 1, z: 1}
+--- !u!114 &679284349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679284346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e02f907d14577439093269ea26792c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_vertex
+  slvr: {fileID: 679284348}
+  extrude: 0
+--- !u!114 &679284350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679284346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 1
+  select: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,6 +1525,548 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &737356577
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 737356578}
+  - component: {fileID: 737356579}
+  m_Layer: 0
+  m_Name: shape widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: 4da9a3a96fa00524b9579aeb034c39be, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &737356578
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 737356577}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1641098398}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &737356579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 737356577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 0
+  select: 0
+--- !u!1 &750814918
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 750814919}
+  - component: {fileID: 750814922}
+  - component: {fileID: 750814921}
+  - component: {fileID: 750814920}
+  m_Layer: 0
+  m_Name: edge widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: c2115e95457d3ac4e91dcfdfe0f5673e, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &750814919
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 750814918}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.17677669, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1613404833}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &750814920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 750814918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 190000001a000000
+  controllingTriangles: 
+  oldPosition: {x: 0.17677669, y: 0.5, z: 0}
+--- !u!114 &750814921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 750814918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f10941fc2127a9499ddeef1d4e37776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_edge
+  slvr: {fileID: 750814920}
+  extrude: 0
+--- !u!114 &750814922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 750814918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 2
+  select: 0
+--- !u!1 &760372187
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 760372188}
+  - component: {fileID: 760372191}
+  - component: {fileID: 760372190}
+  - component: {fileID: 760372189}
+  m_Layer: 0
+  m_Name: edge widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: c2115e95457d3ac4e91dcfdfe0f5673e, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &760372188
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 760372187}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1613404833}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &760372189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 760372187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 02000000030000000b000000120000000e00000011000000
+  controllingTriangles: 
+  oldPosition: {x: 1, y: 0.5, z: 1}
+--- !u!114 &760372190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 760372187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f10941fc2127a9499ddeef1d4e37776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_edge
+  slvr: {fileID: 760372189}
+  extrude: 0
+--- !u!114 &760372191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 760372187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 2
+  select: 0
+--- !u!1 &842338354
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 842338355}
+  - component: {fileID: 842338358}
+  - component: {fileID: 842338357}
+  - component: {fileID: 842338356}
+  m_Layer: 0
+  m_Name: vertex widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: 3ad01921bbde2b24794aa86735db0135, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &842338355
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842338354}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1111961822}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &842338356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842338354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 000000000d00000014000000
+  controllingTriangles: 
+  oldPosition: {x: 1, y: 0, z: 0}
+--- !u!114 &842338357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842338354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e02f907d14577439093269ea26792c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_vertex
+  slvr: {fileID: 842338356}
+  extrude: 0
+--- !u!114 &842338358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842338354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 1
+  select: 0
+--- !u!43 &847418623
+Mesh:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 12
+  m_SubMeshes:
+  - serializedVersion: 2
+    firstByte: 0
+    indexCount: 60
+    topology: 0
+    baseVertex: 0
+    firstVertex: 0
+    vertexCount: 28
+    localAABB:
+      m_Center: {x: 0.5, y: 0.5, z: 0.5}
+      m_Extent: {x: 0.5, y: 0.5, z: 0.5}
+  m_Shapes:
+    vertices: []
+    shapes: []
+    channels: []
+    fullWeights: []
+  m_BindPose: []
+  m_BoneNameHashes: 
+  m_RootBoneNameHash: 0
+  m_BonesAABB: []
+  m_VariableBoneCountWeights:
+    m_Data: 
+  m_MeshCompression: 0
+  m_IsReadable: 1
+  m_KeepVertices: 1
+  m_KeepIndices: 1
+  m_IndexFormat: 0
+  m_IndexBuffer: 000001000200000002000300040005000600040006000700080009000a0008000a000b000c000d000e000c000e000f00100011001200100012001300140015001800180015001900150016001900190016001a00160017001a001a0017001b00170014001b001b0014001800180019001a0018001a001b00
+  m_VertexData:
+    serializedVersion: 3
+    m_VertexCount: 28
+    m_Channels:
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 3
+    - stream: 0
+      offset: 12
+      format: 0
+      dimension: 3
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 24
+      format: 0
+      dimension: 2
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    m_DataSize: 896
+    _typelessdata: 0000803f00000000000000000000803f000000800000008000000000000000000000803f0000803f000000000000803f0000008000000080000000000000803f0000803f0000803f0000803f0000803f00000080000000800000803f0000803f0000803f000000000000803f0000803f00000080000000800000803f00000000000000000000803f00000000000080bf00000080000000800000000000000000000000000000000000000000000080bf0000008000000080000000000000803f00000000000000000000803f000080bf00000080000000800000803f0000803f000000000000803f0000803f000080bf00000080000000800000803f000000000000803f0000803f00000000000000800000803f000000800000000000000000000000000000803f00000000000000800000803f00000080000000000000803f000000000000803f0000803f000000800000803f000000800000803f0000803f0000803f0000803f0000803f000000800000803f000000800000803f0000000000000000000000000000000000000080000080bf0000008000000000000000000000803f000000000000000000000080000080bf00000080000000000000803f0000803f000000000000803f00000080000080bf000000800000803f0000803f00000000000000000000803f00000080000080bf000000800000803f0000000000000000000000000000803f00000080000000800000803f00000000000000000000803f000000000000803f00000080000000800000803f000000000000803f0000803f0000803f0000803f00000080000000800000803f0000803f0000803f000000000000803f0000803f00000080000000800000803f0000803f000000000000803f00000000000000000000008000000080000080bf00000000000000000000000000000000000000000000008000000080000080bf000000000000803f000000000000803f000000000000008000000080000080bf0000803f0000803f0000803f0000803f000000000000008000000080000080bf0000803f00000000c3be523ff304353e000000000000000000000080ffff7fbff304353ef304353ef304353ef304353e000000000000000000000080ffff7fbff304353ec3be523ff304353ec3be523f000000000000000000000080ffff7fbfc3be523fc3be523fc3be523fc3be523f000000000000000000000080ffff7fbfc3be523ff304353e
+  m_CompressedMesh:
+    m_Vertices:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UV:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Normals:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Tangents:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Weights:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_NormalSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_TangentSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_FloatColors:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_BoneIndices:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Triangles:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UVInfo: 0
+  m_LocalAABB:
+    m_Center: {x: 0.5, y: 0.5, z: 0.5}
+    m_Extent: {x: 0.5, y: 0.5, z: 0.5}
+  m_MeshUsageFlags: 0
+  m_CookingOptions: 30
+  m_BakedConvexCollisionMesh: 
+  m_BakedTriangleCollisionMesh: 
+  'm_MeshMetrics[0]': 1
+  'm_MeshMetrics[1]': 1
+  m_MeshOptimizationFlags: 1
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
+  m_MeshLodInfo:
+    serializedVersion: 2
+    m_LodSelectionCurve:
+      serializedVersion: 1
+      m_LodSlope: 0
+      m_LodBias: 0
+    m_NumLevels: 1
+    m_SubMeshes:
+    - serializedVersion: 2
+      m_Levels:
+      - serializedVersion: 1
+        m_IndexStart: 0
+        m_IndexCount: 0
+--- !u!1 &945689832
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 945689833}
+  - component: {fileID: 945689836}
+  - component: {fileID: 945689835}
+  - component: {fileID: 945689834}
+  m_Layer: 0
+  m_Name: vertex widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: 3ad01921bbde2b24794aa86735db0135, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &945689833
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 945689832}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1111961822}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &945689834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 945689832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 020000000b00000012000000
+  controllingTriangles: 
+  oldPosition: {x: 1, y: 1, z: 1}
+--- !u!114 &945689835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 945689832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e02f907d14577439093269ea26792c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_vertex
+  slvr: {fileID: 945689834}
+  extrude: 0
+--- !u!114 &945689836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 945689832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 1
+  select: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,6 +2159,875 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1006059415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1006059416}
+  m_Layer: 0
+  m_Name: face widgets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1006059416
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006059415}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1899112553}
+  - {fileID: 2059949956}
+  - {fileID: 1556809098}
+  - {fileID: 1167365394}
+  - {fileID: 1799096740}
+  - {fileID: 89862481}
+  m_Father: {fileID: 183849558}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1039203887
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1039203888}
+  - component: {fileID: 1039203891}
+  - component: {fileID: 1039203890}
+  - component: {fileID: 1039203889}
+  m_Layer: 0
+  m_Name: edge widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: c2115e95457d3ac4e91dcfdfe0f5673e, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1039203888
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039203887}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1613404833}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1039203889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039203887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 010000000400000008000000170000000900000016000000
+  controllingTriangles: 
+  oldPosition: {x: 0.5, y: 1, z: 0}
+--- !u!114 &1039203890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039203887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f10941fc2127a9499ddeef1d4e37776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_edge
+  slvr: {fileID: 1039203889}
+  extrude: 0
+--- !u!114 &1039203891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039203887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 2
+  select: 0
+--- !u!1 &1075045265
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1075045266}
+  - component: {fileID: 1075045269}
+  - component: {fileID: 1075045268}
+  - component: {fileID: 1075045267}
+  m_Layer: 0
+  m_Name: edge widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: c2115e95457d3ac4e91dcfdfe0f5673e, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1075045266
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075045265}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1613404833}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1075045267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075045265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 06000000070000000f000000100000000a00000013000000
+  controllingTriangles: 
+  oldPosition: {x: 0, y: 0.5, z: 1}
+--- !u!114 &1075045268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075045265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f10941fc2127a9499ddeef1d4e37776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_edge
+  slvr: {fileID: 1075045267}
+  extrude: 0
+--- !u!114 &1075045269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075045265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 2
+  select: 0
+--- !u!1 &1097160031
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1097160032}
+  - component: {fileID: 1097160033}
+  m_Layer: 0
+  m_Name: shape widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: 86a722e09d916834d9203d73ff586245, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1097160032
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097160031}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1641098398}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1097160033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097160031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 0
+  select: 0
+--- !u!1 &1111961821
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1111961822}
+  m_Layer: 0
+  m_Name: vertex widgets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1111961822
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111961821}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 842338355}
+  - {fileID: 1862799929}
+  - {fileID: 945689833}
+  - {fileID: 1607896148}
+  - {fileID: 521690901}
+  - {fileID: 1833388236}
+  - {fileID: 399377454}
+  - {fileID: 679284347}
+  - {fileID: 372371176}
+  - {fileID: 1245480774}
+  - {fileID: 2114255988}
+  - {fileID: 2003464102}
+  m_Father: {fileID: 183849558}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1129438788
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1129438789}
+  m_Layer: 5
+  m_Name: cheat menu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1129438789
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129438788}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 195716226}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1152803877
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1152803878}
+  m_Layer: 0
+  m_Name: temp widgets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1152803878
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1152803877}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 183849558}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1167365393
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1167365394}
+  - component: {fileID: 1167365397}
+  - component: {fileID: 1167365396}
+  - component: {fileID: 1167365395}
+  m_Layer: 0
+  m_Name: face widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: 3ea76abe7da77fd4bbd5b3552510c353, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1167365394
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167365393}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 0, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1006059416}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1167365395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167365393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 0c0000000d0000000e0000000f0000000000000003000000050000000600000010000000110000001400000015000000
+  controllingTriangles: 1200000015000000
+  oldPosition: {x: 0.5, y: 0, z: 0.5}
+--- !u!114 &1167365396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167365393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d69347a5ef39f6f4fbf4c15f76268fd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_face
+  g: {fileID: 1167365397}
+  slvr: {fileID: 1167365395}
+  flipNormals: 0
+  inset: 0
+  extrude: 0
+  removeFace: 0
+--- !u!114 &1167365397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167365393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 3
+  select: 0
+--- !u!1 &1245480770
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1245480774}
+  - component: {fileID: 1245480771}
+  - component: {fileID: 1245480773}
+  - component: {fileID: 1245480772}
+  m_Layer: 0
+  m_Name: vertex widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: 92b1634fb31de7c49be52b3aa5c7025d, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1245480771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245480770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 1
+  select: 1
+--- !u!114 &1245480772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245480770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 19000000
+  controllingTriangles: 
+  oldPosition: {x: 0.17677669, y: 0.17677669, z: 0}
+--- !u!114 &1245480773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245480770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e02f907d14577439093269ea26792c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_vertex
+  slvr: {fileID: 1245480772}
+  extrude: 0
+--- !u!4 &1245480774
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245480770}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.17677669, y: 0.17677669, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1111961822}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1268201280
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1268201281}
+  - component: {fileID: 1268201284}
+  - component: {fileID: 1268201283}
+  - component: {fileID: 1268201282}
+  m_Layer: 0
+  m_Name: edge widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: c2115e95457d3ac4e91dcfdfe0f5673e, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1268201281
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268201280}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1613404833}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1268201282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268201280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 00000000010000000d000000140000000800000017000000
+  controllingTriangles: 
+  oldPosition: {x: 1, y: 0.5, z: 0}
+--- !u!114 &1268201283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268201280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f10941fc2127a9499ddeef1d4e37776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_edge
+  slvr: {fileID: 1268201282}
+  extrude: 0
+--- !u!114 &1268201284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268201280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 2
+  select: 0
+--- !u!1 &1280416350
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1280416351}
+  - component: {fileID: 1280416354}
+  - component: {fileID: 1280416353}
+  - component: {fileID: 1280416352}
+  m_Layer: 0
+  m_Name: edge widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: c2115e95457d3ac4e91dcfdfe0f5673e, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1280416351
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280416350}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 0.17677669, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1613404833}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1280416352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280416350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 1800000019000000
+  controllingTriangles: 
+  oldPosition: {x: 0.5, y: 0.17677669, z: 0}
+--- !u!114 &1280416353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280416350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f10941fc2127a9499ddeef1d4e37776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_edge
+  slvr: {fileID: 1280416352}
+  extrude: 0
+--- !u!114 &1280416354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280416350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 2
+  select: 0
+--- !u!1 &1405726694
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1405726695}
+  - component: {fileID: 1405726696}
+  m_Layer: 0
+  m_Name: shape widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: 2d40ee5d1b5b93849b2751c5e4ee8b0f, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1405726695
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405726694}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1641098398}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1405726696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405726694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 0
+  select: 0
+--- !u!1 &1441616496
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1441616497}
+  - component: {fileID: 1441616500}
+  - component: {fileID: 1441616499}
+  - component: {fileID: 1441616498}
+  m_Layer: 0
+  m_Name: edge widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: c2115e95457d3ac4e91dcfdfe0f5673e, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1441616497
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441616496}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1613404833}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1441616498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441616496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 02000000070000000b000000120000000a00000013000000
+  controllingTriangles: 
+  oldPosition: {x: 0.5, y: 1, z: 1}
+--- !u!114 &1441616499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441616496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f10941fc2127a9499ddeef1d4e37776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_edge
+  slvr: {fileID: 1441616498}
+  extrude: 0
+--- !u!114 &1441616500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441616496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 2
+  select: 0
+--- !u!1 &1444619481
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1444619482}
+  m_Layer: 5
+  m_Name: '[m] main menu'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1444619482
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1444619481}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 174602565}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1465307142
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1465307143}
+  m_Layer: 5
+  m_Name: debug menu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1465307143
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465307142}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 174602565}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1495939268
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,7 +3044,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1495939269
 Transform:
   m_ObjectHideFlags: 0
@@ -438,7 +3057,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 183849558}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1495939270
@@ -481,7 +3101,7 @@ GameObject:
   - component: {fileID: 1518538141}
   - component: {fileID: 1518538140}
   m_Layer: 0
-  m_Name: EventSystem
+  m_Name: event system
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -548,11 +3168,1059 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1556809097
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1556809098}
+  - component: {fileID: 1556809101}
+  - component: {fileID: 1556809100}
+  - component: {fileID: 1556809099}
+  m_Layer: 0
+  m_Name: face widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: 3ea76abe7da77fd4bbd5b3552510c353, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1556809098
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556809097}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 1, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1006059416}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1556809099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556809097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 08000000090000000a0000000b0000000100000002000000040000000700000012000000130000001600000017000000
+  controllingTriangles: 0c0000000f000000
+  oldPosition: {x: 0.5, y: 1, z: 0.5}
+--- !u!114 &1556809100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556809097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d69347a5ef39f6f4fbf4c15f76268fd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_face
+  g: {fileID: 1556809101}
+  slvr: {fileID: 1556809099}
+  flipNormals: 0
+  inset: 0
+  extrude: 0
+  removeFace: 0
+--- !u!114 &1556809101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556809097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 3
+  select: 0
+--- !u!1 &1607896147
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1607896148}
+  - component: {fileID: 1607896151}
+  - component: {fileID: 1607896150}
+  - component: {fileID: 1607896149}
+  m_Layer: 0
+  m_Name: vertex widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: 3ad01921bbde2b24794aa86735db0135, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1607896148
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607896147}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1111961822}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1607896149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607896147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 030000000e00000011000000
+  controllingTriangles: 
+  oldPosition: {x: 1, y: 0, z: 1}
+--- !u!114 &1607896150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607896147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e02f907d14577439093269ea26792c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_vertex
+  slvr: {fileID: 1607896149}
+  extrude: 0
+--- !u!114 &1607896151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607896147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 1
+  select: 0
+--- !u!1 &1613404832
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1613404833}
+  m_Layer: 0
+  m_Name: edge widgets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1613404833
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613404832}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1268201281}
+  - {fileID: 262057379}
+  - {fileID: 760372188}
+  - {fileID: 1912742242}
+  - {fileID: 532381400}
+  - {fileID: 620821983}
+  - {fileID: 1075045266}
+  - {fileID: 2136101082}
+  - {fileID: 1039203888}
+  - {fileID: 2100500670}
+  - {fileID: 1441616497}
+  - {fileID: 611107202}
+  - {fileID: 1280416351}
+  - {fileID: 750814919}
+  - {fileID: 336375692}
+  - {fileID: 275711811}
+  m_Father: {fileID: 183849558}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1641098397
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1641098398}
+  m_Layer: 0
+  m_Name: shape widgets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1641098398
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1641098397}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1405726695}
+  - {fileID: 678671342}
+  - {fileID: 1097160032}
+  - {fileID: 737356578}
+  m_Father: {fileID: 183849558}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1799096739
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1799096740}
+  - component: {fileID: 1799096743}
+  - component: {fileID: 1799096742}
+  - component: {fileID: 1799096741}
+  m_Layer: 0
+  m_Name: face widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: 3ea76abe7da77fd4bbd5b3552510c353, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1799096740
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799096739}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1006059416}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1799096741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799096739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 10000000110000001200000013000000020000000300000006000000070000000e0000000f0000000a0000000b000000
+  controllingTriangles: 180000001b000000
+  oldPosition: {x: 0.5, y: 0.5, z: 1}
+--- !u!114 &1799096742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799096739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d69347a5ef39f6f4fbf4c15f76268fd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_face
+  g: {fileID: 1799096743}
+  slvr: {fileID: 1799096741}
+  flipNormals: 0
+  inset: 0
+  extrude: 0
+  removeFace: 0
+--- !u!114 &1799096743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799096739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 3
+  select: 0
+--- !u!1 &1833388235
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1833388236}
+  - component: {fileID: 1833388239}
+  - component: {fileID: 1833388238}
+  - component: {fileID: 1833388237}
+  m_Layer: 0
+  m_Name: vertex widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: 3ad01921bbde2b24794aa86735db0135, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1833388236
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833388235}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1111961822}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1833388237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833388235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 050000000c00000015000000
+  controllingTriangles: 
+  oldPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &1833388238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833388235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e02f907d14577439093269ea26792c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_vertex
+  slvr: {fileID: 1833388237}
+  extrude: 0
+--- !u!114 &1833388239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833388235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 1
+  select: 0
+--- !u!1 &1862799928
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1862799929}
+  - component: {fileID: 1862799932}
+  - component: {fileID: 1862799931}
+  - component: {fileID: 1862799930}
+  m_Layer: 0
+  m_Name: vertex widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: 3ad01921bbde2b24794aa86735db0135, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1862799929
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862799928}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1111961822}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1862799930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862799928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 010000000800000017000000
+  controllingTriangles: 
+  oldPosition: {x: 1, y: 1, z: 0}
+--- !u!114 &1862799931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862799928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e02f907d14577439093269ea26792c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_vertex
+  slvr: {fileID: 1862799930}
+  extrude: 0
+--- !u!114 &1862799932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862799928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 1
+  select: 0
+--- !u!1 &1899112552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1899112553}
+  - component: {fileID: 1899112556}
+  - component: {fileID: 1899112555}
+  - component: {fileID: 1899112554}
+  m_Layer: 0
+  m_Name: face widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: 3ea76abe7da77fd4bbd5b3552510c353, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1899112553
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899112552}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1006059416}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1899112554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899112552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 00000000010000000200000003000000080000000b0000000d0000000e00000011000000120000001400000017000000
+  controllingTriangles: 0000000003000000
+  oldPosition: {x: 1, y: 0.5, z: 0.5}
+--- !u!114 &1899112555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899112552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d69347a5ef39f6f4fbf4c15f76268fd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_face
+  g: {fileID: 1899112556}
+  slvr: {fileID: 1899112554}
+  flipNormals: 0
+  inset: 0
+  extrude: 0
+  removeFace: 0
+--- !u!114 &1899112556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899112552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 3
+  select: 0
+--- !u!1 &1912742241
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1912742242}
+  - component: {fileID: 1912742245}
+  - component: {fileID: 1912742244}
+  - component: {fileID: 1912742243}
+  m_Layer: 0
+  m_Name: edge widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: c2115e95457d3ac4e91dcfdfe0f5673e, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1912742242
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912742241}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 0, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1613404833}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1912742243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912742241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 03000000000000000e000000110000000d00000014000000
+  controllingTriangles: 
+  oldPosition: {x: 1, y: 0, z: 0.5}
+--- !u!114 &1912742244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912742241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f10941fc2127a9499ddeef1d4e37776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_edge
+  slvr: {fileID: 1912742243}
+  extrude: 0
+--- !u!114 &1912742245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912742241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 2
+  select: 0
+--- !u!1 &2003464098
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2003464102}
+  - component: {fileID: 2003464099}
+  - component: {fileID: 2003464101}
+  - component: {fileID: 2003464100}
+  m_Layer: 0
+  m_Name: vertex widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: 92b1634fb31de7c49be52b3aa5c7025d, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &2003464099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003464098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 1
+  select: 1
+--- !u!114 &2003464100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003464098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 1b000000
+  controllingTriangles: 
+  oldPosition: {x: 0.8232233, y: 0.8232233, z: 0}
+--- !u!114 &2003464101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003464098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e02f907d14577439093269ea26792c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_vertex
+  slvr: {fileID: 2003464100}
+  extrude: 0
+--- !u!4 &2003464102
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003464098}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.8232233, y: 0.8232233, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1111961822}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2059949955
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2059949956}
+  - component: {fileID: 2059949959}
+  - component: {fileID: 2059949958}
+  - component: {fileID: 2059949957}
+  m_Layer: 0
+  m_Name: face widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: 3ea76abe7da77fd4bbd5b3552510c353, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2059949956
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059949955}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1006059416}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2059949957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059949955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 04000000050000000600000007000000090000000a0000000c0000000f00000010000000130000001500000016000000
+  controllingTriangles: 0600000009000000
+  oldPosition: {x: 0, y: 0.5, z: 0.5}
+--- !u!114 &2059949958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059949955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d69347a5ef39f6f4fbf4c15f76268fd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_face
+  g: {fileID: 2059949959}
+  slvr: {fileID: 2059949957}
+  flipNormals: 0
+  inset: 0
+  extrude: 0
+  removeFace: 0
+--- !u!114 &2059949959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059949955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 3
+  select: 0
+--- !u!1 &2100500669
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2100500670}
+  - component: {fileID: 2100500673}
+  - component: {fileID: 2100500672}
+  - component: {fileID: 2100500671}
+  m_Layer: 0
+  m_Name: edge widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: c2115e95457d3ac4e91dcfdfe0f5673e, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2100500670
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100500669}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1613404833}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2100500671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100500669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 05000000000000000c000000150000000d00000014000000
+  controllingTriangles: 
+  oldPosition: {x: 0.5, y: 0, z: 0}
+--- !u!114 &2100500672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100500669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f10941fc2127a9499ddeef1d4e37776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_edge
+  slvr: {fileID: 2100500671}
+  extrude: 0
+--- !u!114 &2100500673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100500669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 2
+  select: 0
+--- !u!1 &2114255984
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2114255988}
+  - component: {fileID: 2114255985}
+  - component: {fileID: 2114255987}
+  - component: {fileID: 2114255986}
+  m_Layer: 0
+  m_Name: vertex widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: 92b1634fb31de7c49be52b3aa5c7025d, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &2114255985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2114255984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 1
+  select: 1
+--- !u!114 &2114255986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2114255984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 1a000000
+  controllingTriangles: 
+  oldPosition: {x: 0.17677669, y: 0.8232233, z: 0}
+--- !u!114 &2114255987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2114255984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e02f907d14577439093269ea26792c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_vertex
+  slvr: {fileID: 2114255986}
+  extrude: 0
+--- !u!4 &2114255988
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2114255984}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.17677669, y: 0.8232233, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1111961822}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2136101081
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2136101082}
+  - component: {fileID: 2136101085}
+  - component: {fileID: 2136101084}
+  - component: {fileID: 2136101083}
+  m_Layer: 0
+  m_Name: edge widget(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: c2115e95457d3ac4e91dcfdfe0f5673e, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2136101082
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136101081}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1613404833}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2136101083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136101081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e91e157619a7a44bbbb1ad9a83f841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_vertexslaver
+  controllingVertices: 07000000040000000a000000130000000900000016000000
+  controllingTriangles: 
+  oldPosition: {x: 0, y: 1, z: 0.5}
+--- !u!114 &2136101084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136101081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f10941fc2127a9499ddeef1d4e37776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_edge
+  slvr: {fileID: 2136101083}
+  extrude: 0
+--- !u!114 &2136101085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136101081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe27cc7cf1bf6048868d83a82209d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::medit_widget_generic
+  refreshWidgets: 0
+  obj: {fileID: 183849559}
+  type: 2
+  select: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1495939269}
+  - {fileID: 576746836}
+  - {fileID: 375814164}
   - {fileID: 963194228}
   - {fileID: 705507995}
   - {fileID: 174602565}

@@ -10,7 +10,7 @@ using UnityEngine;
 
 // for the purposes of this engine that should be fine
 
-public enum GenericMeshType {
+public enum medit_genericmeshtype {
     Cube,
     Plane,
 }
@@ -23,7 +23,7 @@ public enum medit_widgettype {
     Any,
 }
 
-public enum MeshRenderingMode
+public enum medit_meshrenderingmode
 {
     Solid,
     Wireframe,
@@ -32,27 +32,55 @@ public enum MeshRenderingMode
 [ExecuteAlways]
 public class medit_object : MonoBehaviour
 {
+    [Header("************")]
+    [Header("CONSOLE")]
+
+    // whether to enable the MeshRenderer component
+    public bool renderMesh;
+    public bool renderWidgets;
+    private bool isRenderingWidgets;
+
+    // how exactly to render the mesh
+    // pretty WIP for now
+    public medit_meshrenderingmode renderMode;
+    private medit_meshrenderingmode lastRenderMode;
+
+    // toggles the drawing of (raw) vertices of the mesh
+    // (raw as in not affected by any code, just straight from the file)
+    public bool showRawVertices;
+    public float vertexRadius; // for above
+    // toggles the drawing of (raw) edge lines of the mesh
+    public bool drawEdgeLines;
+    
+    // flips the normals of all triangles in the object
+    public bool flipAllNormals;
+
+    public bool extrudeSelected;
+    public bool fillSelected;
+
+    // removes the entire mesh
+    public bool clearMesh;
+    
+    // spawns in a mesh of a given type (cube, plane, etc.)
+    public bool generateMesh;
+    public medit_genericmeshtype type; // for above
+    private medit_genericmeshtype setupFor; // storing the type that has been generated (not accessible by user)
+
+    public bool resetShapeWidgets;
+
+    // if toggled, the mesh will continuously re-generate itself EVERY FRAME
+    // obviously this is usually a bad idea
+    [Header("warning: laggy")]
+    public bool generateContinuously;
+
+    [Header("************")]
+
+    [Space(24)]
+
+    [Header("References")]
     public MeshFilter mf;
     public MeshRenderer mr;
-    public List<medit_widget_generic> selectedEdges;
-    [Header("DEBUGF")]
-    public bool showRawVertices;
-    public float vertexRadius;
-
-    [Header("CONSOLE")]
-    private bool drawEdgeLines;
-    public MeshRenderingMode renderMode;
-    private MeshRenderingMode lastRenderMode;
-
-    public bool flipAllNormals;
-    
-    public GenericMeshType type;
-    private GenericMeshType setupFor;
-    public bool extrudeSelectedEdges;
-    public bool clearMesh;
-    public bool generateMesh;
-    public bool resetShapeWidgets; // temp?
-    public bool generateContinuously;
+    public List<medit_widget_generic> selected;
 
     // shape widgets affect the general shape of a mesh when spawning it in
     public Transform t_shapeWidgetContainer;
@@ -68,7 +96,7 @@ public class medit_object : MonoBehaviour
     public GameObject p_faceWidget;
     // no sense in having a delete button since you can just delete the gameobject, right?
 
-    public Transform t_tempWidgetContainer;
+    public Transform t_tempWidgetContainer; // WIP
 
     void OnDrawGizmos()
     {
@@ -77,7 +105,25 @@ public class medit_object : MonoBehaviour
             Gizmos.color = Color.lightCyan;
             for (int i = 0; i < mf.sharedMesh.vertices.Length; i++)
             {
-                Gizmos.DrawSphere(mf.sharedMesh.vertices[i], vertexRadius);
+                Gizmos.DrawSphere(transform.position + mf.sharedMesh.vertices[i], vertexRadius);
+            }
+        }
+
+        if (drawEdgeLines)
+        {
+            if (mf.sharedMesh != null)
+            {
+                
+                for (int i = 0; i < mf.sharedMesh.triangles.Length; i+=3)
+                {
+                    Vector3 a = transform.position + mf.sharedMesh.vertices[mf.sharedMesh.triangles[i]];
+                    Vector3 b = transform.position + mf.sharedMesh.vertices[mf.sharedMesh.triangles[i+1]];
+                    Vector3 c = transform.position + mf.sharedMesh.vertices[mf.sharedMesh.triangles[i+2]];
+                    
+                    Debug.DrawLine(a, b, Color.white);
+                    Debug.DrawLine(b, c, Color.white);
+                    Debug.DrawLine(c, a, Color.white);
+                }
             }
         }
     }
@@ -89,6 +135,36 @@ public class medit_object : MonoBehaviour
 
     void Update()
     {
+        mr.enabled = renderMesh;
+
+        if (renderWidgets)
+        {
+            if (!isRenderingWidgets)
+            {
+                isRenderingWidgets = true;
+
+                // show all widgets
+                // TODO: separate function
+                medit_widget_generic[] widgets = GetComponentsInChildren<medit_widget_generic>(true);
+                for (int i = 0; i < widgets.Length; i++)
+                {
+                    widgets[i].gameObject.SetActive(true);
+                }
+            }
+        } else
+        {
+            if (isRenderingWidgets)
+            {
+                // hide all widgets
+                medit_widget_generic[] widgets = GetComponentsInChildren<medit_widget_generic>(true);
+                for (int i = 0; i < widgets.Length; i++)
+                {
+                    widgets[i].gameObject.SetActive(false);
+                }
+                isRenderingWidgets = false;
+            }
+        }
+
         if (resetShapeWidgets)
         {
             resetShapeWidgets = false;
@@ -106,21 +182,26 @@ public class medit_object : MonoBehaviour
             lastRenderMode = renderMode;
         }
 
-        if (extrudeSelectedEdges)
+        if (extrudeSelected)
         {
-            extrudeSelectedEdges = false;
-            ExtrudeSelectedEdges();
+            extrudeSelected = false;
+            ExtrudeSelected();
         }
 
+        if (fillSelected)
+        {
+            fillSelected = false;
+            FillSelected();
+        }
 
         if (generateMesh)
         {
             ShowShapeWidgets();
 
-            if (type == GenericMeshType.Cube)
+            if (type == medit_genericmeshtype.Cube)
             {
                 // this will initialize the widgets in the cube configuration
-                if (setupFor != GenericMeshType.Cube || t_shapeWidgetContainer.childCount != 4) {SetupForCube();}
+                if (setupFor != medit_genericmeshtype.Cube || t_shapeWidgetContainer.childCount != 4) {SetupForCube();}
 
                 Vector3 midpoint = GetWidget(3);
 
@@ -140,11 +221,11 @@ public class medit_object : MonoBehaviour
                 }
 
 
-                setupFor = GenericMeshType.Cube;
+                setupFor = medit_genericmeshtype.Cube;
             }
-            if (type == GenericMeshType.Plane)
+            if (type == medit_genericmeshtype.Plane)
             {
-                if (setupFor != GenericMeshType.Plane || t_shapeWidgetContainer.childCount != 2) {SetupForPlane();}
+                if (setupFor != medit_genericmeshtype.Plane || t_shapeWidgetContainer.childCount != 2) {SetupForPlane();}
 
                 Vector3 midpoint = GetWidget(2);
 
@@ -159,24 +240,6 @@ public class medit_object : MonoBehaviour
             }
 
             if (!generateContinuously) {generateMesh = false;}
-        }
-        
-        if (drawEdgeLines)
-        {
-            if (mf.sharedMesh != null)
-            {
-                
-                for (int i = 0; i < mf.sharedMesh.triangles.Length; i+=3)
-                {
-                    Vector3 a = mf.sharedMesh.vertices[mf.sharedMesh.triangles[i]];
-                    Vector3 b = mf.sharedMesh.vertices[mf.sharedMesh.triangles[i]];
-                    Vector3 c = mf.sharedMesh.vertices[mf.sharedMesh.triangles[i]];
-
-                    Debug.DrawLine(a, b, Color.white);
-                    Debug.DrawLine(b, c, Color.white);
-                    Debug.DrawLine(c, a, Color.white);
-                }
-            }
         }
 
         if (clearMesh)
@@ -227,45 +290,77 @@ public class medit_object : MonoBehaviour
     // switch between rendering the mesh with an actual mesh and with just lines connecting the vertices
     public void UpdateMeshRenderMode()
     {
-        if (renderMode == MeshRenderingMode.Solid)
+        if (renderMode == medit_meshrenderingmode.Solid)
         {
             mr.enabled = true;
             drawEdgeLines = false;
 
-        } else if (renderMode == MeshRenderingMode.Wireframe)
+        } else if (renderMode == medit_meshrenderingmode.Wireframe)
         {
             mr.enabled = false;
             drawEdgeLines = true;
         }
     }
 
-    public void ClearSelectedEdges()
+    public void Clearselected()
     {
-        for (int i = 0; i < selectedEdges.Count; i++)
+        for (int i = 0; i < selected.Count; i++)
         {
-            if (selectedEdges[i] != null)
+            if (selected[i] != null)
             {
-                selectedEdges[i].select = false;
+                selected[i].select = false;
             }
         }
 
-        selectedEdges.Clear();
+        selected.Clear();
     }
 
-    public void ExtrudeSelectedEdges()
+    public void FillSelected()
+    {
+        List<int> involvedVertices = new List<int>();
+
+        for (int i = 0; i < selected.Count; i++)
+        {
+            if (selected[i].type == medit_widgettype.Vertex)
+            {
+                involvedVertices.Add(selected[i].GetComponent<medit_vertexslaver>().controllingVertices[0]);
+            }
+        }
+
+        int[] triangles = new int[mf.sharedMesh.triangles.Length + (involvedVertices.Count - 2) * 3];
+
+        // the original triangles
+        for (int i = 0; i < mf.sharedMesh.triangles.Length; i++)
+        {
+            triangles[i] = mf.sharedMesh.triangles[i];
+        }
+
+        // now the new ones (polygon fan)
+        // TODO: SORT IT BY CLOCKWISE
+        for (int i = 2,n = 0; i < involvedVertices.Count; i++,n+=3)
+        {
+            triangles[mf.sharedMesh.triangles.Length + n] = involvedVertices[0];
+            triangles[mf.sharedMesh.triangles.Length + n+1] = involvedVertices[i-1];
+            triangles[mf.sharedMesh.triangles.Length + n+2] = involvedVertices[i];
+        }
+
+        mf.sharedMesh.SetTriangles(triangles,0);
+    }
+
+    public void ExtrudeSelected()
     {
         // temp!
-        if (selectedEdges.Count < 2) {return;}
+        if (selected.Count < 2) {return;}
 
-        Vector3 normal = Vector3.Cross(selectedEdges[0].GetComponent<medit_widget_edge>().GetDirection(),selectedEdges[1].GetComponent<medit_widget_edge>().GetDirection()).normalized;
+        Vector3 normal = Vector3.Cross(selected[0].GetComponent<medit_widget_edge>().GetDirection(),selected[1].GetComponent<medit_widget_edge>().GetDirection()).normalized;
 
         //Debug.Log(normal);
         List<int> toMerge = new List<int>();
-        for (int i = 0; i < selectedEdges.Count; i++)
+        for (int i = 0; i < selected.Count; i++)
         {
             ExtrudeEdge(
-                selectedEdges[i].GetComponent<medit_widget_edge>().slvr.controllingVertices[0],
-                selectedEdges[i].GetComponent<medit_widget_edge>().slvr.controllingVertices[1],
+                selected[i].GetComponent<medit_widget_edge>().slvr.controllingVertices[0],
+                selected[i].GetComponent<medit_widget_edge>().slvr.controllingVertices[1],
                 normal);
 
             // merging the newly created vertices based on their positions
@@ -295,7 +390,7 @@ public class medit_object : MonoBehaviour
             MergeVertexWidgets(toMerge[i],toMerge[i+1]);
         }
 
-        ClearSelectedEdges();
+        Clearselected();
     }
 
     public void CreateInsetFace(int[] faceVertices)
@@ -481,7 +576,7 @@ public class medit_object : MonoBehaviour
     {
         ApplyMesh(m);
         GenerateMeshWidgets(); // fully delete and remake the widgets
-        selectedEdges.Clear();
+        selected.Clear();
     }
 
     // don't add/delete anything, just move the objects
@@ -550,7 +645,7 @@ public class medit_object : MonoBehaviour
     public void MakeVertexWidgetsFromType(int toAvoid)
     {
         Mesh m = mf.sharedMesh;
-        if (type == GenericMeshType.Cube)
+        if (type == medit_genericmeshtype.Cube)
         {
             MakeVertexWidgetsForCube(toAvoid);
         } else
@@ -562,7 +657,7 @@ public class medit_object : MonoBehaviour
     public void MakeEdgeWidgetsFromType(int toAvoid)
     {
         Mesh m = mf.sharedMesh;
-        if (type == GenericMeshType.Cube)
+        if (type == medit_genericmeshtype.Cube)
         {
             MakeEdgeWidgetsForCube(toAvoid);
         } else
@@ -574,7 +669,7 @@ public class medit_object : MonoBehaviour
     public void MakeFaceWidgetsFromType(int toAvoid)
     {
         Mesh m = mf.sharedMesh;
-        if (type == GenericMeshType.Cube)
+        if (type == medit_genericmeshtype.Cube)
         {
             MakeFaceWidgetsForCube(toAvoid);
         } else
