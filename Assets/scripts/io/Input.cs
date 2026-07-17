@@ -53,6 +53,34 @@ public class Input : MonoBehaviour
         UpdateValues(Time.deltaTime);
     }
 
+    public static bool GetMouseButtonDown(int button)
+    {
+        if (button == 0) // left-click
+        {
+            return mouseButtonDownLeft;
+        } else if (button == 1) // right-click
+        {
+            return mouseButtonDownRight;
+        } else
+        {
+            return false;
+        }
+    }
+
+    public static bool GetMouseButton(int button)
+    {
+        if (button == 0) // left-click
+        {
+            return mouseButtonLeft;
+        } else if (button == 1) // right-click
+        {
+            return mouseButtonRight;
+        } else
+        {
+            return false;
+        }
+    }
+
     // grabs which keys the player is pressing and turns them into this nice, clean, standard format
     public static player_keypresspacket GetKeypressPacket()
     {

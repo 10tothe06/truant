@@ -73,6 +73,9 @@ public class medit_object : MonoBehaviour
     [Header("warning: laggy")]
     public bool generateContinuously;
 
+    [Header("saves in the Assets folder")]
+    public bool exportToOBJ;
+
     [Header("************")]
 
     [Space(24)]
@@ -165,6 +168,12 @@ public class medit_object : MonoBehaviour
             }
         }
 
+        if (exportToOBJ)
+        {
+            exportToOBJ = false;
+            ExportMeshToOBJ();
+        }
+
         if (resetShapeWidgets)
         {
             resetShapeWidgets = false;
@@ -249,6 +258,11 @@ public class medit_object : MonoBehaviour
             ClearAllWidgets();
             mf.mesh = null;
         }
+    }
+
+    public void ExportMeshToOBJ()
+    {
+        medit_utils_objexporter.ExportMeshToObj(mf.sharedMesh, "./Assets/mesh.obj");
     }
 
     // take two vertices, with different widgets, and make them the same widget

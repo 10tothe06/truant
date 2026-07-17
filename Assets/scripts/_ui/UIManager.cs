@@ -35,7 +35,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        inventory.Initialize();
+        //inventory.Initialize();
     }
 
     public static bool isTyping;
