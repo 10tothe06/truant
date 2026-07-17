@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -65,17 +66,21 @@ public class UIManager : MonoBehaviour
     [Header("Component References")]
     public Inventory inventory;
 
+
+    public IEnumerator RunGameIntro()
+    {
+        yield return new WaitForSeconds(1f);
+
+        EnterMainMenu();
+    }
+
+
     public void EnterMainMenu()
     {
         SwitchMenu("main menu");
         g_console.SetActive(false);
     }
 
-    public void EnterConnectionMenu()
-    {
-        SwitchMenu("join server menu");
-        g_console.SetActive(false);
-    }
 
     public void InMenuUpdate()
     {

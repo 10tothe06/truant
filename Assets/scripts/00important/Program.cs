@@ -63,7 +63,7 @@ public class Program : MonoBehaviour
     {
         if (startMode == ProgramStartMode.FullGame)
         {
-            
+            StartCoroutine(UIManager.Instance.RunGameIntro());
         } else if (startMode == ProgramStartMode.ImmediateLevel)
         {
             

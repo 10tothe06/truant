@@ -2192,6 +2192,7 @@ GameObject:
   - component: {fileID: 576746836}
   - component: {fileID: 576746837}
   - component: {fileID: 576746838}
+  - component: {fileID: 576746839}
   m_Layer: 0
   m_Name: sys
   m_TagString: Untagged
@@ -2245,6 +2246,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::framelocker
   framerate: 60
+--- !u!114 &576746839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 576746835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bc22bdccf3aecd439e1914ca4c9e51c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  endingsPossibleWithHiker: 
+  endingsPossibleWithRanger: 
+  endingsPossibleWithCamper: 
+  characterIndex: 0
+  items: []
+  t_playerSpawns: []
 --- !u!1001 &591057437
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4633,7 +4652,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1329702764
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4894,7 +4913,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1444619482
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5011,7 +5030,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1465307143
 RectTransform:
   m_ObjectHideFlags: 0
