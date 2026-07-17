@@ -61,7 +61,16 @@ public class Program : MonoBehaviour
 
     public void Boot()
     {
-        
+        if (startMode == ProgramStartMode.FullGame)
+        {
+            
+        } else if (startMode == ProgramStartMode.ImmediateLevel)
+        {
+            
+        } else if (startMode == ProgramStartMode.SceneOnly)
+        {
+            
+        }
     }
 
     // forget exiting to main, just quit the damn program

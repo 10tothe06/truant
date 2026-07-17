@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ui_navigator : MonoBehaviour
 {
@@ -24,5 +25,53 @@ public class ui_navigator : MonoBehaviour
     void Awake()
     {
         Instance = this;
+    }
+
+    private ui_navigable current_nav;
+
+    public void Set(ui_navigable nav)
+    {
+        current_nav = nav;
+    }
+
+    public void MoveTo(ui_navigable nav)
+    {
+        if (nav == null) {return;}
+
+
+        current_nav.Deselect();
+
+        nav.Select();
+
+        Set(nav);
+    }
+
+    public void Clear()
+    {
+        if (current_nav != null)
+        {
+            current_nav.Deselect();
+            current_nav = null;
+        }
+    }
+
+    void Update()
+    {
+        if (current_nav != null)
+        {
+            if (Keyboard.current.upArrowKey.wasPressedThisFrame)
+            {
+                MoveTo(current_nav.n_up);
+            } else if (Keyboard.current.downArrowKey.wasPressedThisFrame)
+            {
+                MoveTo(current_nav.n_down);
+            } else if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
+            {
+                MoveTo(current_nav.n_left);
+            } else if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
+            {
+                MoveTo(current_nav.n_right);
+            }
+        }
     }
 }
