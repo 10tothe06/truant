@@ -66,6 +66,17 @@ public class UIManager : MonoBehaviour
     [Header("Component References")]
     public Inventory inventory;
 
+    #region ADVANCEMENTS
+
+    public IEnumerator ShowAdvancementPopup(adv_advancementdata data)
+    {
+        // TODO: this
+
+        yield return new WaitForSeconds(1f);
+    }
+
+    #endregion
+
 
     public IEnumerator RunGameIntro()
     {

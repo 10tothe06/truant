@@ -45,6 +45,8 @@ public class Program : MonoBehaviour
         startMode = ins_startMode;
     }
 
+    public bool resetAdvancements;
+
     public string version;
 
     public ProgramBuildMode ins_buildMode;
