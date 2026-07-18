@@ -54,10 +54,10 @@ public class ui_button : MonoBehaviour
     {
         if (enablePassthrough)
         {
-            return ui_canvasutils.IsCursorInBounds(gameObject, true);
+            return util_canvas.IsCursorInBounds(gameObject, true);
         } else
         {
-            return ui_canvasutils.IsCursorInteract(gameObject, true);
+            return util_canvas.IsCursorInteract(gameObject, true);
         }
     }
 

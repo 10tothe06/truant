@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 // A support class with functions for UI
 // This class can be referenced by any other script in the project
-public class ui_canvasutils : MonoBehaviour
+public class util_canvas : MonoBehaviour
 {
     public static bool HasChildOfName(GameObject parent, string name)
     {

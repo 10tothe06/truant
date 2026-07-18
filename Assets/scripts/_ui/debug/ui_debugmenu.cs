@@ -160,7 +160,7 @@ public class ui_debugmenu : MonoBehaviour
     public void RefreshEntryList()
     {
         monoEntries = new List<ui_monodebugentry>();
-        ui_canvasutils.DestroyChildren(t_entryContainer.gameObject);
+        util_canvas.DestroyChildren(t_entryContainer.gameObject);
 
         for (int i = 0; i < entries.Count;i++)
         {

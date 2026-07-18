@@ -66,6 +66,20 @@ public class UIManager : MonoBehaviour
     [Header("Component References")]
     public Inventory inventory;
 
+    #region OPEN/CLOSE
+
+    public void OpenAdvancementsWidget()
+    {
+        
+    }
+    public void CloseAdvancementsWidget()
+    {
+        
+    }
+
+    #endregion
+
+
     #region ADVANCEMENTS
 
     public IEnumerator ShowAdvancementPopup(adv_advancementdata data)

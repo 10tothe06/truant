@@ -48,7 +48,7 @@ public class ui_snappable : MonoBehaviour
 
         if (canBeInteractedWith)
         {
-            if (Input.mouseButtonDownLeft && ui_canvasutils.IsCursorInteract(gameObject, true))
+            if (Input.mouseButtonDownLeft && util_canvas.IsCursorInteract(gameObject, true))
             {
                 isHolding = true;
             }

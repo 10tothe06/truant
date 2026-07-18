@@ -30,6 +30,6 @@ public class FootstepController : MonoBehaviour
         Material steppingOn = util_audio.GetMaterialFromRay(transform.position, -Vector3.up, rayDistance, validHits);
 
         // stacking should be controlled alr so i dont rlly care
-        AudioManager.Instance.PlaySound(util_audio.GetClipFromMaterial(steppingOn, materials, defaultStepSound));
+        //AudioManager.Instance.PlaySound(util_audio.GetClipFromMaterial(steppingOn, materials, defaultStepSound));
     }
 }

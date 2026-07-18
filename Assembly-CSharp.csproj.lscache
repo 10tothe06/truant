@@ -125,7 +125,7 @@ Assets/scripts/
   ui_monodebugentry.cs
  _ui/
   UIManager.cs
-  ui_canvasutils.cs
+  util_canvas.cs
  _util/
   util_audio.cs
   util_math.cs

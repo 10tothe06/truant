@@ -44,6 +44,6 @@ public class uim_modularmenu : MonoBehaviour
 
     public void ClearAllEntries()
     {
-        ui_canvasutils.DestroyChildren(t_entryContainer.gameObject);
+        util_canvas.DestroyChildren(t_entryContainer.gameObject);
     }
 }
