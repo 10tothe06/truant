@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -59,18 +60,41 @@ public class ui_navigator : MonoBehaviour
     {
         if (current_nav != null)
         {
-            if (Keyboard.current.upArrowKey.wasPressedThisFrame)
+            if (current_nav.is_selected)
             {
-                MoveTo(current_nav.n_up);
-            } else if (Keyboard.current.downArrowKey.wasPressedThisFrame)
+                if (Keyboard.current.upArrowKey.wasPressedThisFrame)
+                {
+                    MoveTo(current_nav.n_up);
+                } else if (Keyboard.current.downArrowKey.wasPressedThisFrame)
+                {
+                    MoveTo(current_nav.n_down);
+                } else if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
+                {
+                    MoveTo(current_nav.n_left);
+                } else if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
+                {
+                    MoveTo(current_nav.n_right);
+                }
+
+                if (Keyboard.current.enterKey.wasPressedThisFrame)
+                {
+                    current_nav.ConfirmSelection();
+                }
+            } else
             {
-                MoveTo(current_nav.n_down);
-            } else if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
-            {
-                MoveTo(current_nav.n_left);
-            } else if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
-            {
-                MoveTo(current_nav.n_right);
+                if (Keyboard.current.upArrowKey.wasPressedThisFrame)
+                {
+                    current_nav.Select();
+                } else if (Keyboard.current.downArrowKey.wasPressedThisFrame)
+                {
+                    current_nav.Select();
+                } else if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
+                {
+                    current_nav.Select();
+                } else if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
+                {
+                    current_nav.Select();
+                }
             }
         }
     }

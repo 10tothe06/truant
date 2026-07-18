@@ -190,6 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87f6b346553231e4b9bfb0c3e0f76971, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ui_navigable
+  is_default: 0
   n_up: {fileID: 0}
   n_down: {fileID: 0}
   n_right: {fileID: 0}
@@ -200,6 +201,10 @@ MonoBehaviour:
   onDeselect:
     m_PersistentCalls:
       m_Calls: []
+  onConfirmSelection:
+    m_PersistentCalls:
+      m_Calls: []
+  button: {fileID: 8453670206041178135}
 --- !u!114 &4921335470211192109
 MonoBehaviour:
   m_ObjectHideFlags: 0

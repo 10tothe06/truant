@@ -65,8 +65,15 @@ public class UIManager : MonoBehaviour
     [Space(30)]
     [Header("Component References")]
     public Inventory inventory;
+    public ui_settingsmenu settingsMenu;
 
     #region OPEN/CLOSE
+
+    public void OpenSettingsMenu()
+    {
+        SwitchMenu("settings menu");
+        settingsMenu.EnterMenu();
+    }
 
     public void OpenAdvancementsWidget()
     {
@@ -94,7 +101,7 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator RunGameIntro()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0f);
 
         EnterMainMenu();
     }
