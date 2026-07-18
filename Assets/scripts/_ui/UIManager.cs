@@ -67,7 +67,14 @@ public class UIManager : MonoBehaviour
     public Inventory inventory;
     public ui_settingsmenu settingsMenu;
 
+    public GameObject g_bugReportWidget;
+
     #region OPEN/CLOSE
+
+    public void OpenBugReportWidget()
+    {
+        g_bugReportWidget.SetActive(true);
+    }
 
     public void OpenSettingsMenu()
     {
