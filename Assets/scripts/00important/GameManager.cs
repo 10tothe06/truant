@@ -18,6 +18,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    [SerializeField]
+    private float ins_game_update_speed; // just for show
+    private static float game_update_speed;
+
+
+    [SerializeField]
+    private float ins_last_game_update_speed; // just for show
+    private static float last_game_update_speed; // stored to allow reverting
+
+
     void Awake()
     {
         Instance = this;
@@ -39,29 +49,48 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // endings marked as 'true' are possible with that character, 'false' aren't
-    // because some endings just can't happen with certain characters
-    public bool[] endingsPossibleWithHiker;
-    public bool[] endingsPossibleWithRanger;
-    public bool[] endingsPossibleWithCamper;
+    #region GAME UPDATING
 
-    public int characterIndex;
-    public Item[] items;
+    // this is the function that is accessed by all scripts,
+    // not a variable in case we want more logic
 
-    public Transform[] t_playerSpawns;
-
-    // may have already coded this function,
-    // but can't be bothered to look for it
-    public Item FindItem(string name)
+    // 0 means the game is paused
+    // 0.5 means half speed
+    // 1 means full speed
+    public static float GetUpdateSpeed()
     {
-        for (int i = 0; i < items.Length; i++)
-        {
-            if (items[i].name == name)
-            {
-                return items[i];
-            }
-        }
-
-        return null;
+        return game_update_speed;
     }
+
+    public static void SetUpdateSpeed(float new_speed)
+    {
+        // storing the old speed
+        last_game_update_speed = game_update_speed;
+        GameManager.Instance.ins_last_game_update_speed = game_update_speed;
+
+        // setting the new speed
+        game_update_speed = new_speed;
+        GameManager.Instance.ins_game_update_speed = new_speed;
+    }
+
+    #endregion
+
+    #region PAUSING
+
+    // one-stop-shop:
+    // * opens the pause menu
+    // * stops physics
+    public static void PauseGame()
+    {
+        SetUpdateSpeed(0);
+    }
+
+    public static void ResumeGame()
+    {
+        // return the update speed to whatever we had it at before
+       SetUpdateSpeed(last_game_update_speed);
+    }
+
+
+    #endregion
 }

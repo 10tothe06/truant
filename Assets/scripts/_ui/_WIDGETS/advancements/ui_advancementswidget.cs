@@ -3,10 +3,14 @@ using UnityEngine;
 
 // controller of the advancement window-thing
 
+
 public class ui_advancementwidget : MonoBehaviour
 {
+    // rendering of advancement icons is done through this component
     public ui_list list;
 
+
+    // called
     public void RenderAchievements()
     {
         list.ClearAllListElements();
