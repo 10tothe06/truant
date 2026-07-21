@@ -83,12 +83,16 @@ public class GameManager : MonoBehaviour
     public static void PauseGame()
     {
         SetUpdateSpeed(0);
+
+        UIManager.OpenPauseMenu();
     }
 
     public static void ResumeGame()
     {
         // return the update speed to whatever we had it at before
        SetUpdateSpeed(last_game_update_speed);
+
+       UIManager.ClosePauseMenu();
     }
 
 

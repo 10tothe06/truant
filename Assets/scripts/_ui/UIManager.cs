@@ -69,26 +69,50 @@ public class UIManager : MonoBehaviour
 
     public GameObject g_bugReportWidget;
 
+    public ui_advancementwidget advancementsWidget;
+
+    public GameObject g_pauseMenu;
+
     #region OPEN/CLOSE
 
-    public void OpenBugReportWidget()
+    // these are all static functions
+    // (new rule to avoid verbosity)
+    // TODO: do the same shit for all the open/close functions in Launch Sequence
+
+    public static void OpenBugReportWidget()
     {
-        g_bugReportWidget.SetActive(true);
+        Instance.g_bugReportWidget.SetActive(true);
     }
 
-    public void OpenSettingsMenu()
+    public static void OpenSettingsMenu()
     {
-        SwitchMenu("settings menu");
-        settingsMenu.EnterMenu();
+        Instance.SwitchMenu("settings menu");
+        Instance.settingsMenu.EnterMenu();
     }
 
-    public void OpenAdvancementsWidget()
+    public static void OpenAdvancementsWidget()
     {
-        
+        Instance.advancementsWidget.gameObject.SetActive(true);
+        Instance.advancementsWidget.RenderAchievements();
     }
-    public void CloseAdvancementsWidget()
+    public static void CloseAdvancementsWidget()
     {
-        
+        Instance.advancementsWidget.gameObject.SetActive(false);
+    }
+
+
+    // BOTH OF THESE ARE CALLED THROUGH THE GAME MANAGER
+
+    
+    // DON'T FUCKING CALL THEM FROM HERE
+    // (you dimwit)
+    public static void OpenPauseMenu()
+    {
+        Instance.g_pauseMenu.SetActive(true);
+    }
+    public static void ClosePauseMenu()
+    {
+        Instance.g_pauseMenu.SetActive(false);
     }
 
     #endregion

@@ -2962,6 +2962,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bc22bdccf3aecd439e1914ca4c9e51c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  ins_game_update_speed: 0
+  ins_last_game_update_speed: 0
 --- !u!1001 &591057437
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9318,10 +9320,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ui_list
   num_columns: 1
   overlapListElements: 0
-  spaceBetweenItems: 0
+  spaceBetweenItems: 25
   listUpwards: 0
-  p_listElement: {fileID: 0}
-  t_listContainer: {fileID: 0}
+  p_listElement: {fileID: 1641098893918378301, guid: 6a847530dc846c34fafbae4f20a332d1, type: 3}
+  t_listContainer: {fileID: 1967789644}
 --- !u!1001 &1985387236
 PrefabInstance:
   m_ObjectHideFlags: 0
