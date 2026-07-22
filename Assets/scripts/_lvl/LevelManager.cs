@@ -30,4 +30,61 @@ public class LevelManager : MonoBehaviour
     {
         Instance = this;
     }
+
+    void Start()
+    {
+        LoadLevelList();
+    }
+
+    // very similar to the UIManager's menuarray system
+    // could POSSIBLY make a modular script but ehh
+
+    public Transform t_levelContianer;
+
+
+    // no need for a custom data struct here
+    public string[] level_names;
+    public lvl_generic[] level_list;
+
+    private lvl_generic current_level;
+
+
+    private void LoadLevelList()
+    {
+        // grab every object with a level component, and add it to the list
+        level_list = t_levelContianer.GetComponentsInChildren<lvl_generic>();
+
+        level_names = new string[level_list.Length];
+
+        for (int i = 0; i < level_names.Length; i++)
+        {
+            // this means the gameobject names have to be EXACTLY the same as their backend level names
+            level_names[i] = level_list[i].gameObject.name;
+        }
+
+
+    }
+
+    #region SWITCHING LEVELS
+    
+    private static void ExitCurrentLevel()
+    {
+        if (Instance.current_level == null) {return;}
+    }
+
+    public static void LoadLevel(string level_name)
+    {
+        ExitCurrentLevel();
+
+        for (int i = 0; i < Instance.level_names.Length; i++)
+        {
+            if (Instance.level_names[i] == level_name)
+            {
+                // we really only need to call one function on the generic class
+                Instance.level_list[i].EnterLevel();
+            }
+        }
+    }
+
+    #endregion
 }

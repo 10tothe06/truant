@@ -11,4 +11,9 @@ public class lvl_generic : MonoBehaviour
     {
         onLevelEnter.Invoke();
     }
+
+    public void ExitLevel()
+    {
+        
+    }
 }

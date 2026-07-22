@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class lvl_basement : MonoBehaviour
 {
-    public lvl_generic gComp;
+    private lvl_generic gComp;
     void Awake()
     {
         gComp = GetComponent<lvl_generic>();

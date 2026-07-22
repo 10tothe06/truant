@@ -68,12 +68,25 @@ public class UIManager : MonoBehaviour
     public ui_settingsmenu settingsMenu;
 
     public GameObject g_bugReportWidget;
-
     public ui_advancementwidget advancementsWidget;
 
     public GameObject g_pauseMenu;
 
+
+    public GameObject g_creditsMenu;
+
     #region OPEN/CLOSE
+
+    public static void OpenCreditsMenu()
+    {
+        Instance.g_creditsMenu.SetActive(true);
+    }
+
+    public static void CloseCreditsMenu()
+    {
+        Instance.g_creditsMenu.SetActive(false);
+    }
+
 
     // these are all static functions
     // (new rule to avoid verbosity)

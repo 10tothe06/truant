@@ -39,6 +39,12 @@ public class AudioManager : MonoBehaviour
         // TODO: this
     }
 
+    // not clicking, but hovering over a button
+    public void ButtonSelect()
+    {
+        
+    }
+
     public void PlayStaticSound(int index, bool loop = false)
     {
         SpawnAudioTrack(staticSounds[index]);

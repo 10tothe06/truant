@@ -49,6 +49,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // quits to desktop, basically
+    public static void QuitGame()
+    {
+        
+    }
+
+
     #region GAME UPDATING
 
     // this is the function that is accessed by all scripts,
