@@ -33,6 +33,22 @@ public class GameManager : MonoBehaviour
         Instance = this;
     }
 
+    // called upon the player clicking the "start" button
+    
+    // decides what to do based on progression
+    public static void StartGame()
+    {
+        if (GameFlags.flags.has_completed_tutorial)
+        {
+            // tutorial done, load into lobby
+            LevelManager.LoadLevel("lobby");
+        } else
+        {
+            // gotta do the tutorial
+            LevelManager.LoadLevel("tutorial");
+        }
+    }
+
     // quits to desktop, basically
     public static void QuitGame()
     {
