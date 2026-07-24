@@ -33,12 +33,6 @@ public class GameManager : MonoBehaviour
         Instance = this;
     }
 
-    void Start()
-    {
-        // attempts to grab game progression data from disk
-        GameFlags.TryLoadFlags();
-    }
-
     // quits to desktop, basically
     public static void QuitGame()
     {

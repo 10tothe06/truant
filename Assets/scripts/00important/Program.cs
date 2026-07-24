@@ -58,7 +58,18 @@ public class Program : MonoBehaviour
     // should almost be the ONLY use of the start function
     void Start()
     {
+        // attempts to grab game progression data from disk
+        GameFlags.TryLoadFlags();
+
         Boot();
+    }
+
+    void OnApplicationQuit()
+    {
+        Settings.Instance.WriteToSettingsFile();
+        Settings.Instance.SaveTrackedAdvancements();
+
+        GameFlags.SaveFlagsToDisk();
     }
 
     public void Boot()

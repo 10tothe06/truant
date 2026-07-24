@@ -172,7 +172,7 @@ public class Settings : MonoBehaviour
         }
     }
 
-    private void SaveTrackedAdvancements()
+    public void SaveTrackedAdvancements()
     {
         if (!Directory.Exists(util_file.GetWorkingDirectory())) {Directory.CreateDirectory(util_file.GetWorkingDirectory());}
         string filePath = util_file.GetWorkingDirectory() + "user.advancements";
@@ -344,11 +344,6 @@ public class Settings : MonoBehaviour
         }
 
         // we're not going to bother with writing anything to disk, that's another function's job
-    }
-    void OnApplicationQuit()
-    {
-        WriteToSettingsFile();
-        SaveTrackedAdvancements();
     }
 
     public void WriteToSettingsFile()
