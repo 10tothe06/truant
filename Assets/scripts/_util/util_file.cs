@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using UnityEngine;
 
 public class util_file : MonoBehaviour
@@ -26,5 +28,37 @@ public class util_file : MonoBehaviour
         {
             return str + "\\";
         }
+    }
+
+    public static Texture2D LoadPNG(string filePath)
+    {
+
+        Texture2D tex = null;
+        byte[] fileData;
+
+        if (File.Exists(filePath))
+        {
+            fileData = File.ReadAllBytes(filePath);
+            tex = new Texture2D(2, 2);
+            tex.LoadImage(fileData); //..this will auto-resize the texture dimensions.
+        }
+        return tex;
+    }
+
+    // replaces one line of a text file with a string
+    //returns null if goes right, return error message if goes wrong
+    public static string ModifyTxtWithNoSurprises(string file, int lineIndex, string newText)
+    {
+        try
+        {
+            var lines = File.ReadAllLines(file);
+            lines[lineIndex] = newText;
+            File.WriteAllLines(file, lines);
+        }
+        catch (Exception e)
+        {
+            return e.Message;
+        }
+        return null;
     }
 }

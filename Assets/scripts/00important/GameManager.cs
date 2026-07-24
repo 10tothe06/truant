@@ -35,18 +35,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        // try loading the game flags from disk
-        GameFlags loadedFlags = rw_utils.LoadFlags();
-
-        if (loadedFlags != null)
-        {
-            Debug.Log("Using loaded game flags...");
-            GameFlags.Apply(loadedFlags);
-        } else
-        {
-            Debug.Log("Using factory default game flags...");
-            GameFlags.ApplyFactoryDefaults();
-        }
+        // attempts to grab game progression data from disk
+        GameFlags.TryLoadFlags();
     }
 
     // quits to desktop, basically
