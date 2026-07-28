@@ -9368,8 +9368,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1330985637}
   - {fileID: 1144709420}
+  - {fileID: 1330985637}
   - {fileID: 1576140316}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9413,7 +9413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   isActive: 1
-  gravityDirection: {x: 0, y: 0, z: 0}
+  gravityDirection: {x: -0, y: -1, z: -0}
   gravitationalAcceleration: 9.81
   col: {fileID: 1330985640}
   lastPacket:
@@ -9440,16 +9440,16 @@ MonoBehaviour:
   t_foot: {fileID: 1576140316}
   raycastDistanceFromFoot: 0.15
   crouchPercentHeight: 0.5
-  moveSpeed: 1
+  moveSpeed: 30
   sprintBoost: 2
   strafeSpeed: 0.5
-  turnSpeed: 1
+  turnSpeed: 2
   flySpeed: 1
-  jumpStrength: 1
-  cameraBounceAmplitude: 1
-  cameraBounceFrequency: 1
+  jumpStrength: 4
+  cameraBounceAmplitude: 0.05
+  cameraBounceFrequency: 20
   maxSprint: 200
-  sprintValue: 0
+  sprintValue: 200
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
