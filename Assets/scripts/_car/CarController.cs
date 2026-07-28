@@ -48,11 +48,11 @@ public class CarController : MonoBehaviour
             steeringPercent = Input.inputAxisHorizontal * steeringMoveSpeed;
 
             sus.angularDrag = drivingAngularDrag;
-            sus.linearDrag = drivingLinearDrag;
+            //sus.linearDrag = drivingLinearDrag;
         } else
         {
             sus.angularDrag = angularDrag;
-            sus.linearDrag = linearDrag;
+            //sus.linearDrag = linearDrag;
         }
         
         //temp 
