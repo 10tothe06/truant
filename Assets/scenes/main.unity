@@ -173,7 +173,7 @@ MonoBehaviour:
     cellIndex: 0
     extendHorizontal: 0
     extendVertical: 0
-  itemDisplay: {fileID: 0}
+  itemDisplay: {fileID: 5381021655036083582, guid: 1628933c41b3ad740acae0a40762a8b2, type: 3}
 --- !u!1 &33189798
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,8 +717,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ui_inventories
   t_inventoryContainer: {fileID: 1414474353}
-  p_inventory: {fileID: 0}
-  cursor: {fileID: 0}
+  p_inventory: {fileID: 2949734989014633036, guid: c786f97a722e13940b0b8e170edf78c4, type: 3}
+  cursor: {fileID: 3469275}
   spacingBetweenInventories: 50
 --- !u!1 &149606528
 GameObject:
