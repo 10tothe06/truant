@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 2313714408643226733}
   - component: {fileID: 7828376522516511250}
   - component: {fileID: 9171863185802271225}
+  - component: {fileID: 2426810684006620440}
   m_Layer: 0
   m_Name: model
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,6 +112,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2426810684006620440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890519104577960506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1318597684b1c24dab54b70b71b2d2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractCollider
+  parentObject: {fileID: 9060493668500253043}
 --- !u!1 &6702777790825529560
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,11 +198,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb72d9494664291449da362dc3af3687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableObject3D
-  logInteractionEvents: 0
+  isDraggable: 0
   hoverPrompt: press E to pick up
   onInteract:
     m_PersistentCalls:
       m_Calls: []
-  onPeriodic:
+  onInteractByObject:
     m_PersistentCalls:
       m_Calls: []
