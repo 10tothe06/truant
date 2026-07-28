@@ -25,6 +25,8 @@ public class lvl_tutorial : MonoBehaviour
         // set the camera mode
         CameraController.SetControlMode(CameraControlMode.PlayerFirstPerson);
 
+        UIManager.ShowPlayerHUD();
+
 
         /*
         TEMP vvv

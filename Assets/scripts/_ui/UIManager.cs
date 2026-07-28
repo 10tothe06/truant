@@ -36,6 +36,7 @@ public class UIManager : MonoBehaviour
 
         // making sure all of these objects start in their proper states
         if (inventory != null) {inventory.gameObject.SetActive(false);}
+        if (player_hud != null) {player_hud.gameObject.SetActive(false);}
     }
 
     public static bool isTyping;
@@ -76,6 +77,9 @@ public class UIManager : MonoBehaviour
     public ui_inventories inventory;
 
 
+    public ui_playerhud player_hud;
+
+
 
 
 
@@ -110,6 +114,15 @@ public class UIManager : MonoBehaviour
 
 
     #region OPEN/CLOSE
+
+    public static void ShowPlayerHUD()
+    {
+        Instance.player_hud.gameObject.SetActive(true);
+    }
+    public static void HidePlayerHUD()
+    {
+        Instance.player_hud.gameObject.SetActive(false);
+    }
 
 
     public void OpenInventory()
