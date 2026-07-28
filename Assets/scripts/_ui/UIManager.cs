@@ -75,6 +75,40 @@ public class UIManager : MonoBehaviour
 
     public ui_inventories inventory;
 
+
+
+
+
+    #region LOCKING
+
+    public void LockPlayer()
+    {
+        // freeze player movement and looking
+        PlayerController comp = Player.controller;
+
+        comp.lockCameraHorizontal = true;
+        comp.lockCameraVertical = true;
+        comp.lockMovement = true;
+
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void UnlockPlayer()
+    {
+        // freeze player movement and looking
+        PlayerController comp = Player.controller;
+
+        comp.lockCameraHorizontal = false;
+        comp.lockCameraVertical = false;
+        comp.lockMovement = false;
+
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    # endregion
+
+
+
     #region OPEN/CLOSE
 
 
@@ -83,10 +117,14 @@ public class UIManager : MonoBehaviour
         inventory.gameObject.SetActive(true);
 
         inventory.OpenPlayerInventory();
+
+        LockPlayer();
     }
     public void CloseInventory()
     {
         inventory.gameObject.SetActive(false);
+
+        UnlockPlayer();
     }
     public void ToggleInventory()
     {

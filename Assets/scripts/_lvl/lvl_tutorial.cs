@@ -24,5 +24,13 @@ public class lvl_tutorial : MonoBehaviour
 
         // set the camera mode
         CameraController.SetControlMode(CameraControlMode.PlayerFirstPerson);
+
+
+        /*
+        TEMP vvv
+        */
+
+        Player.player_inventory.AddItem(new inv_itemstack(0, 1, 0));
+        Player.player_inventory.AddItem(new inv_itemstack(2, 1, 1));
     }
 }
