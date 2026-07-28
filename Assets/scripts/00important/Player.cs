@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
         // assinging components that can be accessed by other scripts
         rb = GetComponent<Rigidbody>();
         controller= GetComponent<PlayerController>();
+        generic_controller = GetComponent<player_genericcontroller>();
         t = transform;
     }
 
@@ -40,6 +41,7 @@ public class Player : MonoBehaviour
 
     public static Transform t;
     public static PlayerController controller;
+    public static player_genericcontroller generic_controller;
     public static Rigidbody rb;
 
 

@@ -35,10 +35,6 @@ public class ItemManager : MonoBehaviour
 
     public inv_itemdata[] items;
 
-
-    // for the items that are NOT spacecraft parts
-    public GameObject[] p_items;
-
     
 
     public inv_itembackground[] item_bgs;

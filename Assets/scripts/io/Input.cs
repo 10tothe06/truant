@@ -48,6 +48,13 @@ public class Input : MonoBehaviour
 
     public static Vector2 mousePosition;
 
+
+    private bool isTyping;
+    private float typing_timer_start;
+    private float typing_timer_duration = 0.5f;
+
+    
+
     void Update()
     {
         UpdateValues(Time.deltaTime);
@@ -61,6 +68,28 @@ public class Input : MonoBehaviour
             {
                 
                 UIManager.Instance.ToggleInventory();
+            }
+        }
+
+
+
+        if (Cursor.lockState != CursorLockMode.Locked)
+        {
+            isTyping = true;
+        } else
+        {
+            // small delay to insure no interactions immediately after quitting menus
+            if (typing_timer_start == -1)
+            {
+                typing_timer_start = Time.time;
+            }
+            else
+            {
+                if (Time.time > typing_timer_start + typing_timer_duration)
+                {
+                    typing_timer_start = -1;
+                    isTyping = false;
+                }
             }
         }
     }
@@ -118,6 +147,8 @@ public class Input : MonoBehaviour
 
             result.mouseLeft = Input.mouseButtonLeft;
             result.mouseRight = Input.mouseButtonRight;
+
+            result.isTyping = Instance.isTyping;
         }
 
         return result;

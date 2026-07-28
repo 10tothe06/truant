@@ -14,6 +14,8 @@ public class inv_itemdata
 
     public Sprite icon;
 
+    public string associated_object;
+
     public inv_itemdata() {}
 
     public inv_itemdata(int occupyWidth, int occupyHeight)

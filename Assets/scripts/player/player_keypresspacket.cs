@@ -22,6 +22,9 @@ public class player_keypresspacket
     public bool up; // e
     public bool down; // q
 
+
+    public bool isTyping;
+
     public player_keypresspacket() {}
 
     public float GetHorizontal()
@@ -58,6 +61,8 @@ public class player_keypresspacket
         result += (mouseLeft ? "1" : "0") + ',';
         result += (mouseRight ? "1" : "0") + ',';
 
+        result += (isTyping ? "1" : "0") + ',';
+
         return result;
     }
 
@@ -86,6 +91,8 @@ public class player_keypresspacket
 
         result.mouseLeft = split[11] == "1";
         result.mouseRight = split[12] == "1";
+
+        result.isTyping = split[13] == "1";
 
         return result;
     }
