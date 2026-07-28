@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using UnityEngine;
 
 // players load in to this level when they first boot up the game,
@@ -15,6 +16,13 @@ public class lvl_tutorial : MonoBehaviour
     // called by the generic component
     public void OnLevelEnter()
     {
+        UIManager.SwitchMenu("");
+
+        // move the player to the starting point of the level
         Player.TeleportTo(player_spawn_position.position);
+
+
+        // set the camera mode
+        CameraController.SetControlMode(CameraControlMode.PlayerFirstPerson);
     }
 }

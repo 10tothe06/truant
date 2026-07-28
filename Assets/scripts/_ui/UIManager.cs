@@ -99,7 +99,7 @@ public class UIManager : MonoBehaviour
 
     public static void OpenSettingsMenu()
     {
-        Instance.SwitchMenu("settings menu");
+        SwitchMenu("settings menu");
         Instance.settingsMenu.EnterMenu();
     }
 
@@ -218,20 +218,20 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void SwitchMenu(string name)
+    public static void SwitchMenu(string name)
     {
         int index = -1;
-        for (int i = 0; i < menuNames.Count; i++)
+        for (int i = 0; i < Instance.menuNames.Count; i++)
         {
-            t_canvas.GetChild(menuSiblingIndices[i]).gameObject.SetActive(false);
-            if (menuNames[i] == name)
+            Instance.t_canvas.GetChild(Instance.menuSiblingIndices[i]).gameObject.SetActive(false);
+            if (Instance.menuNames[i] == name)
             {
-                index = menuSiblingIndices[i];
+                index = Instance.menuSiblingIndices[i];
             }
         }
 
         if (index == -1) {Debug.Log("Menu name not found!"); return;}
 
-        t_canvas.GetChild(index).gameObject.SetActive(true);
+        Instance.t_canvas.GetChild(index).gameObject.SetActive(true);
     }
 }

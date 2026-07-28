@@ -86,6 +86,12 @@ public class Program : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        // the game manager handles the specifics
+        GameManager.Instance.UpdateGame();
+    }
+
     // forget exiting to main, just quit the damn program
     public void HardQuit()
     {

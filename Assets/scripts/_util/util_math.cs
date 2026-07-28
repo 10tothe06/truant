@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class util_math : MonoBehaviour
 {
+    public static float ProjectedMagnitude(UnityEngine.Vector3 a, UnityEngine.Vector3 b)
+    {
+        UnityEngine.Vector3 p = UnityEngine.Vector3.Project(a,b);
+        if (UnityEngine.Vector3.Dot(b, a) < 0)
+        {
+            return -p.magnitude;
+        } else
+        {
+            return p.magnitude;
+        }
+    }
+    
     public static Vector3 RotateVector(Vector3 vector, Vector3 axis, float angle) {
         Vector3 rotated = new Vector3(0,0,0);
         rotated.x = vector.x * (     (axis.x * axis.x) * (1 - Mathf.Cos(angle)) + Mathf.Cos(angle)                  ) +   vector.y * (        (axis.y * axis.x) * (1 - Mathf.Cos(angle)) - (axis.z * Mathf.Sin(angle))         ) + vector.z * (        (axis.z * axis.x) * (1 - Mathf.Cos(angle)) + (axis.y * Mathf.Sin(angle))     );

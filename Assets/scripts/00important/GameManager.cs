@@ -1,6 +1,15 @@
 using System.Collections;
 using UnityEngine;
 
+// used so that very high-level scripts like the WorldManagr can only run certain logic when in-game
+// essentially the updated version of the inGame variable all the way back from Tempest
+public enum GameState
+{
+    InMenu,
+    InGame,
+}
+
+
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
@@ -26,6 +35,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float ins_last_game_update_speed; // just for show
     private static float last_game_update_speed; // stored to allow reverting
+
+    // the static one is the one that scripts look for
+    // the ins_ variable is just so that I can see
+    [Header("vv READ ONLY vv")]
+    public GameState ins_gameState;
+    public static GameState gameState;
 
 
     void Awake()
@@ -78,6 +93,23 @@ public class GameManager : MonoBehaviour
         // setting the new speed
         game_update_speed = new_speed;
         GameManager.Instance.ins_game_update_speed = new_speed;
+    }
+
+
+    public void UpdateGame()
+    {
+        // ====================================
+        // updating UI (no distinction made here between sandbox and game)
+        // ====================================
+
+        // we want to try and have an update function in as few scripts as possible
+        if (gameState == GameState.InGame)
+        {
+            UIManager.Instance.InGameUpdate();
+        } else if (gameState == GameState.InMenu)
+        {
+            UIManager.Instance.InMenuUpdate();
+        }
     }
 
     #endregion

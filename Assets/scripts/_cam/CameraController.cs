@@ -4,10 +4,8 @@ using UnityEngine.Events;
 public enum CameraControlMode
 {
     None,
-    MapView,
-    Freecam,
+    Freecam, // only a playtester/developer thing
     PlayerFirstPerson,
-    BodyEditor,
     MainMenu,
 }
 
@@ -40,11 +38,6 @@ public class CameraController : MonoBehaviour
         cam_main = ins_cam_main;
     }
 
-    // what layers should be rendered for each view
-    // (allows us to use the same scene for both)
-    public LayerMask normalView;
-    public LayerMask mapView;
-
     public Transform ins_t_cam;
     public static Transform t_cam;
 
@@ -60,27 +53,42 @@ public class CameraController : MonoBehaviour
     public UnityEvent onChangeControlMode;
     public UnityEvent onCameraUpdate;
 
+
+
+    // fov-related stuff
+    // needs a bit of sysarch to make sure any sub-cameras obey the rules
+    private float target_fov;
+    [SerializeField]
+    private float fov_lerp_speed;
+
+
+
     public void UpdateCamera()
     { 
         onCameraUpdate.Invoke();
+
+
+        // fov interpolation
+        cam_main.fieldOfView = Mathf.Lerp(cam_main.fieldOfView, target_fov, fov_lerp_speed);
     }
 
-    public static void SetToMapView()
-    {
-        Camera.main.cullingMask = Instance.mapView;
-    }
 
-    public static void SetToGameView()
-    {
-        Camera.main.cullingMask = Instance.normalView;
-    }
-
+    // basically a position/rotation reset command
     public static void ZeroOut()
     {
         Instance.transform.localPosition = Vector3.zero;
         t_cam.localPosition = Vector3.zero;
 
-        Instance.transform.localRotation = Quaternion.Euler(Vector3.zero);
+        Instance.transform.rotation =Quaternion.identity;
+        t_cam.transform.rotation =Quaternion.identity;
+    }
+    public static void ZeroOutLocal()
+    {
+        Instance.transform.localPosition = Vector3.zero;
+        t_cam.localPosition = Vector3.zero;
+
+        Instance.transform.localRotation =Quaternion.identity;
+        t_cam.transform.localRotation =Quaternion.identity;
     }
 
 
@@ -97,5 +105,16 @@ public class CameraController : MonoBehaviour
         Instance.ins_controlMode = controlMode;
         
         Instance.onChangeControlMode.Invoke();
+    }
+
+    public static void SetCameraFov(float target_fov, bool should_lerp = true)
+    {
+        Instance.target_fov = target_fov;
+
+        if (!should_lerp)
+        {
+            // just set it immediately
+            cam_main.fieldOfView = target_fov;
+        }
     }
 }
