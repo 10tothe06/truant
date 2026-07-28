@@ -63,9 +63,9 @@ public class ui_inventories : MonoBehaviour
 
     public void OpenPlayerInventory()
     {
-        // Func<inv_inventorydata>[] playerInventorySources = LocalPlayer.localClient.controllingEntity.GetComponent<player_partmanager>().GetInventorySources();
+        Func<inv_inventorydata>[] playerInventorySources = new Func<inv_inventorydata>[] {() => Player.player_inventory};
 
-        // BuildMenus(playerInventorySources);
+        BuildMenus(playerInventorySources);
     }
 
     public void OpenExternalInventory(Func<inv_inventorydata> source)

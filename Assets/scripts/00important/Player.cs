@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
     public static Rigidbody rb;
 
 
-
+    public static inv_inventorydata player_inventory;
 
 
 

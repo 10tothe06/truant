@@ -51,6 +51,17 @@ public class Input : MonoBehaviour
     void Update()
     {
         UpdateValues(Time.deltaTime);
+
+        // keyboard presses
+        if (!UIManager.isTyping)
+        {
+
+            // opening/closing the player inventory
+            if (Keyboard.current.iKey.wasPressedThisFrame)
+            {
+                UIManager.Instance.ToggleInventory();
+            }
+        }
     }
 
     public static bool GetMouseButtonDown(int button)

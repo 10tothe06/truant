@@ -74,7 +74,25 @@ public class UIManager : MonoBehaviour
 
     public GameObject g_creditsMenu;
 
+    public ui_inventories inventory;
+
     #region OPEN/CLOSE
+
+
+    public void OpenInventory()
+    {
+        
+    }
+    public void CloseInventory()
+    {
+        
+    }
+    public void ToggleInventory()
+    {
+        
+    }
+
+
 
     public static void OpenCreditsMenu()
     {
