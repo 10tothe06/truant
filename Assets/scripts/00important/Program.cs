@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 // this is a very, very forward-thinking feature for when I decide to add dedicated servers
 // changing this will affect how the build works, avoiding all client code if set to 'ServerBuild'
@@ -79,11 +81,18 @@ public class Program : MonoBehaviour
             StartCoroutine(UIManager.Instance.RunGameIntro());
         } else if (startMode == ProgramStartMode.ImmediateLevel)
         {
-            LevelManager.LoadLevel(level_to_load);
+            StartCoroutine(DelayedBoot(0.1f, () => LevelManager.LoadLevel(level_to_load)));
         } else if (startMode == ProgramStartMode.SceneOnly)
         {
             // do nothing
         }
+    }
+
+    public IEnumerator DelayedBoot(float delay, UnityAction toBoot)
+    {
+        yield return new WaitForSeconds(delay);
+
+        toBoot.Invoke();
     }
 
     void Update()
