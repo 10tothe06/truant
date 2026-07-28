@@ -32,11 +32,10 @@ public class UIManager : MonoBehaviour
         Instance = this;
         
         LoadMenuObjects();
-    }
 
-    void Start()
-    {
-        //inventory.Initialize();
+
+        // making sure all of these objects start in their proper states
+        if (inventory != null) {inventory.gameObject.SetActive(false);}
     }
 
     public static bool isTyping;
@@ -81,15 +80,23 @@ public class UIManager : MonoBehaviour
 
     public void OpenInventory()
     {
-        
+        inventory.gameObject.SetActive(true);
+
+        inventory.OpenPlayerInventory();
     }
     public void CloseInventory()
     {
-        
+        inventory.gameObject.SetActive(false);
     }
     public void ToggleInventory()
     {
-        
+        if (!inventory.gameObject.activeSelf)
+        {
+            OpenInventory();
+        } else
+        {
+            CloseInventory();
+        }
     }
 
 

@@ -32,6 +32,11 @@ public class Player : MonoBehaviour
         t = transform;
     }
 
+    void Start()
+    {
+        player_inventory = new inv_inventorydata(8, 1);
+    }
+
     public static Transform t;
     public static Rigidbody rb;
 

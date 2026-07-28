@@ -59,6 +59,7 @@ public class Input : MonoBehaviour
             // opening/closing the player inventory
             if (Keyboard.current.iKey.wasPressedThisFrame)
             {
+                
                 UIManager.Instance.ToggleInventory();
             }
         }

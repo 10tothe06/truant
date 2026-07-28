@@ -16,12 +16,16 @@ public class inv_inventorydata
     public bool[] cellsTaken;
     public List<inv_itemstack> items;
 
-    public inv_inventorydata(){items = new List<inv_itemstack>();}
+    public inv_inventorydata(){items = new List<inv_itemstack>(); cellsTaken = new bool[inventory_width * inventory_height];}
 
     public inv_inventorydata(int inventory_width, int inventory_height)
     {
         this.inventory_width = inventory_width;
         this.inventory_height = inventory_height;
+
+        items = new List<inv_itemstack>();
+
+        cellsTaken = new bool[inventory_width * inventory_height];
     }
 
     public void ApplyData(inv_inventorydata i)

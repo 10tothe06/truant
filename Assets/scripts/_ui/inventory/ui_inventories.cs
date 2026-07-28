@@ -30,6 +30,9 @@ public class ui_inventories : MonoBehaviour
     void Awake()
     {
         Instance = this;
+    }
+    void Start()
+    {
         ClearCursor();
     }
 
