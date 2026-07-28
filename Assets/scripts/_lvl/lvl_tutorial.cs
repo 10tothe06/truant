@@ -5,5 +5,16 @@ using UnityEngine;
 
 public class lvl_tutorial : MonoBehaviour
 {
-    
+    public Transform player_spawn_position;
+
+    void Awake()
+    {
+        GetComponent<lvl_generic>().onLevelEnter.AddListener(OnLevelEnter);
+    }
+
+    // called by the generic component
+    public void OnLevelEnter()
+    {
+        Player.TeleportTo(player_spawn_position.position);
+    }
 }

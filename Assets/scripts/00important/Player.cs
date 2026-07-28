@@ -64,6 +64,31 @@ public class Player : MonoBehaviour
     public float fovMultiplier;
     private float defaultMoveSpeed;
 
+
+    public static void TeleportTo(Vector3 position)
+    {
+        
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     void Start()
     {
         t = transform;

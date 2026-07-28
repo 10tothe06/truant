@@ -10,6 +10,8 @@ public class lvl_generic : MonoBehaviour
     // or loading into one in-game
     public void EnterLevel()
     {
+        gameObject.SetActive(true);
+
         onLevelEnter.Invoke();
     }
 

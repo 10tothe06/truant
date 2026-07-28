@@ -52,7 +52,7 @@ public class LevelManager : MonoBehaviour
     private void LoadLevelList()
     {
         // grab every object with a level component, and add it to the list
-        level_list = t_levelContianer.GetComponentsInChildren<lvl_generic>();
+        level_list = t_levelContianer.GetComponentsInChildren<lvl_generic>(true);
 
         level_names = new string[level_list.Length];
 
@@ -60,6 +60,9 @@ public class LevelManager : MonoBehaviour
         {
             // this means the gameobject names have to be EXACTLY the same as their backend level names
             level_names[i] = level_list[i].gameObject.name;
+
+            // make sure all levels start out as disabled
+            level_list[i].gameObject.SetActive(false);
         }
 
 
