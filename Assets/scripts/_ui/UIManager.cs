@@ -64,7 +64,6 @@ public class UIManager : MonoBehaviour
 
     [Space(30)]
     [Header("Component References")]
-    public Inventory inventory;
     public ui_settingsmenu settingsMenu;
 
     public GameObject g_bugReportWidget;

@@ -29,13 +29,4 @@ public class WorldData : MonoBehaviour
     {
         Instance = this;
     }
-
-    public Item[] items;
-
-    
-    // returns the index of the newly created gas so it can be easily referenced
-    public int CreateExoticGas()
-    {
-        return 0;
-    }
 }
