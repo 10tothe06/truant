@@ -3285,8 +3285,8 @@ MonoBehaviour:
   resetAdvancements: 0
   version: demo-1.0-rc1
   ins_buildMode: 0
-  ins_startMode: 1
-  levelIndex: 0
+  ins_startMode: 2
+  level_to_load: tutorial
 --- !u!114 &576746838
 MonoBehaviour:
   m_ObjectHideFlags: 0

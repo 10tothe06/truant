@@ -53,7 +53,7 @@ public class Program : MonoBehaviour
     public static ProgramBuildMode buildMode;
     public ProgramStartMode ins_startMode;
     public static ProgramStartMode startMode;
-    public int levelIndex;
+    public string level_to_load;
 
     // should almost be the ONLY use of the start function
     void Start()
@@ -79,10 +79,10 @@ public class Program : MonoBehaviour
             StartCoroutine(UIManager.Instance.RunGameIntro());
         } else if (startMode == ProgramStartMode.ImmediateLevel)
         {
-            
+            LevelManager.LoadLevel(level_to_load);
         } else if (startMode == ProgramStartMode.SceneOnly)
         {
-            
+            // do nothing
         }
     }
 
