@@ -50,6 +50,36 @@ public class Player : MonoBehaviour
 
 
 
+    #region LOCKING
+
+    public static void Lock()
+    {
+        // freeze player movement and looking
+        PlayerController comp = Player.controller;
+
+        comp.lockCameraHorizontal = true;
+        comp.lockCameraVertical = true;
+        comp.lockMovement = true;
+
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    public static void Unlock()
+    {
+        // freeze player movement and looking
+        PlayerController comp = Player.controller;
+
+        comp.lockCameraHorizontal = false;
+        comp.lockCameraVertical = false;
+        comp.lockMovement = false;
+
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    # endregion
+
+
+
     public static void TeleportTo(Vector3 position)
     {
         Instance.transform.position = position;
