@@ -21,8 +21,6 @@ public class int_interactionsource : MonoBehaviour
     public void StartDraggingObject(GameObject obj)
     {
         if (isDraggingObject) {return;} // don't want to call repeatedly
-
-        isDraggingObject = true;
         
         objectToDrag = obj.GetComponent<Rigidbody>();
 
@@ -32,6 +30,8 @@ public class int_interactionsource : MonoBehaviour
         {
             objectToDrag.GetComponent<obj_applyphysics>().useGravity = false;
         }
+
+        isDraggingObject = true;
     }
 
     public void StopDraggingObject()

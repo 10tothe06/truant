@@ -45,13 +45,13 @@ public class AudioManager : MonoBehaviour
         
     }
 
-    public void PlayStaticSound(int index, bool loop = false)
+    public static void PlayStaticSound(int index, bool loop = false)
     {
-        SpawnAudioTrack(staticSounds[index]);
+        Instance.SpawnAudioTrack(Instance.staticSounds[index]);
     }
-    public void PlayVariableSound(int index, bool loop = false)
+    public static void PlayVariableSound(int index, bool loop = false)
     {
-        SpawnAudioTrack(variableSounds[index].Get());
+        Instance.SpawnAudioTrack(Instance.variableSounds[index].Get());
     }
 
     public void SpawnAudioTrack(AudioClip clip)
@@ -65,7 +65,7 @@ public class AudioManager : MonoBehaviour
         comp.Play();
     }
 
-    public void PlayMusic(int index)
+    public static void PlayMusic(int index)
     {
         // cant just spawn an audio channel because we need a parent for organization purposes
 
@@ -75,28 +75,28 @@ public class AudioManager : MonoBehaviour
 
         // creating a parent audio channel
         GameObject g_channelParent = new GameObject();
-        g_channelParent.transform.SetParent(transform);
+        g_channelParent.transform.SetParent(Instance.transform);
         g_channelParent.name = "music " + index;
 
-        for (int i = 0; i < musicTracks[index].layers.Length; i++)
+        for (int i = 0; i < Instance.musicTracks[index].layers.Length; i++)
         {
-            GameObject g_newChannel = Instantiate(p_audioChannel, g_channelParent.transform);
+            GameObject g_newChannel = Instantiate(Instance.p_audioChannel, g_channelParent.transform);
 
             AudioSource comp = g_newChannel.GetComponent<AudioSource>();
-            comp.clip = musicTracks[index].layers[i];
+            comp.clip = Instance.musicTracks[index].layers[i];
             comp.volume = Settings.GetFloat("vol_master") * Settings.GetFloat("vol_music");
 
             comp.Play();
         }
     }
 
-    public void StopAllMusic()
+    public static void StopAllMusic()
     {
-        for (int i = transform.childCount - 1; i>=0;i--)
+        for (int i = Instance.transform.childCount - 1; i>=0;i--)
         {
-            if (transform.GetChild(i).gameObject.name.Contains("music"))
+            if (Instance.transform.GetChild(i).gameObject.name.Contains("music"))
             {
-                Destroy(transform.GetChild(i).gameObject);
+                Destroy(Instance.transform.GetChild(i).gameObject);
             }
         }
     }
