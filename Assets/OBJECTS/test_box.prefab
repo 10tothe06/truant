@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 4540712496507850893}
   - component: {fileID: 9060493668500253043}
   - component: {fileID: 466854455980900253}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: test_box
   m_TagString: Interactable
   m_Icon: {fileID: 0}
