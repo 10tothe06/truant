@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class LayeredText : MonoBehaviour
 {
+    public bool layering_enabled = true;
     public TextMeshProUGUI[] text_layers;
     private Vector3[] default_local_positions;
 
@@ -17,6 +18,9 @@ public class LayeredText : MonoBehaviour
 
     public bool draw_on_awake;
     public string awake_message;
+
+    [HideInInspector]
+    public string current_message;
 
     void Awake()
     {
@@ -34,6 +38,8 @@ public class LayeredText : MonoBehaviour
 
     public void Draw(string msg)
     {
+        current_message = msg;
+
         for (int i = 0; i < text_layers.Length; i++)
         {
             text_layers[i].text = msg;
@@ -42,9 +48,11 @@ public class LayeredText : MonoBehaviour
 
     void Update()
     {
-        if (wiggle_layers)
+        
+
+        for (int i = 0; i < text_layers.Length; i++)
         {
-            for (int i = 0; i < text_layers.Length; i++)
+            if (wiggle_layers)
             {
                 if (freeze_top_layer && i == 0) {continue;}
 
@@ -54,6 +62,14 @@ public class LayeredText : MonoBehaviour
                 v *= (i % 2 == 0) ? 1 : -1;
 
                 text_layers[i].transform.localPosition = default_local_positions[i] + v;
+            }
+            
+            if (layering_enabled)
+            {
+                text_layers[i].gameObject.SetActive(true);
+            } else
+            {
+                text_layers[i].gameObject.SetActive(i == 0);
             }
         }
     }
