@@ -51,6 +51,12 @@ public class Player : MonoBehaviour
     public static inv_inventorydata player_inventory;
 
 
+    #region STATS
+
+    public static float drunk_level;
+
+    #endregion
+
 
 
     #region LOCKING

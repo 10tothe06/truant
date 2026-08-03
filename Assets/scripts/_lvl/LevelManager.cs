@@ -43,7 +43,9 @@ public class LevelManager : MonoBehaviour
 
 
     // no need for a custom data struct here
+    [HideInInspector]
     public string[] level_names;
+    [HideInInspector]
     public lvl_generic[] level_list;
 
     private lvl_generic current_level;

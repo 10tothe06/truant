@@ -10649,7 +10649,12 @@ MonoBehaviour:
   level_intro_data:
     default_message_interval: 0.5
     messages:
-    - :)
+    - I used to come here when I was a kid.
+    - It's really peaceful at night.
+    - Helps me get away from life.
+    - ...
+    - It's getting late.
+    - I should $get to my car$ so I can drive home.
 --- !u!114 &1768812475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13379,7 +13384,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WorldManager
   t_adjustmentContainer: {fileID: 0}
   globalChunkAdjustments: []
-  chunkGenerationActive: 1
+  chunkGenerationActive: 0
   chunkFoliage:
     types: []
     totalCount: 0
