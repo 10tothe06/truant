@@ -353,6 +353,7 @@ GameObject:
   - component: {fileID: 97006074}
   - component: {fileID: 97006076}
   - component: {fileID: 97006075}
+  - component: {fileID: 97006077}
   m_Layer: 5
   m_Name: bg
   m_TagString: Untagged
@@ -419,6 +420,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 97006073}
   m_CullTransparentMesh: 1
+--- !u!114 &97006077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97006073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b3efec62cf7f44dbabf341bc3f8afa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ui_tabs
+  tabObjects:
+  - {fileID: 2134541743}
+  - {fileID: 549688584}
+  connectedObjects:
+  - {fileID: 1129438788}
+  - {fileID: 320216586}
+  currentIndex: 0
+  useColorSwap: 1
+  selectedColor: {r: 1, g: 0.58679235, b: 0.58679235, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &101596473
 GameObject:
   m_ObjectHideFlags: 0
@@ -1320,7 +1343,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &195716226
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1961,6 +1984,7 @@ GameObject:
   - component: {fileID: 320216587}
   - component: {fileID: 320216589}
   - component: {fileID: 320216588}
+  - component: {fileID: 320216590}
   m_Layer: 5
   m_Name: output
   m_TagString: Untagged
@@ -2027,6 +2051,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 320216586}
   m_CullTransparentMesh: 1
+--- !u!114 &320216590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 320216586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5f67117e914ee544a20473ab6870059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ui_console
+  consoleInput: {fileID: 0}
+  p_msg: {fileID: 0}
+  t_messageContainer: {fileID: 0}
+  messageSpacing: 0
 --- !u!1 &341757353
 GameObject:
   m_ObjectHideFlags: 0
@@ -3477,7 +3517,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 549688585}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 97006077}
+        m_TargetAssemblyTypeName: ui_tabs, Assembly-CSharp
+        m_MethodName: SetTabIndex
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &549688585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3734,6 +3786,7 @@ Transform:
   - {fileID: 513091473}
   - {fileID: 833768892}
   - {fileID: 2084072296}
+  - {fileID: 2034476821}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &576746837
@@ -7491,6 +7544,7 @@ GameObject:
   - component: {fileID: 1129438789}
   - component: {fileID: 1129438791}
   - component: {fileID: 1129438790}
+  - component: {fileID: 1129438792}
   m_Layer: 5
   m_Name: cheat menu
   m_TagString: Untagged
@@ -7557,6 +7611,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1129438788}
   m_CullTransparentMesh: 1
+--- !u!114 &1129438792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129438788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22309c5199202c74bb51bf4206e44b3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ui_cheatmenu
 --- !u!1 &1133767615
 GameObject:
   m_ObjectHideFlags: 0
@@ -9379,10 +9445,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
   t_canvas: {fileID: 174602565}
-  g_console: {fileID: 195716225}
   menuNames: []
   menuSiblingIndices: 
   isInMapView: 0
+  g_console: {fileID: 195716225}
+  consoleTabs: {fileID: 97006077}
+  consoleOutput: {fileID: 320216590}
+  cheatMenu: {fileID: 1129438792}
   settingsMenu: {fileID: 1329702765}
   g_bugReportWidget: {fileID: 1967719473}
   advancementsWidget: {fileID: 0}
@@ -14116,6 +14185,51 @@ MonoBehaviour:
   shouldSpin: 1
   t_wheelEdge: {fileID: 2092375461}
   wheel_radius: 0
+--- !u!1 &2034476820
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2034476821}
+  - component: {fileID: 2034476822}
+  m_Layer: 0
+  m_Name: cmd
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2034476821
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2034476820}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 576746836}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2034476822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2034476820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9297de84986209b41bb5ef7b7c76473a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::cmd_console
+  menu: {fileID: 320216590}
 --- !u!1 &2064097005
 GameObject:
   m_ObjectHideFlags: 0
@@ -14801,7 +14915,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2134541744}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 97006077}
+        m_TargetAssemblyTypeName: ui_tabs, Assembly-CSharp
+        m_MethodName: SetTabIndex
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2134541744
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -60,6 +60,7 @@ public class Input : MonoBehaviour
         UpdateValues(Time.deltaTime);
 
         // keyboard presses
+        // TEMP until i can come up with a better input system
         if (!UIManager.isTyping)
         {
 
@@ -70,9 +71,23 @@ public class Input : MonoBehaviour
                 UIManager.Instance.ToggleInventory();
             }
 
-            if (Keyboard.current.minusKey.wasPressedThisFrame)
+            // turning on and off the debug menu
+            if (Keyboard.current.backquoteKey.wasPressedThisFrame)
             {
                 UIManager.Instance.ToggleDebugMenu();
+            }
+
+
+            // the console/cheats menu
+            if (Keyboard.current.minusKey.wasPressedThisFrame)
+            {
+                // console
+                UIManager.ToggleConsole();
+            }
+            if (Keyboard.current.equalsKey.wasPressedThisFrame)
+            {
+                // cheats
+                UIManager.ToggleCheatMenu();
             }
         }
 

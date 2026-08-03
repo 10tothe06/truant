@@ -57,8 +57,6 @@ public class UIManager : MonoBehaviour
 
     public Transform t_canvas;
 
-    public GameObject g_console;
-
     public List<string> menuNames;
     public List<int> menuSiblingIndices;
 
@@ -67,6 +65,13 @@ public class UIManager : MonoBehaviour
 
     [Space(30)]
     [Header("Component References")]
+    public GameObject g_console;
+
+    public ui_tabs consoleTabs;
+    public ui_console consoleOutput;
+    public ui_cheatmenu cheatMenu;
+
+
     public ui_settingsmenu settingsMenu;
 
     public GameObject g_bugReportWidget;
@@ -105,6 +110,49 @@ public class UIManager : MonoBehaviour
 
 
     #region OPEN/CLOSE
+
+    public void ShowConsole()
+    {
+        g_console.gameObject.SetActive(true);
+    }
+
+    public void HideConsole()
+    {
+        g_console.gameObject.SetActive(false);
+    }
+    
+    // these 2 are gonna be the most used
+    // ***
+    public static void ToggleConsole()
+    {
+        if (Instance.consoleTabs.connectedObjects[1].activeInHierarchy)
+        {
+            Instance.HideConsole();
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            Instance.ShowConsole();
+            Instance.consoleTabs.SetTabIndex(1);
+
+            Cursor.lockState = CursorLockMode.None;
+        }
+    }
+    public static void ToggleCheatMenu()
+    {
+        if (Instance.consoleTabs.connectedObjects[0].activeInHierarchy)
+        {
+            Instance.HideConsole();
+            Cursor.lockState = CursorLockMode.Locked;
+        } else
+        {
+            Instance.ShowConsole();
+            Instance.consoleTabs.SetTabIndex(0);
+
+            Cursor.lockState = CursorLockMode.None;
+        }
+    }
+    // ***
     
     public void ToggleDebugMenu()
     {
@@ -225,7 +273,7 @@ public class UIManager : MonoBehaviour
     public void EnterMainMenu()
     {
         SwitchMenu("main menu");
-        g_console.SetActive(false);
+        g_console.gameObject.SetActive(false);
     }
 
 
@@ -239,39 +287,6 @@ public class UIManager : MonoBehaviour
     public void InGameUpdate()
     {
         CameraController.Instance.UpdateCamera();
-
-        if (Keyboard.current.backquoteKey.wasPressedThisFrame)
-        {
-            ToggleConsole();
-        }
-
-        if (!isTyping)
-        {
-
-            // keypress checks
-        }
-    }
-
-    public void ShowConsole()
-    {
-        g_console.SetActive(true);
-    }
-
-    public void HideConsole()
-    {
-        g_console.SetActive(false);
-    }
-
-    public void ToggleConsole()
-    {
-        g_console.SetActive(!g_console.activeSelf);
-        if (g_console.activeSelf)
-        {
-            StartTyping();
-        } else
-        {
-            StopTyping();
-        }
     }
 
     public void LoadMenuObjects()
