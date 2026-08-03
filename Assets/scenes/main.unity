@@ -700,7 +700,19 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2034476822}
+        m_TargetAssemblyTypeName: cmd_console, Assembly-CSharp
+        m_MethodName: TryRunCommand
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 104281646}
+          m_ObjectArgumentAssemblyTypeName: TMPro.TMP_InputField, Unity.TextMeshPro
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls: []
@@ -2063,10 +2075,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5f67117e914ee544a20473ab6870059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ui_console
-  consoleInput: {fileID: 0}
-  p_msg: {fileID: 0}
-  t_messageContainer: {fileID: 0}
-  messageSpacing: 0
+  consoleInput: {fileID: 104281646}
+  p_msg: {fileID: 5655546738123132526, guid: d612b9b079c53ef4baf4b023927ea911, type: 3}
+  t_messageContainer: {fileID: 820082943}
+  messageSpacing: 25
 --- !u!1 &341757353
 GameObject:
   m_ObjectHideFlags: 0
@@ -5588,6 +5600,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 820082943}
+  - component: {fileID: 820082946}
+  - component: {fileID: 820082945}
+  - component: {fileID: 820082944}
   m_Layer: 5
   m_Name: message list
   m_TagString: Untagged
@@ -5609,11 +5624,62 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 320216587}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -121.55, y: 160.09}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 13, y: 62.8}
+  m_SizeDelta: {x: 325.44, y: 357.38}
+  m_Pivot: {x: 0, y: 0}
+--- !u!114 &820082944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820082942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Mask
+  m_ShowMaskGraphic: 1
+--- !u!114 &820082945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820082942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.003921569}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &820082946
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820082942}
+  m_CullTransparentMesh: 1
 --- !u!1 &833768891
 GameObject:
   m_ObjectHideFlags: 0

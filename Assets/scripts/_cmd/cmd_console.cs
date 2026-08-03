@@ -79,34 +79,6 @@ public class cmd_console : MonoBehaviour
     {
         // CURRENT:
         new cmd_consolecommand(new string[]{"tp"},false,false), // teleport
-        new cmd_consolecommand(new string[]{"systp"},false,false), // (planetary) system teleport
-
-        new cmd_consolecommand(new string[]{"fspeed"},false,true), // freecam speed
-
-        new cmd_consolecommand(new string[]{"whitelist","wlist"},true,false), // allow a player on a server
-        new cmd_consolecommand(new string[]{"blacklist","blist"},true,false), // block a player from a server
-        new cmd_consolecommand(new string[]{"kick","k"},true,false), // remove a player from a server
-        new cmd_consolecommand(new string[]{"ban","b"},true,false), // kick + blacklist
-
-        new cmd_consolecommand(new string[]{"spawn"},false,false), // spawn entity
-
-        new cmd_consolecommand(new string[]{"chat","c"},false,false), // big text for all players
-
-        new cmd_consolecommand(new string[]{"p","perm"},true,false), // change permission
-
-        new cmd_consolecommand(new string[]{"sandbox","sbox"},true,false), // go in/out of sandbox
-
-        // for debugging purposes
-        new cmd_consolecommand(new string[]{"error","err"},false,true),
-        new cmd_consolecommand(new string[]{"exception","exc"},false,true),
-
-
-        new cmd_consolecommand(new string[]{"kill"},false,false), // killing an entity
-
-
-        // FUTURE:
-        new cmd_consolecommand(new string[]{"timeset","t"},false,false), // set time 
-        new cmd_consolecommand(new string[]{"title"},false,false), // big text for all players
     };
     
     public static cmd_consolecommand GetCommandData(string name)
@@ -150,11 +122,10 @@ public class cmd_console : MonoBehaviour
 
         // the VERY FIRST THING WE HAVE TO DO IS CHECK IF THE COMMAND CAN BE LOCAL
         cmd_consolecommand selectedCommand = GetSelectedCommand(items[0]);
-        if (selectedCommand == null) {return;}
-
-        else
+        if (selectedCommand == null)
         {
-            PostToConsole(items[0]);
+            // no command means text
+            PostToConsole(text);
         }
     }
 
