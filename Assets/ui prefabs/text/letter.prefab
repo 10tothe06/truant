@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimatedCharacter
   slide_amplitude: 20
-  lerp_speed: 0.1
+  lerp_speed: 0.5
 --- !u!1 &8423262302636805270
 GameObject:
   m_ObjectHideFlags: 0

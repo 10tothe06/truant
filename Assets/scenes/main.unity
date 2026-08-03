@@ -5043,7 +5043,8 @@ MonoBehaviour:
   enable_slide: 0
   enable_fade: 0
   draw_on_awake: 1
-  awake_message: hello world
+  awake_message: '|hello| $*world'
+  text_spacing: 35
   default_character_interval: 0.05
   p_letter: {fileID: 3752582528098645016, guid: 157434fb293994346b026ceb98823718, type: 3}
 --- !u!1 &720810758

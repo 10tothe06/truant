@@ -1,6 +1,6 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class LayeredText : MonoBehaviour
 {
@@ -21,6 +21,56 @@ public class LayeredText : MonoBehaviour
 
     [HideInInspector]
     public string current_message;
+
+    #region FORMATTING
+
+
+    // these three functions are a bit of a cv but that's fine
+
+    public void SetBold(bool b)
+    {
+        for (int i = 0; i < text_layers.Length; i++)
+        {
+            if (b)
+            {
+                text_layers[i].fontStyle = util_text.AddStyle(text_layers[i].fontStyle, FontStyles.Bold);
+            } else
+            {
+                text_layers[i].fontStyle = util_text.RemoveStyle(text_layers[i].fontStyle, FontStyles.Bold);
+            }
+        }
+    }
+
+
+    public void SetItalic(bool b)
+    {
+        for (int i = 0; i < text_layers.Length; i++)
+        {
+            if (b)
+            {
+                text_layers[i].fontStyle = util_text.AddStyle(text_layers[i].fontStyle, FontStyles.Italic);
+            } else
+            {
+                text_layers[i].fontStyle = util_text.RemoveStyle(text_layers[i].fontStyle, FontStyles.Italic);
+            }
+        }
+    }
+
+    public void SetUnderline(bool b)
+    {
+        for (int i = 0; i < text_layers.Length; i++)
+        {
+            if (b)
+            {
+                text_layers[i].fontStyle = util_text.AddStyle(text_layers[i].fontStyle, FontStyles.Underline);
+            } else
+            {
+                text_layers[i].fontStyle = util_text.RemoveStyle(text_layers[i].fontStyle, FontStyles.Underline);
+            }
+        }
+    }
+
+    #endregion
 
     void Awake()
     {

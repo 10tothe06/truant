@@ -1,5 +1,7 @@
+using NUnit.Framework;
 using TMPro;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class AnimatedText : MonoBehaviour
 {
@@ -17,6 +19,8 @@ public class AnimatedText : MonoBehaviour
 
     // time between characters
     [SerializeField]
+    private float text_spacing;
+    [SerializeField]
     private float default_character_interval;
     private float current_character_interval;
     private float last_character_time;
@@ -26,9 +30,21 @@ public class AnimatedText : MonoBehaviour
     public GameObject p_letter;
 
 
+    // tracking variables
+    // ***
+    
     private string current_msg;
     private int current_character_index;
+    private int character_index_offset; // to account for formatting characters
     private bool is_drawing;
+
+    // vvv formatting vvv
+    private bool is_layered;
+    private bool is_underline;
+    private bool is_italic;
+    private bool is_bold;
+
+    // ***
 
 
     private LayeredText tx_main;
@@ -49,6 +65,12 @@ public class AnimatedText : MonoBehaviour
         // now we make the main text
         tx_main = Instantiate(p_letter, transform).GetComponent<LayeredText>();
         tx_main.Draw("");
+
+        // resetting the formatting trackers
+        is_layered = false;
+        is_underline = false;
+        is_italic = false;
+        is_bold = false;
     }
 
 
@@ -68,12 +90,40 @@ public class AnimatedText : MonoBehaviour
 
     private void RenderNextCharacter()
     {
-        // adding the character
-        LayeredText tx_new = Instantiate(p_letter, transform).GetComponent<LayeredText>();
-        tx_new.Draw(current_msg[current_character_index].ToString());
-        
-        tx_new.transform.localPosition = Vector3.right * current_character_index * 50f;
-        tx_new.GetComponent<AnimatedCharacter>().AnimateIn();
+        char to_render = current_msg[current_character_index];
+
+        if (to_render == '$')
+        {
+            is_layered = !is_layered;
+            character_index_offset ++;
+        } else if (to_render == '|')
+        {
+            is_underline = !is_underline;
+            character_index_offset ++;
+        } else if (to_render == '*')
+        {
+            is_italic = !is_italic;
+            character_index_offset ++;
+        }else if (to_render == '#')
+        {
+            is_bold = !is_bold;
+            character_index_offset ++;
+        }else
+        {
+            // adding the character
+            LayeredText tx_new = Instantiate(p_letter, transform).GetComponent<LayeredText>();
+
+            // dealing with formatting
+            tx_new.layering_enabled = is_layered;
+            tx_new.SetBold(is_bold);
+            tx_new.SetItalic(is_italic);
+            tx_new.SetUnderline(is_underline);
+
+            tx_new.Draw(current_msg[current_character_index].ToString());
+            
+            tx_new.transform.localPosition = Vector3.right * (current_character_index-character_index_offset) * text_spacing;
+            tx_new.GetComponent<AnimatedCharacter>().AnimateIn();
+        }
 
         // prepping for the next character
         current_character_index++;
