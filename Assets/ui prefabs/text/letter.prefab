@@ -147,6 +147,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7981193866347587099}
   - component: {fileID: 3268148378628924133}
+  - component: {fileID: 4110277098522323052}
   m_Layer: 5
   m_Name: letter
   m_TagString: Untagged
@@ -200,6 +201,20 @@ MonoBehaviour:
   draw_on_awake: 0
   awake_message: 
   current_message: 
+--- !u!114 &4110277098522323052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3752582528098645016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cc8f9d6fdc91354e85db6b8828fb4cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimatedCharacter
+  slide_amplitude: 20
+  lerp_speed: 0.1
 --- !u!1 &8423262302636805270
 GameObject:
   m_ObjectHideFlags: 0

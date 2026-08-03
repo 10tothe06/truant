@@ -69,7 +69,11 @@ public class AnimatedText : MonoBehaviour
     private void RenderNextCharacter()
     {
         // adding the character
-        tx_main.Draw(tx_main.current_message + current_msg[current_character_index]);
+        LayeredText tx_new = Instantiate(p_letter, transform).GetComponent<LayeredText>();
+        tx_new.Draw(current_msg[current_character_index].ToString());
+        
+        tx_new.transform.localPosition = Vector3.right * current_character_index * 50f;
+        tx_new.GetComponent<AnimatedCharacter>().AnimateIn();
 
         // prepping for the next character
         current_character_index++;
