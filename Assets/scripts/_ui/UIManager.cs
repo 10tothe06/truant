@@ -40,6 +40,8 @@ public class UIManager : MonoBehaviour
 
         // needs to be true for initialization to work
         if (level_intro != null) {level_intro.gameObject.SetActive(true);}
+
+        if (g_console != null) {HideConsole();}
     }
 
     public static bool isTyping;
