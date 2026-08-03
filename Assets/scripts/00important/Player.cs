@@ -37,6 +37,9 @@ public class Player : MonoBehaviour
     void Start()
     {
         player_inventory = new inv_inventorydata(8, 1);
+
+        // adding to the debug menu
+        ui_debugmenu.AddEntry("player_pos", () => transform.position.ToString());
     }
 
     public static Transform t;

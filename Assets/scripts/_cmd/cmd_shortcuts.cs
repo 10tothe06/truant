@@ -9,10 +9,6 @@ public class cmd_shortcuts : MonoBehaviour
     //public cam_freecam freecam;
     void Update()
     {
-        // if (Keyboard.current.ctrlKey.isPressed)
-        // {
-        //     // ctrl+i is toggle map icons
-        //     WorldManager.Instance.ToggleMapIcons();
-        // }
+        
     }
 }

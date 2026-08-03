@@ -69,6 +69,11 @@ public class Input : MonoBehaviour
                 
                 UIManager.Instance.ToggleInventory();
             }
+
+            if (Keyboard.current.minusKey.wasPressedThisFrame)
+            {
+                UIManager.Instance.ToggleDebugMenu();
+            }
         }
 
 

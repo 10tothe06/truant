@@ -37,6 +37,9 @@ public class UIManager : MonoBehaviour
         // making sure all of these objects start in their proper states
         if (inventory != null) {inventory.gameObject.SetActive(false);}
         if (player_hud != null) {player_hud.gameObject.SetActive(false);}
+
+        // needs to be true for initialization to work
+        if (level_intro != null) {level_intro.gameObject.SetActive(true);}
     }
 
     public static bool isTyping;
@@ -83,6 +86,8 @@ public class UIManager : MonoBehaviour
 
     public ui_levelintro level_intro;
 
+    public GameObject g_debugMenu;
+
 
     
 
@@ -100,6 +105,11 @@ public class UIManager : MonoBehaviour
 
 
     #region OPEN/CLOSE
+    
+    public void ToggleDebugMenu()
+    {
+        g_debugMenu.SetActive(!g_debugMenu.activeSelf);
+    }
 
     public static void ShowPlayerHUD()
     {

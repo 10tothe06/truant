@@ -40,6 +40,29 @@ public class ui_debugmenu : MonoBehaviour
 
     public float entrySpacing;
 
+    #region ADD/REMOVE
+
+    // these 2 are wrappers for the below function
+    public static void AddEntry(string title, Func<string> dataSource)
+    {
+        Instance.AddEntry(new ui_debugentry(title, dataSource));
+        Instance.UpdateListOfTabs();
+    }
+    public static void AddEntry(string title, Func<string> dataSource, string tab)
+    {
+        Instance.AddEntry(new ui_debugentry(title, dataSource,tab));
+        Instance.UpdateListOfTabs();
+    }
+
+    private void AddEntry(ui_debugentry entry)
+    {
+        if (HasEntryWithName(entry.title)) {return;}
+        entries.Add(entry);
+        SpawnEntryObject(entry);
+    }
+
+    #endregion
+
     public void SetTabActive(string tabName, bool active)
     {
         for (int i = 0; i < tabs.Count; i++)
@@ -51,16 +74,7 @@ public class ui_debugmenu : MonoBehaviour
         }
     }
 
-    public void AddEntry(string title, Func<string> dataSource)
-    {
-        AddEntry(new ui_debugentry(title, dataSource));
-        UpdateListOfTabs();
-    }
-    public void AddEntry(string title, Func<string> dataSource, string tab)
-    {
-        AddEntry(new ui_debugentry(title, dataSource,tab));
-        UpdateListOfTabs();
-    }
+    
 
     public void UpdateListOfTabs()
     {
@@ -104,13 +118,6 @@ public class ui_debugmenu : MonoBehaviour
             }
         }
         return false;
-    }
-
-    public void AddEntry(ui_debugentry entry)
-    {
-        if (HasEntryWithName(entry.title)) {return;}
-        entries.Add(entry);
-        SpawnEntryObject(entry);
     }
 
     public bool HasEntryWithName(string name)
