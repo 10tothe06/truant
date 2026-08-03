@@ -6,11 +6,25 @@ using UnityEngine;
 
 public class lvl_tutorial : MonoBehaviour
 {
+    private lvl_generic g;
+
+    [Header("INTRO")]
+    public TextSequence level_intro_data;
+
+
+    [Space(20)]
+    [Header("CONFIG")]
     public Transform player_spawn_position;
+    public CarController player_car;
 
     void Awake()
     {
-        GetComponent<lvl_generic>().onLevelEnter.AddListener(OnLevelEnter);
+        g =GetComponent<lvl_generic>();
+
+        g.onLevelEnter.AddListener(OnLevelEnter);
+
+        // making it so that starting the car finishes the level
+        player_car.onEngineStart.AddListener(() => g.ExitLevel(true));
     }
 
     // called by the generic component
@@ -26,6 +40,9 @@ public class lvl_tutorial : MonoBehaviour
         CameraController.SetControlMode(CameraControlMode.PlayerFirstPerson);
 
         UIManager.ShowPlayerHUD();
+
+        
+        UIManager.PlayLevelIntro(level_intro_data);
 
 
         /*

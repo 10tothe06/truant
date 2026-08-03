@@ -80,7 +80,12 @@ public class UIManager : MonoBehaviour
     public ui_playerhud player_hud;
 
 
+    
 
+    public static void PlayLevelIntro(TextSequence data)
+    {
+        
+    }
 
 
     

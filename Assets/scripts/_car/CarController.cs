@@ -1,73 +1,75 @@
+using NUnit.Framework;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CarController : MonoBehaviour
 {
     private SuspendedVehicle sus;
-    [Header("DEBUG")]
-    public TextMeshProUGUI tx_speed;
-    public TextMeshProUGUI tx_steering;
-    [Header("CONFIG")]
-    public float steeringMoveSpeed;
-    public float throttlePercent;
-    public float steeringPercent;
-    public float steeringForce;
-    public float maxSteeringAngle;
-    public float wheelForce;
 
-    public bool isBeingDriven;
+    public int_chair driver_seat;
+    public InteractableObject3D ignition_key;
 
-    [Header("DRAG (overwrites SuspendedVehicle)")]
-    public float linearDrag;
-    public float angularDrag;
-    public float drivingLinearDrag;
-    public float drivingAngularDrag;
+    
+    public bool is_engine_started;
+
+
+
+    [Header("EVENTS")]
+    // used as a sort of trigger for certain levels
+    public UnityEvent onEngineStart; 
+
+
 
     void Awake()
     {
         sus = GetComponent<SuspendedVehicle>();
+
+        // adding the proper events to objects
+        ignition_key.onInteract.AddListener(OnIgnitionKeyPressed);
+        
+        // basically just a state reset
+        KillEngine();
     }
 
     void Update()
     {
-        if (tx_speed != null)
+        
+    }
+
+    private void OnIgnitionKeyPressed()
+    {
+        if (is_engine_started)
         {
-            tx_speed.text = "speed: " + Vector3.Project(sus.rb.linearVelocity, transform.forward).magnitude;
-
-            tx_speed.transform.parent.gameObject.SetActive(isBeingDriven);
-        }
-        if (tx_steering != null)
-        {
-            tx_steering.text = "steering: " + steeringPercent;
-        }
-
-        if (isBeingDriven)
-        {
-            throttlePercent = Input.inputAxisForward;
-
-            steeringPercent = Input.inputAxisHorizontal * steeringMoveSpeed;
-
-            sus.angularDrag = drivingAngularDrag;
-            //sus.linearDrag = drivingLinearDrag;
+            KillEngine();
         } else
         {
-            sus.angularDrag = angularDrag;
-            //sus.linearDrag = linearDrag;
+            StartEngine();
         }
-        
-        //temp 
-        Vector3 a = transform.forward * wheelForce * throttlePercent * Time.deltaTime;
-        GetComponent<Rigidbody>().linearVelocity += a;
-        GetComponent<Rigidbody>().angularVelocity += Vector3.up * Vector3.Dot(a, transform.forward) * steeringForce * steeringPercent;
     }
 
-    public void EnterDriver()
+    public void KillEngine()
     {
-        isBeingDriven = true;
+        Debug.Log("Car engine stopped.");
+
+        is_engine_started = false;
+
+
+        ignition_key.hoverPrompt = "Press E to start engine.";
     }
 
-    public void ExitDriver()
+    public void StartEngine()
     {
-        isBeingDriven = false;
+        Debug.Log("Car engine started.");
+
+
+        is_engine_started = true;
+
+        // TODO: play the sound sequence
+
+
+        ignition_key.hoverPrompt = "Press E to kill engine.";
+
+        onEngineStart.Invoke();
     }
 }

@@ -56,6 +56,7 @@ public class Program : MonoBehaviour
     public ProgramStartMode ins_startMode;
     public static ProgramStartMode startMode;
     public string level_to_load;
+    public bool skip_loading_screens;
 
     // should almost be the ONLY use of the start function
     void Start()

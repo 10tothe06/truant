@@ -15,8 +15,16 @@ public class lvl_generic : MonoBehaviour
         onLevelEnter.Invoke();
     }
 
-    public void ExitLevel()
+    public void ExitLevel(bool was_completed = false)
     {
         onLevelExit.Invoke();
+
+        if (was_completed)
+        {
+            Debug.Log("💖 Level completed!");
+        } else
+        {
+            Debug.Log("💔 Level exited, incomplete.");
+        }
     }
 }
