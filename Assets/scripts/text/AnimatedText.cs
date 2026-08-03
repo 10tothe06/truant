@@ -122,7 +122,7 @@ public class AnimatedText : MonoBehaviour
             tx_new.Draw(current_msg[current_character_index].ToString());
             
             tx_new.transform.localPosition = Vector3.right * (current_character_index-character_index_offset) * text_spacing;
-            tx_new.GetComponent<AnimatedCharacter>().AnimateIn();
+            tx_new.GetComponent<AnimatedCharacter>().AnimateIn(enable_slide, enable_fade);
         }
 
         // prepping for the next character

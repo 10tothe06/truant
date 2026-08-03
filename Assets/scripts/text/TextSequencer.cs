@@ -1,0 +1,54 @@
+using System.Collections;
+using System.Data.Common;
+using UnityEngine;
+
+// handles the drawing of text sequences
+// as the name may suggest
+
+public class TextSequencer : MonoBehaviour
+{
+    private TextSequence current_sequence;
+
+    public void RenderSequence(TextSequence data)
+    {
+        current_sequence = data;
+
+        StartCoroutine(Draw());
+    }
+
+    private IEnumerator Draw()
+    {
+        bool should_auto_wait;
+
+        // looping through every message 
+        for (int i = 0; i < current_sequence.messages.Length; i++)
+        {
+            // just skip blanks
+            if (current_sequence.messages[i].Length < 1) {continue;}
+
+
+            // check for any commands in the message
+            if (current_sequence.messages[i][0] == ':')
+            {
+                float parsed_time = 0;
+
+                // colon means wait
+                yield return new WaitForSeconds(parsed_time);
+
+
+                should_auto_wait = false;
+            } else
+            {
+                // if no command then its a message
+
+                should_auto_wait = true;
+            }
+
+
+            if (should_auto_wait)
+            {
+                yield return new WaitForSeconds(current_sequence.default_message_interval);
+            }
+        }
+    }
+}
