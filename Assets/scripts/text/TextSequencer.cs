@@ -7,7 +7,11 @@ using UnityEngine;
 
 public class TextSequencer : MonoBehaviour
 {
+    [SerializeField]
+    private AnimatedText text_component;
     private TextSequence current_sequence;
+
+    public bool isRendering;
 
     public void RenderSequence(TextSequence data)
     {
@@ -16,8 +20,14 @@ public class TextSequencer : MonoBehaviour
         StartCoroutine(Draw());
     }
 
+    public void Clear()
+    {
+        text_component.Clear();
+    }
+
     private IEnumerator Draw()
     {
+        isRendering = true;
         bool should_auto_wait;
 
         // looping through every message 
@@ -31,6 +41,7 @@ public class TextSequencer : MonoBehaviour
             if (current_sequence.messages[i][0] == ':')
             {
                 float parsed_time = 0;
+                float.TryParse(current_sequence.messages[i].Substring(1), out parsed_time);
 
                 // colon means wait
                 yield return new WaitForSeconds(parsed_time);
@@ -40,6 +51,9 @@ public class TextSequencer : MonoBehaviour
             } else
             {
                 // if no command then its a message
+                // the message is passed off to an AnimatedText component to be drawn
+                text_component.Draw(current_sequence.messages[i]);
+
 
                 should_auto_wait = true;
             }
@@ -50,5 +64,7 @@ public class TextSequencer : MonoBehaviour
                 yield return new WaitForSeconds(current_sequence.default_message_interval);
             }
         }
+
+        isRendering = false;
     }
 }

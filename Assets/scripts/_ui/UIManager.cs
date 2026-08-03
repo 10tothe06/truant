@@ -80,11 +80,18 @@ public class UIManager : MonoBehaviour
     public ui_playerhud player_hud;
 
 
+
+    public ui_levelintro level_intro;
+
+
     
 
     public static void PlayLevelIntro(TextSequence data)
     {
-        
+        if (Program.skip_loading_screens) {return;}
+
+
+        Instance.level_intro.PlayIntro(data);
     }
 
 

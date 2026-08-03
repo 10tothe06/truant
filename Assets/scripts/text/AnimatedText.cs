@@ -73,6 +73,11 @@ public class AnimatedText : MonoBehaviour
         is_bold = false;
     }
 
+    public void Clear()
+    {
+        Initialize();
+    }
+
 
     // TODO: formatting for speed and such
     public void Draw(string msg)

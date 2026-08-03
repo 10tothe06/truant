@@ -45,6 +45,8 @@ public class Program : MonoBehaviour
 
         buildMode = ins_buildMode;
         startMode = ins_startMode;
+
+        skip_loading_screens = ins_skip_loading_screens;
     }
 
     public bool resetAdvancements;
@@ -56,7 +58,9 @@ public class Program : MonoBehaviour
     public ProgramStartMode ins_startMode;
     public static ProgramStartMode startMode;
     public string level_to_load;
-    public bool skip_loading_screens;
+
+    public bool ins_skip_loading_screens;
+    public static bool skip_loading_screens;
 
     // should almost be the ONLY use of the start function
     void Start()

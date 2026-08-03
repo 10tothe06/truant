@@ -197,7 +197,7 @@ MonoBehaviour:
   wiggle_layers: 1
   freeze_top_layer: 1
   wiggle_frequency: 10
-  wiggle_amplitude: 2
+  wiggle_amplitude: 3
   draw_on_awake: 0
   awake_message: 
   current_message: 
@@ -214,7 +214,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimatedCharacter
   slide_amplitude: 20
-  lerp_speed: 0.5
+  slide_lerp_speed: 0.5
+  fade_lerp_speed: 0.1
 --- !u!1 &8423262302636805270
 GameObject:
   m_ObjectHideFlags: 0
