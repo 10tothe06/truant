@@ -15,11 +15,29 @@ public class int_interactionsource : MonoBehaviour
 
     public float max_drag_distance;
 
+    public float object_rotation_speed = 0.5f;
+
     void Update()
     {
         if (isDraggingObject)
         {
             Vector3 dragDir = src.position + src.forward * draggingDistance - objectToDrag.transform.position;
+
+            if (Input.mouseButtonDownRight)
+            {
+                Player.LockCamera();
+            }
+
+            if (Input.mouseButtonRight)
+            {
+                // right-clicking to rotate the object
+
+                Vector3 rot = CameraController.t_cam.right * Input.mouseMovement.y + CameraController.t_cam.up * -Input.mouseMovement.x;
+
+                objectToDrag.transform.Rotate(rot * object_rotation_speed * Time.deltaTime / objectToDrag.mass, Space.World);
+            } else {
+                Player.UnlockAll();
+            }
 
             if (dragDir.magnitude > max_drag_distance)
             {

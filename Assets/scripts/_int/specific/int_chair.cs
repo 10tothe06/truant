@@ -54,7 +54,7 @@ public class int_chair : MonoBehaviour
     {
         satThisFrame = true;
         onSit.Invoke();
-        Player.Lock();
+        Player.LockAll();
 
 
         // still want the player to be able to look around
@@ -75,7 +75,7 @@ public class int_chair : MonoBehaviour
     public void Stand()
     {
         onStand.Invoke();
-        Player.Unlock();
+        Player.UnlockAll();
         Player.controller.EnableCollider();
         
         Player.t.position = t_sitPoint.position + -originalOffset;

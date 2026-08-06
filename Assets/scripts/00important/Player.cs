@@ -61,7 +61,16 @@ public class Player : MonoBehaviour
 
     #region LOCKING
 
-    public static void Lock()
+    public static void LockCamera()
+    {
+        // freeze player movement and looking
+        PlayerController comp = Player.controller;
+
+        comp.lockCameraHorizontal = true;
+        comp.lockCameraVertical = true;
+    }
+
+    public static void LockAll()
     {
         // freeze player movement and looking
         PlayerController comp = Player.controller;
@@ -73,7 +82,7 @@ public class Player : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
-    public static void Unlock()
+    public static void UnlockAll()
     {
         // freeze player movement and looking
         PlayerController comp = Player.controller;

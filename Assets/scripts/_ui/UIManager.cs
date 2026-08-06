@@ -177,13 +177,13 @@ public class UIManager : MonoBehaviour
 
         inventory.OpenPlayerInventory();
 
-        Player.Lock();
+        Player.LockAll();
     }
     public void CloseInventory()
     {
         inventory.gameObject.SetActive(false);
 
-        Player.Unlock();
+        Player.UnlockAll();
     }
     public void ToggleInventory()
     {

@@ -135,6 +135,8 @@ public class PlayerController : MonoBehaviour
         colDefaultHeight = col.height;
         sprintValue = maxSprint;
 
+        defaultCameraHeight = t_camera.localPosition.y;
+
         //gComp.onTeleport.AddListener(() => {rb.linearVelocity = Vector3.zero;});
     }
 
