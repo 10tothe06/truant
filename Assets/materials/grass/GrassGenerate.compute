@@ -1,0 +1,85 @@
+#pragma kernel CSMain
+#pragma kernel CSCull
+
+struct GrassBlade
+{
+    float3 position;
+    float  rotation;
+    float  height;
+    float  width;
+    float  bend;
+    float  colorVariation;
+};
+
+RWStructuredBuffer<GrassBlade> _AllBlades;
+AppendStructuredBuffer<GrassBlade> _VisibleBlades;
+
+float4x4 _VPMatrix;
+float3   _CameraPos;
+float    _DrawDistance;
+float    _AreaSize;
+uint     _BladeCount;
+float    _Time;
+float    _WindStrength;
+float2   _WindDirection;
+
+float hash(float2 p)
+{
+    return frac(sin(dot(p, float2(127.1, 311.7))) * 43758.5453);
+}
+
+float2 hash2(float2 p)
+{
+    return frac(sin(float2(dot(p, float2(127.1, 311.7)),
+                           dot(p, float2(269.5, 183.3)))) * 43758.5453);
+}
+
+[numthreads(256, 1, 1)]
+void CSMain(uint3 id : SV_DispatchThreadID)
+{
+    if (id.x >= _BladeCount) return;
+
+    float2 uv = float2(id.x % 1024, id.x / 1024) / 1024.0; // simple grid
+    float2 random = hash2(uv + 17.3);
+
+    float3 pos;
+    pos.x = (random.x - 0.5) * _AreaSize;
+    pos.z = (random.y - 0.5) * _AreaSize;
+    pos.y = 0; // flat ground – replace with heightmap sample if needed
+
+    GrassBlade blade;
+    blade.position = pos;
+    blade.rotation = random.x * 360;
+
+    float random_height = hash(random.y);
+    blade.height   = lerp(0.25, 0.55, random_height);
+    blade.height *= blade.height * blade.height * 2;
+    
+    blade.width    = lerp(0.08, 0.16, hash(uv + 3.1));
+    blade.bend     = random.x * 0.4;
+    blade.colorVariation = random.y;
+
+    _AllBlades[id.x] = blade;
+}
+
+[numthreads(256, 1, 1)]
+void CSCull(uint3 id : SV_DispatchThreadID)
+{
+    if (id.x >= _BladeCount) return;
+
+    GrassBlade blade = _AllBlades[id.x];
+
+    float3 worldPos = blade.position;
+    float dist = distance(worldPos, _CameraPos);
+
+    if (dist > _DrawDistance) return;
+
+    // Simple frustum test (conservative)
+    float4 clip = mul(_VPMatrix, float4(worldPos, 1.0));
+    float3 ndc = clip.xyz / clip.w;
+
+    if (abs(ndc.x) > 1.15 || abs(ndc.y) > 1.15 || ndc.z < 0 || ndc.z > 1)
+        return;
+
+    _VisibleBlades.Append(blade);
+}

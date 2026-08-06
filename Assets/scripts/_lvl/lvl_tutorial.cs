@@ -23,6 +23,8 @@ public class lvl_tutorial : MonoBehaviour
 
         g.onLevelEnter.AddListener(OnLevelEnter);
 
+        player_car = ObjectManager.SpawnObject("car_1", Vector3.forward * 5).GetComponent<CarController>();
+
         // making it so that starting the car finishes the level
         player_car.onEngineStart.AddListener(() => g.ExitLevel(true));
     }

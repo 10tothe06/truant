@@ -27,8 +27,8 @@ Shader "Geometry/GrassGeometryShaderUnlit"
         _PositionRandomness("Position randomness", float) = 0
  
         //Grass blades
-        _GrassBlades("Grass blades per triangle", Range(0, 15)) = 1
-        _MinimunGrassBlades("Minimum grass blades per triangle", Range(0, 15)) = 1
+        _GrassBlades("Grass blades per triangle", Range(0, 30)) = 1
+        _MinimunGrassBlades("Minimum grass blades per triangle", Range(0, 30)) = 1
         _MaxCameraDistance("Max camera distance", float) = 10
     }
     SubShader
@@ -116,7 +116,7 @@ Shader "Geometry/GrassGeometryShaderUnlit"
             }
  
             //3 + 3 * 15 = 48
-            [maxvertexcount(48)]
+            [maxvertexcount(64)]
             void geom(triangle v2g input[3], inout TriangleStream<g2f> triStream)
             {
                 float3 normal = normalize(cross(input[1].vertex - input[0].vertex, input[2].vertex - input[0].vertex));

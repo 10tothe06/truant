@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: m_drunk
-  m_Shader: {fileID: 4800000, guid: a83d7b9c9963b2e4c8ad9ca2549d53e0, type: 3}
+  m_Name: m_grass_blades
+  m_Shader: {fileID: 4800000, guid: 99e4d51b27e8b3c49ad59c5b1ff32d14, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -59,10 +59,8 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Ints:
-    - _Amt: 0
+    m_Ints: []
     m_Floats:
-    - _Amt: 1
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -78,9 +76,13 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
+    - _WindStrength: 0.5
     - _ZWrite: 1
     m_Colors:
+    - _BaseColor: {r: 0.065824114, g: 0.16226411, b: 0.0742102, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _TipColor: {r: 0.27332503, g: 0.4264151, b: 0.2502171, a: 1}
+    - _WindDirection: {r: 1, g: 0.35, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
