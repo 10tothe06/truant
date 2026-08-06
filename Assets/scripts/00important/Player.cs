@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
         controller= GetComponent<PlayerController>();
         generic_controller = GetComponent<player_genericcontroller>();
         t = transform;
+
+        player_hotbar = ins_player_hotbar;
     }
 
     void Start()
@@ -49,6 +51,9 @@ public class Player : MonoBehaviour
 
 
     public static inv_inventorydata player_inventory;
+
+    public ui_hotbar ins_player_hotbar;
+    public static ui_hotbar player_hotbar;
 
 
     #region STATS
@@ -96,10 +101,20 @@ public class Player : MonoBehaviour
 
     # endregion
 
-
+    public static inv_itemstack GetSelectedItem()
+    {
+        return player_inventory.GetItemAtCell(player_hotbar.selected_cell);
+    }
 
     public static void TeleportTo(Vector3 position)
     {
         Instance.transform.position = position;
+    }
+
+    public static void GiveItem(inv_itemstack data)
+    {
+        player_inventory.AddItem(data);
+
+        UIManager.Instance.inventory.OpenPlayerInventory();
     }
 }

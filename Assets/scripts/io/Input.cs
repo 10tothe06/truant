@@ -89,6 +89,44 @@ public class Input : MonoBehaviour
                 // cheats
                 UIManager.ToggleCheatMenu();
             }
+
+
+
+
+            // selecting hotbar cells
+            if (Keyboard.current.digit1Key.wasPressedThisFrame)
+            {
+                Player.player_hotbar.SelectCell(0);
+            } else if (Keyboard.current.digit2Key.wasPressedThisFrame)
+            {
+                Player.player_hotbar.SelectCell(1);
+            } else if (Keyboard.current.digit3Key.wasPressedThisFrame)
+            {
+                Player.player_hotbar.SelectCell(2);
+            } else if (Keyboard.current.digit4Key.wasPressedThisFrame)
+            {
+                Player.player_hotbar.SelectCell(3);
+            } else if (Keyboard.current.digit5Key.wasPressedThisFrame)
+            {
+                Player.player_hotbar.SelectCell(4);
+            } else if (Keyboard.current.digit6Key.wasPressedThisFrame)
+            {
+                Player.player_hotbar.SelectCell(5);
+            } else if (Keyboard.current.digit7Key.wasPressedThisFrame)
+            {
+                Player.player_hotbar.SelectCell(6);
+            } else if (Keyboard.current.digit8Key.wasPressedThisFrame)
+            {
+                Player.player_hotbar.SelectCell(7);
+            }
+
+            if (scrollWheelAxis > 0)
+            {
+                Player.player_hotbar.SelectNextCell(1);
+            } else if (scrollWheelAxis < 0)
+            {
+                Player.player_hotbar.SelectNextCell(-1);
+            }
         }
 
 

@@ -72,6 +72,31 @@ public class inv_inventorydata
         return data;
     }
 
+
+    // i fucking hate this function its so inefficient
+    public inv_itemstack GetItemTakingUpCell(int cellIndex)
+    {
+        for (int n = 0; n < items.Count; n++)
+        {
+            for (int x = 0; x < items[n].extendHorizontal; x++)
+            {
+                for (int y = 0; y < items[n].extendVertical; y++)
+                {
+                    int indexOffset = x + y * inventory_width;
+
+                    if (items[n].cellIndex + indexOffset == cellIndex)
+                    {
+                        return items[n];
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+
+
     // returns a COPY, not the real thing
     public inv_itemstack GetItemAtCell(int cellIndex)
     {
@@ -183,6 +208,13 @@ public class inv_inventorydata
     // adding an item to the inventory
     public void AddItem(inv_itemstack data)
     {
+        if (data.cellIndex == -1)
+        {
+            // someone wants us to figure out where to put the item
+
+            // TODO: this
+        }
+
         // there are two possibilities here, either we combine the stack with another of the same type or we add it
         // if neither, then we return
         if (cellsTaken[data.cellIndex])

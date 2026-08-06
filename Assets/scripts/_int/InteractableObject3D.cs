@@ -41,4 +41,9 @@ public class InteractableObject3D : MonoBehaviour
 
         //if (logInteractionEvents) Debug.Log("interacted with " + gameObject.name);
     }
+
+    public void Despawn()
+    {
+        Destroy(gameObject);
+    }
 }

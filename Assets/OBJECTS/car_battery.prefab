@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 1890519104577960506}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 0, y: -0.129, z: 0.122}
+  m_LocalScale: {x: 0.5, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6597372535184340560}
@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e74b6f1261355dd44a99c50fdae931d8, type: 2}
+  - {fileID: 2100000, guid: 104237bcca108bf4eac63a95788a69ca, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -136,10 +136,10 @@ GameObject:
   - component: {fileID: 6597372535184340560}
   - component: {fileID: 4540712496507850893}
   - component: {fileID: 9060493668500253043}
-  - component: {fileID: 466854455980900253}
-  - component: {fileID: -2351631913175768162}
+  - component: {fileID: 4133140099415944032}
+  - component: {fileID: 1792735198715129915}
   m_Layer: 6
-  m_Name: test_box
+  m_Name: car_battery
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -208,27 +208,7 @@ MonoBehaviour:
   onInteractByObject:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &466854455980900253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6702777790825529560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e6ebd2e2baf81943b1ecc244842622c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::int_carryable
-  cooldownInterval: 1
-  isBeingCarried: 0
-  onPickup:
-    m_PersistentCalls:
-      m_Calls: []
-  onDrop:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &-2351631913175768162
+--- !u!114 &4133140099415944032
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -242,3 +222,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::int_colliderlist
   colliders:
   - {fileID: 9171863185802271225}
+--- !u!114 &1792735198715129915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6702777790825529560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a37311f575ffaa41a3dcc8f1384950f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::int_item
+  itemType: 3

@@ -13,6 +13,8 @@ public class lvl_generic : MonoBehaviour
         gameObject.SetActive(true);
 
         onLevelEnter.Invoke();
+
+        UIManager.Instance.inventory.OpenPlayerInventory();
     }
 
     public void ExitLevel(bool was_completed = false)

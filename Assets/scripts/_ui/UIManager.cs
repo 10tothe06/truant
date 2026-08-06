@@ -35,7 +35,7 @@ public class UIManager : MonoBehaviour
 
 
         // making sure all of these objects start in their proper states
-        if (inventory != null) {inventory.gameObject.SetActive(false);}
+        if (inventory != null) {inventory.gameObject.SetActive(true);}
         if (player_hud != null) {player_hud.gameObject.SetActive(false);}
 
         // needs to be true for initialization to work
@@ -85,6 +85,7 @@ public class UIManager : MonoBehaviour
     public GameObject g_creditsMenu;
 
     public ui_inventories inventory;
+    private bool is_inventory_open;
 
 
     public ui_playerhud player_hud;
@@ -176,18 +177,20 @@ public class UIManager : MonoBehaviour
         inventory.gameObject.SetActive(true);
 
         inventory.OpenPlayerInventory();
+        is_inventory_open = true;
 
         Player.LockAll();
     }
     public void CloseInventory()
     {
-        inventory.gameObject.SetActive(false);
+        //inventory.gameObject.SetActive(false);
 
         Player.UnlockAll();
+        is_inventory_open = false;
     }
     public void ToggleInventory()
     {
-        if (!inventory.gameObject.activeSelf)
+        if (!is_inventory_open)
         {
             OpenInventory();
         } else

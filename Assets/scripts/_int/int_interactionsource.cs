@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class int_interactionsource : MonoBehaviour
 {
+    public int_objectcarrier carry_point;
     public Transform src;
 
     private bool isDraggingObject;
@@ -63,6 +64,7 @@ public class int_interactionsource : MonoBehaviour
 
     public void StartDraggingObject(GameObject obj)
     {
+        if (carry_point.isCarryingObject) {return;}
         if (isDraggingObject) {return;} // don't want to call repeatedly
         
         objectToDrag = obj.GetComponent<Rigidbody>();

@@ -45,6 +45,8 @@ public class ui_inventories : MonoBehaviour
 
     public void BuildMenus(Func<inv_inventorydata>[] sources)
     {
+        ClearMenus(); 
+        
         Vector3 v = new Vector3(Screen.width / 2f, 100f, 0);
 
         for (int i = 0; i < sources.Length; i++)

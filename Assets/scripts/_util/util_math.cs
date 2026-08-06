@@ -4,6 +4,22 @@ using UnityEngine;
 
 public class util_math : MonoBehaviour
 {
+    public static int StepWithinBounds(int old, int step, int min, int max)
+    {
+        int toReturn = old + step;
+
+        if (toReturn < min)
+        {
+            return min;
+        } else if (toReturn > max)
+        {
+            return max;
+        } else
+        {
+            return toReturn;
+        }
+    }
+
     public static float ProjectedMagnitude(UnityEngine.Vector3 a, UnityEngine.Vector3 b)
     {
         UnityEngine.Vector3 p = UnityEngine.Vector3.Project(a,b);
