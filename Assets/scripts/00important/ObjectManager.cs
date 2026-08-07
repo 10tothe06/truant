@@ -79,6 +79,9 @@ public class ObjectManager : MonoBehaviour
     }
     public static GameObject SpawnObject(string object_name, Vector3 spawn_position, Vector3 spawn_euler_angles)
     {
+        if (GetObjectPrefabFromName(object_name) == null) {return null;}
+
+
         GameObject g_newObject = Instantiate(GetObjectPrefabFromName(object_name), Instance.t_currentObjectContainer);
 
         g_newObject.transform.position = spawn_position;

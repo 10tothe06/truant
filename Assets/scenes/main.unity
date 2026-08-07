@@ -1061,12 +1061,12 @@ RectTransform:
   - {fileID: 1444619482}
   - {fileID: 1465307143}
   - {fileID: 375270162}
-  - {fileID: 195716226}
   - {fileID: 1967719474}
   - {fileID: 1762046484}
   - {fileID: 1381902550}
   - {fileID: 972574034}
   - {fileID: 1586644645}
+  - {fileID: 195716226}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5358,6 +5358,12 @@ MonoBehaviour:
     occupyHeight: 1
     icon: {fileID: 21300000, guid: 707af0890d673bb45a2d57b9f788af8e, type: 3}
     associated_object: 
+  - item_name: car_headlight
+    stackSize: 999
+    occupyWidth: 1
+    occupyHeight: 1
+    icon: {fileID: 21300000, guid: 707af0890d673bb45a2d57b9f788af8e, type: 3}
+    associated_object: 
   item_bgs:
   - width: 1
     height: 1
@@ -5388,6 +5394,7 @@ MonoBehaviour:
   - {fileID: 6702777790825529560, guid: 5e526aacd8d8a0e458452c374f279ebd, type: 3}
   - {fileID: 5361951604180008226, guid: f0d70e2b0d4d5124da951e659db45664, type: 3}
   - {fileID: 6702777790825529560, guid: 198b4b0ba71638c4e801bef1064cae09, type: 3}
+  - {fileID: 6702777790825529560, guid: a6acf5c14a534a7439c1cdb24ea6c2f1, type: 3}
   t_currentObjectContainer: {fileID: 0}
 --- !u!1 &865919485
 GameObject:
@@ -7038,6 +7045,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d09a81287cb9e45805e092161ba436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::int_crosshair
+  color_switch: 1
+  interactColor: {r: 0.93182325, g: 1, b: 0, a: 1}
+  defaultColor: {r: 1, g: 0.0022603488, b: 0, a: 1}
+  sprite_switch: 1
   sp_default: {fileID: 21300000, guid: 0f56a76a522f388438a6369e4d642e29, type: 3}
   sp_interactable: {fileID: 21300000, guid: 3938f52ae3809cd4dbe236a9d4dbe83c, type: 3}
   i_crosshair: {fileID: 1093397178}
@@ -11365,6 +11376,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1aaf8a0471a034c4581c7a0d4db193be, type: 3}
+--- !u!1001 &1851282264
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6597372535184340560, guid: a6acf5c14a534a7439c1cdb24ea6c2f1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6597372535184340560, guid: a6acf5c14a534a7439c1cdb24ea6c2f1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.835
+      objectReference: {fileID: 0}
+    - target: {fileID: 6597372535184340560, guid: a6acf5c14a534a7439c1cdb24ea6c2f1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.998
+      objectReference: {fileID: 0}
+    - target: {fileID: 6597372535184340560, guid: a6acf5c14a534a7439c1cdb24ea6c2f1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6597372535184340560, guid: a6acf5c14a534a7439c1cdb24ea6c2f1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6597372535184340560, guid: a6acf5c14a534a7439c1cdb24ea6c2f1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6597372535184340560, guid: a6acf5c14a534a7439c1cdb24ea6c2f1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6597372535184340560, guid: a6acf5c14a534a7439c1cdb24ea6c2f1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6597372535184340560, guid: a6acf5c14a534a7439c1cdb24ea6c2f1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6597372535184340560, guid: a6acf5c14a534a7439c1cdb24ea6c2f1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6702777790825529560, guid: a6acf5c14a534a7439c1cdb24ea6c2f1, type: 3}
+      propertyPath: m_Name
+      value: car_headlight
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a6acf5c14a534a7439c1cdb24ea6c2f1, type: 3}
 --- !u!1 &1866586572
 GameObject:
   m_ObjectHideFlags: 0
@@ -14435,3 +14503,4 @@ SceneRoots:
   - {fileID: 1518538142}
   - {fileID: 1866586573}
   - {fileID: 649694351}
+  - {fileID: 1851282264}

@@ -111,6 +111,9 @@ public class Player : MonoBehaviour
 
     public static void DropSelectedItem()
     {
+        if (GetSelectedItemData() == null) {return;}
+
+        
         ObjectManager.SpawnObject(GetSelectedItemData().item_name, player_hotbar.GetComponent<inv_helditemdisplay>().t_heldItemContainer.position);
 
         player_inventory.RemoveItem(GetSelectedItem());

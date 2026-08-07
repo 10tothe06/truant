@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -5,6 +6,7 @@ using UnityEngine;
 public class inv_itemdata
 {
     public string item_name;
+    public List<string> item_tags;
 
     public int stackSize;
 
@@ -22,6 +24,7 @@ public class inv_itemdata
     {
         this.occupyWidth = occupyWidth;
         this.occupyHeight = occupyHeight;
+        item_tags = new List<string>();
     }
 
     public inv_itemdata(string item_name, int occupyWidth, int occupyHeight)
@@ -31,5 +34,7 @@ public class inv_itemdata
         
         this.occupyWidth = occupyWidth;
         this.occupyHeight = occupyHeight;
+
+        item_tags = new List<string>();
     }
 }
