@@ -20,6 +20,8 @@ public class InteractableObject3D : MonoBehaviour
     public bool auto_colliders = true;
     public Collider[] collider_list;
 
+    public bool has_physics = true;
+
 
     [Space(14)]
     public bool isDraggable = true;
@@ -34,6 +36,8 @@ public class InteractableObject3D : MonoBehaviour
 
     void Awake()
     {
+        has_physics = GetComponent<Rigidbody>() != null;
+        
         if (auto_colliders)
         {
             collider_list = GetComponentsInChildren<Collider>();
@@ -42,6 +46,7 @@ public class InteractableObject3D : MonoBehaviour
 
     public void DisablePhysics()
     {
+        has_physics = false;
         if (GetComponent<obj_applyphysics>() != null)
         {
             GetComponent<obj_applyphysics>().useGravity = false;
@@ -54,6 +59,7 @@ public class InteractableObject3D : MonoBehaviour
     }
     public void EnablePhysics()
     {
+        has_physics = true;
         if (GetComponent<obj_applyphysics>() != null)
         {
             GetComponent<obj_applyphysics>().useGravity = true;

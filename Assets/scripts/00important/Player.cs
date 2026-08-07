@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         controller= GetComponent<PlayerController>();
         generic_controller = GetComponent<player_genericcontroller>();
+        interaction_source = GetComponent<int_interactionsource>();
         t = transform;
 
         player_hotbar = ins_player_hotbar;
@@ -54,6 +55,11 @@ public class Player : MonoBehaviour
 
     public ui_hotbar ins_player_hotbar;
     public static ui_hotbar player_hotbar;
+
+    public static int_interactionsource interaction_source;
+
+    public static bool isDraggingObject;
+    public static bool isCarryingObject;
 
 
     #region STATS

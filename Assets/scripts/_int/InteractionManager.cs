@@ -80,7 +80,10 @@ public class InteractionManager : MonoBehaviour
                             // dragging is implemented separately from the rest of the interaction system,
                             // because basically every interactable object can be dragged
 
-                            comp.GetComponent<int_interactionsource>().StartDraggingObject(ioComp.gameObject);
+                            if (ioComp.has_physics)
+                            {
+                                comp.GetComponent<int_interactionsource>().StartDraggingObject(ioComp.gameObject);
+                            }
                         }
                     }
                 }

@@ -6,7 +6,7 @@ public class int_interactionsource : MonoBehaviour
     public Transform src;
 
     private bool isDraggingObject;
-    private Rigidbody objectToDrag;
+    public Rigidbody objectToDrag {get; private set;}
 
     public float draggingDistance = 0.1f;
     public float dragForce = 10f;
@@ -20,6 +20,8 @@ public class int_interactionsource : MonoBehaviour
 
     void Update()
     {
+        Player.isDraggingObject = isDraggingObject;
+        
         if (isDraggingObject)
         {
             Vector3 dragDir = src.position + src.forward * draggingDistance - objectToDrag.transform.position;
@@ -81,6 +83,7 @@ public class int_interactionsource : MonoBehaviour
 
     public void StopDraggingObject()
     {
+        Debug.Log("shit");
         if (objectToDrag == null) {return;}
         if (!isDraggingObject) {return;}
         
