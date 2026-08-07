@@ -16,7 +16,7 @@ public class ui_hotbar : MonoBehaviour
     public Sprite[] cell_borders;
     
 
-
+    
 
     [Header("EVENTS")]
     public UnityEvent onSelectCell;
