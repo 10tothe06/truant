@@ -32,6 +32,11 @@ public class ui_hotbar : MonoBehaviour
         onSelectCell.Invoke();
     }
 
+    public void Refresh()
+    {
+        SelectCell(selected_cell);
+    }
+
     private void UpdateSelectedCellBorder()
     {
         inv_itemstack selected_item = Player.player_inventory.GetItemTakingUpCell(selected_cell);

@@ -127,6 +127,11 @@ public class Input : MonoBehaviour
             {
                 Player.player_hotbar.SelectNextCell(-1);
             }
+
+            if (Keyboard.current.qKey.wasPressedThisFrame)
+            {
+                Player.DropSelectedItem();
+            }
         }
 
 

@@ -101,6 +101,17 @@ public class Player : MonoBehaviour
 
     # endregion
 
+    #region ITEMS
+
+    public static void DropSelectedItem()
+    {
+        ObjectManager.SpawnObject(GetSelectedItemData().item_name, player_hotbar.GetComponent<inv_helditemdisplay>().t_heldItemContainer.position);
+
+        player_inventory.RemoveItem(GetSelectedItem());
+
+        player_hotbar.Refresh();
+        UIManager.Instance.inventory.OpenPlayerInventory();
+    }
 
     public static inv_itemdata GetSelectedItemData()
     {
@@ -111,6 +122,8 @@ public class Player : MonoBehaviour
     {
         return player_inventory.GetItemAtCell(player_hotbar.selected_cell);
     }
+
+    #endregion
 
     public static void TeleportTo(Vector3 position)
     {
