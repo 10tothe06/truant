@@ -56,6 +56,8 @@ public class int_itemslot : MonoBehaviour
         comp.DisablePhysics();
         comp.transform.localPosition = Vector3.zero;
 
+        GetComponent<Collider>().enabled = false;
+
         comp.transform.localRotation = Quaternion.identity;
     }
 }

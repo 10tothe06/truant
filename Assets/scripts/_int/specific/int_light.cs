@@ -21,4 +21,12 @@ public class int_light : MonoBehaviour
             }
         }
     }
+
+    public void SwitchOn() {
+
+    }
+
+    public void SwitchOff() {
+        
+    }
 }

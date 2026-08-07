@@ -60,6 +60,7 @@ public class int_interactionsource : MonoBehaviour
                 }
 
                 objectToDrag.linearVelocity = force;
+                objectToDrag.angularVelocity = Vector3.zero;
             }
         }
     }

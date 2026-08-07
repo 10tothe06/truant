@@ -65,10 +65,18 @@ public class Player : MonoBehaviour
     #region STATS
 
     public static float drunk_level;
+    // must modify through the ModifyHealth() function
+    public static float health {get; private set;}
 
     #endregion
 
 
+    public static void ModifyHealth(float amt)
+    {
+        health += amt;
+    }
+
+    
 
     #region LOCKING
 
