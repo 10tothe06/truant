@@ -1,0 +1,26 @@
+using UnityEngine;
+
+// why is this a separate script?
+// who the shit knows really
+
+public class inv_helditemdisplay : MonoBehaviour
+{
+    public Transform t_heldItemContainer;
+
+    void Awake()
+    {
+        GetComponent<ui_hotbar>().onUpdateSelectedItem.AddListener(OnUpdateHeldItem);
+    }
+
+    private void OnUpdateHeldItem()
+    {
+        util_canvas.DestroyChildren(t_heldItemContainer.gameObject);
+
+        if (ObjectManager.GetItemObject(Player.GetSelectedItemData()) == null) {return;}
+
+        GameObject g_itemDisplay = Instantiate(ObjectManager.GetItemObject(Player.GetSelectedItemData()), t_heldItemContainer);
+
+        g_itemDisplay.GetComponent<InteractableObject3D>().DisableAllColliders();
+        g_itemDisplay.GetComponent<InteractableObject3D>().DisablePhysics();
+    }
+}

@@ -1,5 +1,6 @@
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ui_hotbar : MonoBehaviour
 {
@@ -7,19 +8,49 @@ public class ui_hotbar : MonoBehaviour
 
 
     public int selected_cell;
+    private int last_selected_cell_index;
+
+    private int selected_item_cell_index;
+    private int last_selected_item_cell_index;
 
     public Sprite[] cell_borders;
+    
+
+
+
+    [Header("EVENTS")]
+    public UnityEvent onSelectCell;
+    public UnityEvent onUpdateSelectedItem;
 
     public void SelectCell(int cell_index)
     {
+        last_selected_cell_index = selected_cell;
         selected_cell = cell_index;
 
         UpdateSelectedCellBorder();
+
+        onSelectCell.Invoke();
     }
 
     private void UpdateSelectedCellBorder()
     {
         inv_itemstack selected_item = Player.player_inventory.GetItemTakingUpCell(selected_cell);
+
+        last_selected_item_cell_index = selected_item_cell_index;
+        
+        if (selected_item != null)
+        {
+            selected_item_cell_index = selected_item.cellIndex;
+        } else
+        {
+            selected_item_cell_index = -1;
+        }
+
+        if (last_selected_cell_index != selected_item_cell_index)
+        {
+            // the item the player was holding changed
+            onUpdateSelectedItem.Invoke(); 
+        }
 
         if (selected_item == null)
         {

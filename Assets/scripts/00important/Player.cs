@@ -101,6 +101,12 @@ public class Player : MonoBehaviour
 
     # endregion
 
+
+    public static inv_itemdata GetSelectedItemData()
+    {
+        if (player_inventory.GetItemAtCell(player_hotbar.selected_cell) == null) {return null;}
+        return player_inventory.GetItemAtCell(player_hotbar.selected_cell).GetData();
+    }
     public static inv_itemstack GetSelectedItem()
     {
         return player_inventory.GetItemAtCell(player_hotbar.selected_cell);

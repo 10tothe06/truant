@@ -136,7 +136,6 @@ GameObject:
   - component: {fileID: 6597372535184340560}
   - component: {fileID: 4540712496507850893}
   - component: {fileID: 9060493668500253043}
-  - component: {fileID: 4133140099415944032}
   - component: {fileID: 1792735198715129915}
   m_Layer: 6
   m_Name: car_battery
@@ -200,6 +199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb72d9494664291449da362dc3af3687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableObject3D
+  auto_colliders: 1
+  collider_list: []
   isDraggable: 1
   hoverPrompt: press E to pick up
   onInteract:
@@ -208,20 +209,6 @@ MonoBehaviour:
   onInteractByObject:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4133140099415944032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6702777790825529560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca1d7f1a8d6ca0e4d8241a1676448d5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::int_colliderlist
-  colliders:
-  - {fileID: 9171863185802271225}
 --- !u!114 &1792735198715129915
 MonoBehaviour:
   m_ObjectHideFlags: 0

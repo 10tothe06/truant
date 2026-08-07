@@ -37,9 +37,9 @@ public class int_objectcarrier : MonoBehaviour
         isCarryingObject = true;
 
         // disable the object's colliders
-        if (g.GetComponent<int_colliderlist>() != null)
+        if (g.GetComponent<InteractableObject3D>() != null)
         {
-            g.GetComponent<int_colliderlist>().DisableAll();
+            g.GetComponent<InteractableObject3D>().DisableAllColliders();
         }
     }
 
@@ -56,9 +56,9 @@ public class int_objectcarrier : MonoBehaviour
         }
 
         // re-enable the object's colliders
-        if (g.GetComponent<int_colliderlist>() != null)
+        if (g.GetComponent<InteractableObject3D>() != null)
         {
-            g.GetComponent<int_colliderlist>().EnableAll();
+            g.GetComponent<InteractableObject3D>().EnableAllColliders();
         }
 
         g.GetComponent<int_carryable>().OnDrop();

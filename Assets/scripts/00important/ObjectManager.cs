@@ -33,6 +33,22 @@ public class ObjectManager : MonoBehaviour
     public Transform t_currentObjectContainer;
 
 
+    public static GameObject GetItemObject(inv_itemdata item_data)
+    {
+        if (item_data == null) {return null;}
+        for (int i = 0; i < Instance.p_objects.Length; i++)
+        {
+            if (Instance.p_objects[i].name == item_data.item_name)
+            {
+                return Instance.p_objects[i];
+            }
+        }
+
+        Debug.LogWarning("tried to get the object for an item and it didnt exist");
+        return null;
+    }
+
+
 
     // there are no prefixes or anything to worry about here,
     // the prefab gameobject names are VERBATIM the object names

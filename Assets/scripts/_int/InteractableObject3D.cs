@@ -17,6 +17,11 @@ but the InteractCollider class exists so that that's not necessary
 
 public class InteractableObject3D : MonoBehaviour
 {
+    public bool auto_colliders = true;
+    public Collider[] collider_list;
+
+
+    [Space(14)]
     public bool isDraggable = true;
     
     [Header("Config")]
@@ -26,6 +31,54 @@ public class InteractableObject3D : MonoBehaviour
     [Header("Events")]
     public UnityEvent onInteract;
     public UnityEvent<GameObject> onInteractByObject;
+
+    void Awake()
+    {
+        if (auto_colliders)
+        {
+            collider_list = GetComponentsInChildren<Collider>();
+        }
+    }
+
+    public void DisablePhysics()
+    {
+        if (GetComponent<obj_applyphysics>() != null)
+        {
+            GetComponent<obj_applyphysics>().useGravity = false;
+        }
+        if (GetComponent<Rigidbody>() != null)
+        {
+            GetComponent<Rigidbody>().useGravity = false;
+            GetComponent<Rigidbody>().isKinematic = true;
+        }
+    }
+    public void EnablePhysics()
+    {
+        if (GetComponent<obj_applyphysics>() != null)
+        {
+            GetComponent<obj_applyphysics>().useGravity = true;
+        }
+        if (GetComponent<Rigidbody>() != null)
+        {
+            GetComponent<Rigidbody>().useGravity = true;
+            GetComponent<Rigidbody>().isKinematic = false;
+        }
+    }
+
+    public void DisableAllColliders()
+    {
+        SetAllColliders(false);
+    }
+    public void EnableAllColliders()
+    {
+        SetAllColliders(true);
+    }
+    private void SetAllColliders(bool enable) {
+        for (int i = 0; i < collider_list.Length; i++)
+        {
+            collider_list[i].enabled = enable;
+        }
+    }
 
     public void HandleInteract()
     {
