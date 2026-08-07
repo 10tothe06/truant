@@ -84,7 +84,6 @@ public class int_interactionsource : MonoBehaviour
 
     public void StopDraggingObject()
     {
-        Debug.Log("shit");
         if (objectToDrag == null) {return;}
         if (!isDraggingObject) {return;}
         

@@ -104,9 +104,10 @@ GameObject:
   - component: {fileID: 5909758149282499650}
   - component: {fileID: 5176404365456275653}
   - component: {fileID: 8215963277471501564}
+  - component: {fileID: 4266911960987721239}
   m_Layer: 6
   m_Name: battery slot
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -164,6 +165,42 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5034437, y: 0.13148117, z: 0.63020444}
   m_Center: {x: -0.24827814, y: -0.020301819, z: -0.02427566}
+--- !u!114 &4266911960987721239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231909348239188293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb72d9494664291449da362dc3af3687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractableObject3D
+  auto_colliders: 0
+  collider_list:
+  - {fileID: 8215963277471501564}
+  has_physics: 0
+  isDraggable: 0
+  hoverPrompt: press E to place battery
+  onInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5176404365456275653}
+        m_TargetAssemblyTypeName: int_itemslot, Assembly-CSharp
+        m_MethodName: TryPlaceItemFromPlayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onInteractByObject:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1860148346554229232
 GameObject:
   m_ObjectHideFlags: 0

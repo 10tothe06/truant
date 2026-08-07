@@ -11,6 +11,11 @@ public class int_itemslot : MonoBehaviour
     // can either be item names OR tags
     public string[] allowed_items;
 
+    public void TryPlaceItemFromPlayer()
+    {
+        // TODO: maybe find an approach for this
+    }
+
 
     // called when an object passes through the slot's trigger
     void OnTriggerEnter(Collider col)
@@ -19,6 +24,11 @@ public class int_itemslot : MonoBehaviour
         if (comp == null) {return;}
 
 
+        TryPlaceItem(comp);
+    }
+
+    private void TryPlaceItem(InteractableObject3D comp)
+    {
         if (allowed_items.Length > 0)
         {
             if (comp.GetComponent<int_item>() != null)
