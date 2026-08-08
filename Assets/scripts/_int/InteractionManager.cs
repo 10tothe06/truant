@@ -31,13 +31,21 @@ public class InteractionManager : MonoBehaviour
         // ***
         InteractableObject3D interactingWith = CheckLocalPlayerForInteractableObject();
 
+        bool show_prompt = false;
         if (interactingWith != null)
         {
-            // show the prompt
-            interactionPrompt.DisplayPrompt(interactingWith.hoverPrompt);
+            if (interactingWith.can_be_interacted_with)
+            {
+                // show the prompt
+                interactionPrompt.DisplayPrompt(interactingWith.hoverPrompt);
 
-            if (crosshair != null) {crosshair.SetInteractable();}
-        } else
+                if (crosshair != null) {crosshair.SetInteractable();}
+
+                show_prompt = true;
+            }
+        }
+        
+        if (!show_prompt)
         {
             interactionPrompt.DisplayPrompt("");
 
@@ -77,17 +85,20 @@ public class InteractionManager : MonoBehaviour
 
                     if (ioComp != null)
                     {
-                        if (comp.mostRecentPacket.up && !comp.oldPacket.up)
+                        if (ioComp.can_be_interacted_with)
                         {
-                            ioComp.HandleInteractByObject(comp.gameObject);
-                        } else if (comp.mostRecentPacket.mouseLeft && !comp.mostRecentPacket.isTyping)
-                        {
-                            // dragging is implemented separately from the rest of the interaction system,
-                            // because basically every interactable object can be dragged
-
-                            if (ioComp.has_physics)
+                            if (comp.mostRecentPacket.up && !comp.oldPacket.up)
                             {
-                                comp.GetComponent<int_interactionsource>().StartDraggingObject(ioComp.gameObject);
+                                ioComp.HandleInteractByObject(comp.gameObject);
+                            } else if (comp.mostRecentPacket.mouseLeft && !comp.mostRecentPacket.isTyping)
+                            {
+                                // dragging is implemented separately from the rest of the interaction system,
+                                // because basically every interactable object can be dragged
+
+                                if (ioComp.has_physics)
+                                {
+                                    comp.GetComponent<int_interactionsource>().StartDraggingObject(ioComp.gameObject);
+                                }
                             }
                         }
                     }

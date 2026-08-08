@@ -24,6 +24,17 @@ public class int_objectcarrier : MonoBehaviour
     // picking up an object
     public void CarryObject(GameObject g)
     {
+        // disable the object's colliders
+        if (g.GetComponent<InteractableObject3D>() != null)
+        {
+            g.GetComponent<InteractableObject3D>().DisableAllColliders();
+            
+            if (g.GetComponent<InteractableObject3D>().parent_slot != null)
+            {
+                g.GetComponent<InteractableObject3D>().parent_slot.DropItem();
+            }
+        }
+
         // set the parent and remove physics
         g.transform.SetParent(carryParent);
         if (g.GetComponent<Rigidbody>() != null)
@@ -35,12 +46,6 @@ public class int_objectcarrier : MonoBehaviour
         g.transform.localRotation = Quaternion.identity;
 
         isCarryingObject = true;
-
-        // disable the object's colliders
-        if (g.GetComponent<InteractableObject3D>() != null)
-        {
-            g.GetComponent<InteractableObject3D>().DisableAllColliders();
-        }
     }
 
     public void DropObject()

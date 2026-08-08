@@ -31,6 +31,12 @@ public class int_item : MonoBehaviour
         if (canFitItem)
         {
             Player.GiveItem(data);
+
+            if (GetComponent<InteractableObject3D>().parent_slot != null)
+            {
+                GetComponent<InteractableObject3D>().parent_slot.DropItem();
+            }
+            
             GetComponent<InteractableObject3D>().Despawn();
         }
     }

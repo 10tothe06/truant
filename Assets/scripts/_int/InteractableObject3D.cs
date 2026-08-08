@@ -17,6 +17,12 @@ but the InteractCollider class exists so that that's not necessary
 
 public class InteractableObject3D : MonoBehaviour
 {
+    [HideInInspector]
+    public int_itemslot parent_slot;
+
+    public bool can_be_interacted_with = true;
+
+
     public bool auto_colliders = true;
     public Collider[] collider_list;
 
@@ -41,6 +47,21 @@ public class InteractableObject3D : MonoBehaviour
         if (auto_colliders)
         {
             collider_list = GetComponentsInChildren<Collider>();
+        }
+    }
+
+    public void SetCollidersToSolid()
+    {
+        for (int i = 0; i < collider_list.Length; i++)
+        {
+            collider_list[i].isTrigger = false;
+        }
+    }
+    public void SetCollidersToTrigger()
+    {
+        for (int i = 0; i < collider_list.Length; i++)
+        {
+            collider_list[i].isTrigger = true;
         }
     }
 
