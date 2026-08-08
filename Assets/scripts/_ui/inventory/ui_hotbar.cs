@@ -22,6 +22,11 @@ public class ui_hotbar : MonoBehaviour
     public UnityEvent onSelectCell;
     public UnityEvent onUpdateSelectedItem;
 
+    void Start()
+    {
+        Player.player_inventory.onInventoryUpdate.AddListener(Refresh);
+    }
+
     public void SelectCell(int cell_index)
     {
         last_selected_cell_index = selected_cell;

@@ -29,6 +29,11 @@ public class ui_inventorywidget : MonoBehaviour
 
     //public float spaceBetweenCells;
 
+    void Start()
+    {
+        Player.player_inventory.onInventoryUpdate.AddListener(RefreshWidget);
+    }
+
     public void BuildMenu(Func<inv_inventorydata> source, Vector3 position)
     {
         transform.position = position;

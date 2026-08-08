@@ -174,9 +174,14 @@ public class UIManager : MonoBehaviour
 
     public void OpenInventory()
     {
+        // making sure that we can SEE the widget
         inventory.gameObject.SetActive(true);
 
+        // actually building the widget
         inventory.OpenPlayerInventory();
+
+        // because the gameobject for the inventory stays active,
+        // we need a tracking variable to keep up with it
         is_inventory_open = true;
 
         Player.LockAll();

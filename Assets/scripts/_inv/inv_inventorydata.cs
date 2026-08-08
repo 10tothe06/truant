@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 // better organizing inventory data being sent over the network with this class
 
@@ -16,7 +17,9 @@ public class inv_inventorydata
     public bool[] cellsTaken;
     public List<inv_itemstack> items;
 
-    public inv_inventorydata(){items = new List<inv_itemstack>(); cellsTaken = new bool[inventory_width * inventory_height];}
+    public UnityEvent onInventoryUpdate;
+
+    public inv_inventorydata(){onInventoryUpdate = new UnityEvent(); items = new List<inv_itemstack>(); cellsTaken = new bool[inventory_width * inventory_height];}
 
     public inv_inventorydata(int inventory_width, int inventory_height)
     {
@@ -26,7 +29,13 @@ public class inv_inventorydata
         items = new List<inv_itemstack>();
 
         cellsTaken = new bool[inventory_width * inventory_height];
+
+        onInventoryUpdate = new UnityEvent();
     }
+
+
+
+    
 
     public void ApplyData(inv_inventorydata i)
     {
@@ -194,15 +203,19 @@ public class inv_inventorydata
 
                     UpdateSelectedCellsForItem(data, false);
 
+                    onInventoryUpdate.Invoke();
                     return; // we're done, so we do this to avoid loop issues
                 } else
                 {
                     items[i].itemCount -= data.itemCount;
                     
+                    onInventoryUpdate.Invoke();
                     return; // same story, we're done
                 }
             }
         }
+
+        onInventoryUpdate.Invoke();
     }
 
     // adding an item to the inventory
@@ -224,6 +237,7 @@ public class inv_inventorydata
                 GetItemReferenceAtCell(data.cellIndex).itemCount = Mathf.Min(GetItemAtCell(data.cellIndex).GetData().stackSize, GetItemAtCell(data.cellIndex).itemCount + data.itemCount);
             } else
             {
+                onInventoryUpdate.Invoke();
                 return; // can't add
             }
         } else
@@ -233,6 +247,7 @@ public class inv_inventorydata
 
         // no need to refresh the whole array here, just need to set the cells for this one item
         UpdateSelectedCellsForItem(data, true);
+        onInventoryUpdate.Invoke();
     }
 
     public void UpdateSelectedCellsForItem(inv_itemstack data, bool isPlaced) // either placed (set cells to taken) or removed (unset them)

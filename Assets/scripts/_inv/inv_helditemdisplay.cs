@@ -7,9 +7,14 @@ public class inv_helditemdisplay : MonoBehaviour
 {
     public Transform t_heldItemContainer;
 
-    void Awake()
+    void Start()
     {
+        // this updates it when the player selects a new item
         GetComponent<ui_hotbar>().onUpdateSelectedItem.AddListener(OnUpdateHeldItem);
+
+        // and this does when the players inventory data changes,
+        // such as when they drop an item
+        Player.player_inventory.onInventoryUpdate.AddListener(OnUpdateHeldItem);
     }
 
     private void OnUpdateHeldItem()

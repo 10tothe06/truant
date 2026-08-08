@@ -117,17 +117,21 @@ public class Player : MonoBehaviour
 
     #region ITEMS
 
-    public static void DropSelectedItem()
+
+    // returns the object that was dropped
+    public static GameObject DropSelectedItem()
     {
-        if (GetSelectedItemData() == null) {return;}
+        if (GetSelectedItemData() == null) {return null;}
 
         
-        ObjectManager.SpawnObject(GetSelectedItemData().item_name, player_hotbar.GetComponent<inv_helditemdisplay>().t_heldItemContainer.position);
+        GameObject g = ObjectManager.SpawnObject(GetSelectedItemData().item_name, player_hotbar.GetComponent<inv_helditemdisplay>().t_heldItemContainer.position);
 
         player_inventory.RemoveItem(GetSelectedItem());
 
-        player_hotbar.Refresh();
-        UIManager.Instance.inventory.OpenPlayerInventory();
+        // the hotbar and the inventory will automatically rebuild themselves,
+        // to show the change (bc of the RemoveItem() call)
+
+        return g;
     }
 
     public static inv_itemdata GetSelectedItemData()
@@ -151,6 +155,6 @@ public class Player : MonoBehaviour
     {
         player_inventory.AddItem(data);
 
-        UIManager.Instance.inventory.OpenPlayerInventory();
+        // hotbar and inventory will auto-rebuild after we call this function
     }
 }

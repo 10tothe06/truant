@@ -13,7 +13,7 @@ public class int_itemslot : MonoBehaviour
 
     public void TryPlaceItemFromPlayer()
     {
-        // TODO: maybe find an approach for this
+        TryPlaceItem(Player.DropSelectedItem().GetComponent<InteractableObject3D>());
     }
 
 
