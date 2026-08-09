@@ -73,8 +73,8 @@ public class GrassRenderer : MonoBehaviour
         grassCompute.SetFloat("_NoiseRange", WorldManager.level_noise.noise_range);
 
         grassCompute.SetVector("_Position", new Vector3(transform.position.x, 0, transform.position.z));
-        Texture2D tex = WorldManager.level_noise.GenerateTexture(64, transform.position);
-        grassCompute.SetTexture(kernelGenerate, "_ChunkTexture", tex);
+        
+        grassCompute.SetTexture(kernelGenerate, "_ChunkTexture", transform.parent.GetComponent<Chunk>().chunk_tex);
 
         //transform.parent.GetComponent<MeshRenderer>().material.mainTexture = tex;
 

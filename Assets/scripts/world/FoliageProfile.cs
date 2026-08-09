@@ -16,5 +16,5 @@ public class FoliageProfile
 public class FoliageType
 {
     public float percent; // [0..1]
-    public GameObject prefab;
+    public string object_name;
 }

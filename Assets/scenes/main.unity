@@ -5534,6 +5534,7 @@ MonoBehaviour:
   - {fileID: 6702777790825529560, guid: a6acf5c14a534a7439c1cdb24ea6c2f1, type: 3}
   - {fileID: 1906947019263682895, guid: 9b807ddd8b1fe1b49b13a661ec6dcc15, type: 3}
   - {fileID: 6702777790825529560, guid: 8026b6b021498a24c9ba3077440bc5b9, type: 3}
+  - {fileID: 5414149883367336487, guid: be45f307ea847a14ba47cce9b9efeff5, type: 3}
   t_currentObjectContainer: {fileID: 0}
 --- !u!1 &865919485
 GameObject:
@@ -14281,8 +14282,10 @@ MonoBehaviour:
   globalChunkAdjustments: []
   chunkGenerationActive: 0
   chunkFoliage:
-    types: []
-    totalCount: 0
+    types:
+    - percent: 1
+      object_name: tree_1
+    totalCount: 20
   loadedChunks: []
   p_chunkPrefab: {fileID: 7317471999498970213, guid: e794e4fc1d8b0624ea373822e049d289, type: 3}
   t_chunkContainer: {fileID: 273908606}
