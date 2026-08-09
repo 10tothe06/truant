@@ -35,6 +35,8 @@ public class Player : MonoBehaviour
         t = transform;
 
         player_hotbar = ins_player_hotbar;
+
+        item_holder = player_hotbar.GetComponent<inv_helditemdisplay>();
     }
 
     void Start()
@@ -55,6 +57,7 @@ public class Player : MonoBehaviour
 
     public ui_hotbar ins_player_hotbar;
     public static ui_hotbar player_hotbar;
+    public static inv_helditemdisplay item_holder;
 
     public static int_interactionsource interaction_source;
 
@@ -114,6 +117,11 @@ public class Player : MonoBehaviour
     }
 
     # endregion
+
+    public static GameObject GetHeldObject()
+    {
+        return item_holder.g_currentlyHeldObject;
+    }
 
     #region ITEMS
 

@@ -238,5 +238,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2738051971880dd489f061ec6c273f4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::int_fluidtank
+  tank_fill_level: 100
   tank_capacity: 100
   fluid_name: gas

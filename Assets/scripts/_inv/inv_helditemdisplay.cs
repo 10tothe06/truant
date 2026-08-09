@@ -6,6 +6,7 @@ using UnityEngine;
 public class inv_helditemdisplay : MonoBehaviour
 {
     public Transform t_heldItemContainer;
+    public GameObject g_currentlyHeldObject {get; private set;}
 
     void Start()
     {
@@ -21,9 +22,11 @@ public class inv_helditemdisplay : MonoBehaviour
     {
         util_canvas.DestroyChildren(t_heldItemContainer.gameObject);
 
-        if (ObjectManager.GetItemObject(Player.GetSelectedItemData()) == null) {return;}
+        if (ObjectManager.GetItemObject(Player.GetSelectedItemData()) == null) {g_currentlyHeldObject = null; return;}
 
         GameObject g_itemDisplay = Instantiate(ObjectManager.GetItemObject(Player.GetSelectedItemData()), t_heldItemContainer);
+
+        g_currentlyHeldObject = g_itemDisplay;
 
         g_itemDisplay.GetComponent<InteractableObject3D>().DisableAllColliders();
         g_itemDisplay.GetComponent<InteractableObject3D>().DisablePhysics();

@@ -16,6 +16,14 @@ using UnityEngine;
 
 public class int_fluidtank : MonoBehaviour
 {
-    public float tank_capacity;
+    public float tank_fill_level; // how much fluid IS in the tank
+    public float tank_capacity; // how much fluid can fit in the tank
+
+
     public string fluid_name;
+
+    public void AdjustFluidLevel(float amt)
+    {
+        tank_fill_level += amt;
+    }
 }

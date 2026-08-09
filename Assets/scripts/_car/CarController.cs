@@ -13,6 +13,8 @@ public class CarController : MonoBehaviour
     
     public bool is_engine_started;
 
+    public int_fluidtank fuel_tank;
+
 
 
     [Header("EVENTS")]
@@ -30,6 +32,11 @@ public class CarController : MonoBehaviour
         
         // basically just a state reset
         KillEngine();
+    }
+
+    void Start()
+    {
+        ui_debugmenu.AddEntry("car_fuel", () => fuel_tank.tank_fill_level.ToString());
     }
 
     void Update()
