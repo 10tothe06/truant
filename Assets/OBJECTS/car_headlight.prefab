@@ -323,7 +323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a37311f575ffaa41a3dcc8f1384950f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::int_item
-  itemType: 4
+  item_name: car_headlight
 --- !u!114 &8419041291975093350
 MonoBehaviour:
   m_ObjectHideFlags: 0

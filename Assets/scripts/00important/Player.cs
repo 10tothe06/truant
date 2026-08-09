@@ -134,6 +134,17 @@ public class Player : MonoBehaviour
         
         GameObject g = ObjectManager.SpawnObject(GetSelectedItemData().item_name, player_hotbar.GetComponent<inv_helditemdisplay>().t_heldItemContainer.position);
 
+
+        // all items should have this comp,
+        // but it IN THEORY might not so this is to prevent an error
+        if (g.GetComponent<int_item>())
+        {
+            g.GetComponent<int_item>().SetItemData(new inv_itemstack(GetSelectedItem()));
+        } else
+        {
+            Debug.LogWarning("item prefab does not have item component?");
+        }
+
         player_inventory.RemoveItem(GetSelectedItem());
 
         // the hotbar and the inventory will automatically rebuild themselves,

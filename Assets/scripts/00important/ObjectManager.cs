@@ -83,6 +83,8 @@ public class ObjectManager : MonoBehaviour
 
 
         GameObject g_newObject = Instantiate(GetObjectPrefabFromName(object_name), Instance.t_currentObjectContainer);
+        // get rid of the fucking '(Clone)' text i hate that shit
+        g_newObject.name = GetObjectPrefabFromName(object_name).name;
 
         g_newObject.transform.position = spawn_position;
 

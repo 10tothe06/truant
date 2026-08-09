@@ -25,6 +25,13 @@ public class inv_helditemdisplay : MonoBehaviour
         if (ObjectManager.GetItemObject(Player.GetSelectedItemData()) == null) {g_currentlyHeldObject = null; return;}
 
         GameObject g_itemDisplay = Instantiate(ObjectManager.GetItemObject(Player.GetSelectedItemData()), t_heldItemContainer);
+        if (g_itemDisplay.GetComponent<int_item>())
+        {
+            g_itemDisplay.GetComponent<int_item>().SetItemData(new inv_itemstack(Player.GetSelectedItem()));
+        } else
+        {
+            Debug.LogWarning("item prefab does not have item component?");
+        }
 
         g_currentlyHeldObject = g_itemDisplay;
 

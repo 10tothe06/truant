@@ -25,6 +25,7 @@ public class ui_hotbar : MonoBehaviour
     void Start()
     {
         Player.player_inventory.onInventoryUpdate.AddListener(Refresh);
+        Refresh();
     }
 
     public void SelectCell(int cell_index)

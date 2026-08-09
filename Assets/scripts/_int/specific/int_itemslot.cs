@@ -36,7 +36,7 @@ public class int_itemslot : MonoBehaviour
         {
             if (comp.GetComponent<int_item>() != null)
             {
-                if (!util_items.IsItemAllowed(ItemManager.Instance.items[comp.GetComponent<int_item>().itemType], allowed_items))
+                if (!util_items.IsItemAllowed(ItemManager.Instance.items[comp.GetComponent<int_item>().item_data.itemIndex], allowed_items))
                 {
                     return;
                 }

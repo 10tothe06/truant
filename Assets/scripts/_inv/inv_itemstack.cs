@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 // an item, in an inventory
@@ -10,6 +11,8 @@ public class inv_itemstack
     public int itemCount;
 
 
+    public List<string> data_keys;
+    public List<string> data_values;
 
 
     public int cellIndex; // where the "origin" of the item is
@@ -19,7 +22,14 @@ public class inv_itemstack
     public int extendHorizontal;
     public int extendVertical;
 
-    public inv_itemstack() {}
+    public inv_itemstack()
+    {
+        data_keys = new List<string>();
+        data_values = new List<string>();
+
+        extendVertical = 1;
+        extendHorizontal = 1;
+    }
 
 
     // assuming rotation is 0
@@ -33,7 +43,88 @@ public class inv_itemstack
         // filling out the extend horizontal and vertical based on the item's static data
         this.extendHorizontal = ItemManager.Instance.items[itemIndex].occupyWidth;
         this.extendVertical = ItemManager.Instance.items[itemIndex].occupyHeight;
+
+        data_keys = new List<string>();
+        data_values = new List<string>();
     }
+
+    public inv_itemstack(int itemIndex, int itemCount, int cellIndex, List<string> data_keys, List<string> data_values)
+    {
+        this.itemIndex = itemIndex;
+        this.itemCount = itemCount;
+
+        this.cellIndex = cellIndex;
+
+        // filling out the extend horizontal and vertical based on the item's static data
+        this.extendHorizontal = ItemManager.Instance.items[itemIndex].occupyWidth;
+        this.extendVertical = ItemManager.Instance.items[itemIndex].occupyHeight;
+
+        this.data_keys = data_keys;
+        this.data_values = data_values;
+    }
+
+    #region ITEM DATA
+
+    // and by this i mean the additional key/value pair data that items can have
+    
+
+    public void SetData(string key, float new_value)
+    {
+        SetData(key, new_value.ToString());
+    }
+    public void SetData(string key, string new_value)
+    {
+        bool existingEntry = false;
+
+        for (int i = 0; i < data_keys.Count; i++)
+        {
+            if (data_keys[i] == key)
+            {
+                data_values[i] = new_value;
+                existingEntry = true;
+                break;
+            }
+        }
+
+        if (!existingEntry)
+        {
+            // making a new entry cuz we didnt find one
+            data_keys.Add(key);
+            data_values.Add(new_value);
+        }
+    }
+
+    // similar to how WPILib (the old comms protocol) has built-in parsing function
+    public string GetString(string key)
+    {
+        for (int i = 0; i < data_keys.Count; i++)
+        {
+            if (data_keys[i] == key)
+            {
+                return data_values[i];
+            }
+        }
+
+        // default is empty
+        return "";
+    }
+
+    public float GetFloat(string key)
+    {
+        string raw = GetString(key);
+        float parsedValue = 0;
+        
+        if (float.TryParse(raw, out parsedValue))
+        {
+            return parsedValue;
+        }
+
+        // default
+        return 0;
+    }
+
+
+    #endregion
 
 
     // TODO: actually factor in rotation index
@@ -91,6 +182,9 @@ public class inv_itemstack
 
         this.extendHorizontal = src.extendHorizontal;
         this.extendVertical = src.extendVertical;
+
+        this.data_keys = src.data_keys;
+        this.data_values = src.data_values;
     }
 
     public inv_itemdata GetData()

@@ -199,8 +199,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb72d9494664291449da362dc3af3687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableObject3D
+  parent_slot: {fileID: 0}
+  can_be_interacted_with: 1
   auto_colliders: 1
   collider_list: []
+  has_physics: 1
   isDraggable: 1
   hoverPrompt: press E to pick up
   onInteract:
@@ -221,4 +224,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a37311f575ffaa41a3dcc8f1384950f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::int_item
-  itemType: 3
+  item_name: car_battery

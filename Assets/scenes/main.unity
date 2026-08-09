@@ -171,6 +171,8 @@ MonoBehaviour:
   heldItem:
     itemIndex: 0
     itemCount: 0
+    data_keys: []
+    data_values: []
     cellIndex: 0
     extendHorizontal: 0
     extendVertical: 0
@@ -12129,7 +12131,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6597372535184340560, guid: 8026b6b021498a24c9ba3077440bc5b9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 4.94
       objectReference: {fileID: 0}
     - target: {fileID: 6597372535184340560, guid: 8026b6b021498a24c9ba3077440bc5b9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -12137,7 +12139,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6597372535184340560, guid: 8026b6b021498a24c9ba3077440bc5b9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.77
+      value: 1.43
       objectReference: {fileID: 0}
     - target: {fileID: 6597372535184340560, guid: 8026b6b021498a24c9ba3077440bc5b9, type: 3}
       propertyPath: m_LocalRotation.w
