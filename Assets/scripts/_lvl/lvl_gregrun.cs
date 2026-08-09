@@ -18,6 +18,8 @@ public class lvl_gregrun : MonoBehaviour
 
     public void OnLevelEnter()
     {
+        WorldManager.Instance.InitializeChunkGeneration(new NoiseProfile());
+
         UIManager.SwitchMenu("");
 
         // set the camera mode

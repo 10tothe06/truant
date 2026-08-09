@@ -28,12 +28,11 @@ public class Chunk : MonoBehaviour
         {
             for (int z = 0; z < res; z++, i++)
             {
-                // float noiseX = noiseScale * (p.x + x / ((float)res-1) * WorldManager.Instance.chunkSize);
-                // float noiseY = noiseScale * (p.z + z / ((float)res-1) * WorldManager.Instance.chunkSize);
+                float noiseX = (p.x + x / ((float)res-1) * WorldManager.Instance.chunkSize);
+                float noiseY = (p.z + z / ((float)res-1) * WorldManager.Instance.chunkSize);
 
-                //v[i] = planeMesh.vertices[i] + Vector3.up * ((float)Perlin.Noise(noiseX, 0, noiseY) * noiseAmplitude * (float)Perlin.Noise(noiseX / 10f, 0, noiseY / 10f) - noiseAmplitude * 2 * Mathf.Abs(Mathf.Pow((float)Perlin.Noise(noiseX/5, 0, noiseY/5) + 0.4f, 8f)));
                 float dist = 999f;
-                float targetHeight = 0;
+                float targetHeight = WorldManager.level_noise.GetHeight(new Vector3(noiseX, noiseY, 0));
                 bool actingPath = false;
                 grassColors[i] = Color.white;
                 for (int j = 0; j < localChunkAdjustments.Count;j++)
@@ -97,7 +96,8 @@ public class Chunk : MonoBehaviour
                     }
                 }
 
-                float term = actingPath ? dist-2 : (5+dist)/20f;
+                //float term = actingPath ? dist-2 : (5+dist)/20f;
+                float term = 0;
                 v[i] = planeMesh.vertices[i] + Vector3.Lerp(Vector3.up * targetHeight, Vector3.zero, Mathf.Min(term, 1));
             }
         }

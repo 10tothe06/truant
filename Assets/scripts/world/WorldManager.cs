@@ -58,12 +58,21 @@ public class WorldManager : MonoBehaviour
     public Transform[] t_chunkLocationMarkers;
     public Transform t_locationMarkerContainer;
 
+    public static NoiseProfile level_noise;
+
     void Start()
     {
         //GrabChunkAdjustments();
 
 
         PopulateChunkLocationMarkers();
+    }
+
+    public void InitializeChunkGeneration(NoiseProfile noise_data)
+    {
+        chunkGenerationActive = true;
+
+        level_noise = noise_data;
     }
 
     // placing the gameobjects that will become the guides for chunk generation
