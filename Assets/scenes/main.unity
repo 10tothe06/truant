@@ -4172,59 +4172,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 625880491}
   m_CullTransparentMesh: 1
---- !u!1 &649694349
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 649694351}
-  - component: {fileID: 649694350}
-  m_Layer: 0
-  m_Name: grass renderer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &649694350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 649694349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e67f0e044b1ec841a2b416a348a80b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GrassRenderer
-  grassMesh: {fileID: 0}
-  grassMaterial: {fileID: 2100000, guid: f6120d7257007c94cbeb72f116fe5a03, type: 2}
-  grassCompute: {fileID: 7200000, guid: 2cf88727d98ad9c4b93ba7280dc2f445, type: 3}
-  bladeCount: 20000
-  areaSize: 10
-  drawDistance: 70
-  windStrength: 0.5
-  windDirection: {x: 1, y: 0.35}
---- !u!4 &649694351
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 649694349}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.60792, y: -2.58, z: 0.72632}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1014853108}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &678503964
 GameObject:
   m_ObjectHideFlags: 0
@@ -6980,50 +6927,6 @@ Transform:
   - {fileID: 618316394}
   m_Father: {fileID: 183849558}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1014853107
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1014853108}
-  - component: {fileID: 1014853109}
-  m_Layer: 0
-  m_Name: generator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1014853108
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1014853107}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 649694351}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1014853109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1014853107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0312829f79b01ff4bae6cfb6ec2fa49d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GrassBladeMeshGenerator
 --- !u!1 &1026203647
 GameObject:
   m_ObjectHideFlags: 0
@@ -8582,7 +8485,7 @@ Transform:
   m_GameObject: {fileID: 1357155165}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1852.9033, y: 0, z: 19962.756}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14384,8 +14287,8 @@ MonoBehaviour:
   p_chunkPrefab: {fileID: 7317471999498970213, guid: e794e4fc1d8b0624ea373822e049d289, type: 3}
   t_chunkContainer: {fileID: 273908606}
   chunkSize: 20
-  chunkResolution: 10
-  renderDistance: 2
+  chunkResolution: 20
+  renderDistance: 0
   t_chunkLocationMarkers: []
   t_locationMarkerContainer: {fileID: 44302499}
 --- !u!1 &2140500297
@@ -14839,4 +14742,3 @@ SceneRoots:
   - {fileID: 174602565}
   - {fileID: 1518538142}
   - {fileID: 1866586573}
-  - {fileID: 649694351}

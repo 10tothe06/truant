@@ -10,7 +10,6 @@ public class GrassRenderer : MonoBehaviour
 
     [Header("Settings")]
     public int bladeCount = 150000;
-    public float areaSize = 80f;
     public float drawDistance = 70f;
     public float windStrength = 0.45f;
     public Vector2 windDirection = new Vector2(1f, 0.35f);
@@ -25,6 +24,8 @@ public class GrassRenderer : MonoBehaviour
     uint[] args = new uint[5] { 0, 0, 0, 0, 0 };
     Bounds renderBounds;
 
+    MaterialPropertyBlock propertyBlock;
+
     void OnEnable()
     {
         if (grassMesh == null)
@@ -33,6 +34,11 @@ public class GrassRenderer : MonoBehaviour
         kernelGenerate = grassCompute.FindKernel("CSMain");
         kernelCull     = grassCompute.FindKernel("CSCull");
 
+        propertyBlock = new MaterialPropertyBlock();
+    }
+
+    public void Initialize()
+    {
         InitBuffers();
         GenerateGrass();
     }
@@ -55,14 +61,22 @@ public class GrassRenderer : MonoBehaviour
         args[4] = 0;
         argsBuffer.SetData(args);
 
-        renderBounds = new Bounds(transform.position, Vector3.one * (areaSize + 20f));
+        renderBounds = new Bounds(transform.position, Vector3.one * WorldManager.Instance.chunkSize);
     }
 
     void GenerateGrass()
     {
         grassCompute.SetBuffer(kernelGenerate, "_AllBlades", allBladesBuffer);
         grassCompute.SetInt("_BladeCount", bladeCount);
-        grassCompute.SetFloat("_AreaSize", areaSize);
+        grassCompute.SetFloat("_AreaSize", WorldManager.Instance.chunkSize);
+        
+        grassCompute.SetFloat("_NoiseRange", WorldManager.level_noise.noise_range);
+
+        grassCompute.SetVector("_Position", new Vector3(transform.position.x, 0, transform.position.z));
+        Texture2D tex = WorldManager.level_noise.GenerateTexture(64, transform.position);
+        grassCompute.SetTexture(kernelGenerate, "_ChunkTexture", tex);
+
+        //transform.parent.GetComponent<MeshRenderer>().material.mainTexture = tex;
 
         int groups = Mathf.CeilToInt(bladeCount / 256f);
         grassCompute.Dispatch(kernelGenerate, groups, 1, 1);
@@ -90,9 +104,10 @@ public class GrassRenderer : MonoBehaviour
         ComputeBuffer.CopyCount(visibleBladesBuffer, argsBuffer, sizeof(uint));
 
         // ---- Material ----
-        grassMaterial.SetBuffer("_GrassBlades", visibleBladesBuffer);
-        grassMaterial.SetFloat("_WindStrength", windStrength);
-        grassMaterial.SetVector("_WindDirection", windDirection);
+        propertyBlock.Clear();                                      
+        propertyBlock.SetBuffer("_GrassBlades", visibleBladesBuffer);
+        propertyBlock.SetFloat("_WindStrength", windStrength);
+        propertyBlock.SetVector("_WindDirection", windDirection);
 
         // ---- Draw ----
         Graphics.DrawMeshInstancedIndirect(
@@ -102,7 +117,7 @@ public class GrassRenderer : MonoBehaviour
             renderBounds,
             argsBuffer,
             0,
-            null,
+            propertyBlock,
             ShadowCastingMode.On,
             true,
             gameObject.layer

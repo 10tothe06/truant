@@ -1,6 +1,8 @@
 using UnityEngine;
 
-public class NoiseLayer : MonoBehaviour
+
+[System.Serializable]
+public class NoiseLayer
 {
     public float frequency;
     public float amplitude;

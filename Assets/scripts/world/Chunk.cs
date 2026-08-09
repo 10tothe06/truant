@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Chunk : MonoBehaviour
 {
+    public GrassRenderer grass;
     public List<ChunkAdjustment> localChunkAdjustments;
     private MeshFilter meshComp;
     private MeshFilter grassComp;
@@ -28,11 +29,16 @@ public class Chunk : MonoBehaviour
         {
             for (int z = 0; z < res; z++, i++)
             {
+                // this is lying
+                // this is the WRONG vertex position
+
+                // but DONT FUCKING FIX IT
+                // because im lying the same way elsewhere and it works
                 float noiseX = (p.x + x / ((float)res-1) * WorldManager.Instance.chunkSize);
                 float noiseY = (p.z + z / ((float)res-1) * WorldManager.Instance.chunkSize);
 
                 float dist = 999f;
-                float targetHeight = WorldManager.level_noise.GetHeight(new Vector3(noiseX, noiseY, 0));
+                float targetHeight = WorldManager.level_noise.GetHeight(new Vector3(noiseX, 0, noiseY));
                 bool actingPath = false;
                 grassColors[i] = Color.white;
                 for (int j = 0; j < localChunkAdjustments.Count;j++)
@@ -143,77 +149,80 @@ public class Chunk : MonoBehaviour
         
         colliderComp.sharedMesh = planeMesh;
 
-        // now the foliage
-        for (int i = 0; i < WorldManager.Instance.chunkFoliage.types.Length; i++)
-        {
-            int count = WorldManager.Instance.chunkFoliage.GetCount(i);
-            for (int j = 0; j < count; j++)
-            {
-                Transform t_newFoliage = Instantiate(WorldManager.Instance.chunkFoliage.types[i].prefab, transform).transform;
+        // draw grass
+        grass.Initialize();
 
-                // TODO: seeded
-                float minX = transform.position.x - WorldManager.Instance.chunkSize/2f;
-                float maxX = transform.position.x + WorldManager.Instance.chunkSize/2f;
+        // // now the foliage
+        // for (int i = 0; i < WorldManager.Instance.chunkFoliage.types.Length; i++)
+        // {
+        //     int count = WorldManager.Instance.chunkFoliage.GetCount(i);
+        //     for (int j = 0; j < count; j++)
+        //     {
+        //         Transform t_newFoliage = Instantiate(WorldManager.Instance.chunkFoliage.types[i].prefab, transform).transform;
 
-                float minY = transform.position.z - WorldManager.Instance.chunkSize/2f;
-                float maxY = transform.position.z + WorldManager.Instance.chunkSize/2f;
+        //         // TODO: seeded
+        //         float minX = transform.position.x - WorldManager.Instance.chunkSize/2f;
+        //         float maxX = transform.position.x + WorldManager.Instance.chunkSize/2f;
 
-                Vector3 rPos = new Vector3(Random.Range(minX, maxX), 100, Random.Range(minY, maxY));
+        //         float minY = transform.position.z - WorldManager.Instance.chunkSize/2f;
+        //         float maxY = transform.position.z + WorldManager.Instance.chunkSize/2f;
 
-                bool placedSucessfully = false;
-                RaycastHit hit;
-                if (Physics.Raycast(rPos, -Vector3.up, out hit))
-                {
-                    // this gives the tree a random position, and makes sure that it lies on the terrain
-                    if (hit.collider.gameObject == gameObject)
-                    {
-                        t_newFoliage.position = hit.point;
-                        placedSucessfully = true;
-                    }
+        //         Vector3 rPos = new Vector3(Random.Range(minX, maxX), 100, Random.Range(minY, maxY));
 
-                }
+        //         bool placedSucessfully = false;
+        //         RaycastHit hit;
+        //         if (Physics.Raycast(rPos, -Vector3.up, out hit))
+        //         {
+        //             // this gives the tree a random position, and makes sure that it lies on the terrain
+        //             if (hit.collider.gameObject == gameObject)
+        //             {
+        //                 t_newFoliage.position = hit.point;
+        //                 placedSucessfully = true;
+        //             }
 
-                for (int n = 0; n < localChunkAdjustments.Count;n++)
-                {
-                    if (localChunkAdjustments[n].type == ChunkAdjustmentType.Foliage_Break || localChunkAdjustments[n].type == ChunkAdjustmentType.Flat_Area)
-                    {
+        //         }
+
+        //         for (int n = 0; n < localChunkAdjustments.Count;n++)
+        //         {
+        //             if (localChunkAdjustments[n].type == ChunkAdjustmentType.Foliage_Break || localChunkAdjustments[n].type == ChunkAdjustmentType.Flat_Area)
+        //             {
                         
-                        float dist = util_mesh.DistanceToPolygon(localChunkAdjustments[n].points, hit.point);
-                        if (dist < 0.1f) placedSucessfully = false;
-                    }
-                    else if (localChunkAdjustments[n].type == ChunkAdjustmentType.Path)
-                    {
-                        // paths are a bit different, instead of getting the distance to a rect we're grabbing the distance to the line
-                        if (localChunkAdjustments[n].points.Length > 1)
-                        {
-                            Vector3 vert = hit.point;
-                            for (int k = 0; k < localChunkAdjustments[n].points.Length - 1; k++)
-                            {   
-                                Vector3 dir1 = vert - localChunkAdjustments[n].points[k];
-                                Vector3 dir2 = localChunkAdjustments[n].points[k+1] - localChunkAdjustments[n].points[k];
+        //                 float dist = util_mesh.DistanceToPolygon(localChunkAdjustments[n].points, hit.point);
+        //                 if (dist < 0.1f) placedSucessfully = false;
+        //             }
+        //             else if (localChunkAdjustments[n].type == ChunkAdjustmentType.Path)
+        //             {
+        //                 // paths are a bit different, instead of getting the distance to a rect we're grabbing the distance to the line
+        //                 if (localChunkAdjustments[n].points.Length > 1)
+        //                 {
+        //                     Vector3 vert = hit.point;
+        //                     for (int k = 0; k < localChunkAdjustments[n].points.Length - 1; k++)
+        //                     {   
+        //                         Vector3 dir1 = vert - localChunkAdjustments[n].points[k];
+        //                         Vector3 dir2 = localChunkAdjustments[n].points[k+1] - localChunkAdjustments[n].points[k];
                                 
-                                if (Vector3.Dot(dir1, dir2) > 0)
-                                {
-                                    Vector3 projectedDir = Vector3.Project(dir1, dir2);
-                                    projectedDir = projectedDir.normalized * Mathf.Min(dir2.magnitude, projectedDir.magnitude);
+        //                         if (Vector3.Dot(dir1, dir2) > 0)
+        //                         {
+        //                             Vector3 projectedDir = Vector3.Project(dir1, dir2);
+        //                             projectedDir = projectedDir.normalized * Mathf.Min(dir2.magnitude, projectedDir.magnitude);
 
-                                    Vector3 clampedPoint = localChunkAdjustments[n].points[k] + projectedDir;
-                                    clampedPoint = new Vector3(clampedPoint.x, 0, clampedPoint.z);
-                                    vert = new Vector3(vert.x, 0, vert.z);
+        //                             Vector3 clampedPoint = localChunkAdjustments[n].points[k] + projectedDir;
+        //                             clampedPoint = new Vector3(clampedPoint.x, 0, clampedPoint.z);
+        //                             vert = new Vector3(vert.x, 0, vert.z);
 
-                                    float distToLine = Vector3.Distance(clampedPoint, vert);
-                                    if (distToLine < 4f) placedSucessfully = false;
-                                }
-                            }
-                        }
-                    }
-                }
+        //                             float distToLine = Vector3.Distance(clampedPoint, vert);
+        //                             if (distToLine < 4f) placedSucessfully = false;
+        //                         }
+        //                     }
+        //                 }
+        //             }
+        //         }
 
-                if (!placedSucessfully)
-                {
-                    Destroy(t_newFoliage.gameObject);
-                }
-            }
-        }
+        //         if (!placedSucessfully)
+        //         {
+        //             Destroy(t_newFoliage.gameObject);
+        //         }
+        //     }
+        // }
     }
 }

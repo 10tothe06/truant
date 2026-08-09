@@ -4,9 +4,10 @@ using UnityEngine;
 // I'm bringing back an updated version of the idea of a 'noise profile'
 
 [System.Serializable]
-public class NoiseProfile : MonoBehaviour
+public class NoiseProfile
 {
     public NoiseLayer[] layers;
+    public float noise_range;
 
     public NoiseProfile()
     {
@@ -16,6 +17,32 @@ public class NoiseProfile : MonoBehaviour
             new NoiseLayer(0.03f, 4f, Vector3.zero),
             new NoiseLayer(0.3f, 1f, Vector3.zero),
         };
+
+        noise_range = 20f;
+    }
+
+    public Texture2D GenerateTexture(int resolution, Vector3 center_position)
+    {
+        Texture2D toReturn = new Texture2D(resolution, resolution, TextureFormat.RGBA32, false, true);
+
+        Color[] colors = new Color[resolution * resolution];
+
+        for (int i = 0; i < colors.Length; i++)
+        {
+            float x = (i % resolution) / (float)resolution;
+            float y = 0;
+            float z = (i / resolution) / (float)resolution;
+
+            //colors[i] = new Color(x, z, 0, 1f);
+
+            colors[i] = new Color(GetHeight(center_position + new Vector3(x * WorldManager.Instance.chunkSize,y,z * WorldManager.Instance.chunkSize)) / noise_range + 0.5f, 0, 0, 0);
+        }
+
+        toReturn.SetPixels(colors);
+        toReturn.Apply(false, false);
+        toReturn.filterMode = FilterMode.Point;
+
+        return toReturn;
     }
 
     public float GetHeight(Vector3 position)

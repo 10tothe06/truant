@@ -16,12 +16,17 @@ AppendStructuredBuffer<GrassBlade> _VisibleBlades;
 
 float4x4 _VPMatrix;
 float3   _CameraPos;
+float3   _Position;
 float    _DrawDistance;
 float    _AreaSize;
 uint     _BladeCount;
 float    _Time;
 float    _WindStrength;
 float2   _WindDirection;
+
+Texture2D<float4> _ChunkTexture;
+SamplerState sampler_ChunkTexture;
+float    _NoiseRange;
 
 float hash(float2 p)
 {
@@ -43,9 +48,15 @@ void CSMain(uint3 id : SV_DispatchThreadID)
     float2 random = hash2(uv + 17.3);
 
     float3 pos;
-    pos.x = (random.x - 0.5) * _AreaSize;
-    pos.z = (random.y - 0.5) * _AreaSize;
-    pos.y = 0; // flat ground – replace with heightmap sample if needed
+    pos.x = (random.x - 0.5) * _AreaSize + _Position.x;
+    pos.z = (random.y - 0.5) * _AreaSize + _Position.z;
+
+    int2 texSize;
+    _ChunkTexture.GetDimensions(texSize.x, texSize.y);
+
+    float4 chunk_col = _ChunkTexture.SampleLevel(sampler_ChunkTexture, float2((random.x), (random.y)), 0);
+
+    pos.y = (chunk_col.r - 0.5) * _NoiseRange;
 
     GrassBlade blade;
     blade.position = pos;
