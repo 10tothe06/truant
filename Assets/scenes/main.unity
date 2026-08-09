@@ -1399,7 +1399,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1906947019263682895, guid: 9b807ddd8b1fe1b49b13a661ec6dcc15, type: 3}
       propertyPath: m_Name
-      value: car_tire (2)
+      value: car_tire
       objectReference: {fileID: 0}
     - target: {fileID: 6690628673931001129, guid: 9b807ddd8b1fe1b49b13a661ec6dcc15, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3727,7 +3727,7 @@ MonoBehaviour:
   version: demo-1.0-rc1
   ins_buildMode: 0
   ins_startMode: 2
-  level_to_load: tutorial
+  level_to_load: gregrun
   ins_skip_loading_screens: 1
 --- !u!114 &576746838
 MonoBehaviour:
@@ -4833,7 +4833,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1906947019263682895, guid: 9b807ddd8b1fe1b49b13a661ec6dcc15, type: 3}
       propertyPath: m_Name
-      value: car_tire (3)
+      value: car_tire
       objectReference: {fileID: 0}
     - target: {fileID: 6690628673931001129, guid: 9b807ddd8b1fe1b49b13a661ec6dcc15, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9726,7 +9726,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1906947019263682895, guid: 9b807ddd8b1fe1b49b13a661ec6dcc15, type: 3}
       propertyPath: m_Name
-      value: car_tire (1)
+      value: car_tire
       objectReference: {fileID: 0}
     - target: {fileID: 6690628673931001129, guid: 9b807ddd8b1fe1b49b13a661ec6dcc15, type: 3}
       propertyPath: m_LocalPosition.x

@@ -82,7 +82,6 @@ public class int_itemslot : MonoBehaviour
 
     private void PlaceItem(InteractableObject3D comp)
     {
-        Debug.Log('a');
         comp.parent_slot = this;
         currently_held_object = comp;
 

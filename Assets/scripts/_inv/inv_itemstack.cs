@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 // an item, in an inventory
@@ -61,6 +62,14 @@ public class inv_itemstack
 
         this.data_keys = data_keys;
         this.data_values = data_values;
+    }
+
+    public void SetItemIndex(int new_index)
+    {
+        itemIndex = new_index;
+
+        extendHorizontal = ItemManager.Instance.items[itemIndex].occupyWidth;
+        extendVertical = ItemManager.Instance.items[itemIndex].occupyHeight;
     }
 
     #region ITEM DATA

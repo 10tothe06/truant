@@ -26,10 +26,10 @@ public class int_item : MonoBehaviour
             item_data.itemCount = 1;
             if (string.IsNullOrEmpty(item_type))
             {
-                item_data.itemIndex = ItemManager.GetItemIndexFromName(gameObject.name);
+                item_data.SetItemIndex(ItemManager.GetItemIndexFromName(gameObject.name));
             } else
             {
-                item_data.itemIndex = ItemManager.GetItemIndexFromName(item_type);
+                item_data.SetItemIndex(ItemManager.GetItemIndexFromName(item_type));
             }
 
             onInitialize.Invoke();
