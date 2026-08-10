@@ -20,7 +20,7 @@ public class test_lakevertices : MonoBehaviour
     public Color pointColor = new Color(1f, 1f, 1f, 0.65f);
     public float pointSize = 0.16f;
 
-    private Vector2[] vertices;
+    public Vector2[] vertices;
     public List<int> bad_lines;
     private double lastHash;
 
@@ -188,7 +188,7 @@ public class test_lakevertices : MonoBehaviour
     {
         List<Vector2> toReturn = new List<Vector2>();
 
-        int count_per_segment = 10;
+        int count_per_segment = 2;
         for (int n = 1; n < vertices.Length; n++)
         {
             for (int i = 1; i < count_per_segment; i++)
@@ -325,7 +325,7 @@ public class test_lakevertices : MonoBehaviour
         for (int s = 0; s < 2; s++)
             ring = SmoothClosed(ring, 0.28f);
 
-        if (!IsClockwise(ring))
+        if (IsClockwise(ring))
             ring.Reverse();
 
         return ResampleClosed(ring, vertexCount);

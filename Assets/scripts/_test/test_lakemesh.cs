@@ -1,0 +1,28 @@
+using UnityEngine;
+
+public class test_lakemesh : MonoBehaviour
+{
+    public bool calculate;
+
+    void Update()
+    {
+        if (calculate)
+        {
+            calculate = false;
+
+            GenerateLakeMesh();
+        }
+    }
+
+    private void GenerateLakeMesh()
+    {
+        int[] verts = util_polygon.GenerateConcaveTriangulation(GetComponent<test_lakevertices>().vertices);
+
+        Mesh m = new Mesh();
+
+        m.SetVertices(util_mesh.ToVector3(GetComponent<test_lakevertices>().vertices));
+        m.SetTriangles(verts,0);
+
+        GetComponent<MeshFilter>().sharedMesh = m;
+    }
+}

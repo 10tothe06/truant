@@ -5,6 +5,19 @@ using UnityEngine;
 
 public class util_mesh : MonoBehaviour
 {
+
+    public static Vector3[] ToVector3(Vector2[] old)
+    {
+        Vector3[] toReturn = new Vector3[old.Length];
+
+        for (int i = 0; i < old.Length; i++)
+        {
+            toReturn[i] = new Vector3(old[i].x, old[i].y, 0);
+        }
+
+        return toReturn;
+    }
+
     public static AltMesh ToAlt(Mesh m)
     {
         AltMesh result = new AltMesh();
