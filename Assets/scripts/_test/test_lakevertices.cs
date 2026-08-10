@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class test_lakevertices : MonoBehaviour
@@ -15,23 +16,15 @@ public class test_lakevertices : MonoBehaviour
     public int seed = 98765;
 
     [Header("Visual")]
-    public bool drawGizmos = true;
     public Color lineColor = new Color(0.1f, 0.4f, 0.8f, 0.95f);
     public Color pointColor = new Color(1f, 1f, 1f, 0.65f);
     public float pointSize = 0.16f;
 
     private Vector2[] vertices;
+    public List<int> bad_lines;
     private double lastHash;
 
     public NoiseProfile prof;
-
-    void OnValidate() => TryGenerate();
-    void OnEnable() => TryGenerate();
-
-    void Update()
-    {
-        TryGenerate();
-    }
 
     void TryGenerate()
     {
@@ -41,28 +34,105 @@ public class test_lakevertices : MonoBehaviour
 
         vertices = AddNoiseToVertices(LakeVertexGenerator2.Generate(
             vertexCount, length, maxWidth, meander, widthVariation, seed));
+
+        CheckForBadVertices();
+            
         lastHash = hash;
     }
 
+    private void CheckForBadVertices()
+    {
+        bad_lines =  new List<int>();
+        bad_lines.Clear();
+
+        Vector3 origin = transform.position;
+
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            Vector3 a1 = origin + (Vector3)vertices[i];
+            Vector3 a2 = origin + (Vector3)vertices[(i + 1) % vertices.Length];
+
+            for (int j = 0; j < vertices.Length; j++)
+            {
+                if (j == i) {continue;}
+
+                Vector3 b1 = origin + (Vector3)vertices[j];
+                Vector3 b2 = origin + (Vector3)vertices[(j + 1) % vertices.Length];
+
+                if (SegmentsIntersect(a1, a2, b1, b2))
+                {
+                    bad_lines.Add(i);
+                }
+            }
+        }
+    }
+    
+
+
+    public static bool SegmentsIntersect(Vector3 a1, Vector3 a2, Vector3 b1, Vector3 b2)
+    {
+        Vector3 dirA = a2 - a1;
+        Vector3 dirB = b2 - b1;
+
+        // Direction of the line connecting the two start points
+        Vector3 dirAB = b1 - a1;
+
+        Vector3 crossAB = Vector3.Cross(dirA, dirB);
+        float crossSqrMag = crossAB.sqrMagnitude;
+
+        // Lines are parallel (or nearly parallel)
+        if (crossSqrMag < 1e-8f)
+            return false;
+
+        // Check if the lines are coplanar
+        float planarFactor = Vector3.Dot(dirAB, crossAB);
+        if (Mathf.Abs(planarFactor) > 1e-5f)
+            return false; // Not coplanar → cannot intersect in 3D
+
+        // Calculate the intersection parameters
+        Vector3 crossABandB = Vector3.Cross(dirAB, dirB);
+        float t = Vector3.Dot(crossABandB, crossAB) / crossSqrMag;
+
+        Vector3 crossABandA = Vector3.Cross(dirAB, dirA);
+        float u = Vector3.Dot(crossABandA, crossAB) / crossSqrMag;
+
+        // Check if the intersection point lies on both segments
+        // (using a small epsilon for floating-point tolerance)
+        const float epsilon = -0.01f;
+        return t >= -epsilon && t <= 1f + epsilon &&
+               u >= -epsilon && u <= 1f + epsilon;
+    }
+
+
+
+
     void OnDrawGizmos()
     {
-        if (!drawGizmos || vertices == null || vertices.Length < 3) return;
-
         TryGenerate(); // keep live in editor
 
         Vector3 origin = transform.position;
-        Gizmos.color = lineColor;
 
         for (int i = 0; i < vertices.Length; i++)
         {
             Vector3 a = origin + (Vector3)vertices[i];
             Vector3 b = origin + (Vector3)vertices[(i + 1) % vertices.Length];
+
+            if (bad_lines.Contains(i))
+            {
+                Gizmos.color = Color.red;
+            } else
+            {
+                Gizmos.color = lineColor;
+            }
+
             Gizmos.DrawLine(a, b);
         }
 
         Gizmos.color = pointColor;
-        foreach (var v in vertices)
-            Gizmos.DrawSphere(origin + (Vector3)v, pointSize);
+        for (int i =0; i < vertices.Length; i++)
+        {
+            Gizmos.DrawSphere(origin + (Vector3)vertices[i], pointSize);
+        }  
     }
 
     [ContextMenu("Randomize Seed")]
