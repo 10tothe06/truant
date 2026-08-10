@@ -32,32 +32,71 @@ public class test_lakevertices : MonoBehaviour
                    meander.GetHashCode() + widthVariation.GetHashCode() + noise_amp;
         //if (hash == lastHash && vertices != null) return;
 
-        vertices = AddNoiseToVertices(LakeVertexGenerator2.Generate(
-            vertexCount, length, maxWidth, meander, widthVariation, seed));
 
-        CheckForBadVertices();
+        vertices = RemoveIntersections(AddNoiseToVertices(LakeVertexGenerator2.Generate(
+            vertexCount, length, maxWidth, meander, widthVariation, seed)));
+        
             
         lastHash = hash;
     }
 
-    private void CheckForBadVertices()
+    private Vector2[] RemoveIntersections(Vector2[] raw_vertices)
+    {
+        List<Vector2> toReturn = new List<Vector2>();
+
+        for (int i = 0; i < raw_vertices.Length; i++)
+        {
+            if (bad_lines.Contains(i))
+            {
+                toReturn.Add(raw_vertices[i]);
+                
+
+                int bad_line_index = bad_lines.IndexOf(i);
+
+                int next_index = i;
+
+                if (bad_lines.Count > bad_line_index + 1)
+                {
+                    next_index = bad_lines[bad_line_index + 1] + 1;
+                }
+
+                i = next_index;
+
+                if (i < raw_vertices.Length)
+                {
+                    toReturn.Add(raw_vertices[i]);
+                }
+            } else
+            {
+                toReturn.Add(raw_vertices[i]);
+            }
+
+            
+        }
+
+        bad_lines.Clear();
+
+        return  toReturn.ToArray();
+    }
+
+    private void CheckForBadVertices(Vector2[] v)
     {
         bad_lines =  new List<int>();
         bad_lines.Clear();
 
         Vector3 origin = transform.position;
 
-        for (int i = 0; i < vertices.Length; i++)
+        for (int i = 0; i < v.Length; i++)
         {
-            Vector3 a1 = origin + (Vector3)vertices[i];
-            Vector3 a2 = origin + (Vector3)vertices[(i + 1) % vertices.Length];
+            Vector3 a1 = origin + (Vector3)v[i];
+            Vector3 a2 = origin + (Vector3)v[(i + 1) % v.Length];
 
-            for (int j = 0; j < vertices.Length; j++)
+            for (int j = 0; j < v.Length; j++)
             {
                 if (j == i) {continue;}
 
-                Vector3 b1 = origin + (Vector3)vertices[j];
-                Vector3 b2 = origin + (Vector3)vertices[(j + 1) % vertices.Length];
+                Vector3 b1 = origin + (Vector3)v[j];
+                Vector3 b2 = origin + (Vector3)v[(j + 1) % v.Length];
 
                 if (SegmentsIntersect(a1, a2, b1, b2))
                 {
@@ -177,6 +216,8 @@ public class test_lakevertices : MonoBehaviour
 
             v[i] = toReturn[i] + new Vector2(normal.x, normal.y).normalized * prof.GetHeight(new Vector3(toReturn[i].x, toReturn[i].y, 0)) * noise_amp;
         }
+
+        CheckForBadVertices(v);
 
         return v;
     }

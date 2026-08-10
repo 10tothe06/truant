@@ -537,11 +537,11 @@ MonoBehaviour:
   maxWidth: 46.3
   meander: 0.265
   widthVariation: 1.2
-  seed: 105273
+  seed: 105779
   lineColor: {r: 0.1, g: 0.4, b: 0.8, a: 0.95}
   pointColor: {r: 1, g: 1, b: 1, a: 0.65}
   pointSize: 0.35
-  bad_lines: 4e00000051000000
+  bad_lines: 
   prof:
     layers:
     - frequency: 0.03
