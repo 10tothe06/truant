@@ -14291,7 +14291,7 @@ MonoBehaviour:
   t_chunkContainer: {fileID: 273908606}
   chunkSize: 20
   chunkResolution: 20
-  renderDistance: 0
+  renderDistance: 2
   t_chunkLocationMarkers: []
   t_locationMarkerContainer: {fileID: 44302499}
 --- !u!1 &2140500297
