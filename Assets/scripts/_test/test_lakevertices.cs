@@ -33,8 +33,22 @@ public class test_lakevertices : MonoBehaviour
         //if (hash == lastHash && vertices != null) return;
 
 
-        vertices = RemoveIntersections(AddNoiseToVertices(LakeVertexGenerator2.Generate(
+        vertices = RemoveIntersections(AddNoiseToVertices(Generate(
             vertexCount, length, maxWidth, meander, widthVariation, seed)));
+
+
+        if (transform.childCount != vertices.Length)
+        {
+            util_canvas.DestroyChildren(gameObject);
+
+            for (int i = 0; i < vertices.Length; i++)
+            {
+                GameObject g = new GameObject();
+
+                g.transform.SetParent(transform);
+                g.transform.position = new Vector3(vertices[i].x, 0, vertices[i].y);
+            }
+        }
         
             
         lastHash = hash;
@@ -142,19 +156,22 @@ public class test_lakevertices : MonoBehaviour
                u >= -epsilon && u <= 1f + epsilon;
     }
 
-
+    void Update()
+    {
+        TryGenerate(); // keep live in editor
+    }
 
 
     void OnDrawGizmos()
     {
-        TryGenerate(); // keep live in editor
+        
 
         Vector3 origin = transform.position;
 
         for (int i = 0; i < vertices.Length; i++)
         {
-            Vector3 a = origin + (Vector3)vertices[i];
-            Vector3 b = origin + (Vector3)vertices[(i + 1) % vertices.Length];
+            Vector3 a = origin + new Vector3(vertices[i].x, 0, vertices[i].y);
+            Vector3 b = origin + new Vector3(vertices[(i + 1) % vertices.Length].x, 0, vertices[(i + 1) % vertices.Length].y);
 
             if (bad_lines.Contains(i))
             {
@@ -170,7 +187,7 @@ public class test_lakevertices : MonoBehaviour
         Gizmos.color = pointColor;
         for (int i =0; i < vertices.Length; i++)
         {
-            Gizmos.DrawSphere(origin + (Vector3)vertices[i], pointSize);
+            Gizmos.DrawSphere(origin + new Vector3(vertices[i].x, 0, vertices[i].y), pointSize);
         }  
     }
 

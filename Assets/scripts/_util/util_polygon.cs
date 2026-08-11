@@ -211,12 +211,6 @@ public class util_polygon
             // we loop backwards cuz things will be getting deleted and we don't wanna mess up the index math
             for (int n = concaveSlices.Count - 1; n >= 0; n--)
             {
-                // bool isC = true;
-                // if (IsPolygonClockwise(MakePolygon(concaveSlices[n], verts3D)))
-                // {
-                //     isC = false;
-                // }
-
                 // our job for each concave slice is to find a reflex angle
                 // if we CAN'T find one then the slice is convex and we transfer it
                 // if we CAN, then we slice it
@@ -259,30 +253,15 @@ public class util_polygon
                         convexSlices.Add(concaveSlices[n]);
                     } else
                     {
-                        // Debug.Log("[-1]");
-                        // LogArray(concaveSlices[n]);
-
-                        // here we have to cut the thing
-                        // each slice contains original vertex indices
                         List<int>[] slices = CutPolygon(bisector, verts[concaveSlices[n][reflexIndex]], GrabVertexSet(verts, concaveSlices[n]), concaveSlices[n]);
-                        // if we hit a line segment, we need another triangle
+
                         int[] extraTriangle = GetCutTriangle(bisector, concaveSlices[n][reflexIndex], verts[concaveSlices[n][reflexIndex]], GrabVertexSet(verts, concaveSlices[n]), concaveSlices[n]);
                         for (int i = 0; i < extraTriangle.Length; i++) {additionalTriangles.Add(extraTriangle[i]);}
-
-                        // if (extraTriangle.Length > 0)
-                        // {
-                        //     Debug.Log(extraTriangle[0]);
-                        //     Debug.Log(extraTriangle[1]);
-                        //     Debug.Log(extraTriangle[2]);
-                        // }
                         
-                        // Debug.Log("[0]");
-                        // LogArray(slices[0].ToArray());
-                        // Debug.Log("[1]");
-                        // LogArray(slices[1].ToArray());
-
-                        concaveSlices.Add(slices[0].ToArray());
-                        concaveSlices.Add(slices[1].ToArray());
+                        for (int i = 0; i < slices.Length; i++)
+                        {
+                            concaveSlices.Add(slices[i].ToArray());
+                        }
                     }
                 }
                 
@@ -314,7 +293,7 @@ public class util_polygon
 
         int localIndex = 0;
         int sliceIndex = 0;
-        for (int i = 0; i < result.Length - additionalTriangles.Count; i++)
+        for (int i = 0; i < result.Length- additionalTriangles.Count; i++)
         {
             result[i] = sliceTriangulations[sliceIndex][localIndex];
 
@@ -330,7 +309,7 @@ public class util_polygon
             result[triSum + i] = additionalTriangles[i];
         }
 
-        // temp
+        
         return result;
     }
 
@@ -470,6 +449,77 @@ public class util_polygon
         }
     }
 
+    public static bool SegmentsIntersect(Vector3 a1, Vector3 a2, Vector3 b1, Vector3 b2)
+    {
+        Vector3 dirA = a2 - a1;
+        Vector3 dirB = b2 - b1;
+
+        // Direction of the line connecting the two start points
+        Vector3 dirAB = b1 - a1;
+
+        Vector3 crossAB = Vector3.Cross(dirA, dirB);
+        float crossSqrMag = crossAB.sqrMagnitude;
+
+        // Lines are parallel (or nearly parallel)
+        if (crossSqrMag < 1e-8f)
+            return false;
+
+        // Check if the lines are coplanar
+        float planarFactor = Vector3.Dot(dirAB, crossAB);
+        if (Mathf.Abs(planarFactor) > 1e-5f)
+            return false; // Not coplanar → cannot intersect in 3D
+
+        // Calculate the intersection parameters
+        Vector3 crossABandB = Vector3.Cross(dirAB, dirB);
+        float t = Vector3.Dot(crossABandB, crossAB) / crossSqrMag;
+
+        Vector3 crossABandA = Vector3.Cross(dirAB, dirA);
+        float u = Vector3.Dot(crossABandA, crossAB) / crossSqrMag;
+
+        // Check if the intersection point lies on both segments
+        // (using a small epsilon for floating-point tolerance)
+        const float epsilon = -0.01f;
+        return t >= -epsilon && t <= 1f + epsilon &&
+               u >= -epsilon && u <= 1f + epsilon;
+    }
+
+    
+    // Vector3.zero is being used as a stand-in for a null value type
+    public static Vector3 SegmentsIntersectPoint(Vector3 a1, Vector3 a2, Vector3 b1, Vector3 b2)
+    {
+        Vector3 dirA = a2 - a1;
+        Vector3 dirB = b2 - b1;
+        Vector3 dirAB = b1 - a1;
+
+        Vector3 crossAB = Vector3.Cross(dirA, dirB);
+        float crossSqrMag = crossAB.sqrMagnitude;
+
+        // Parallel (or nearly parallel)
+        if (crossSqrMag < 1e-8f)
+            return Vector3.zero;
+
+        // Not coplanar
+        float planarFactor = Vector3.Dot(dirAB, crossAB);
+        if (Mathf.Abs(planarFactor) > 1e-5f)
+            return Vector3.zero;
+
+        // Intersection parameters
+        Vector3 crossABandB = Vector3.Cross(dirAB, dirB);
+        float t = Vector3.Dot(crossABandB, crossAB) / crossSqrMag;
+
+        Vector3 crossABandA = Vector3.Cross(dirAB, dirA);
+        float u = Vector3.Dot(crossABandA, crossAB) / crossSqrMag;
+
+        // Same tolerance as your original
+        const float epsilon = -0.01f;
+        if (t < -epsilon || t > 1f + epsilon ||
+            u < -epsilon || u > 1f + epsilon)
+            return Vector3.zero;
+
+        // Point of intersection (using parameter t on segment A)
+        return a1 + t * dirA;
+    }
+
     // returns a 2 by n array that represents the two pieces of the cut polygon
 
     // very useful for turning a concave polygon into 2 convex gons
@@ -477,32 +527,38 @@ public class util_polygon
     // we don't need to return a util_polygoncomponent[] because we can just keep the original indices
     public static List<int>[] CutPolygon(Vector2 cutLine, Vector2 source, Vector2[] verts, int[] indexMap)
     {
+        // ***
+        // splitting up the vertices in two
+        // ***
+
         // using the idea that taking the negative rociprocal of the slope of a 2D line yields the perpindicular slope
         Vector2 perpLine = new Vector2(cutLine.y, -cutLine.x);
         // there are 2 possible perp lines, which one this ends up being doesn't matter
 
 
-        // two pieces, never more
-        List<int>[] result = new List<int>[2];
-        result[0] = new List<int>();
-        result[1] = new List<int>();
+        // we start with these two unseparated pieces
+        List<List<int>> queue = new List<List<int>>();
+        // one for each side of the cut line
+        queue.Add(new List<int>());
+        queue.Add(new List<int>());
 
         for (int i = 0; i < verts.Length; i++)
         {
             if (Vector2.Dot(perpLine, verts[i]-source) > 0)
             {
-                result[0].Add(indexMap[i]);
+                queue[0].Add(indexMap[i]);
             } else if (Vector2.Dot(perpLine, verts[i]-source) < 0)
             {
-                result[1].Add(indexMap[i]);
+                queue[1].Add(indexMap[i]);
             } else // lies right on the line, so 2 copies (bc we need the resulting copies to be complete polygons)
             {
-                result[0].Add(indexMap[i]);
-                result[1].Add(indexMap[i]);
+                queue[0].Add(indexMap[i]);
+                queue[1].Add(indexMap[i]);
             }
         }
 
-        return result;
+
+        return queue.ToArray();
     }
     // with no map
     // public static List<int>[] CutPolygon(Vector2 cutLine, Vector2[] verts)

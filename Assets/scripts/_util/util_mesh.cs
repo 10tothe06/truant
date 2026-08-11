@@ -12,7 +12,7 @@ public class util_mesh : MonoBehaviour
 
         for (int i = 0; i < old.Length; i++)
         {
-            toReturn[i] = new Vector3(old[i].x, old[i].y, 0);
+            toReturn[i] = new Vector3(old[i].x, 0, old[i].y);
         }
 
         return toReturn;
@@ -124,6 +124,40 @@ public class util_mesh : MonoBehaviour
             {
                 leftCount++;
             } else if (Vector3.Dot(toNext, toPoint) > 0) {rightCount++;}
+        }
+
+        if (leftCount == 0 || rightCount == 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public static bool IsPointInsidePolygon(Vector2[] points, Vector2 point)
+    {
+        int leftCount = 0;
+        int rightCount = 0;
+
+        for (int i = 0; i < points.Length; i++)
+        {
+            Vector2 toNext;
+            Vector2 toPoint;
+            if (i < points.Length-1)
+            {
+                toNext = points[i+1]-points[i];
+                
+                toPoint = point-points[i];
+            } else
+            {
+                toNext = points[0]-points[i];
+                
+                toPoint = point-points[i];
+            }
+
+            if (Vector2.Dot(toNext, toPoint) < 0)
+            {
+                leftCount++;
+            } else if (Vector2.Dot(toNext, toPoint) > 0) {rightCount++;}
         }
 
         if (leftCount == 0 || rightCount == 0)
