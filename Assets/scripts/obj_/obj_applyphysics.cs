@@ -1,7 +1,21 @@
 using UnityEngine;
 
+// this script should realistically be applied to every object
+
+// doing so allows me to do a few things,
+// like pausing the game in a more flexible way than using the built-in physics update system
+// buoyancy, too, is controlled from here
+// freezing/unfreezing objects is here too
+
 public class obj_applyphysics : MonoBehaviour
 {
+    [Header("General Settings")]
+    public float mass = 1f;
+
+    [Header("Buoyancy Settings")]
+    
+
+
     public bool useGravity = true;
     public obj_generic gComp;
     private Rigidbody rb;

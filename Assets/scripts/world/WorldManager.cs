@@ -68,12 +68,34 @@ public class WorldManager : MonoBehaviour
         PopulateChunkLocationMarkers();
     }
 
-    public void InitializeChunkGeneration(NoiseProfile noise_data)
+    #region LEVEL GENERATION
+    
+    // called when a level wants to have chunk generation
+
+    // even though most levels are going to use the same noise profile,
+    // I still want support for different ones just in case
+    public static void InitializeChunkGeneration(NoiseProfile noise_data)
     {
-        chunkGenerationActive = true;
+        Instance.chunkGenerationActive = true;
 
         level_noise = noise_data;
     }
+
+
+    // called when a script wants to add a lake to the level
+    // this handles the chunk adjustment,
+    // the placement of the water mesh,
+    // and everything else
+
+    // note that 
+    public static void AddLake()
+    {
+        
+    }
+
+    #endregion
+
+    
 
     // placing the gameobjects that will become the guides for chunk generation
     void PopulateChunkLocationMarkers()
