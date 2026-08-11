@@ -156,15 +156,10 @@ public class test_lakevertices : MonoBehaviour
                u >= -epsilon && u <= 1f + epsilon;
     }
 
-    void Update()
-    {
-        TryGenerate(); // keep live in editor
-    }
-
 
     void OnDrawGizmos()
     {
-        
+        TryGenerate();
 
         Vector3 origin = transform.position;
 

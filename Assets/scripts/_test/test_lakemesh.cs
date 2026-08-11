@@ -4,7 +4,7 @@ public class test_lakemesh : MonoBehaviour
 {
     public bool calculate;
 
-    void Update()
+    void OnDrawGizmos()
     {
         if (calculate)
         {
