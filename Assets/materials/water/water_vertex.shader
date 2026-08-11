@@ -1,18 +1,32 @@
     Shader "Custom/water_vertex" {
         Properties{
-            [Space]
+            
             [Header(Tesselation)]
+            [Space(10)]
             _MaxTessDistance("Max Tessellation Distance", Range(10,100)) = 50
             _Tess("Tessellation", Range(1,32)) = 20
 
-            [Space]
+            [Space(50)]
             
+            [Header(Colors)]
+            [Space(10)]
             _LightCol ("Light Color", Color) = (0.5,0.5,0.5,1)
             _DarkCol ("Dark Color", Color) = (0.5,0.5,0.5,1)
-
+            
+            [Header(Foam)]
+            [Space(10)]
+            _FoamStrength  ("Foam Strength", Range(0,1)) = 0.5
+            _FoamScale  ("Foam Scale", Range(0.1,10)) = 0.5
             _Foam1 ("Foam Texture 1", 2D) = "white" {}
             _Foam2 ("Foam Texture 2", 2D) = "white" {}
-
+            
+            [Space(50)]
+            
+            [Header(Normals)]
+            [Space(10)]
+            _NormalScale  ("Normal Scale", Range(0.1,10)) = 0.5
+            _SpecularStrength  ("Specular Strength", Range(0.1,10)) = 0.5
+            _SpecularPower  ("Specular Power", Range(1,200)) = 100
             _SpecularNormal ("Normal Map", 2D) = "white" {}
         }
     
@@ -36,6 +50,10 @@
             float3 sunDir;
             int isUnderWater;
             float timeValue;
+
+            // specular settings
+            float _SpecularStrength;
+            float _SpecularPower;
     
             inline half4 LightingToonRamp(SurfaceOutput s, half3 lightDir, half3 viewDir, half atten)
             {
@@ -45,7 +63,7 @@
                 half4 c;
                 
                 if (!isUnderWater) {
-                    c.rgb = lerp(_DarkCol, _LightCol, s.Albedo.r) + pow(clamp(dot(normalize((sunDir + viewDir))-0.2, s.Normal), 0, 1), 40)*1000 + s.Alpha;
+                    c.rgb = lerp(_DarkCol, _LightCol, s.Albedo.r) + pow(clamp(dot(normalize((sunDir + viewDir)), s.Normal), 0, 1), _SpecularPower)*_SpecularStrength + s.Alpha;
                 } else {
                     c.rgb = lerp(_DarkCol, _LightCol, s.Albedo.r) + pow(clamp(dot(normalize(lerp(-viewDir, s.Normal, 0.2)), sunDir), 0, 1), 10) + s.Alpha;
                 }
@@ -61,6 +79,13 @@
             float _Tess;
             float _MaxTessDistance;
             float waveAngles[12];
+            
+
+            // foam settings
+            float _FoamStrength;
+            float _FoamScale;
+
+            float _NormalScale;
     
             float CalcDistanceTessFactor(float4 vertex, float minDist, float maxDist, float tess)
             {
@@ -158,13 +183,15 @@
 
                 float2 x = IN.worldPos.xz/50;
                 float t = timeValue/30;
-                float foamValue = tex2D(_Foam1, x/2 + t/2).r + tex2D(_Foam2, x/3-t/3).r + tex2D(_Foam1, x+t/3).r;
+                float foamValue = tex2D(_Foam1, x/2*_FoamScale + t/2).r + tex2D(_Foam2, x/3*_FoamScale-t/3).r + tex2D(_Foam1, x*_FoamScale+t/3).r;
                 if (isUnderWater) {
                     foamValue *= 0.4; // foam is less apparent when viewing from the bottom
                 }
 
+                foamValue *= _FoamStrength;
+
                 o.Albedo = heightTerm + diffuseTerm + distanceTerm;
-                o.Normal = normalize(lerp(o.Normal, UnpackNormal(tex2D(_SpecularNormal, x)), 0.3));
+                o.Normal = normalize(lerp(o.Normal, UnpackNormal(tex2D(_SpecularNormal, x*_NormalScale + t)), 0.3));
                 o.Alpha = foamValue * 0.25;
                 o.Emission = 0;
             }

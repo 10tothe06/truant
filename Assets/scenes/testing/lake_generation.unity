@@ -2884,7 +2884,7 @@ MonoBehaviour:
   waterDepthTex: {fileID: 0}
   waterColorTex: {fileID: 0}
   waterObj: {fileID: 1777717097}
-  baseWaveFrequency: 1
+  baseWaveFrequency: 0.1
   lightTransform: {fileID: 1125000705}
   isUnderwater: 0
 --- !u!1 &1778068532
