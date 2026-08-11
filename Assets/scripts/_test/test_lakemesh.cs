@@ -16,7 +16,7 @@ public class test_lakemesh : MonoBehaviour
 
     private void GenerateLakeMesh()
     {
-        int[] verts = util_polygon.GenerateConcaveTriangulation(GetComponent<test_lakevertices>().vertices);
+        int[] verts = util_grok.Triangulate(GetComponent<test_lakevertices>().vertices);
 
         Mesh m = new Mesh();
 

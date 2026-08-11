@@ -205,7 +205,7 @@ public class test_lakevertices : MonoBehaviour
     {
         List<Vector2> toReturn = new List<Vector2>();
 
-        int count_per_segment = 2;
+        int count_per_segment = 5;
         for (int n = 1; n < vertices.Length; n++)
         {
             for (int i = 1; i < count_per_segment; i++)

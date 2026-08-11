@@ -255,8 +255,8 @@ public class util_polygon
                     {
                         List<int>[] slices = CutPolygon(bisector, verts[concaveSlices[n][reflexIndex]], GrabVertexSet(verts, concaveSlices[n]), concaveSlices[n]);
 
-                        int[] extraTriangle = GetCutTriangle(bisector, concaveSlices[n][reflexIndex], verts[concaveSlices[n][reflexIndex]], GrabVertexSet(verts, concaveSlices[n]), concaveSlices[n]);
-                        for (int i = 0; i < extraTriangle.Length; i++) {additionalTriangles.Add(extraTriangle[i]);}
+                        // int[] extraTriangle = GetCutTriangle(bisector, concaveSlices[n][reflexIndex], verts[concaveSlices[n][reflexIndex]], GrabVertexSet(verts, concaveSlices[n]), concaveSlices[n]);
+                        // for (int i = 0; i < extraTriangle.Length; i++) {additionalTriangles.Add(extraTriangle[i]);}
                         
                         for (int i = 0; i < slices.Length; i++)
                         {

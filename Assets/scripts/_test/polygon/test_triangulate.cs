@@ -23,7 +23,7 @@ public class test_triangulate : MonoBehaviour
 
             UpdateVertices();
 
-            triangles = util_polygon.GenerateConcaveTriangulation(vertices);
+            triangles = util_grok.Triangulate(vertices);
 
             Mesh m = new Mesh();
 
