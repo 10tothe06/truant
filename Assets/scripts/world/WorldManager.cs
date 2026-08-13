@@ -109,12 +109,12 @@ public class WorldManager : MonoBehaviour
         lake_object.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh = lake_mesh;
 
         // then, the chunk adjustment that will control the terrain
-        AddChunkAdjustment(lake_mesh.vertices, NoiseProfile.Contstant(-10f), 30f);
+        AddChunkAdjustment(lake_mesh.vertices, NoiseProfile.Contstant(-10f), new FoliageProfile(), 30f, 0f);
     }
 
-    public static void AddChunkAdjustment(Vector3[] points, NoiseProfile overwrite_profile, float transition_width = 1f)
+    public static void AddChunkAdjustment(Vector3[] points, NoiseProfile noise_overwrite, FoliageProfile foliage_overwrite, float noise_transition_width = 1f, float foliage_transition_width = 1f)
     {
-        ChunkAdjustment new_adjust = new ChunkAdjustment(points, overwrite_profile, transition_width);
+        ChunkAdjustment new_adjust = new ChunkAdjustment(points, noise_overwrite, foliage_overwrite, noise_transition_width, foliage_transition_width);
 
         Instance.globalChunkAdjustments.Add(new_adjust);
     }

@@ -28,21 +28,55 @@ public class ChunkAdjustment
     // data for how widely the adjustment is applied
     // ***
 
-    public float transition_width = 1f;
+    public float noise_transition_width = 1f;
+    public float foliage_transition_width = 1f;
 
     // ***
+    
+    public FoliageProfile foliage_overwrite;
 
     #region CONSTRUCTORS
 
 
     public ChunkAdjustment() {}
 
-    public ChunkAdjustment(Vector3[] points, NoiseProfile noise_overwrite, float transition_width)
+    public ChunkAdjustment(Vector3[] points)
+    {
+        this.points = points;
+
+        this.noise_overwrite = null;
+        this.foliage_overwrite = null;
+    }
+
+    public ChunkAdjustment(Vector3[] points, NoiseProfile noise_overwrite, float noise_transition_width)
     {
         this.points = points;
 
         this.noise_overwrite = noise_overwrite;
-        this.transition_width = transition_width;
+        this.foliage_overwrite = null;
+
+        this.noise_transition_width = noise_transition_width;
+    }
+
+    public ChunkAdjustment(Vector3[] points, FoliageProfile foliage_overwrite, float foliage_transition_width)
+    {
+        this.points = points;
+
+        this.noise_overwrite = null;
+        this.foliage_overwrite = foliage_overwrite;
+
+        this.foliage_transition_width = foliage_transition_width;
+    }
+
+    public ChunkAdjustment(Vector3[] points, NoiseProfile noise_overwrite, FoliageProfile foliage_overwrite, float noise_transition_width, float foliage_transition_width)
+    {
+        this.points = points;
+
+        this.noise_overwrite = noise_overwrite;
+        this.foliage_overwrite = foliage_overwrite;
+        
+        this.noise_transition_width = noise_transition_width;
+        this.foliage_transition_width = foliage_transition_width;
     }
 
 
@@ -59,6 +93,35 @@ public class ChunkAdjustment
 
         float dist = util_mesh.DistanceInsidePolygon(points, new Vector3(point.x, 0, point.z));
 
-        return Mathf.Lerp(old_height, adjusted_height, Mathf.Clamp01(dist/transition_width));
+        return Mathf.Lerp(old_height, adjusted_height, Mathf.Clamp01(dist/noise_transition_width));
+    }
+
+
+    // 0 means the adjustment doesn't apply
+    // 1 means it fully applies
+    public float GetFoliageTransitionAmount(Vector3 sample_point)
+    {
+        float dist = util_mesh.DistanceInsidePolygon(points, new Vector3(sample_point.x, 0, sample_point.z));
+
+        if (foliage_transition_width == 0)
+        {
+            return dist > 0 ? 1f : 0f;
+        } else
+        {
+            return Mathf.Clamp01(dist/foliage_transition_width);
+        }
+    }
+
+    public float GetNoiseTransitionAmount(Vector3 sample_point)
+    {
+        float dist = util_mesh.DistanceInsidePolygon(points, new Vector3(sample_point.x, 0, sample_point.z));
+
+        if (noise_transition_width == 0)
+        {
+            return dist > 0 ? 1f : 0f;
+        } else
+        {
+            return Mathf.Clamp01(dist/noise_transition_width);
+        }
     }
 }

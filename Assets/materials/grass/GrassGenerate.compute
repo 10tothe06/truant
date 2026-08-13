@@ -65,6 +65,10 @@ void CSMain(uint3 id : SV_DispatchThreadID)
     float random_height = hash(random.y);
     blade.height   = lerp(0.25, 0.55, random_height);
     blade.height *= blade.height * blade.height * 2;
+
+    if (chunk_col.g == 0) {
+        blade.height = 0;
+    }
     
     blade.width    = lerp(0.08, 0.16, hash(uv + 3.1));
     blade.bend     = random.x * 0.4;
@@ -79,6 +83,8 @@ void CSCull(uint3 id : SV_DispatchThreadID)
     if (id.x >= _BladeCount) return;
 
     GrassBlade blade = _AllBlades[id.x];
+
+    if (blade.height == 0) return;
 
     float3 worldPos = blade.position;
     float dist = distance(worldPos, _CameraPos);

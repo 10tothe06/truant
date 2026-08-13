@@ -66,13 +66,19 @@ public class Chunk : MonoBehaviour
 
 
             float targetHeight = WorldManager.level_noise.GetHeight(noise_sample_point);
+            float grass_density = WorldManager.Instance.chunkFoliage.grass_density;
 
             for (int c = 0; c < localChunkAdjustments.Count; c++)
             {
                 targetHeight = localChunkAdjustments[c].AdjustTerrainHeight(noise_sample_point, targetHeight);
+                
+                if (localChunkAdjustments[c].foliage_overwrite != null && localChunkAdjustments[c].GetFoliageTransitionAmount(noise_sample_point) > 0)
+                {
+                    grass_density = localChunkAdjustments[c].foliage_overwrite.grass_density;
+                }
             }
 
-            chunk_tex_data[i] = new Color(targetHeight / WorldManager.level_noise.noise_range + 0.5f, 0, 0, 0);
+            chunk_tex_data[i] = new Color(targetHeight / WorldManager.level_noise.noise_range + 0.5f, grass_density, 0, 0);
         }
     }
     public async void Initialize()
@@ -112,21 +118,61 @@ public class Chunk : MonoBehaviour
         // draw grass
         grass.Initialize();
 
-        SpawnFoliage();
+        SpawnAllFoliage();
     }
 
 
-    // TODO: sample from a heightmap instead of raycasting?
-    private void SpawnFoliage()
+    private void SpawnAllFoliage()
     {
-        // now the foliage
-        for (int i = 0; i < WorldManager.Instance.chunkFoliage.types.Length; i++)
+        int res = WorldManager.Instance.chunkResolution;
+
+        List<int> relevant_foliage_adjustments = new List<int>();
+
+        // step 1: figure out how many foliage profiles are in this chunk
+        for (int x = 0, i = 0; x < res; x++)
         {
-            int count = WorldManager.Instance.chunkFoliage.GetCount(i);
+            for (int z = 0; z < res; z++, i++)
+            {
+                // this is lying
+                // this is the WRONG vertex position
+
+                // but DONT FUCKING FIX IT
+                // because im lying the same way elsewhere and it works
+                float position_x = (transform.position.x + x / ((float)res-1) * WorldManager.Instance.chunkSize);
+                float position_z = (transform.position.z + z / ((float)res-1) * WorldManager.Instance.chunkSize);
+
+                Vector3 foliage_sample_point = new Vector3(position_x, 0, position_z);
+
+                for (int c = 0; c < localChunkAdjustments.Count; c++)
+                {
+                    if (localChunkAdjustments[c].foliage_overwrite == null) {continue;}
+
+                    if (localChunkAdjustments[c].GetFoliageTransitionAmount(foliage_sample_point) > 0)
+                    {
+                        relevant_foliage_adjustments.Add(c);
+                    }
+                }
+            }
+        }
+
+        // step 2: spawn all the fucking foliage
+        SpawnFoliageFromProfile(WorldManager.Instance.chunkFoliage);
+
+        for (int i = 0; i < relevant_foliage_adjustments.Count; i++)
+        {
+            SpawnFoliageFromProfile(localChunkAdjustments[relevant_foliage_adjustments[i]].foliage_overwrite, relevant_foliage_adjustments[i]);
+        }
+    }
+
+    private void SpawnFoliageFromProfile(FoliageProfile profile, int adjustment_index = -1)
+    {
+        for (int i = 0; i < profile.types.Length; i++)
+        {
+            int count = profile.GetCount(i);
             for (int j = 0; j < count; j++)
             {
                 // TODO: spawn them in like other objects??
-                Transform t_newFoliage = Instantiate(ObjectManager.GetObjectPrefabFromName(WorldManager.Instance.chunkFoliage.types[i].object_name), transform).transform;
+                Transform t_newFoliage = Instantiate(ObjectManager.GetObjectPrefabFromName(profile.types[i].object_name), transform).transform;
 
                 // TODO: seeded
                 float minX = transform.position.x - WorldManager.Instance.chunkSize/2f;
@@ -139,6 +185,33 @@ public class Chunk : MonoBehaviour
                 float z = Random.Range(0f, 1f);
                 float height = (chunk_tex.GetPixel(Mathf.RoundToInt(x * 64), Mathf.RoundToInt(z * 64)).r - 0.5f) * WorldManager.level_noise.noise_range;
                 t_newFoliage.position = new Vector3(Mathf.Lerp(minX, maxX, x), height, Mathf.Lerp(minY, maxY, z));
+
+                bool can_spawn = false;
+
+                float transition_total = 0;
+                
+                if (adjustment_index == -1)
+                {
+                    for (int c = 0; c < localChunkAdjustments.Count; c++)
+                    {
+                        if (localChunkAdjustments[c].foliage_overwrite == null) {continue;}
+
+                        transition_total += localChunkAdjustments[c].GetFoliageTransitionAmount(new Vector3(Mathf.Lerp(minX, maxX, x), 0, Mathf.Lerp(minY, maxY, z)));
+                    }
+                    transition_total = Mathf.Clamp01(transition_total);
+                } else
+                {
+                    transition_total = 1 - localChunkAdjustments[adjustment_index].GetFoliageTransitionAmount(new Vector3(Mathf.Lerp(minX, maxX, x), 0, Mathf.Lerp(minY, maxY, z)));
+                }
+                
+                float dice_roll = Random.Range(1f, 1000f);
+
+                can_spawn = dice_roll / 1000f > transition_total;
+
+                if (!can_spawn)
+                {
+                    Destroy(t_newFoliage.gameObject);
+                }
             }
         }
     }

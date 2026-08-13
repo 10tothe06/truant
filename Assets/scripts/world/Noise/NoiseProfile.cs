@@ -51,7 +51,7 @@ public class NoiseProfile
 
             //colors[i] = new Color(x, z, 0, 1f);
 
-            colors[i] = new Color(GetHeight(center_position + new Vector3(x * WorldManager.Instance.chunkSize,y,z * WorldManager.Instance.chunkSize)) / noise_range + 0.5f, 0, 0, 0);
+            colors[i] = new Color(GetHeight(center_position + new Vector3(x * WorldManager.Instance.chunkSize,y,z * WorldManager.Instance.chunkSize)) / noise_range + 0.5f, 0f, 0, 0);
         }
 
         return colors;

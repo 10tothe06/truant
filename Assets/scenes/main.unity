@@ -14035,6 +14035,7 @@ MonoBehaviour:
   globalChunkAdjustments: []
   chunkGenerationActive: 0
   chunkFoliage:
+    grass_density: 1
     types:
     - percent: 1
       object_name: tree_1
