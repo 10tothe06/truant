@@ -13,6 +13,7 @@ public class Chunk : MonoBehaviour
     private Vector3[] v;
 
     public Texture2D chunk_tex;
+    private Color[] chunk_tex_data;
 
 
     void CalculateVertices(AltMesh planeMesh, Transform t, Vector3 p)
@@ -54,6 +55,25 @@ public class Chunk : MonoBehaviour
                 v[i] = planeMesh.vertices[i] + Vector3.up * targetHeight;
             }
         }
+
+        for (int i = 0; i < chunk_tex_data.Length; i++)
+        {
+            float noise_x = (i % 64) / (float)64;
+            float noise_y = 0;
+            float noise_z = (i / 64) / (float)64;
+
+            Vector3 noise_sample_point = p + new Vector3(noise_x, noise_y, noise_z) * WorldManager.Instance.chunkSize;
+
+
+            float targetHeight = WorldManager.level_noise.GetHeight(noise_sample_point);
+
+            for (int c = 0; c < localChunkAdjustments.Count; c++)
+            {
+                targetHeight = localChunkAdjustments[c].AdjustTerrainHeight(noise_sample_point, targetHeight);
+            }
+
+            chunk_tex_data[i] = new Color(targetHeight / WorldManager.level_noise.noise_range + 0.5f, 0, 0, 0);
+        }
     }
     public async void Initialize()
     {
@@ -72,12 +92,16 @@ public class Chunk : MonoBehaviour
         Vector3 p = t.position;
         AltMesh a = util_mesh.ToAlt(planeMesh);
 
-        chunk_tex = WorldManager.level_noise.GenerateTexture(64, transform.position);
+        chunk_tex_data = WorldManager.level_noise.GenerateTextureData(64, transform.position);
 
         //GetComponent<MeshRenderer>().material.mainTexture = chunk_tex;
 
         await Task.Run(() => CalculateVertices(a,t,p));
 
+        chunk_tex = new Texture2D(64, 64, TextureFormat.RGBA32, false, true);
+        chunk_tex.SetPixels(chunk_tex_data);
+        chunk_tex.Apply(false, false);
+        chunk_tex.filterMode = FilterMode.Point;
 
         planeMesh.SetVertices(v);
         planeMesh.RecalculateBounds();
@@ -115,49 +139,6 @@ public class Chunk : MonoBehaviour
                 float z = Random.Range(0f, 1f);
                 float height = (chunk_tex.GetPixel(Mathf.RoundToInt(x * 64), Mathf.RoundToInt(z * 64)).r - 0.5f) * WorldManager.level_noise.noise_range;
                 t_newFoliage.position = new Vector3(Mathf.Lerp(minX, maxX, x), height, Mathf.Lerp(minY, maxY, z));
-
-                bool placedSucessfully = true;
-
-                // for (int n = 0; n < localChunkAdjustments.Count;n++)
-                // {
-                //     if (localChunkAdjustments[n].type == ChunkAdjustmentType.Foliage_Break || localChunkAdjustments[n].type == ChunkAdjustmentType.Flat_Area)
-                //     {
-                        
-                //         float dist = util_mesh.DistanceToPolygon(localChunkAdjustments[n].points, t_newFoliage.position);
-                //         if (dist < 0.1f) placedSucessfully = false;
-                //     }
-                //     else if (localChunkAdjustments[n].type == ChunkAdjustmentType.Path)
-                //     {
-                //         // paths are a bit different, instead of getting the distance to a rect we're grabbing the distance to the line
-                //         if (localChunkAdjustments[n].points.Length > 1)
-                //         {
-                //             Vector3 vert = t_newFoliage.position;
-                //             for (int k = 0; k < localChunkAdjustments[n].points.Length - 1; k++)
-                //             {   
-                //                 Vector3 dir1 = vert - localChunkAdjustments[n].points[k];
-                //                 Vector3 dir2 = localChunkAdjustments[n].points[k+1] - localChunkAdjustments[n].points[k];
-                                
-                //                 if (Vector3.Dot(dir1, dir2) > 0)
-                //                 {
-                //                     Vector3 projectedDir = Vector3.Project(dir1, dir2);
-                //                     projectedDir = projectedDir.normalized * Mathf.Min(dir2.magnitude, projectedDir.magnitude);
-
-                //                     Vector3 clampedPoint = localChunkAdjustments[n].points[k] + projectedDir;
-                //                     clampedPoint = new Vector3(clampedPoint.x, 0, clampedPoint.z);
-                //                     vert = new Vector3(vert.x, 0, vert.z);
-
-                //                     float distToLine = Vector3.Distance(clampedPoint, vert);
-                //                     if (distToLine < 4f) placedSucessfully = false;
-                //                 }
-                //             }
-                //         }
-                //     }
-                // }
-
-                if (!placedSucessfully)
-                {
-                    Destroy(t_newFoliage.gameObject);
-                }
             }
         }
     }

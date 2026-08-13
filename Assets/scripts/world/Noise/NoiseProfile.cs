@@ -39,12 +39,8 @@ public class NoiseProfile
     }
 
 
-
-
-    public Texture2D GenerateTexture(int resolution, Vector3 center_position)
+    public Color[] GenerateTextureData(int resolution, Vector3 center_position)
     {
-        Texture2D toReturn = new Texture2D(resolution, resolution, TextureFormat.RGBA32, false, true);
-
         Color[] colors = new Color[resolution * resolution];
 
         for (int i = 0; i < colors.Length; i++)
@@ -57,6 +53,15 @@ public class NoiseProfile
 
             colors[i] = new Color(GetHeight(center_position + new Vector3(x * WorldManager.Instance.chunkSize,y,z * WorldManager.Instance.chunkSize)) / noise_range + 0.5f, 0, 0, 0);
         }
+
+        return colors;
+    }
+
+    public Texture2D GenerateTexture(int resolution, Vector3 center_position)
+    {
+        Texture2D toReturn = new Texture2D(resolution, resolution, TextureFormat.RGBA32, false, true);
+
+        Color[] colors = GenerateTextureData(resolution, center_position);
 
         toReturn.SetPixels(colors);
         toReturn.Apply(false, false);
