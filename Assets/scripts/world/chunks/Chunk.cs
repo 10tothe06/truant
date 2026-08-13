@@ -15,6 +15,70 @@ public class Chunk : MonoBehaviour
     public Texture2D chunk_tex;
     private Color[] chunk_tex_data;
 
+    #region DEBUG
+
+    public void ShowChunkBorders()
+    {
+        Vector3 min = transform.position - new Vector3(1,0,1) * WorldManager.Instance.chunkSize/2f;
+
+        Vector3 a = min;
+        Vector3 b = min + new Vector3(1,0,0) * WorldManager.Instance.chunkSize;
+        Vector3 c = min + new Vector3(0,0,1) * WorldManager.Instance.chunkSize;
+        Vector3 d = min + new Vector3(1,0,1) * WorldManager.Instance.chunkSize;
+
+        DebugManager.DrawLine(a-Vector3.up * 20f, a + Vector3.up * 20f);
+        DebugManager.DrawLine(b-Vector3.up * 20f, b + Vector3.up * 20f);
+        DebugManager.DrawLine(c-Vector3.up * 20f, c + Vector3.up * 20f);
+        DebugManager.DrawLine(d-Vector3.up * 20f, d + Vector3.up * 20f);
+    }
+    public void HideChunkBorders()
+    {
+        
+    }
+
+    #endregion
+
+    public async void Initialize()
+    {
+        ShowChunkBorders();
+        
+        for (int i = 0; i < WorldManager.Instance.globalChunkAdjustments.Count; i++)
+        {
+            localChunkAdjustments.Add(WorldManager.Instance.globalChunkAdjustments[i]);
+        }
+
+
+        meshComp = GetComponent<MeshFilter>();
+        colliderComp = GetComponent<MeshCollider>();
+
+        Mesh planeMesh = util_mesh.GeneratePlane(WorldManager.Instance.chunkResolution, WorldManager.Instance.chunkSize, false);
+
+        Transform t = transform;
+        Vector3 p = t.position;
+        AltMesh a = util_mesh.ToAlt(planeMesh);
+
+        chunk_tex_data = WorldManager.level_noise.GenerateTextureData(32, transform.position);
+
+        //GetComponent<MeshRenderer>().material.mainTexture = chunk_tex;
+
+        await Task.Run(() => CalculateVertices(a,t,p));
+
+        chunk_tex = new Texture2D(32, 32, TextureFormat.RGBA32, false, true);
+        chunk_tex.SetPixels(chunk_tex_data);
+        chunk_tex.Apply(false, false);
+        chunk_tex.filterMode = FilterMode.Point;
+
+        planeMesh.SetVertices(v);
+        planeMesh.RecalculateBounds();
+        meshComp.sharedMesh = planeMesh;
+        
+        colliderComp.sharedMesh = planeMesh;
+
+        // draw grass
+        grass.Initialize();
+
+        SpawnAllFoliage();
+    }
 
     void CalculateVertices(AltMesh planeMesh, Transform t, Vector3 p)
     {
@@ -80,45 +144,6 @@ public class Chunk : MonoBehaviour
 
             chunk_tex_data[i] = new Color(targetHeight / WorldManager.level_noise.noise_range + 0.5f, grass_density, 0, 0);
         }
-    }
-    public async void Initialize()
-    {
-        for (int i = 0; i < WorldManager.Instance.globalChunkAdjustments.Count; i++)
-        {
-            localChunkAdjustments.Add(WorldManager.Instance.globalChunkAdjustments[i]);
-        }
-
-
-        meshComp = GetComponent<MeshFilter>();
-        colliderComp = GetComponent<MeshCollider>();
-
-        Mesh planeMesh = util_mesh.GeneratePlane(WorldManager.Instance.chunkResolution, WorldManager.Instance.chunkSize, false);
-
-        Transform t = transform;
-        Vector3 p = t.position;
-        AltMesh a = util_mesh.ToAlt(planeMesh);
-
-        chunk_tex_data = WorldManager.level_noise.GenerateTextureData(32, transform.position);
-
-        //GetComponent<MeshRenderer>().material.mainTexture = chunk_tex;
-
-        await Task.Run(() => CalculateVertices(a,t,p));
-
-        chunk_tex = new Texture2D(32, 32, TextureFormat.RGBA32, false, true);
-        chunk_tex.SetPixels(chunk_tex_data);
-        chunk_tex.Apply(false, false);
-        chunk_tex.filterMode = FilterMode.Point;
-
-        planeMesh.SetVertices(v);
-        planeMesh.RecalculateBounds();
-        meshComp.sharedMesh = planeMesh;
-        
-        colliderComp.sharedMesh = planeMesh;
-
-        // draw grass
-        grass.Initialize();
-
-        SpawnAllFoliage();
     }
 
 
