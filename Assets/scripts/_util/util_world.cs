@@ -68,6 +68,39 @@ public class util_world
 
     private static Vector3[] RemoveIntersectionsFromLakeVertices(Vector3[] raw_vertices)
     {
+
+        // checking for bad vertices
+        // ***
+
+        List<int> bad_lines =  new List<int>();
+        bad_lines.Clear();
+
+        Vector3 origin = Vector3.zero;
+
+        for (int i = 0; i < raw_vertices.Length; i++)
+        {
+            Vector3 a1 = origin + (Vector3)raw_vertices[i];
+            Vector3 a2 = origin + (Vector3)raw_vertices[(i + 1) % raw_vertices.Length];
+
+            for (int j = 0; j < raw_vertices.Length; j++)
+            {
+                if (j == i) {continue;}
+
+                Vector3 b1 = origin + (Vector3)raw_vertices[j];
+                Vector3 b2 = origin + (Vector3)raw_vertices[(j + 1) % raw_vertices.Length];
+
+                if (SegmentsIntersect(a1, a2, b1, b2))
+                {
+                    bad_lines.Add(i);
+                }
+            }
+        }
+
+        // ***
+
+
+
+
         List<Vector3> toReturn = new List<Vector3>();
 
         for (int i = 0; i < raw_vertices.Length; i++)
@@ -138,8 +171,6 @@ public class util_world
 
             v[i] = toReturn[i] + new Vector3(normal.x, 0, normal.z).normalized * lake_shore_profile.GetHeight(toReturn[i]) * lake_shore_noise_amplitude;
         }
-
-        //CheckForBadVertices(v);
 
         return v;
     }

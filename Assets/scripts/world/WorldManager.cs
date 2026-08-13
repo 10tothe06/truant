@@ -91,7 +91,7 @@ public class WorldManager : MonoBehaviour
     public static void AddLake()
     {
         // first, let's make the mesh itself
-        Mesh m = world_lake.
+        //Mesh m = world_lake.
     }
 
     #endregion

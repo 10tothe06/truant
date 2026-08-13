@@ -10,6 +10,8 @@
             
             [Header(Colors)]
             [Space(10)]
+            _ColorBand ("Color Banding", Range(0,100)) = 0.5
+            _SpaceBand ("Space Banding", Range(0,100)) = 0.5
             _LightCol ("Light Color", Color) = (0.5,0.5,0.5,1)
             _DarkCol ("Dark Color", Color) = (0.5,0.5,0.5,1)
             
@@ -46,6 +48,8 @@
             sampler2D _MainTex, _Foam1, _Foam2, _SpecularNormal;
 
             float4 _LightCol;
+            float _ColorBand;
+            float _SpaceBand;
             float4 _DarkCol;
             float3 sunDir;
             int isUnderWater;
@@ -63,9 +67,9 @@
                 half4 c;
                 
                 if (!isUnderWater) {
-                    c.rgb = lerp(_DarkCol, _LightCol, s.Albedo.r) + pow(clamp(dot(normalize((sunDir + viewDir)), s.Normal), 0, 1), _SpecularPower)*_SpecularStrength + s.Alpha;
+                    c.rgb = lerp(_DarkCol, _LightCol, round(s.Albedo.r / _ColorBand) * _ColorBand) + pow(clamp(dot(normalize((sunDir + viewDir)), s.Normal), 0, 1), _SpecularPower)*_SpecularStrength + s.Alpha;
                 } else {
-                    c.rgb = lerp(_DarkCol, _LightCol, s.Albedo.r) + pow(clamp(dot(normalize(lerp(-viewDir, s.Normal, 0.2)), sunDir), 0, 1), 10) + s.Alpha;
+                    c.rgb = lerp(_DarkCol, _LightCol, round(s.Albedo.r / _ColorBand) * _ColorBand) + pow(clamp(dot(normalize(lerp(-viewDir, s.Normal, 0.2)), sunDir), 0, 1), 10) + s.Alpha;
                 }
                 
                 c.a = 0;
@@ -176,13 +180,17 @@
             }
     
             void surf(Input IN, inout SurfaceOutput o) {
+                IN.worldPos = float3(round(IN.worldPos.x / _SpaceBand) * _SpaceBand, round(IN.worldPos.y / _SpaceBand) * _SpaceBand, round(IN.worldPos.z / _SpaceBand) * _SpaceBand);
 
                 float heightTerm = clamp(IN.worldPos.y - 6, 0, 10)/5;
-                float diffuseTerm = lerp(0, 1, clamp(dot(sunDir, o.Normal)-0.5, 0, 1));
+                float diffuseTerm = lerp(0, 1, clamp(dot(sunDir, o.Normal)-0.5, 0, 1))/2;
                 float distanceTerm = clamp(2/length(IN.worldPos - _WorldSpaceCameraPos), 0, 0.3);
 
                 float2 x = IN.worldPos.xz/50;
+
+                //x = float2(round(x.x / _ColorBand) * _ColorBand, round(x.y / _ColorBand) * _ColorBand);
                 float t = timeValue/30;
+
                 float foamValue = tex2D(_Foam1, x/2*_FoamScale + t/2).r + tex2D(_Foam2, x/3*_FoamScale-t/3).r + tex2D(_Foam1, x*_FoamScale+t/3).r;
                 if (isUnderWater) {
                     foamValue *= 0.4; // foam is less apparent when viewing from the bottom
