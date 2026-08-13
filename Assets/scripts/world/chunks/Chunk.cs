@@ -58,9 +58,9 @@ public class Chunk : MonoBehaviour
 
         for (int i = 0; i < chunk_tex_data.Length; i++)
         {
-            float noise_x = (i % 64) / (float)64;
+            float noise_x = (i % 32) / (float)32;
             float noise_y = 0;
-            float noise_z = (i / 64) / (float)64;
+            float noise_z = (i / 32) / (float)32;
 
             Vector3 noise_sample_point = p + new Vector3(noise_x, noise_y, noise_z) * WorldManager.Instance.chunkSize;
 
@@ -98,13 +98,13 @@ public class Chunk : MonoBehaviour
         Vector3 p = t.position;
         AltMesh a = util_mesh.ToAlt(planeMesh);
 
-        chunk_tex_data = WorldManager.level_noise.GenerateTextureData(64, transform.position);
+        chunk_tex_data = WorldManager.level_noise.GenerateTextureData(32, transform.position);
 
         //GetComponent<MeshRenderer>().material.mainTexture = chunk_tex;
 
         await Task.Run(() => CalculateVertices(a,t,p));
 
-        chunk_tex = new Texture2D(64, 64, TextureFormat.RGBA32, false, true);
+        chunk_tex = new Texture2D(32, 32, TextureFormat.RGBA32, false, true);
         chunk_tex.SetPixels(chunk_tex_data);
         chunk_tex.Apply(false, false);
         chunk_tex.filterMode = FilterMode.Point;
@@ -183,8 +183,15 @@ public class Chunk : MonoBehaviour
 
                 float x = Random.Range(0f, 1f);
                 float z = Random.Range(0f, 1f);
-                float height = (chunk_tex.GetPixel(Mathf.RoundToInt(x * 64), Mathf.RoundToInt(z * 64)).r - 0.5f) * WorldManager.level_noise.noise_range;
+                
+                float height = (chunk_tex.GetPixel(Mathf.RoundToInt(x * 32), Mathf.RoundToInt(z * 32)).r - 0.5f) * WorldManager.level_noise.noise_range;
                 t_newFoliage.position = new Vector3(Mathf.Lerp(minX, maxX, x), height, Mathf.Lerp(minY, maxY, z));
+
+                minX = transform.position.x;
+                maxX = transform.position.x + WorldManager.Instance.chunkSize;
+
+                minY = transform.position.z;
+                maxY = transform.position.z + WorldManager.Instance.chunkSize;
 
                 bool can_spawn = false;
 

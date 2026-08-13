@@ -47,6 +47,7 @@ public class Program : MonoBehaviour
         startMode = ins_startMode;
 
         skip_loading_screens = ins_skip_loading_screens;
+        force_flat_terrain = ins_force_flat_terrain;
     }
 
     public bool resetAdvancements;
@@ -61,6 +62,9 @@ public class Program : MonoBehaviour
 
     public bool ins_skip_loading_screens;
     public static bool skip_loading_screens;
+
+    public bool ins_force_flat_terrain;
+    public static bool force_flat_terrain;
 
     // should almost be the ONLY use of the start function
     void Start()

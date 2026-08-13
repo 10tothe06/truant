@@ -7,7 +7,7 @@ using UnityEngine;
 public class NoiseProfile
 {
     public NoiseLayer[] layers;
-    public float noise_range;
+    public float noise_range = 20f;
 
     #region CONSTRUCTORS
 
@@ -26,6 +26,7 @@ public class NoiseProfile
     public NoiseProfile(NoiseLayer[] layers)
     {
         this.layers = layers;
+        noise_range = 20f;
     }
 
     #endregion

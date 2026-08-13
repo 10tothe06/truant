@@ -3592,6 +3592,7 @@ MonoBehaviour:
   ins_startMode: 2
   level_to_load: gregrun
   ins_skip_loading_screens: 1
+  ins_force_flat_terrain: 1
 --- !u!114 &576746838
 MonoBehaviour:
   m_ObjectHideFlags: 0

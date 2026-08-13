@@ -63,7 +63,6 @@ public class WorldManager : MonoBehaviour
     {
         //GrabChunkAdjustments();
 
-
         PopulateChunkLocationMarkers();
     }
 
@@ -73,6 +72,11 @@ public class WorldManager : MonoBehaviour
     // what level scripts should be calling to make the map
     public static void InitializeLevelEnvironment(NoiseProfile terrain_noise)
     {
+        if (Program.force_flat_terrain)
+        {
+            terrain_noise = NoiseProfile.Contstant(0);
+        }
+
         // first, the lake
         InitializeLake();
 
