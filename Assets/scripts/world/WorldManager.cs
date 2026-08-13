@@ -39,7 +39,7 @@ public class WorldManager : MonoBehaviour
     // both in unity coordinate units
     public float level_width;
     public float level_height;
-
+    public Texture2D map_texture;
 
 
 
@@ -71,8 +71,17 @@ public class WorldManager : MonoBehaviour
     // cached stuff
     // *****
 
-    private Vector3[] lake_vertices;
+    [HideInInspector]
+    public Vector3[] lake_vertices;
 
+    [HideInInspector]
+    public Vector3 a;
+    [HideInInspector]
+    public Vector3 b;
+    [HideInInspector]
+    public Vector3 c;
+    [HideInInspector]
+    public Vector3 d;
 
 
 
@@ -125,20 +134,22 @@ public class WorldManager : MonoBehaviour
         }
 
         // these are the four points that make up the map rectangle
-        Vector3 a = lake_midpoint - long_lake_axis * Instance.level_width/2f;
-        Vector3 b = lake_midpoint + long_lake_axis * Instance.level_width/2f;
-        Vector3 c = lake_midpoint + long_lake_axis * Instance.level_width/2f + short_lake_axis * Instance.level_height;
-        Vector3 d = lake_midpoint - long_lake_axis * Instance.level_width/2f + short_lake_axis * Instance.level_height;
+        Instance.a = lake_midpoint - long_lake_axis * Instance.level_width/2f;
+        Instance.b = lake_midpoint + long_lake_axis * Instance.level_width/2f;
+        Instance.c = lake_midpoint + long_lake_axis * Instance.level_width/2f + short_lake_axis * Instance.level_height;
+        Instance.d = lake_midpoint - long_lake_axis * Instance.level_width/2f + short_lake_axis * Instance.level_height;
 
-        DebugManager.DrawLine(a, b, Color.cyan);
-        DebugManager.DrawLine(b, c, Color.cyan);
-        DebugManager.DrawLine(c, d, Color.cyan);
-        DebugManager.DrawLine(d, a, Color.cyan);
+        DebugManager.DrawLine(Instance.a, Instance.b, Color.cyan);
+        DebugManager.DrawLine(Instance.b, Instance.c, Color.cyan);
+        DebugManager.DrawLine(Instance.c, Instance.d, Color.cyan);
+        DebugManager.DrawLine(Instance.d, Instance.a, Color.cyan);
 
         // finally, the chunks
         // we do these last so that we don't have to re-calculate all the chunk adjustments
         // (if we did level generation would take forever)
         InitializeChunkGeneration(terrain_noise);
+
+        Instance.map_texture = util_map.GenerateMapTexture(128, 64);
     }
 
     
