@@ -33,14 +33,20 @@
         }
     
         SubShader{
-            Tags{ "RenderType" = "Opaque" }
+            Tags { 
+                "RenderType" = "Transparent" 
+                "Queue" = "Transparent" 
+            }
+
+            ZWrite Off
+
             LOD 200
     
             CGPROGRAM
     
             // custom lighting function that uses a texture ramp based
             // on angle between light direction and normal
-            #pragma surface surf ToonRamp vertex:vert addshadow nolightmap tessellate:tessDistance fullforwardshadows
+            #pragma surface surf ToonRamp vertex:vert addshadow nolightmap tessellate:tessDistance fullforwardshadows alpha
             #pragma target 4.0
             #pragma require tessellation tessHW
             #include "Tessellation.cginc"
@@ -72,7 +78,7 @@
                     c.rgb = lerp(_DarkCol, _LightCol, round(s.Albedo.r / _ColorBand) * _ColorBand) + pow(clamp(dot(normalize(lerp(-viewDir, s.Normal, 0.2)), sunDir), 0, 1), 10) + s.Alpha;
                 }
                 
-                c.a = 0;
+                c.a = 0.9;
                 return c;
             }
             uniform float3 _Position;

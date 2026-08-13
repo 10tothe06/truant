@@ -13,7 +13,8 @@ public class util_world
     // lake stuff
     // ***
 
-    public static NoiseProfile lake_shore_profile = new NoiseProfile(new NoiseLayer[] {new NoiseLayer(2f, 0.2f),new NoiseLayer(0.5f, 1f)});
+    public static NoiseProfile lake_shore_profile = new NoiseProfile(new NoiseLayer[] {
+        NoiseLayer.PerlinLayer(2f, 0.2f), NoiseLayer.PerlinLayer(0.5f, 1f)});
     
 
     #endregion

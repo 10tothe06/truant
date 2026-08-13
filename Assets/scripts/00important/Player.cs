@@ -65,6 +65,30 @@ public class Player : MonoBehaviour
     public static bool isCarryingObject;
 
 
+    // all three of these functions can be called by various scripts/commands
+    // ***
+    public static void EnterFlight()
+    {
+        controller.isFlying = true;
+    }
+    public static void ExitFlight()
+    {
+       controller.isFlying = false; 
+    }
+    public static void ToggleFlight()
+    {
+        if (controller.isFlying)
+        {
+            ExitFlight();
+        } else
+        {
+            EnterFlight();
+        }
+    }
+    // ***
+
+
+
     #region STATS
 
     public static float drunk_level;

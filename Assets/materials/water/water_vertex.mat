@@ -82,7 +82,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _BumpScale: 1
-    - _ColorBand: 0.02
+    - _ColorBand: 0.1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -106,7 +106,7 @@ Material:
     - _SnowPathStrength: 2
     - _SnowTextureOpacity: 0.3
     - _SnowTextureScale: 0.3
-    - _SpaceBand: 0.2
+    - _SpaceBand: 0.05
     - _SparkCutoff: 0.9
     - _SparkleScale: 10
     - _SpecularHighlights: 1

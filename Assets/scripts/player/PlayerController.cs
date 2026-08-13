@@ -58,9 +58,6 @@ public class PlayerController : MonoBehaviour
     [Header("Flags")]
     public bool allowJump = true;
     public bool allowSprint = true;
-    // FLIGHT IS NOT FREECAM, THEY ARE DIFFERENT
-    // flight literally moves the robot model itself
-    public bool allowFlight = false; 
     public bool allowCrouch = false;
     # endregion
 
@@ -122,7 +119,7 @@ public class PlayerController : MonoBehaviour
     private float lastWalkingTime;
     private float walkingTime;
 
-    private bool isFlying; // either flying OR noclip
+    public bool isFlying; // either flying OR noclip
     /**/
 
     
@@ -136,8 +133,6 @@ public class PlayerController : MonoBehaviour
         sprintValue = maxSprint;
 
         defaultCameraHeight = t_camera.localPosition.y;
-
-        //gComp.onTeleport.AddListener(() => {rb.linearVelocity = Vector3.zero;});
     }
 
     void SetupReferences()
@@ -149,13 +144,8 @@ public class PlayerController : MonoBehaviour
         t_camera = transform.GetChild(0);
     }
 
-    // just doing this through Update() and using Time.deltaTime instead of FixedUpdate()
     public void UpdatePlayer()
     {
-        //cmd.LogRaw(GetComponent<e_genericentity>().data.index + "   " + rb.linearVelocity);
-        //cmd.LogRaw(GetComponent<e_genericentity>().data.index + "   " + GetComponent<e_genericentity>().data.GetPosition().AsRawString());
-        //cmd.LogRaw(GetComponent<e_genericentity>().data.index + "v   " + GetComponent<e_genericentity>().data.GetPosition().ToVector3());
-
         Vector3 test = t_camera.forward - Vector3.Project(t_camera.forward, transform.up);
         if (Vector3.Angle(test, transform.forward) > 1f)
         {

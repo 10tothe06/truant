@@ -101,37 +101,67 @@ public class util_mesh : MonoBehaviour
 
     public static bool IsPointInsidePolygon(Vector3[] points, Vector3 point)
     {
-        int leftCount = 0;
-        int rightCount = 0;
+        if (points == null || points.Length < 3)
+            return false;
+
+        bool inside = false;
+        int j = points.Length - 1;
 
         for (int i = 0; i < points.Length; i++)
         {
-            Vector3 toNext;
-            Vector3 toPoint;
-            if (i < points.Length-1)
+            Vector3 pi = points[i];
+            Vector3 pj = points[j];
+
+            // Check if the ray from 'point' to +∞ on X crosses the edge (pj → pi)
+            // We work in the XZ plane (Y is ignored)
+            if (((pi.z > point.z) != (pj.z > point.z)) &&          // edge straddles the horizontal ray
+                (point.x < (pj.x - pi.x) * (point.z - pi.z) / (pj.z - pi.z + float.Epsilon) + pi.x))
             {
-                toNext = points[i+1]-points[i];
-                toNext = new Vector3(toNext.z, 0, -toNext.x);
-                toPoint = point-points[i];
-            } else
-            {
-                toNext = points[0]-points[i];
-                toNext = new Vector3(toNext.z, 0, -toNext.x);
-                toPoint = point-points[i];
+                inside = !inside;
             }
 
-            if (Vector3.Dot(toNext, toPoint) < 0)
-            {
-                leftCount++;
-            } else if (Vector3.Dot(toNext, toPoint) > 0) {rightCount++;}
+            j = i;
         }
 
-        if (leftCount == 0 || rightCount == 0)
-        {
-            return true;
-        }
-        return false;
+        return inside;
     }
+
+
+    // convex only vvvv
+
+    // public static bool IsPointInsidePolygon(Vector3[] points, Vector3 point)
+    // {
+    //     int leftCount = 0;
+    //     int rightCount = 0;
+
+    //     for (int i = 0; i < points.Length; i++)
+    //     {
+    //         Vector3 toNext;
+    //         Vector3 toPoint;
+    //         if (i < points.Length-1)
+    //         {
+    //             toNext = points[i+1]-points[i];
+    //             toNext = new Vector3(toNext.z, 0, -toNext.x);
+    //             toPoint = point-points[i];
+    //         } else
+    //         {
+    //             toNext = points[0]-points[i];
+    //             toNext = new Vector3(toNext.z, 0, -toNext.x);
+    //             toPoint = point-points[i];
+    //         }
+
+    //         if (Vector3.Dot(toNext, toPoint) < 0)
+    //         {
+    //             leftCount++;
+    //         } else if (Vector3.Dot(toNext, toPoint) > 0) {rightCount++;}
+    //     }
+
+    //     if (leftCount == 0 || rightCount == 0)
+    //     {
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
     public static bool IsPointInsidePolygon(Vector2[] points, Vector2 point)
     {

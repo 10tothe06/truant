@@ -26,6 +26,11 @@ public class pst_water : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        
+        if (lightTransform == null)
+        {
+            lightTransform = GameObject.Find("<light>").transform;
+        }
     }
 
     public Material m_water;

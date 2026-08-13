@@ -35,7 +35,6 @@ public class WorldManager : MonoBehaviour
         Instance = this;
     }
 
-    public Transform t_adjustmentContainer;
     public List<ChunkAdjustment> globalChunkAdjustments;
 
     public bool chunkGenerationActive;
@@ -105,9 +104,19 @@ public class WorldManager : MonoBehaviour
         // first, let's make the mesh itself
         Mesh lake_mesh = util_world.GenerateLakeMesh();
 
-        GameObject lake_object = ObjectManager.SpawnObject("lake", Vector3.up * 5f);
+        GameObject lake_object = ObjectManager.SpawnObject("lake", new Vector3(-Instance.chunkSize/2f, 0, -Instance.chunkSize/2f));
 
         lake_object.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh = lake_mesh;
+
+        // then, the chunk adjustment that will control the terrain
+        AddChunkAdjustment(lake_mesh.vertices, NoiseProfile.Contstant(-10f), 10f);
+    }
+
+    public static void AddChunkAdjustment(Vector3[] points, NoiseProfile overwrite_profile, float transition_width = 1f)
+    {
+        ChunkAdjustment new_adjust = new ChunkAdjustment(points, overwrite_profile, transition_width);
+
+        Instance.globalChunkAdjustments.Add(new_adjust);
     }
 
     #endregion

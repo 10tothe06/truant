@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class Chunk : MonoBehaviour
 {
@@ -35,75 +36,22 @@ public class Chunk : MonoBehaviour
                 float noiseX = (p.x + x / ((float)res-1) * WorldManager.Instance.chunkSize);
                 float noiseY = (p.z + z / ((float)res-1) * WorldManager.Instance.chunkSize);
 
-                float dist = 999f;
-                float targetHeight = WorldManager.level_noise.GetHeight(new Vector3(noiseX, 0, noiseY));
-                bool actingPath = false;
-            
-                for (int j = 0; j < localChunkAdjustments.Count;j++)
+                Vector3 noise_sample_point = new Vector3(noiseX, 0, noiseY);
+
+                float targetHeight = WorldManager.level_noise.GetHeight(noise_sample_point);
+                
+                // adjusting the terrain based on chunk adjustments
+                // ***
+
+                for (int c = 0; c < localChunkAdjustments.Count; c++)
                 {
-                    if (localChunkAdjustments[j].type == ChunkAdjustmentType.Terrain_Adjust || localChunkAdjustments[j].type == ChunkAdjustmentType.Flat_Area)
-                    {
-                        if (!actingPath)
-                        {
-                            float tHeight = localChunkAdjustments[j].points[0].y;
-                            float newDist = util_mesh.DistanceToPolygon(localChunkAdjustments[j].points, planeMesh.vertices[i]+p);
-                            if (newDist < dist) {
-                                dist = newDist; targetHeight = tHeight;
-                                if (localChunkAdjustments[j].grassBan && newDist == 0)
-                                {
-                                    // TODO:
-                                    // ban grass
-                                }
-                            }
-                        }
-                    }
-                    else if (localChunkAdjustments[j].type == ChunkAdjustmentType.Foliage_Break)
-                    {
-                        if (!actingPath)
-                        {
-
-                            float newDist = util_mesh.DistanceToPolygon(localChunkAdjustments[j].points, planeMesh.vertices[i]+p);
-                            if (localChunkAdjustments[j].grassBan && newDist == 0) { /* ban grass */ }
-                        }
-                    }
-                    else if (localChunkAdjustments[j].type == ChunkAdjustmentType.Path)
-                    {
-                        // paths are a bit different, instead of getting the distance to a rect we're grabbing the distance to the line
-                        if (localChunkAdjustments[j].points.Length > 1)
-                        {
-                            Vector3 vert = planeMesh.vertices[i]+p;
-                            for (int n = 0; n < localChunkAdjustments[j].points.Length - 1; n++)
-                            {   
-                                Vector3 dir1 = vert - localChunkAdjustments[j].points[n];
-                                Vector3 dir2 = localChunkAdjustments[j].points[n+1] - localChunkAdjustments[j].points[n];
-                                
-                                if (Vector3.Dot(dir1, dir2) > 0)
-                                {
-                                    Vector3 projectedDir = Vector3.Project(dir1, dir2);
-                                    projectedDir = projectedDir.normalized * Mathf.Min(dir2.magnitude, projectedDir.magnitude);
-
-                                    Vector3 clampedPoint = localChunkAdjustments[j].points[n] + projectedDir;
-                                    clampedPoint = new Vector3(clampedPoint.x, 0, clampedPoint.z);
-                                    vert = new Vector3(vert.x, 0, vert.z);
-
-                                    float distToLine = Vector3.Distance(clampedPoint, vert)/2f;
-                                    float height = Mathf.Lerp(localChunkAdjustments[j].points[n].y, localChunkAdjustments[j].points[n+1].y, projectedDir.magnitude / dir2.magnitude);
-                                    if (distToLine < dist && distToLine < 2) {
-                                        dist = distToLine; targetHeight = height;actingPath = true;
-                                        if (distToLine < 1)
-                                        {
-                                            // ban grass
-                                        }
-                                        }
-                                }
-                            }
-                        }
-                    }
+                    targetHeight = localChunkAdjustments[c].AdjustTerrainHeight(noise_sample_point, targetHeight);
                 }
 
-                //float term = actingPath ? dist-2 : (5+dist)/20f;
-                float term = 0;
-                v[i] = planeMesh.vertices[i] + Vector3.Lerp(Vector3.up * targetHeight, Vector3.zero, Mathf.Min(term, 1));
+                // ***
+                
+
+                v[i] = planeMesh.vertices[i] + Vector3.up * targetHeight;
             }
         }
     }
@@ -170,41 +118,41 @@ public class Chunk : MonoBehaviour
 
                 bool placedSucessfully = true;
 
-                for (int n = 0; n < localChunkAdjustments.Count;n++)
-                {
-                    if (localChunkAdjustments[n].type == ChunkAdjustmentType.Foliage_Break || localChunkAdjustments[n].type == ChunkAdjustmentType.Flat_Area)
-                    {
+                // for (int n = 0; n < localChunkAdjustments.Count;n++)
+                // {
+                //     if (localChunkAdjustments[n].type == ChunkAdjustmentType.Foliage_Break || localChunkAdjustments[n].type == ChunkAdjustmentType.Flat_Area)
+                //     {
                         
-                        float dist = util_mesh.DistanceToPolygon(localChunkAdjustments[n].points, t_newFoliage.position);
-                        if (dist < 0.1f) placedSucessfully = false;
-                    }
-                    else if (localChunkAdjustments[n].type == ChunkAdjustmentType.Path)
-                    {
-                        // paths are a bit different, instead of getting the distance to a rect we're grabbing the distance to the line
-                        if (localChunkAdjustments[n].points.Length > 1)
-                        {
-                            Vector3 vert = t_newFoliage.position;
-                            for (int k = 0; k < localChunkAdjustments[n].points.Length - 1; k++)
-                            {   
-                                Vector3 dir1 = vert - localChunkAdjustments[n].points[k];
-                                Vector3 dir2 = localChunkAdjustments[n].points[k+1] - localChunkAdjustments[n].points[k];
+                //         float dist = util_mesh.DistanceToPolygon(localChunkAdjustments[n].points, t_newFoliage.position);
+                //         if (dist < 0.1f) placedSucessfully = false;
+                //     }
+                //     else if (localChunkAdjustments[n].type == ChunkAdjustmentType.Path)
+                //     {
+                //         // paths are a bit different, instead of getting the distance to a rect we're grabbing the distance to the line
+                //         if (localChunkAdjustments[n].points.Length > 1)
+                //         {
+                //             Vector3 vert = t_newFoliage.position;
+                //             for (int k = 0; k < localChunkAdjustments[n].points.Length - 1; k++)
+                //             {   
+                //                 Vector3 dir1 = vert - localChunkAdjustments[n].points[k];
+                //                 Vector3 dir2 = localChunkAdjustments[n].points[k+1] - localChunkAdjustments[n].points[k];
                                 
-                                if (Vector3.Dot(dir1, dir2) > 0)
-                                {
-                                    Vector3 projectedDir = Vector3.Project(dir1, dir2);
-                                    projectedDir = projectedDir.normalized * Mathf.Min(dir2.magnitude, projectedDir.magnitude);
+                //                 if (Vector3.Dot(dir1, dir2) > 0)
+                //                 {
+                //                     Vector3 projectedDir = Vector3.Project(dir1, dir2);
+                //                     projectedDir = projectedDir.normalized * Mathf.Min(dir2.magnitude, projectedDir.magnitude);
 
-                                    Vector3 clampedPoint = localChunkAdjustments[n].points[k] + projectedDir;
-                                    clampedPoint = new Vector3(clampedPoint.x, 0, clampedPoint.z);
-                                    vert = new Vector3(vert.x, 0, vert.z);
+                //                     Vector3 clampedPoint = localChunkAdjustments[n].points[k] + projectedDir;
+                //                     clampedPoint = new Vector3(clampedPoint.x, 0, clampedPoint.z);
+                //                     vert = new Vector3(vert.x, 0, vert.z);
 
-                                    float distToLine = Vector3.Distance(clampedPoint, vert);
-                                    if (distToLine < 4f) placedSucessfully = false;
-                                }
-                            }
-                        }
-                    }
-                }
+                //                     float distToLine = Vector3.Distance(clampedPoint, vert);
+                //                     if (distToLine < 4f) placedSucessfully = false;
+                //                 }
+                //             }
+                //         }
+                //     }
+                // }
 
                 if (!placedSucessfully)
                 {

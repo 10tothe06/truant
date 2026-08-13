@@ -9,13 +9,15 @@ public class NoiseProfile
     public NoiseLayer[] layers;
     public float noise_range;
 
+    #region CONSTRUCTORS
+
     public NoiseProfile()
     {
         // default, test information
         layers = new NoiseLayer[]
         {
-            new NoiseLayer(0.03f, 4f, Vector3.zero),
-            new NoiseLayer(0.3f, 1f, Vector3.zero),
+            NoiseLayer.PerlinLayer(0.03f, 4f),
+           NoiseLayer.PerlinLayer(0.3f, 1f),
         };
 
         noise_range = 20f;
@@ -25,6 +27,19 @@ public class NoiseProfile
     {
         this.layers = layers;
     }
+
+    #endregion
+
+
+
+
+    public static NoiseProfile Contstant(float constant_value)
+    {
+        return new NoiseProfile(new NoiseLayer[] {NoiseLayer.ConstantLayer(constant_value)});
+    }
+
+
+
 
     public Texture2D GenerateTexture(int resolution, Vector3 center_position)
     {
@@ -56,8 +71,7 @@ public class NoiseProfile
 
         for (int i = 0; i < layers.Length; i++)
         {
-            Vector3 p = (position + layers[i].offset) * layers[i].frequency;
-            height += Perlin.Noise(p.x, p.y, p.z) * layers[i].amplitude;
+            height += layers[i].GetValueAt(position);
         }
 
         return height;
