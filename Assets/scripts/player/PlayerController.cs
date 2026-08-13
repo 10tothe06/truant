@@ -331,7 +331,10 @@ public class PlayerController : MonoBehaviour
 
 
         // GRAVITY
-        rb.linearVelocity += gravityDirection * gravitationalAcceleration * Time.deltaTime;
+        if (!isFlying)
+        {
+            rb.linearVelocity += gravityDirection * gravitationalAcceleration * Time.deltaTime;
+        }
     }
 
     // kept getting stuck on everything because the raycast was missing (like standing on a ledge)

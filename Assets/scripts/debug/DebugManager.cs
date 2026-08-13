@@ -34,7 +34,12 @@ public class DebugManager : MonoBehaviour
     // the syntax for these two is a little bit similar to "Debug.DrawLine" and "Debug.DrawSphere" (built-in unity functions)
     // i accept this and will do nothing about it
 
-    public static void DrawLine(Vector3 start, Vector3 end, float width = 0.2f)
+
+    public static GameObject DrawLine(Vector3 start, Vector3 end, float width = 0.2f)
+    {
+        return DrawLine(start, end, Color.red, width);
+    }
+    public static GameObject DrawLine(Vector3 start, Vector3 end, Color col, float width = 0.2f)
     {
         GameObject g_newLine = Instantiate(Instance.p_line, Instance.transform);
 
@@ -46,10 +51,27 @@ public class DebugManager : MonoBehaviour
 
         comp.startWidth = width;
         comp.endWidth = width;
+
+        comp.material.color = col;
+
+        return g_newLine;
     }
 
-    public static void DrawSphere()
+
+
+    public static GameObject DrawSphere(Vector3 position, float radius = 0.5f)
     {
-        
+        return DrawSphere(position, Color.red, radius);
+    }
+    public static GameObject DrawSphere(Vector3 position, Color col, float radius = 0.5f)
+    {
+        GameObject g_newSphere = Instantiate(Instance.p_sphere, Instance.transform);
+
+        g_newSphere.transform.position = position;
+        g_newSphere.transform.localScale = Vector3.one * radius;
+
+        g_newSphere.GetComponent<MeshRenderer>().material.color = col;
+
+        return g_newSphere;
     }
 }

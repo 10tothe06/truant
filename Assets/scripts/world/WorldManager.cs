@@ -35,6 +35,15 @@ public class WorldManager : MonoBehaviour
         Instance = this;
     }
 
+    [Header("LEVEL DIMENSIONS")]
+    // both in unity coordinate units
+    public float level_width;
+    public float level_height;
+
+
+
+
+    [Space(25)]
     public List<ChunkAdjustment> globalChunkAdjustments;
 
     public bool chunkGenerationActive;
@@ -59,6 +68,16 @@ public class WorldManager : MonoBehaviour
 
     public static NoiseProfile level_noise;
 
+    // cached stuff
+    // *****
+
+    private Vector3[] lake_vertices;
+
+
+
+
+    // *****
+
     void Start()
     {
         //GrabChunkAdjustments();
@@ -80,7 +99,45 @@ public class WorldManager : MonoBehaviour
         // first, the lake
         InitializeLake();
 
-        // first, the chunks
+
+        // now we have to decide where the dimensions of the map will go
+        Vector3 lake_midpoint = util_mesh.GetMidpoint(Instance.lake_vertices);
+
+        DebugManager.DrawSphere(lake_midpoint, 10f);
+
+        // we're gonna try and find the long axis of the lake,
+        // and use that as the bottom edge of the map
+        // (not necessarily south btw)
+        Vector3 long_lake_axis = util_world.GetWidestAxis(Instance.lake_vertices);
+
+        DebugManager.DrawLine(lake_midpoint - long_lake_axis * 500f, lake_midpoint + long_lake_axis * 500f, Color.green);
+
+
+        // now that we have the bottom edge, we can figure out the other ones
+
+        Vector3 short_lake_axis = Vector3.Cross(long_lake_axis, Vector3.up).normalized;
+
+        // making sure the level is actualy oriented towards land,
+        // not the rest of the lake
+        if (Vector3.Dot(short_lake_axis, lake_midpoint - Vector3.zero) > 0)
+        {
+            short_lake_axis *= -1;
+        }
+
+        // these are the four points that make up the map rectangle
+        Vector3 a = lake_midpoint - long_lake_axis * Instance.level_width/2f;
+        Vector3 b = lake_midpoint + long_lake_axis * Instance.level_width/2f;
+        Vector3 c = lake_midpoint + long_lake_axis * Instance.level_width/2f + short_lake_axis * Instance.level_height;
+        Vector3 d = lake_midpoint - long_lake_axis * Instance.level_width/2f + short_lake_axis * Instance.level_height;
+
+        DebugManager.DrawLine(a, b, Color.cyan);
+        DebugManager.DrawLine(b, c, Color.cyan);
+        DebugManager.DrawLine(c, d, Color.cyan);
+        DebugManager.DrawLine(d, a, Color.cyan);
+
+        // finally, the chunks
+        // we do these last so that we don't have to re-calculate all the chunk adjustments
+        // (if we did level generation would take forever)
         InitializeChunkGeneration(terrain_noise);
     }
 
@@ -114,6 +171,8 @@ public class WorldManager : MonoBehaviour
 
         // then, the chunk adjustment that will control the terrain
         AddChunkAdjustment(lake_mesh.vertices, NoiseProfile.Contstant(-10f), new FoliageProfile(), 30f, 0f);
+
+        Instance.lake_vertices = lake_mesh.vertices;
     }
 
     public static void AddChunkAdjustment(Vector3[] points, NoiseProfile noise_overwrite, FoliageProfile foliage_overwrite, float noise_transition_width = 1f, float foliage_transition_width = 1f)

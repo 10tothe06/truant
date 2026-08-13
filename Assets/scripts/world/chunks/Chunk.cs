@@ -15,6 +15,8 @@ public class Chunk : MonoBehaviour
     public Texture2D chunk_tex;
     private Color[] chunk_tex_data;
 
+    private List<GameObject> chunk_border_objects;
+
     #region DEBUG
 
     public void ShowChunkBorders()
@@ -26,10 +28,12 @@ public class Chunk : MonoBehaviour
         Vector3 c = min + new Vector3(0,0,1) * WorldManager.Instance.chunkSize;
         Vector3 d = min + new Vector3(1,0,1) * WorldManager.Instance.chunkSize;
 
-        DebugManager.DrawLine(a-Vector3.up * 20f, a + Vector3.up * 20f);
-        DebugManager.DrawLine(b-Vector3.up * 20f, b + Vector3.up * 20f);
-        DebugManager.DrawLine(c-Vector3.up * 20f, c + Vector3.up * 20f);
-        DebugManager.DrawLine(d-Vector3.up * 20f, d + Vector3.up * 20f);
+        chunk_border_objects = new List<GameObject>();
+
+        chunk_border_objects.Add(DebugManager.DrawLine(a-Vector3.up * 20f, a + Vector3.up * 20f));
+        chunk_border_objects.Add(DebugManager.DrawLine(b-Vector3.up * 20f, b + Vector3.up * 20f));
+        chunk_border_objects.Add(DebugManager.DrawLine(c-Vector3.up * 20f, c + Vector3.up * 20f));
+        chunk_border_objects.Add(DebugManager.DrawLine(d-Vector3.up * 20f, d + Vector3.up * 20f));
     }
     public void HideChunkBorders()
     {
@@ -41,7 +45,7 @@ public class Chunk : MonoBehaviour
     public async void Initialize()
     {
         ShowChunkBorders();
-        
+
         for (int i = 0; i < WorldManager.Instance.globalChunkAdjustments.Count; i++)
         {
             localChunkAdjustments.Add(WorldManager.Instance.globalChunkAdjustments[i]);
@@ -149,6 +153,8 @@ public class Chunk : MonoBehaviour
 
     private void SpawnAllFoliage()
     {
+        if (Program.ban_all_foliage) {return;}
+        
         int res = WorldManager.Instance.chunkResolution;
 
         List<int> relevant_foliage_adjustments = new List<int>();

@@ -24,12 +24,44 @@ public class util_world
 
 
 
+    public static Vector3 GetWidestAxis(Vector3[] polygon)
+    {
+        if (polygon == null || polygon.Length < 2)
+            return Vector3.zero;
+
+        float maxDistSq = 0f;
+        Vector3 best = Vector3.zero;
+
+        // O(n²) is perfectly fine for typical Unity mesh / collider polygons
+        for (int i = 0; i < polygon.Length; i++)
+        {
+            for (int j = i + 1; j < polygon.Length; j++)
+            {
+                Vector3 d = polygon[j] - polygon[i];
+                float distSq = d.sqrMagnitude;
+                if (distSq > maxDistSq)
+                {
+                    maxDistSq = distSq;
+                    best = d;
+                }
+            }
+        }
+
+        // Guard against a degenerate polygon (all points coincident)
+        if (maxDistSq < 1e-12f)
+            return Vector3.zero;
+
+        return best.normalized;
+    }
+
+
+
 
 
 
     #region LAKE FRONTEND 
 
-
+    
 
     public static Mesh GenerateLakeMesh()
     {

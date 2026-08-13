@@ -3594,6 +3594,7 @@ MonoBehaviour:
   level_to_load: gregrun
   ins_skip_loading_screens: 1
   ins_force_flat_terrain: 1
+  ins_ban_all_foliage: 1
 --- !u!114 &576746838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8295,7 +8296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DebugManager
   p_line: {fileID: 305078527539953242, guid: 580299ab73e8ae44d937e0526baf4c40, type: 3}
-  p_sphere: {fileID: 0}
+  p_sphere: {fileID: 2912081248189509942, guid: d501175b45078184a8b4c9b7ba23033b, type: 3}
 --- !u!1 &1381902549
 GameObject:
   m_ObjectHideFlags: 0
@@ -14080,6 +14081,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ffcfcea6dc70c448ee6ef8cc0fe1e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldManager
+  level_width: 1500
+  level_height: 750
   globalChunkAdjustments: []
   chunkGenerationActive: 0
   chunkFoliage:
