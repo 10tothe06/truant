@@ -19,7 +19,7 @@ public class lvl_gregrun : MonoBehaviour
     public void OnLevelEnter()
     {
         Player.TeleportTo(new Vector3(0,3,0));
-        WorldManager.InitializeChunkGeneration(new NoiseProfile());
+        WorldManager.InitializeLevelEnvironment(new NoiseProfile());
 
         UIManager.SwitchMenu("");
 

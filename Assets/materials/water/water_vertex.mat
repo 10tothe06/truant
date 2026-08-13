@@ -86,8 +86,8 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _FoamScale: 3.1
-    - _FoamStrength: 0.3
+    - _FoamScale: 3
+    - _FoamStrength: 0.1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -118,9 +118,9 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0.0627451, g: 0.21568628, b: 0.211789, a: 1}
-    - _DarkCol: {r: 0, g: 0.15482797, b: 0.2924528, a: 1}
+    - _DarkCol: {r: 0.04860822, g: 0.023529414, b: 0.05490196, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _LightCol: {r: 0.043137234, g: 0.6666667, b: 0.41412538, a: 1}
+    - _LightCol: {r: 0.09817632, g: 0.24528301, b: 0.093948, a: 1}
     - _PathColorIn: {r: 1, g: 1, b: 1, a: 1}
     - _PathColorOut: {r: 0.5, g: 0.5, b: 1, a: 1}
     - _RimColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}

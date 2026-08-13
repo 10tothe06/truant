@@ -2,6 +2,18 @@ using UnityEngine;
 
 public class util_geometry
 {
+    public static Vector3[] ScaleVertices(Vector3[] raw, float scale_factor)
+    {
+        for (int i = 0; i < raw.Length; i++)
+        {
+            raw[i] *= scale_factor;
+        }
+
+        return raw;
+    }
+
+
+
     public static Vector2[] Vector3ToVector2(Vector3[] raw)
     {
         Vector2[] result = new Vector2[raw.Length];

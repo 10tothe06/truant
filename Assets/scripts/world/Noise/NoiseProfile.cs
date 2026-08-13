@@ -21,6 +21,11 @@ public class NoiseProfile
         noise_range = 20f;
     }
 
+    public NoiseProfile(NoiseLayer[] layers)
+    {
+        this.layers = layers;
+    }
+
     public Texture2D GenerateTexture(int resolution, Vector3 center_position)
     {
         Texture2D toReturn = new Texture2D(resolution, resolution, TextureFormat.RGBA32, false, true);

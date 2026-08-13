@@ -69,6 +69,18 @@ public class WorldManager : MonoBehaviour
     }
 
     #region LEVEL GENERATION
+
+
+    // what level scripts should be calling to make the map
+    public static void InitializeLevelEnvironment(NoiseProfile terrain_noise)
+    {
+        // first, the lake
+        InitializeLake();
+
+        // first, the chunks
+        InitializeChunkGeneration(terrain_noise);
+    }
+
     
     // called when a level wants to have chunk generation
 
@@ -88,10 +100,14 @@ public class WorldManager : MonoBehaviour
     // and everything else
 
     // note that 
-    public static void AddLake()
+    public static void InitializeLake()
     {
         // first, let's make the mesh itself
-        //Mesh m = world_lake.
+        Mesh lake_mesh = util_world.GenerateLakeMesh();
+
+        GameObject lake_object = ObjectManager.SpawnObject("lake", Vector3.up * 5f);
+
+        lake_object.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh = lake_mesh;
     }
 
     #endregion

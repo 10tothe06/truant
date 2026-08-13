@@ -13,8 +13,7 @@ public class util_world
     // lake stuff
     // ***
 
-    public static float lake_shore_noise_amplitude;
-    public static NoiseProfile lake_shore_profile;
+    public static NoiseProfile lake_shore_profile = new NoiseProfile(new NoiseLayer[] {new NoiseLayer(2f, 0.2f),new NoiseLayer(0.5f, 1f)});
     
 
     #endregion
@@ -37,7 +36,7 @@ public class util_world
 
         // yeah so because the generation can be split into 3 steps,
         // im just using 3 different functions and feeding the last one into the next one
-        Vector3[] vertices = RemoveIntersectionsFromLakeVertices(AddNoiseToLakeVertices(GenerateLakeVertices()));
+        Vector3[] vertices = util_geometry.ScaleVertices(RemoveIntersectionsFromLakeVertices(AddNoiseToLakeVertices(GenerateLakeVertices())), 60f);
 
         // literally every single vertex normal is up because the whole thing is really just a plane mesh
         Vector3[] normals = util_array.FillArrayWith(Vector3.up, vertices.Length);
@@ -49,6 +48,7 @@ public class util_world
 
         m.SetVertices(vertices);
         m.SetNormals(normals);
+        m.SetTriangles(triangles,0);
 
         return m;
     }
@@ -169,7 +169,7 @@ public class util_world
             }
             
 
-            v[i] = toReturn[i] + new Vector3(normal.x, 0, normal.z).normalized * lake_shore_profile.GetHeight(toReturn[i]) * lake_shore_noise_amplitude;
+            v[i] = toReturn[i] + new Vector3(normal.x, 0, normal.z).normalized * lake_shore_profile.GetHeight(toReturn[i]);
         }
 
         return v;
@@ -187,6 +187,8 @@ public class util_world
         int seed = 42
     )
     {
+        seed = Random.Range(0,10000);
+
         Random.InitState(seed);
 
         // -------------------------------------------------

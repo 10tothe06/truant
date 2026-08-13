@@ -12,6 +12,14 @@ public class NoiseLayer
 
     public NoiseLayer() {}
 
+    public NoiseLayer(float frequency, float amplitude)
+    {
+        this.frequency = frequency;
+        this.amplitude = amplitude;
+
+        this.offset = Vector3.zero;
+    }
+
     public NoiseLayer(float frequency, float amplitude, Vector3 offset)
     {
         this.frequency = frequency;
