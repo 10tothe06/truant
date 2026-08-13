@@ -71,13 +71,13 @@ public class pst_water : MonoBehaviour
         //     isUnderwater = false;
         // }
 
-        waterObj.sharedMaterial.SetFloatArray("waveAngles", waveAngles);
-        waterObj.sharedMaterial.SetFloat("baseWaveFrequency", baseWaveFrequency);
+        // waterObj.sharedMaterial.SetFloatArray("waveAngles", waveAngles);
+        // waterObj.sharedMaterial.SetFloat("baseWaveFrequency", baseWaveFrequency);
         waterObj.sharedMaterial.SetVector("sunDir", -lightTransform.forward);
 
         waterObj.sharedMaterial.SetInt("isUnderWater", isUnderwater ? 1 : 0);
         
-        waterObj.sharedMaterial.SetFloat("timeValue", Time.time);
+        //waterObj.sharedMaterial.SetFloat("timeValue", Time.time);
     }
 
     void OnRenderImage(RenderTexture source, RenderTexture mod)

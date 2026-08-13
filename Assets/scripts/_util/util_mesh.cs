@@ -40,6 +40,55 @@ public class util_mesh : MonoBehaviour
 
         return result;
     }
+
+    public static float DistanceInsidePolygon(Vector3[] points1, Vector3 point1)
+    {
+        Vector3 point = new Vector3(point1.x, 0, point1.z);
+        Vector3[] points = CopyVectors(points1);
+        
+        for (int i =0; i<points.Length; i++)
+        {
+            points[i] = points[i] - Vector3.up * points[i].y;
+        }
+        
+        bool isInside = IsPointInsidePolygon(points, point);
+        if (!isInside) return 0;
+
+        Vector3 vert = point;
+        float dist = 999;
+        for (int n = 0; n < points.Length; n++)
+        {   
+            Vector3 dir1;
+            Vector3 dir2;
+
+            if (n < points.Length - 1)
+            {
+                dir1 = vert - points[n];
+                dir2 = points[n+1] - points[n];
+            } else
+            {
+                dir1 = vert - points[n];
+                dir2 = points[0] - points[n];
+            }
+
+            if (Vector3.Dot(dir1, dir2) > 0)
+            {
+                Vector3 projectedDir = Vector3.Project(dir1, dir2);
+                projectedDir = projectedDir.normalized * Mathf.Min(dir2.magnitude, projectedDir.magnitude);
+
+                Vector3 clampedPoint = points[n] + projectedDir;
+                clampedPoint = new Vector3(clampedPoint.x, 0, clampedPoint.z);
+                vert = new Vector3(vert.x, 0, vert.z);
+
+                float distToLine = Vector3.Distance(clampedPoint, vert);
+                if (distToLine < dist) dist = distToLine;
+            }
+        } 
+
+        return dist;
+    }
+
+    
     public static float DistanceToPolygon(Vector3[] points1, Vector3 point1)
     {
         Vector3 point = new Vector3(point1.x, 0, point1.z);

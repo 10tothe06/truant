@@ -57,8 +57,8 @@ public class ChunkAdjustment
 
         float adjusted_height = noise_overwrite.GetHeight(point);
 
-        float dist = util_mesh.DistanceToPolygon(points, new Vector3(point.x, 0, point.z));
+        float dist = util_mesh.DistanceInsidePolygon(points, new Vector3(point.x, 0, point.z));
 
-        return Mathf.Lerp(old_height, adjusted_height, Mathf.Clamp01(1 - (dist/transition_width)));
+        return Mathf.Lerp(old_height, adjusted_height, Mathf.Clamp01(dist/transition_width));
     }
 }

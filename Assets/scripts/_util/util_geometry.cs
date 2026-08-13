@@ -12,6 +12,16 @@ public class util_geometry
         return raw;
     }
 
+    public static Vector3[] ScaleVerticesByConstant(Vector3[] raw, float constant_scale_factor)
+    {
+        for (int i = 0; i < raw.Length; i++)
+        {
+            raw[i] += raw[i].normalized * constant_scale_factor;
+        }
+
+        return raw;
+    }
+
 
 
     public static Vector2[] Vector3ToVector2(Vector3[] raw)
