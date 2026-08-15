@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 7501262543103137007}
   - component: {fileID: 8764439904090168498}
   m_Layer: 0
-  m_Name: test_poi
+  m_Name: poi_lookout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

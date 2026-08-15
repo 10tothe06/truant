@@ -14173,7 +14173,8 @@ MonoBehaviour:
   level_height: 750
   map_texture: {fileID: 0}
   points_of_interest:
-  - test_poi
+  - poi_test
+  - poi_lookout
   globalChunkAdjustments: []
   chunkGenerationActive: 0
   chunkFoliage:
@@ -14191,6 +14192,7 @@ MonoBehaviour:
   t_chunkLocationMarkers: []
   t_locationMarkerContainer: {fileID: 44302499}
   lake_vertices: []
+  poi_objects: []
   a: {x: 0, y: 0, z: 0}
   b: {x: 0, y: 0, z: 0}
   c: {x: 0, y: 0, z: 0}
