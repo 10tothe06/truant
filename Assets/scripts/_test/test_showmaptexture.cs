@@ -15,10 +15,16 @@ public class test_showmaptexture : MonoBehaviour
     {
         if (Keyboard.current.jKey.wasPressedThisFrame)
         {
-            GetComponent<RawImage>().enabled = true;
-            GetComponent<RawImage>().texture = WorldManager.Instance.map_texture;
+            if (GetComponent<RawImage>().enabled)
+            {
+                GetComponent<RawImage>().enabled = false;
+            } else
+            {
+                GetComponent<RawImage>().enabled = true;
+                GetComponent<RawImage>().texture = WorldManager.Instance.map_texture;
 
-            GetComponent<RectTransform>().sizeDelta = new Vector2(WorldManager.Instance.map_texture.width * object_scale, WorldManager.Instance.map_texture.height * object_scale);
+                GetComponent<RectTransform>().sizeDelta = new Vector2(WorldManager.Instance.map_texture.width * object_scale, WorldManager.Instance.map_texture.height * object_scale);
+            }
         }
     }
 }

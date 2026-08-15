@@ -3,6 +3,36 @@ using UnityEngine;
 public class util_map
 {   
 
+    // I was originally planning on doing a binary search to get to the lake,
+    // but then I realized I was stupid and can just teleport to the closest lake vertex
+    
+    // provided that the lake vertices are close enough together, 
+    // this will be close enough to what I want
+    public static Vector3 GetLakesidePosition(Vector3 original_position)
+    {
+        Vector3 result = original_position;
+
+        int king_index = 0;
+        float king_distance = Vector3.Distance(original_position, WorldManager.Instance.lake_vertices[0]);
+
+        for (int i = 1; i < WorldManager.Instance.lake_vertices.Length; i++) {
+            float new_distance = Vector3.Distance(original_position, WorldManager.Instance.lake_vertices[i]);
+
+            if (new_distance > king_distance)
+            {
+                king_distance = new_distance;
+                king_index = i;
+            }
+        }
+
+        result = WorldManager.Instance.lake_vertices[king_index] - new Vector3(10f, 0, 10f);
+        
+
+        return result;
+    }
+
+
+
     // called right after the level has been generated,
     // shouldn't really change over the course of the level
     public static Texture2D GenerateMapTexture(int width, int height)
@@ -33,6 +63,11 @@ public class util_map
         result.filterMode = FilterMode.Point;
 
         return result;
+    }
+
+    public static Vector3 GetRandomMapPosition()
+    {
+        return MapToWorldPosition(new Vector2(Random.Range(0f,1f),Random.Range(0f,1f)));
     }
 
 

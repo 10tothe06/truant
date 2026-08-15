@@ -5403,6 +5403,7 @@ MonoBehaviour:
   - {fileID: 6702777790825529560, guid: 8026b6b021498a24c9ba3077440bc5b9, type: 3}
   - {fileID: 5414149883367336487, guid: be45f307ea847a14ba47cce9b9efeff5, type: 3}
   - {fileID: 5414149883367336487, guid: 0fb339f72bc2fda44abeec4b7ad31d7a, type: 3}
+  - {fileID: 7901170461580289857, guid: 888ff1b9832947c4094159a1c10a2ca2, type: 3}
   t_currentObjectContainer: {fileID: 0}
 --- !u!1 &865919485
 GameObject:
@@ -14171,6 +14172,8 @@ MonoBehaviour:
   level_width: 1500
   level_height: 750
   map_texture: {fileID: 0}
+  points_of_interest:
+  - test_poi
   globalChunkAdjustments: []
   chunkGenerationActive: 0
   chunkFoliage:

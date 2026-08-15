@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -41,6 +42,10 @@ public class WorldManager : MonoBehaviour
     public float level_height;
     public Texture2D map_texture;
 
+
+    [Space(25)]
+    [Header("POIs")]
+    public string[] points_of_interest;
 
 
     [Space(25)]
@@ -150,6 +155,43 @@ public class WorldManager : MonoBehaviour
         InitializeChunkGeneration(terrain_noise);
 
         Instance.map_texture = util_map.GenerateMapTexture(128, 64);
+
+        GenerateLevelPOIs();
+    }
+
+
+    // whole bunch of local variables in here that will be incorporated into sysarch later
+    // (hopefully)
+    private static void GenerateLevelPOIs()
+    {
+        // the number of poi instances we want in one level
+        int poi_count = 10;
+        List<string> poi_pool = Instance.points_of_interest.ToList();
+
+        for (int i = 0; i < poi_count; i++)
+        {
+            if (poi_pool.Count == 0)
+            {
+                // we have no more pois left to add,
+                // so we're done
+                break;
+            }
+
+            // spawn the structure 
+            // (these are spawned like any other object, because why SHOULD there be a difference?)
+            int poi_index = Random.Range(0, poi_pool.Count);
+
+
+            GameObject new_poi = ObjectManager.SpawnObject(poi_pool[poi_index], util_map.GetRandomMapPosition());
+
+            poi_generic comp = new_poi.GetComponent<poi_generic>();
+
+            comp.Initialize();
+
+            // then we remove it from the pool
+            // (this avoids duplicate structures)
+            poi_pool.RemoveAt(poi_index);
+        }
     }
 
     
