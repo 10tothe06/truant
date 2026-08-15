@@ -148,6 +148,8 @@ public class util_mesh : MonoBehaviour
         return m;
     }
 
+    // convex OR concave vvvvv
+
     public static bool IsPointInsidePolygon(Vector3[] points, Vector3 point)
     {
         if (points == null || points.Length < 3)
@@ -178,39 +180,39 @@ public class util_mesh : MonoBehaviour
 
     // convex only vvvv
 
-    // public static bool IsPointInsidePolygon(Vector3[] points, Vector3 point)
-    // {
-    //     int leftCount = 0;
-    //     int rightCount = 0;
+    public static bool IsPointInsideConvexPolygon(Vector3[] points, Vector3 point)
+    {
+        int leftCount = 0;
+        int rightCount = 0;
 
-    //     for (int i = 0; i < points.Length; i++)
-    //     {
-    //         Vector3 toNext;
-    //         Vector3 toPoint;
-    //         if (i < points.Length-1)
-    //         {
-    //             toNext = points[i+1]-points[i];
-    //             toNext = new Vector3(toNext.z, 0, -toNext.x);
-    //             toPoint = point-points[i];
-    //         } else
-    //         {
-    //             toNext = points[0]-points[i];
-    //             toNext = new Vector3(toNext.z, 0, -toNext.x);
-    //             toPoint = point-points[i];
-    //         }
+        for (int i = 0; i < points.Length; i++)
+        {
+            Vector3 toNext;
+            Vector3 toPoint;
+            if (i < points.Length-1)
+            {
+                toNext = points[i+1]-points[i];
+                toNext = new Vector3(toNext.z, 0, -toNext.x);
+                toPoint = point-points[i];
+            } else
+            {
+                toNext = points[0]-points[i];
+                toNext = new Vector3(toNext.z, 0, -toNext.x);
+                toPoint = point-points[i];
+            }
 
-    //         if (Vector3.Dot(toNext, toPoint) < 0)
-    //         {
-    //             leftCount++;
-    //         } else if (Vector3.Dot(toNext, toPoint) > 0) {rightCount++;}
-    //     }
+            if (Vector3.Dot(toNext, toPoint) < 0)
+            {
+                leftCount++;
+            } else if (Vector3.Dot(toNext, toPoint) > 0) {rightCount++;}
+        }
 
-    //     if (leftCount == 0 || rightCount == 0)
-    //     {
-    //         return true;
-    //     }
-    //     return false;
-    // }
+        if (leftCount == 0 || rightCount == 0)
+        {
+            return true;
+        }
+        return false;
+    }
 
     public static bool IsPointInsidePolygon(Vector2[] points, Vector2 point)
     {

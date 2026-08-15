@@ -29,6 +29,11 @@ public class poi_generic : MonoBehaviour
     {
         onInitialize.Invoke();
 
+        HandlePlacement();
+    }
+
+    private void HandlePlacement()
+    {
         if (must_be_lakeside)
         {
             // every poi starts off with a random placement,
@@ -38,6 +43,9 @@ public class poi_generic : MonoBehaviour
             // we're doing this in a bit of a silly way
             
             transform.position = util_map.GetLakesidePosition(transform.position);
+        } else
+        {
+            // do nothing because the WorldManager already gave us a random position
         }
     }
 }

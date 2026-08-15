@@ -2,12 +2,29 @@ using UnityEngine;
 
 public class util_map
 {   
+    // just uses the "is point inside polygon" test
+    // maybe not the fastest? idk and idc
+    public static bool IsPositionInsideMap(Vector3 position_to_test)
+    {
+        return util_mesh.IsPointInsideConvexPolygon(new Vector3[]{
+            WorldManager.Instance.a,
+            WorldManager.Instance.b,
+            WorldManager.Instance.c,
+            WorldManager.Instance.d,
+            },
+            position_to_test);
+    }
+
 
     // I was originally planning on doing a binary search to get to the lake,
     // but then I realized I was stupid and can just teleport to the closest lake vertex
     
     // provided that the lake vertices are close enough together, 
     // this will be close enough to what I want
+
+    
+    // TODO: ensure that the lakeside position is INSIDE THE MAP AREA
+    // (otherwise the POI gets deleted bc its outside the map)
     public static Vector3 GetLakesidePosition(Vector3 original_position)
     {
         Vector3 result = original_position;
@@ -18,7 +35,7 @@ public class util_map
         for (int i = 1; i < WorldManager.Instance.lake_vertices.Length; i++) {
             float new_distance = Vector3.Distance(original_position, WorldManager.Instance.lake_vertices[i]);
 
-            if (new_distance > king_distance)
+            if (new_distance < king_distance)
             {
                 king_distance = new_distance;
                 king_index = i;
