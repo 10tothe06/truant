@@ -17,6 +17,7 @@ but the InteractCollider class exists so that that's not necessary
 
 public class InteractableObject3D : MonoBehaviour
 {
+    private Rigidbody rb;
     [Header("Physics Settings")]
     public float momentOfInertia;
     public float buoyancy_coefficient;
@@ -25,7 +26,13 @@ public class InteractableObject3D : MonoBehaviour
     public float linearDamping = 0.99f;
     public float angularDamping = 0.99f;
 
-    private Rigidbody rb;
+
+
+    [Header("INFORMATION")]
+    public bool is_in_water {get; private set;}
+    
+
+
 
     [Space(30)]
     [HideInInspector]
@@ -68,8 +75,11 @@ public class InteractableObject3D : MonoBehaviour
         HandleBuoyancy();
     }
 
+    // also updates the is_in_water_variable
     void HandleBuoyancy()
     {
+        is_in_water = false;
+
         if (rb == null) {return;}
         if (rb.isKinematic) {return;}
 
@@ -88,6 +98,9 @@ public class InteractableObject3D : MonoBehaviour
 
         if (hit.point.y > transform.position.y)
         {
+            is_in_water = true;
+
+            // calculating the buoyancy force
             forceAmt = hit.point.y - transform.position.y;
             forceAmt = Mathf.Clamp(forceAmt * forceAmt, 0, buoyancy_force_limit) * buoyancy_coefficient;
 
