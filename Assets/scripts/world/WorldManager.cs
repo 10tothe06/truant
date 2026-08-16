@@ -45,6 +45,7 @@ public class WorldManager : MonoBehaviour
 
     [Space(25)]
     [Header("POIs")]
+    public Texture2D default_map_icon;
     public string[] points_of_interest;
 
 
@@ -190,7 +191,7 @@ public class WorldManager : MonoBehaviour
             int poi_index = Random.Range(0, poi_pool.Count);
 
 
-            GameObject new_poi = ObjectManager.SpawnObject(poi_pool[poi_index], util_map.GetRandomMapPosition());
+            GameObject new_poi = ObjectManager.SpawnObject(poi_pool[poi_index], Vector3.zero);
 
             poi_generic comp = new_poi.GetComponent<poi_generic>();
 

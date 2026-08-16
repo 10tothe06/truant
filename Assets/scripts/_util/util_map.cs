@@ -60,7 +60,7 @@ public class util_map
         {
             for (int x = 0; x < width; x++, i++)
             {
-                if (util_mesh.IsPointInsidePolygon(WorldManager.Instance.lake_vertices, MapToWorldPosition(new Vector2(x/(float)(width-1), y/(float)(height-1)))))
+                if (util_mesh.IsPointInsidePolygon(WorldManager.Instance.lake_vertices, MapUVToWorldPosition(new Vector2(x/(float)(width-1), y/(float)(height-1)))))
                 {
                     color_data[i] = Color.blue;
                 } else
@@ -82,18 +82,28 @@ public class util_map
         return result;
     }
 
-    public static Vector3 GetRandomMapPosition()
+    public static Vector3 GetRandomWorldPositionInMap()
     {
-        return MapToWorldPosition(new Vector2(Random.Range(0f,1f),Random.Range(0f,1f)));
+        return MapUVToWorldPosition(new Vector2(Random.Range(0f,1f),Random.Range(0f,1f)));
+    }
+
+    public static Vector2 GetRandomUVPositionInMap()
+    {
+        return new Vector2(Random.Range(0f,1f),Random.Range(0f,1f));
     }
 
 
     // takes in [0..1] coordinates (uv coordinates)
-    public static Vector3 MapToWorldPosition(Vector2 map_position)
+    public static Vector3 MapUVToWorldPosition(Vector2 map_position)
     {
         Vector3 up = WorldManager.Instance.d - WorldManager.Instance.a;
         Vector3 right = WorldManager.Instance.b - WorldManager.Instance.a;
 
         return WorldManager.Instance.a + right.normalized * map_position.x * WorldManager.Instance.level_width + up.normalized * map_position.y * WorldManager.Instance.level_height;
+    }
+
+    public static Vector2 MapUVToPixelPosition(Vector2 map_position)
+    {
+        return new Vector2(map_position.x * 128, map_position.y * 64);
     }
 }

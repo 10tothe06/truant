@@ -134,9 +134,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b05be465950cc4fa417db42e7504b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::poi_generic
-  must_be_lakeside: 0
+  should_appear_on_map: 1
+  map_icon: {fileID: 0}
+  must_be_lakeside: 1
   exclusion_radius: 1
   exclusion_debug_object: {fileID: 705881067465059984}
   onInitialize:
     m_PersistentCalls:
       m_Calls: []
+  map_position: {x: 0, y: 0}
