@@ -27,7 +27,7 @@ public class ui_levelintro : MonoBehaviour
 
         if (Keyboard.current.leftCtrlKey.wasPressedThisFrame)
         {
-            sequencer.ForceFinish();
+            sequencer.ForceStop();
             EndLevelIntro();
         }
     }

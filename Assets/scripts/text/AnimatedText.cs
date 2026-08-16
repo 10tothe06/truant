@@ -111,10 +111,20 @@ public class AnimatedText : MonoBehaviour
         is_drawing = true;
     }
 
-
+    // IMMIDIAETLY renders the rest of the message
+    // (as opposed to just stopping the rendering process, as above)
     public void ForceFinish()
     {
-        is_drawing = false;
+        // finishing the message
+        int num_iterations = 0;
+        int safe_iterations = 40;
+
+
+        while (is_drawing && num_iterations < safe_iterations)
+        {
+            num_iterations++;
+            RenderNextCharacter();
+        }
     }
 
     private void RenderNextCharacter()
@@ -176,7 +186,9 @@ public class AnimatedText : MonoBehaviour
         }
     }
 
-    private void StopDrawing()
+
+    // stops the rendering process
+    public void StopDrawing()
     {
         is_drawing = false;        
     }

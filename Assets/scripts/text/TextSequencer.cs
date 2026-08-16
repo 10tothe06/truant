@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Data.Common;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 // handles the drawing of text sequences
 // as the name may suggest
@@ -25,10 +26,18 @@ public class TextSequencer : MonoBehaviour
         text_component.Clear();
     }
 
-    public void ForceFinish()
+    public void ForceStop()
     {
         StopAllCoroutines();
-        text_component.ForceFinish();
+        text_component.StopDrawing();
+    }
+
+    void Update()
+    {
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            text_component.ForceFinish();
+        }
     }
 
     private IEnumerator Draw()
