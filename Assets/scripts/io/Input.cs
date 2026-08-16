@@ -79,12 +79,12 @@ public class Input : MonoBehaviour
 
 
             // the console/cheats menu
-            if (Keyboard.current.minusKey.wasPressedThisFrame)
+            if (Keyboard.current.minusKey.wasPressedThisFrame && !Keyboard.current.shiftKey.isPressed)
             {
                 // console
                 UIManager.ToggleConsole();
             }
-            if (Keyboard.current.equalsKey.wasPressedThisFrame)
+            if (Keyboard.current.equalsKey.wasPressedThisFrame && !Keyboard.current.shiftKey.isPressed)
             {
                 // cheats
                 UIManager.ToggleCheatMenu();

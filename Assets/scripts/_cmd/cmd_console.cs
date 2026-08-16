@@ -21,9 +21,6 @@ public class cmd_consolecommand
     // we have multiple so that commands like 'teleport'
     // can also have shorthands ('tp')
     public string[] names;
-
-    // the difference between operator and admin commands
-    public bool needsAdmin;
     public bool canBeRunLocally;
 
     public cmd_commandarg[] args;
@@ -32,14 +29,6 @@ public class cmd_consolecommand
     public cmd_consolecommand(string[] names)
     {
         this.names = names;
-        needsAdmin = false;
-        canBeRunLocally = false;
-    }
-    public cmd_consolecommand(string[] names, bool needsAdmin, bool canBeRunLocally)
-    {
-        this.names = names;
-        this.needsAdmin = needsAdmin;
-        this.canBeRunLocally = canBeRunLocally;
     }
 
     public bool IsValid(string name)
@@ -77,8 +66,10 @@ public class cmd_console : MonoBehaviour
 
     public static cmd_consolecommand[] possibleCommands = new cmd_consolecommand[]
     {
-        // CURRENT:
-        new cmd_consolecommand(new string[]{"tp"},false,false), // teleport
+        new cmd_consolecommand(new string[]{"tp"}), // teleport
+        
+        new cmd_consolecommand(new string[]{"summon"}), // spawns objects
+        new cmd_consolecommand(new string[]{"give"}), // give item to player
     };
     
     public static cmd_consolecommand GetCommandData(string name)
@@ -126,6 +117,24 @@ public class cmd_console : MonoBehaviour
         {
             // no command means text
             PostToConsole(text);
+        } 
+        
+        // tp
+        else if (selectedCommand == possibleCommands[0])
+        {
+            
+        }
+
+        // summon (object)
+        else if (selectedCommand == possibleCommands[1])
+        {
+            ObjectManager.SpawnObject(items[1], Player.Instance.transform.position);
+        }
+
+        // give (item)
+        else if (selectedCommand == possibleCommands[2])
+        {
+            
         }
     }
 
