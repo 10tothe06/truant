@@ -76,6 +76,7 @@ public class poi_generic : MonoBehaviour
             // we're doing this in a bit of a silly way
             
             transform.position = util_map.GetLakesidePosition(transform.position);
+            map_position = util_map.WorldToMapUVPosition(transform.position);
         } else
         {
             // do nothing because we already got a random position

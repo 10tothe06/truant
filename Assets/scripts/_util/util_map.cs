@@ -93,6 +93,18 @@ public class util_map
     }
 
 
+    
+
+    #region CONVERSION FUNCTIONS
+
+    // from uv coordinates
+    // ***
+
+    public static Vector2 MapUVToPixelPosition(Vector2 map_position)
+    {
+        return new Vector2(map_position.x * 128, map_position.y * 64);
+    }
+
     // takes in [0..1] coordinates (uv coordinates)
     public static Vector3 MapUVToWorldPosition(Vector2 map_position)
     {
@@ -102,8 +114,25 @@ public class util_map
         return WorldManager.Instance.a + right.normalized * map_position.x * WorldManager.Instance.level_width + up.normalized * map_position.y * WorldManager.Instance.level_height;
     }
 
-    public static Vector2 MapUVToPixelPosition(Vector2 map_position)
+    // ***
+
+
+
+    // from world coordinates
+    // ***
+
+    public static Vector2 WorldToMapUVPosition(Vector3 world_position)
     {
-        return new Vector2(map_position.x * 128, map_position.y * 64);
+        Vector3 from_map_origin = world_position - WorldManager.Instance.a;
+
+        float right_component = util_math.ProjectedMagnitude(from_map_origin, WorldManager.Instance.b-WorldManager.Instance.a);
+        float up_component = util_math.ProjectedMagnitude(from_map_origin, WorldManager.Instance.d-WorldManager.Instance.a);
+
+        return new Vector2(right_component / WorldManager.Instance.level_width,
+        up_component / WorldManager.Instance.level_height);
     }
+
+    // ***
+
+    #endregion
 }
