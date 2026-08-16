@@ -25,6 +25,12 @@ public class TextSequencer : MonoBehaviour
         text_component.Clear();
     }
 
+    public void ForceFinish()
+    {
+        StopAllCoroutines();
+        text_component.ForceFinish();
+    }
+
     private IEnumerator Draw()
     {
         isRendering = true;

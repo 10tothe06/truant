@@ -111,6 +111,12 @@ public class AnimatedText : MonoBehaviour
         is_drawing = true;
     }
 
+
+    public void ForceFinish()
+    {
+        is_drawing = false;
+    }
+
     private void RenderNextCharacter()
     {
         char to_render = current_msg[current_character_index];

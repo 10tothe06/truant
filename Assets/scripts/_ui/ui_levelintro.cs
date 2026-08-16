@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ui_levelintro : MonoBehaviour
 {
@@ -14,9 +15,35 @@ public class ui_levelintro : MonoBehaviour
         sequencer.Clear();
     }
 
+
+    void Update()
+    {
+        // by pressing left ctrl, 
+        // the user can skip the entire intro sequence
+        
+        // this is for if they've already played the level
+        // and don't really care what the intro has to say
+        // (cuz they've seen it already)
+
+        if (Keyboard.current.leftCtrlKey.wasPressedThisFrame)
+        {
+            sequencer.ForceFinish();
+            EndLevelIntro();
+        }
+    }
+
+
     public void PlayIntro(TextSequence data)
     {
         StartCoroutine(Intro(data));
+    }
+
+    private void EndLevelIntro()
+    {
+        sequencer.Clear();
+
+        // fade back
+        bg.gameObject.SetActive(false);
     }
 
     private IEnumerator Intro(TextSequence data)
@@ -39,9 +66,6 @@ public class ui_levelintro : MonoBehaviour
 
         yield return new WaitForSeconds(4f);
 
-        sequencer.Clear();
-
-        // fade back
-        bg.gameObject.SetActive(false);
+        EndLevelIntro();
     }
 }
