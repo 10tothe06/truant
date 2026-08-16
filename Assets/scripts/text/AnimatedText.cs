@@ -64,6 +64,14 @@ public class AnimatedText : MonoBehaviour
         }
     }
 
+    public void FadeOutText(bool leave_hightlights = false)
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).GetComponent<AnimatedCharacter>().FadeOut(leave_hightlights);
+        }
+    }
+
     private void Initialize()
     {
         // first, clear all children

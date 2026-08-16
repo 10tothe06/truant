@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using TMPro;
 using UnityEngine;
 
@@ -14,6 +15,27 @@ public class AnimatedCharacter : MonoBehaviour
     private bool isFading;
     private TextMeshProUGUI[] text_components;
 
+
+    #region FADING
+
+    public void FadeOut(bool leave_hightlights)
+    {
+        if (!GetComponent<LayeredText>().layering_enabled || !leave_hightlights)
+        {
+            isFading = true;
+            desired_opacity = 0;
+        }   
+    }
+
+    public void FadeIn()
+    {
+        
+    }
+
+    #endregion
+
+
+
     public void AnimateIn(bool enable_slide = false, bool enable_fade = false)
     {
         isSliding = enable_slide;
@@ -22,6 +44,8 @@ public class AnimatedCharacter : MonoBehaviour
         desired_local_position = transform.localPosition;
         desired_opacity = 1;
 
+        text_components = GetComponentsInChildren<TextMeshProUGUI>();
+
         if (enable_slide)
         {
             transform.localPosition += Vector3.up * slide_amplitude;
@@ -29,8 +53,6 @@ public class AnimatedCharacter : MonoBehaviour
 
         if (enable_fade)
         {
-            text_components = GetComponentsInChildren<TextMeshProUGUI>();
-
             for (int i = 0; i < text_components.Length; i++)
             {
                 text_components[i].color = new Color(text_components[i].color.r, text_components[i].color.g, text_components[i].color.b, 0);

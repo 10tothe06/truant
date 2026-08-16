@@ -3592,7 +3592,7 @@ MonoBehaviour:
   version: demo-1.0-rc1
   ins_buildMode: 0
   ins_startMode: 2
-  level_to_load: gregrun
+  level_to_load: tutorial
   ins_skip_loading_screens: 0
   ins_force_flat_terrain: 1
   ins_ban_all_foliage: 1
@@ -6380,8 +6380,8 @@ MonoBehaviour:
   level_intro_data:
     default_message_interval: 0.8
     messages:
-    - $tutorial
-    - :3
+    - this is the $tutorial$
+    - :1
   player_spawn_position: {fileID: 397127489}
   player_car: {fileID: 0}
 --- !u!1 &984682226

@@ -8,7 +8,7 @@ using UnityEngine;
 public class TextSequencer : MonoBehaviour
 {
     [SerializeField]
-    private AnimatedText text_component;
+    public AnimatedText text_component;
     private TextSequence current_sequence;
 
     public bool isRendering;
