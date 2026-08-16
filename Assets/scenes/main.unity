@@ -3593,7 +3593,7 @@ MonoBehaviour:
   ins_buildMode: 0
   ins_startMode: 2
   level_to_load: gregrun
-  ins_skip_loading_screens: 1
+  ins_skip_loading_screens: 0
   ins_force_flat_terrain: 1
   ins_ban_all_foliage: 1
 --- !u!114 &576746838
@@ -5405,6 +5405,7 @@ MonoBehaviour:
   - {fileID: 5414149883367336487, guid: 0fb339f72bc2fda44abeec4b7ad31d7a, type: 3}
   - {fileID: 7901170461580289857, guid: 888ff1b9832947c4094159a1c10a2ca2, type: 3}
   - {fileID: 7901170461580289857, guid: 368b14c0cffa63643b212badd2402697, type: 3}
+  - {fileID: 7901170461580289857, guid: 6ec2192c9010c644aa98173d97a37a77, type: 3}
   t_currentObjectContainer: {fileID: 0}
 --- !u!1 &865919485
 GameObject:
@@ -8472,11 +8473,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimatedText
   enable_slide: 1
   enable_fade: 0
+  char_limit_per_line: 15
   draw_on_awake: 0
   awake_message: 
   text_spacing: 35
   default_character_interval: 0.1
   p_letter: {fileID: 3752582528098645016, guid: 157434fb293994346b026ceb98823718, type: 3}
+  is_drawing: 0
 --- !u!114 &1435159026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11060,14 +11063,14 @@ MonoBehaviour:
   special_pois:
   - poi_lookout
   level_intro_data:
-    default_message_interval: 0.5
+    default_message_interval: 1
     messages:
     - I used to come here when I was a kid.
     - It's really peaceful at night.
     - Helps me get away from life.
     - ...
     - It's getting late.
-    - I should $get to my car$ so I can drive home.
+    - I should $|get to my car|$ so I can drive home.
 --- !u!114 &1768812475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14179,6 +14182,7 @@ MonoBehaviour:
   points_of_interest:
   - poi_test
   - poi_lookout
+  - poi_parkinglot
   globalChunkAdjustments: []
   chunkGenerationActive: 0
   chunkFoliage:

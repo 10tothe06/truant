@@ -103,6 +103,8 @@ public class UIManager : MonoBehaviour
     {
         if (Program.skip_loading_screens) {return;}
 
+        Debug.Log("📽 Playing level intro...");
+
 
         Instance.level_intro.PlayIntro(data);
     }

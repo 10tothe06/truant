@@ -33,7 +33,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1154, y: -331}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &768215535046489411
@@ -50,8 +50,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimatedText
   enable_slide: 1
   enable_fade: 0
+  char_limit_per_line: 89999
   draw_on_awake: 0
   awake_message: 
   text_spacing: 35
   default_character_interval: 0.05
   p_letter: {fileID: 3752582528098645016, guid: 157434fb293994346b026ceb98823718, type: 3}
+  is_drawing: 0

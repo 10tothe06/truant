@@ -54,6 +54,8 @@ public class TextSequencer : MonoBehaviour
                 // the message is passed off to an AnimatedText component to be drawn
                 text_component.Draw(current_sequence.messages[i]);
 
+                yield return new WaitUntil(() => !text_component.is_drawing);
+
 
                 should_auto_wait = true;
             }

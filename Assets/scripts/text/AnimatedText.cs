@@ -5,6 +5,7 @@ using UnityEngine.TextCore.Text;
 
 public class AnimatedText : MonoBehaviour
 {
+    [Space(20)]
     [Header("EFFECTS")]
     public bool enable_slide;
     public bool enable_fade;
@@ -12,6 +13,12 @@ public class AnimatedText : MonoBehaviour
 
     [Space(10)]
     [Header("CONFIG")]
+
+    // how many characters do we have to reach,
+    //  before its time to switch to a new line
+    public int char_limit_per_line;
+    private int current_line_index;
+    private int current_line_character_count;
 
     
     public bool draw_on_awake;
@@ -36,7 +43,7 @@ public class AnimatedText : MonoBehaviour
     private string current_msg;
     private int current_character_index;
     private int character_index_offset; // to account for formatting characters
-    private bool is_drawing;
+    public bool is_drawing;
 
     // vvv formatting vvv
     private bool is_layered;
@@ -71,6 +78,9 @@ public class AnimatedText : MonoBehaviour
         is_underline = false;
         is_italic = false;
         is_bold = false;
+
+        current_line_index = 0;
+        current_line_character_count = 0;
     }
 
     public void Clear()
@@ -126,12 +136,21 @@ public class AnimatedText : MonoBehaviour
 
             tx_new.Draw(current_msg[current_character_index].ToString());
             
-            tx_new.transform.localPosition = Vector3.right * (current_character_index-character_index_offset) * text_spacing;
+            tx_new.transform.localPosition = Vector3.right * (current_line_character_count-character_index_offset) * text_spacing;
+            tx_new.transform.localPosition += -Vector3.up * 75f * current_line_index;
             tx_new.GetComponent<AnimatedCharacter>().AnimateIn(enable_slide, enable_fade);
+        }
+
+        if (current_line_character_count > char_limit_per_line && current_msg[current_character_index] == ' ')
+        {
+            current_line_character_count = -1;
+            character_index_offset = 0;
+            current_line_index++;
         }
 
         // prepping for the next character
         current_character_index++;
+        current_line_character_count++;
         last_character_time = Time.time;
 
         if (current_character_index >= current_msg.Length)
