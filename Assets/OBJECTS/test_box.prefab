@@ -199,8 +199,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb72d9494664291449da362dc3af3687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableObject3D
+  momentOfInertia: 1
+  buoyancy_coefficient: 0
+  buoyancy_force_limit: 5
+  linearDamping: 0.99
+  angularDamping: 0.99
+  parent_slot: {fileID: 0}
+  can_be_interacted_with: 1
   auto_colliders: 1
   collider_list: []
+  has_physics: 1
   isDraggable: 1
   hoverPrompt: press E to pick up
   onInteract:

@@ -17,7 +17,6 @@ public class obj_applyphysics : MonoBehaviour
 
 
     public bool useGravity = true;
-    public obj_generic gComp;
     private Rigidbody rb;
     public Vector3 gravityDirection = -Vector3.right;
     public float gravitationalAcceleration = 0.981f;
@@ -25,10 +24,6 @@ public class obj_applyphysics : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        gComp = GetComponent<obj_generic>();
-
-        gComp.onEntityUpdate.AddListener(EntityUpdate);
-
 
         // just making sure:
         rb.useGravity = false;

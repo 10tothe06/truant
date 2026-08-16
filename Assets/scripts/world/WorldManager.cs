@@ -308,6 +308,7 @@ public class WorldManager : MonoBehaviour
         GameObject lake_object = ObjectManager.SpawnObject("lake", new Vector3(-Instance.chunkSize/2f, -4f, -Instance.chunkSize/2f));
 
         lake_object.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh = lake_mesh;
+        lake_object.transform.GetChild(0).GetComponent<MeshCollider>().sharedMesh = lake_mesh;
 
         // then, the chunk adjustment that will control the terrain
         AddChunkAdjustment(lake_mesh.vertices, NoiseProfile.Contstant(-10f), new FoliageProfile(), 30f, 0f);

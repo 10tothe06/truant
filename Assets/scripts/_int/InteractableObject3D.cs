@@ -17,6 +17,17 @@ but the InteractCollider class exists so that that's not necessary
 
 public class InteractableObject3D : MonoBehaviour
 {
+    [Header("Physics Settings")]
+    public float momentOfInertia;
+    public float buoyancy_coefficient;
+    public float buoyancy_force_limit;
+
+    public float linearDamping = 0.99f;
+    public float angularDamping = 0.99f;
+
+    private Rigidbody rb;
+
+    [Space(30)]
     [HideInInspector]
     public int_itemslot parent_slot;
 
@@ -48,6 +59,43 @@ public class InteractableObject3D : MonoBehaviour
         {
             collider_list = GetComponentsInChildren<Collider>();
         }
+
+        rb = GetComponent<Rigidbody>();
+    }
+
+    void Update()
+    {
+        HandleBuoyancy();
+    }
+
+    void HandleBuoyancy()
+    {
+        if (rb == null) {return;}
+        if (rb.isKinematic) {return;}
+
+        float forceAmt = 0;
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position + Vector3.up * 50f, -Vector3.up, out hit, Mathf.Infinity, 1 << LayerMask.NameToLayer("WaterSurface")))
+        {
+            
+        } else
+        {
+            // no water, so no buoyancy
+            return;
+        }
+
+        if (hit.point.y > transform.position.y)
+        {
+            forceAmt = hit.point.y - transform.position.y;
+            forceAmt = Mathf.Clamp(forceAmt * forceAmt, 0, buoyancy_force_limit) * buoyancy_coefficient;
+
+            rb.linearVelocity *= linearDamping;
+            rb.angularVelocity *= angularDamping;
+        }
+
+        rb.linearVelocity += Vector3.up * forceAmt / rb.mass;
     }
 
     public void SetCollidersToSolid()
