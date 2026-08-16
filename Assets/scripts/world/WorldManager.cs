@@ -157,9 +157,29 @@ public class WorldManager : MonoBehaviour
         // (if we did level generation would take forever)
         InitializeChunkGeneration(terrain_noise);
 
+        // the road is not considered a POI,
+        // its just its own thing like the lake
+        InitializeRoad();
+
         Instance.map_texture = util_map.GenerateMapTexture(128, 64);
 
         GenerateLevelPOIs(special_pois);
+    }
+
+    private static void InitializeRoad()
+    {
+        // we basically pick a point along the top edge of the level, 
+        // move down a bit,
+        // and thats where we make the road from
+
+        Vector3 point_on_top_edge = Vector3.Lerp(Instance.d, Instance.c, Random.Range(0f,1f));
+        
+        Vector3 road_origin = point_on_top_edge + (Instance.a-Instance.d).normalized * Random.Range(WorldManager.Instance.level_height * 0.05f, WorldManager.Instance.level_height * 0.2f);
+
+        Vector3 road_direction = (Instance.c-Instance.d).normalized + (Instance.a-Instance.d).normalized * Random.Range(0f, 0.2f);
+        road_direction = road_direction.normalized;
+
+        DebugManager.DrawLine(road_origin - road_direction * 1000f, road_origin + road_direction * 1000f, Color.purple, 10f);
     }
 
 
