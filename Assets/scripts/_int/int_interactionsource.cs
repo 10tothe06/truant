@@ -74,10 +74,7 @@ public class int_interactionsource : MonoBehaviour
 
         if (objectToDrag == null) {return;}
     
-        if (objectToDrag.GetComponent<obj_applyphysics>() != null)
-        {
-            objectToDrag.GetComponent<obj_applyphysics>().useGravity = false;
-        }
+        objectToDrag.useGravity = false;
 
         isDraggingObject = true;
     }
@@ -87,10 +84,7 @@ public class int_interactionsource : MonoBehaviour
         if (objectToDrag == null) {return;}
         if (!isDraggingObject) {return;}
         
-        if (objectToDrag.GetComponent<obj_applyphysics>() != null)
-        {
-            objectToDrag.GetComponent<obj_applyphysics>().useGravity = true;
-        }
+        objectToDrag.useGravity = true;
 
         isDraggingObject = false;
         objectToDrag = null;

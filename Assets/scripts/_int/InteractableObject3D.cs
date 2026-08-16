@@ -116,27 +116,21 @@ public class InteractableObject3D : MonoBehaviour
     public void DisablePhysics()
     {
         has_physics = false;
-        if (GetComponent<obj_applyphysics>() != null)
+        
+        if (rb != null)
         {
-            GetComponent<obj_applyphysics>().useGravity = false;
-        }
-        if (GetComponent<Rigidbody>() != null)
-        {
-            GetComponent<Rigidbody>().useGravity = false;
-            GetComponent<Rigidbody>().isKinematic = true;
+            rb.useGravity = false;
+            rb.isKinematic = true;
         }
     }
     public void EnablePhysics()
     {
         has_physics = true;
-        if (GetComponent<obj_applyphysics>() != null)
+        
+        if (rb != null)
         {
-            GetComponent<obj_applyphysics>().useGravity = true;
-        }
-        if (GetComponent<Rigidbody>() != null)
-        {
-            GetComponent<Rigidbody>().useGravity = true;
-            GetComponent<Rigidbody>().isKinematic = false;
+            rb.useGravity = true;
+            rb.isKinematic = false;
         }
     }
 
