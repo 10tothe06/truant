@@ -89,6 +89,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1685107788364377656
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5829504659364515788}
+  m_Layer: 0
+  m_Name: player spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5829504659364515788
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1685107788364377656}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7501262543103137007}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7901170461580289857
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,6 +130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7501262543103137007}
   - component: {fileID: 8764439904090168498}
+  - component: {fileID: 7225720150712545556}
   m_Layer: 0
   m_Name: poi_lookout
   m_TagString: Untagged
@@ -120,6 +152,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 705881067465059984}
+  - {fileID: 5829504659364515788}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8764439904090168498
@@ -134,9 +167,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b05be465950cc4fa417db42e7504b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::poi_generic
+  should_appear_on_map: 1
+  map_icon: {fileID: 0}
+  is_special: 1
   must_be_lakeside: 1
+  is_mandatory: 1
   exclusion_radius: 1
   exclusion_debug_object: {fileID: 705881067465059984}
   onInitialize:
     m_PersistentCalls:
       m_Calls: []
+  map_position: {x: 0, y: 0}
+--- !u!114 &7225720150712545556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7901170461580289857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e32568e919bcdb14487cddf34bf94dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::poi_playerspawn
+  spawn_position: {fileID: 5829504659364515788}

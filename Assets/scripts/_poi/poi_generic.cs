@@ -12,7 +12,15 @@ public class poi_generic : MonoBehaviour
 
 
     [Header("PLACEMENT SETTINGS")]
+    // if no, then the poi will be selected from the pool as normal (by every level)
+    // if yes, then it will NOT be selected unless the level specifically requests it by name
+    public bool is_special;
+    // does the POI need to be placed on the shore of the lake?
     public bool must_be_lakeside;
+    // does the POI HAVE to be placed? (meaning it is selected from the pool always)
+    // if marked as 'special' and not requested, it will not be placed
+    // the 'mandatory' only applies if its requested in that case
+    public bool is_mandatory;
 
     public float exclusion_radius;
     public Transform exclusion_debug_object;
@@ -41,11 +49,15 @@ public class poi_generic : MonoBehaviour
     // called by the world manager when the object is spawned in
     public void Initialize()
     {
-        onInitialize.Invoke();
-
         HandlePlacement();
 
         HandleMapIcon();
+
+
+
+        // some scripts rely on the POI being in its final position,
+        // so this event needs to be called after ALL intialization logic is done
+        onInitialize.Invoke();
     }
 
     // making sure that the POI appears on the in-game map

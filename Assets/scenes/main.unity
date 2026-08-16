@@ -5404,6 +5404,7 @@ MonoBehaviour:
   - {fileID: 5414149883367336487, guid: be45f307ea847a14ba47cce9b9efeff5, type: 3}
   - {fileID: 5414149883367336487, guid: 0fb339f72bc2fda44abeec4b7ad31d7a, type: 3}
   - {fileID: 7901170461580289857, guid: 888ff1b9832947c4094159a1c10a2ca2, type: 3}
+  - {fileID: 7901170461580289857, guid: 368b14c0cffa63643b212badd2402697, type: 3}
   t_currentObjectContainer: {fileID: 0}
 --- !u!1 &865919485
 GameObject:
@@ -11056,6 +11057,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6518d46844412a428d15594a237b4ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::lvl_gregrun
+  special_pois:
+  - poi_lookout
   level_intro_data:
     default_message_interval: 0.5
     messages:
@@ -14175,6 +14178,7 @@ MonoBehaviour:
   default_map_icon: {fileID: 2800000, guid: 928f76b0f3761d648bca28f129f74626, type: 3}
   points_of_interest:
   - poi_test
+  - poi_lookout
   globalChunkAdjustments: []
   chunkGenerationActive: 0
   chunkFoliage:

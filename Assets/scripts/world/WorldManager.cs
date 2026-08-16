@@ -80,7 +80,7 @@ public class WorldManager : MonoBehaviour
     [HideInInspector]
     public Vector3[] lake_vertices;
     [HideInInspector]
-    public GameObject[] poi_objects;
+    public List<GameObject> poi_objects;
 
     [HideInInspector]
     public Vector3 a;
@@ -106,7 +106,7 @@ public class WorldManager : MonoBehaviour
 
 
     // what level scripts should be calling to make the map
-    public static void InitializeLevelEnvironment(NoiseProfile terrain_noise)
+    public static void InitializeLevelEnvironment(NoiseProfile terrain_noise, string[] special_pois)
     {
         if (Program.force_flat_terrain)
         {
@@ -159,23 +159,59 @@ public class WorldManager : MonoBehaviour
 
         Instance.map_texture = util_map.GenerateMapTexture(128, 64);
 
-        GenerateLevelPOIs();
+        GenerateLevelPOIs(special_pois);
     }
 
 
     // whole bunch of local variables in here that will be incorporated into sysarch later
     // (hopefully)
-    private static void GenerateLevelPOIs()
+    private static void GenerateLevelPOIs(string[] special_pois)
     {
         // the number of poi instances we want in one level
         int poi_count = 10;
-        Instance.poi_objects = new GameObject[poi_count];
+        Instance.poi_objects = new List<GameObject>();
 
 
         List<string> poi_pool = Instance.points_of_interest.ToList();
 
+        // before we can start spawning them in,
+        // we've got to remove any POIs from the pool that are:
+        // a) special
+        // and b) not being requested
+
+        for (int i = poi_pool.Count - 1; i>= 0; i--)
+        {
+            if (ObjectManager.GetObjectPrefabFromName(poi_pool[i]).GetComponent<poi_generic>().is_special
+            && !special_pois.Contains(poi_pool[i]))
+            {
+                poi_pool.RemoveAt(i);
+            }
+        }
+
         // for the real game this should be false 
-        bool allow_duplicate_pois = true;
+        bool allow_duplicate_pois = false;
+
+        // the other thing we have to do is spawn in one copy of any mandatory POIs
+
+        for (int i = 0; i < poi_pool.Count; i++)
+        {
+            if (ObjectManager.GetObjectPrefabFromName(poi_pool[i]).GetComponent<poi_generic>().is_mandatory)
+            {
+                GameObject new_poi = ObjectManager.SpawnObject(poi_pool[i], Vector3.zero);
+                poi_generic comp = new_poi.GetComponent<poi_generic>();
+
+                comp.Initialize();
+
+                Instance.poi_objects.Add(new_poi);
+
+                if (!allow_duplicate_pois)
+                {
+                    poi_pool.RemoveAt(i);
+                }
+
+                poi_count--;
+            }
+        }
 
         for (int i = 0; i < poi_count; i++)
         {
@@ -197,7 +233,7 @@ public class WorldManager : MonoBehaviour
 
             comp.Initialize();
 
-            Instance.poi_objects[i] = new_poi;
+            Instance.poi_objects.Add(new_poi);
 
             // then we remove it from the pool
             // (this avoids duplicate structures)
@@ -216,7 +252,7 @@ public class WorldManager : MonoBehaviour
     private static void RemoveInvalidPOIsFromLevel()
     {
         // first, checking if outside the map
-        for (int i = Instance.poi_objects.Length - 1; i>= 0; i--)
+        for (int i = Instance.poi_objects.Count - 1; i>= 0; i--)
         {
             if (!util_map.IsPositionInsideMap(Instance.poi_objects[i].transform.position))
             {
