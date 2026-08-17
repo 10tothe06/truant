@@ -171,7 +171,9 @@ public class WorldManager : MonoBehaviour
         Vector3 road_direction = (Instance.c-Instance.d).normalized + (Instance.a-Instance.d).normalized * Random.Range(0f, 0.2f);
         road_direction = road_direction.normalized;
 
-        DebugManager.DrawLine(road_origin - road_direction * 1000f, road_origin + road_direction * 1000f, Color.purple, 10f);
+        MapData.road_points = new Vector3[] {road_origin - road_direction * 1000f, road_origin + road_direction * 1000f};
+
+        DebugManager.DrawLine(MapData.road_points[0], MapData.road_points[1], Color.purple, 10f);
     }
 
 

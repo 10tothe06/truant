@@ -91,7 +91,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _MaxTessDistance: 10
+    - _MaxTessDistance: 20
     - _Metallic: 0
     - _Mode: 0
     - _NoiseScale: 0.1
@@ -111,7 +111,7 @@ Material:
     - _SparkleScale: 10
     - _SpecularHighlights: 1
     - _SpecularPower: 150
-    - _SpecularStrength: 0.75
+    - _SpecularStrength: 0.4
     - _SrcBlend: 1
     - _Tess: 5
     - _UVSec: 0

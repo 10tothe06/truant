@@ -73,9 +73,18 @@ public class MapData : MonoBehaviour
     // terrain does actually have height, so we'll use that
     public Color[] terrain_height_colors;
     public float[] terrain_height_values;
+
+    public Color road_color;
+    public float road_width; // how close a point has to be to be considered "on" the road
     
 
     [Space(20)]
     [Header("POIs")]
     public Texture2D default_map_icon;
+
+    #region CACHED INFO
+
+    public static Vector3[] road_points;
+
+    #endregion
 }

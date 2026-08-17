@@ -84,7 +84,11 @@ public class util_map
             {
                 Vector3 world_position = MapUVToWorldPosition(new Vector2(x/(float)(width-1), y/(float)(height-1)));
 
-                if (util_mesh.IsPointInsidePolygon(WorldManager.Instance.lake_vertices, world_position))
+                if (util_geometry.DistanceToLine(MapData.road_points, world_position) < MapData.Instance.road_width)
+                {
+                    color_data[i] = MapData.Instance.road_color;
+                }
+                else if (util_mesh.IsPointInsidePolygon(WorldManager.Instance.lake_vertices, world_position))
                 {
                     color_data[i] = Color.blue;
                     // color_data[i] = util_map.ApplyHeightBanding(
@@ -92,7 +96,8 @@ public class util_map
                     //     MapData.Instance.lake_height_values,
                         
                     //     util_mesh.DistanceInsidePolygon(WorldManager.Instance.lake_vertices, world_position));
-                } else
+                }
+                else
                 {
                     color_data[i] = util_map.ApplyHeightBanding(
                         MapData.Instance.terrain_height_colors, 
