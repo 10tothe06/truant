@@ -168,7 +168,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6702777790825529560}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 0.3
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -200,8 +200,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableObject3D
   momentOfInertia: 1
-  buoyancy_coefficient: 0.05
-  buoyancy_force_limit: 5
+  buoyancy_coefficient: 5
+  buoyancy_force_limit: 0.015
   linearDamping: 0.9
   angularDamping: 0.9
   parent_slot: {fileID: 0}

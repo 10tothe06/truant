@@ -2,6 +2,28 @@ using UnityEngine;
 
 public class util_map
 {   
+    public static Color ApplyHeightBanding(Color[] colors, float[] height_bands, float height_value)
+    {
+        if (height_bands.Length != colors.Length + 1) // wrong number of height bands
+        {
+            return colors[0];
+        }
+
+        for (int i = 0; i < colors.Length; i++)
+        {
+            if (height_value > height_bands[i] && height_value < height_bands[i+1])
+            {
+                return colors[i];
+            }
+        }
+
+
+        // should only get here if the height bands were formatted wrong
+        return colors[0];
+    }
+
+
+
     // just uses the "is point inside polygon" test
     // maybe not the fastest? idk and idc
     public static bool IsPositionInsideMap(Vector3 position_to_test)
@@ -60,12 +82,24 @@ public class util_map
         {
             for (int x = 0; x < width; x++, i++)
             {
-                if (util_mesh.IsPointInsidePolygon(WorldManager.Instance.lake_vertices, MapUVToWorldPosition(new Vector2(x/(float)(width-1), y/(float)(height-1)))))
+                Vector3 world_position = MapUVToWorldPosition(new Vector2(x/(float)(width-1), y/(float)(height-1)));
+
+                if (util_mesh.IsPointInsidePolygon(WorldManager.Instance.lake_vertices, world_position))
                 {
                     color_data[i] = Color.blue;
+                    // color_data[i] = util_map.ApplyHeightBanding(
+                    //     MapData.Instance.lake_height_colors, 
+                    //     MapData.Instance.lake_height_values,
+                        
+                    //     util_mesh.DistanceInsidePolygon(WorldManager.Instance.lake_vertices, world_position));
                 } else
                 {
-                    color_data[i] = Color.darkGreen;
+                    color_data[i] = util_map.ApplyHeightBanding(
+                        MapData.Instance.terrain_height_colors, 
+                        MapData.Instance.terrain_height_values,
+                        // using level noise here isn't the best, because it doesn't take into account chunk adjustments
+                        // but it should work fine because the main adjustment is for the lake, and that's a different color
+                        WorldManager.level_noise.GetHeight(world_position)); 
                 }
 
 
