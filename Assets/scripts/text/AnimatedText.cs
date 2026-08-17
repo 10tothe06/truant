@@ -89,6 +89,23 @@ public class AnimatedText : MonoBehaviour
 
         current_line_index = 0;
         current_line_character_count = 0;
+
+        CenterOnScreen();
+    }
+
+    private void CenterOnScreen()
+    {
+        transform.position = new Vector3(Screen.width/2f, Screen.height/2f, 0);
+
+        if (!string.IsNullOrEmpty(current_msg))
+        {
+            // estimate the number of lines that the dialog will take up
+            int num_lines_estimate = current_msg.Length / char_limit_per_line;
+            
+            transform.position += Vector3.up * (75f * (num_lines_estimate) /2f);
+
+            transform.position -= Vector3.right * (Mathf.Min(char_limit_per_line, current_msg.Length) * text_spacing/2f);
+        }
     }
 
     public void Clear()
@@ -100,13 +117,13 @@ public class AnimatedText : MonoBehaviour
     // TODO: formatting for speed and such
     public void Draw(string msg)
     {
-        Initialize();
-
         current_msg = msg;
         current_character_index = 0;
 
         last_character_time = 0;
         current_character_interval = default_character_interval;
+
+        Initialize();
 
         is_drawing = true;
     }

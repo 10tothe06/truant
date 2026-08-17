@@ -8611,11 +8611,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimatedText
   enable_slide: 1
   enable_fade: 0
-  char_limit_per_line: 15
+  char_limit_per_line: 30
   draw_on_awake: 0
   awake_message: 
   text_spacing: 35
-  default_character_interval: 0.1
+  default_character_interval: 0.05
   p_letter: {fileID: 3752582528098645016, guid: 157434fb293994346b026ceb98823718, type: 3}
   is_drawing: 0
 --- !u!114 &1435159026
@@ -11208,7 +11208,7 @@ MonoBehaviour:
     - It's really peaceful at night.
     - Helps me get away from life.
     - ...
-    - It's getting late.
+    - But, it's getting late.
     - I should $|get to my car|$ so I can drive home.
 --- !u!114 &1768812475
 MonoBehaviour:
