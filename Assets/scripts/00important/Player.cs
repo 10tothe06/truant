@@ -125,6 +125,8 @@ public class Player : MonoBehaviour
         comp.lockCameraVertical = true;
         comp.lockMovement = true;
 
+        rb.isKinematic = true;
+
         Cursor.lockState = CursorLockMode.None;
     }
 
@@ -136,6 +138,8 @@ public class Player : MonoBehaviour
         comp.lockCameraHorizontal = false;
         comp.lockCameraVertical = false;
         comp.lockMovement = false;
+
+        rb.isKinematic = false;
 
         Cursor.lockState = CursorLockMode.Locked;
     }

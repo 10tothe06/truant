@@ -112,9 +112,12 @@ public class int_chair : MonoBehaviour
                     is_animating = false;
                     animation_time = 1;
                 }
-            }
 
-            Player.t.position = Vector3.Lerp(Player.t.position, t_sitPoint.position, animation_time) + Vector3.up * animation_curve_factor * Mathf.Sin(animation_time * Mathf.PI);
+                Player.t.position = Vector3.Lerp(Player.t.position, t_sitPoint.position, animation_time) + Vector3.up * animation_curve_factor * Mathf.Sin(animation_time * Mathf.PI);
+            } else
+            {
+                Player.t.position = t_sitPoint.position;
+            }
         } else
         {
             Player.t.position = t_sitPoint.position;
