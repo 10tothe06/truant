@@ -5620,6 +5620,7 @@ MonoBehaviour:
   - {fileID: 7901170461580289857, guid: 368b14c0cffa63643b212badd2402697, type: 3}
   - {fileID: 7901170461580289857, guid: 6ec2192c9010c644aa98173d97a37a77, type: 3}
   - {fileID: 5414149883367336487, guid: 7ad535d9fdb637e44a7fdb921faf5233, type: 3}
+  - {fileID: 7901170461580289857, guid: 0ac3e42c53667bd46b3b400256a5ac98, type: 3}
   t_currentObjectContainer: {fileID: 0}
 --- !u!1 &865919485
 GameObject:
@@ -14398,6 +14399,7 @@ MonoBehaviour:
   - poi_test
   - poi_lookout
   - poi_parkinglot
+  - poi_roadboundary
   globalChunkAdjustments: []
   chunkGenerationActive: 0
   chunkFoliage:

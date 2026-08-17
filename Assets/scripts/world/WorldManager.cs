@@ -107,8 +107,26 @@ public class WorldManager : MonoBehaviour
 
         // first, the lake
         InitializeLake();
+        InitializeLevelBoundaries();
+        // finally, the chunks
+        // we do these last so that we don't have to re-calculate all the chunk adjustments
+        // (if we did level generation would take forever)
+        InitializeChunkGeneration(terrain_noise);
+        // the road is not considered a POI,
+        // its just its own thing like the lake
+        InitializeRoad();
+        // now that the base of the level is done,
+        // we can make the map texture...
+        MapData.Instance.map_texture = util_map.GenerateMapTexture(MapData.pixel_width, MapData.pixel_height);
+        // then spawn all the POIs (they get added to the texture as they spawn)
+        GenerateLevelPOIs(special_pois);
 
+        // the ending colliders are just POIs,
+        // so they'll spawn in as part of the poi generation
+        // (this is simpler and works better bc they won't be a part of every level)
+    }
 
+    private static void InitializeLevelBoundaries() {
         // now we have to decide where the dimensions of the map will go
         Vector3 lake_midpoint = util_mesh.GetMidpoint(Instance.lake_vertices);
 
@@ -143,19 +161,6 @@ public class WorldManager : MonoBehaviour
         DebugManager.DrawLine(Instance.b, Instance.c, Color.cyan);
         DebugManager.DrawLine(Instance.c, Instance.d, Color.cyan);
         DebugManager.DrawLine(Instance.d, Instance.a, Color.cyan);
-
-        // finally, the chunks
-        // we do these last so that we don't have to re-calculate all the chunk adjustments
-        // (if we did level generation would take forever)
-        InitializeChunkGeneration(terrain_noise);
-
-        // the road is not considered a POI,
-        // its just its own thing like the lake
-        InitializeRoad();
-
-        MapData.Instance.map_texture = util_map.GenerateMapTexture(MapData.pixel_width, MapData.pixel_height);
-
-        GenerateLevelPOIs(special_pois);
     }
 
     private static void InitializeRoad()
@@ -171,7 +176,7 @@ public class WorldManager : MonoBehaviour
         Vector3 road_direction = (Instance.c-Instance.d).normalized + (Instance.a-Instance.d).normalized * Random.Range(0f, 0.2f);
         road_direction = road_direction.normalized;
 
-        MapData.road_points = new Vector3[] {road_origin - road_direction * 1000f, road_origin + road_direction * 1000f};
+        MapData.road_points = new Vector3[] {road_origin - road_direction * 600f, road_origin + road_direction * 600f};
 
         DebugManager.DrawLine(MapData.road_points[0], MapData.road_points[1], Color.purple, 10f);
 
