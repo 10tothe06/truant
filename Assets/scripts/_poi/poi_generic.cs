@@ -66,9 +66,9 @@ public class poi_generic : MonoBehaviour
     {
         if (!should_appear_on_map) {return;} // no map icon or anything at all
 
-        Texture2D texture_to_write = (map_icon != null) ? map_icon : WorldManager.Instance.default_map_icon;
+        Texture2D texture_to_write = (map_icon != null) ? map_icon : MapData.Instance.default_map_icon;
 
-        WorldManager.Instance.map_texture = util_texture.WriteTextureOnTop(WorldManager.Instance.map_texture, util_map.MapUVToPixelPosition(map_position), texture_to_write, 0.125f/2f);
+        MapData.Instance.map_texture = util_texture.WriteTextureOnTop(MapData.Instance.map_texture, util_map.MapUVToPixelPosition(map_position), texture_to_write, 0.125f/2f);
     }
 
     private void HandlePlacement()

@@ -102,7 +102,7 @@ public class util_map
 
     public static Vector2 MapUVToPixelPosition(Vector2 map_position)
     {
-        return new Vector2(map_position.x * 128, map_position.y * 64);
+        return new Vector2(map_position.x * MapData.pixel_width, map_position.y * MapData.pixel_height);
     }
 
     // takes in [0..1] coordinates (uv coordinates)
@@ -111,7 +111,7 @@ public class util_map
         Vector3 up = WorldManager.Instance.d - WorldManager.Instance.a;
         Vector3 right = WorldManager.Instance.b - WorldManager.Instance.a;
 
-        return WorldManager.Instance.a + right.normalized * map_position.x * WorldManager.Instance.level_width + up.normalized * map_position.y * WorldManager.Instance.level_height;
+        return WorldManager.Instance.a + right.normalized * map_position.x * MapData.world_width + up.normalized * map_position.y * MapData.world_height;
     }
 
     // ***
@@ -128,8 +128,8 @@ public class util_map
         float right_component = util_math.ProjectedMagnitude(from_map_origin, WorldManager.Instance.b-WorldManager.Instance.a);
         float up_component = util_math.ProjectedMagnitude(from_map_origin, WorldManager.Instance.d-WorldManager.Instance.a);
 
-        return new Vector2(right_component / WorldManager.Instance.level_width,
-        up_component / WorldManager.Instance.level_height);
+        return new Vector2(right_component / MapData.world_width,
+        up_component / MapData.world_height );
     }
 
     // ***

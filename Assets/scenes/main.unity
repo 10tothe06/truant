@@ -11584,7 +11584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90d7d0c2916c838428ae3c32a9028fa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::test_showmaptexture
-  object_scale: 4
+  object_scale: 3
 --- !u!1001 &1851282264
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14278,6 +14278,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2138586618}
+  - component: {fileID: 2138586620}
   - component: {fileID: 2138586619}
   m_Layer: 0
   m_Name: world
@@ -14313,10 +14314,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ffcfcea6dc70c448ee6ef8cc0fe1e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldManager
-  level_width: 1500
-  level_height: 750
-  map_texture: {fileID: 0}
-  default_map_icon: {fileID: 2800000, guid: 928f76b0f3761d648bca28f129f74626, type: 3}
   points_of_interest:
   - poi_test
   - poi_lookout
@@ -14343,6 +14340,24 @@ MonoBehaviour:
   b: {x: 0, y: 0, z: 0}
   c: {x: 0, y: 0, z: 0}
   d: {x: 0, y: 0, z: 0}
+--- !u!114 &2138586620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138586617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64752e17227e7874ba64e50387061092, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MapData
+  map_texture: {fileID: 0}
+  ins_pixel_width: 512
+  ins_pixel_height: 256
+  ins_world_width: 1000
+  ins_world_height: 500
+  default_map_icon: {fileID: 2800000, guid: 928f76b0f3761d648bca28f129f74626, type: 3}
 --- !u!1 &2140500297
 GameObject:
   m_ObjectHideFlags: 0

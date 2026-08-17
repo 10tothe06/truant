@@ -21,9 +21,9 @@ public class test_showmaptexture : MonoBehaviour
             } else
             {
                 GetComponent<RawImage>().enabled = true;
-                GetComponent<RawImage>().texture = WorldManager.Instance.map_texture;
+                GetComponent<RawImage>().texture = MapData.Instance.map_texture;
 
-                GetComponent<RectTransform>().sizeDelta = new Vector2(WorldManager.Instance.map_texture.width * object_scale, WorldManager.Instance.map_texture.height * object_scale);
+                GetComponent<RectTransform>().sizeDelta = new Vector2(MapData.Instance.map_texture.width * object_scale, MapData.Instance.map_texture.height * object_scale);
             }
         }
     }

@@ -36,16 +36,8 @@ public class WorldManager : MonoBehaviour
         Instance = this;
     }
 
-    [Header("LEVEL DIMENSIONS")]
-    // both in unity coordinate units
-    public float level_width;
-    public float level_height;
-    public Texture2D map_texture;
 
-
-    [Space(25)]
     [Header("POIs")]
-    public Texture2D default_map_icon;
     public string[] points_of_interest;
 
 
@@ -142,10 +134,10 @@ public class WorldManager : MonoBehaviour
         }
 
         // these are the four points that make up the map rectangle
-        Instance.a = lake_midpoint - long_lake_axis * Instance.level_width/2f;
-        Instance.b = lake_midpoint + long_lake_axis * Instance.level_width/2f;
-        Instance.c = lake_midpoint + long_lake_axis * Instance.level_width/2f + short_lake_axis * Instance.level_height;
-        Instance.d = lake_midpoint - long_lake_axis * Instance.level_width/2f + short_lake_axis * Instance.level_height;
+        Instance.a = lake_midpoint - long_lake_axis * MapData.world_width/2f;
+        Instance.b = lake_midpoint + long_lake_axis * MapData.world_width/2f;
+        Instance.c = lake_midpoint + long_lake_axis * MapData.world_width/2f + short_lake_axis * MapData.world_height;
+        Instance.d = lake_midpoint - long_lake_axis * MapData.world_width/2f + short_lake_axis * MapData.world_height;
 
         DebugManager.DrawLine(Instance.a, Instance.b, Color.cyan);
         DebugManager.DrawLine(Instance.b, Instance.c, Color.cyan);
@@ -161,7 +153,7 @@ public class WorldManager : MonoBehaviour
         // its just its own thing like the lake
         InitializeRoad();
 
-        Instance.map_texture = util_map.GenerateMapTexture(128, 64);
+        MapData.Instance.map_texture = util_map.GenerateMapTexture(MapData.pixel_width, MapData.pixel_height);
 
         GenerateLevelPOIs(special_pois);
     }
@@ -174,7 +166,7 @@ public class WorldManager : MonoBehaviour
 
         Vector3 point_on_top_edge = Vector3.Lerp(Instance.d, Instance.c, Random.Range(0f,1f));
         
-        Vector3 road_origin = point_on_top_edge + (Instance.a-Instance.d).normalized * Random.Range(WorldManager.Instance.level_height * 0.05f, WorldManager.Instance.level_height * 0.2f);
+        Vector3 road_origin = point_on_top_edge + (Instance.a-Instance.d).normalized * Random.Range(MapData.world_height * 0.05f, MapData.world_height * 0.2f);
 
         Vector3 road_direction = (Instance.c-Instance.d).normalized + (Instance.a-Instance.d).normalized * Random.Range(0f, 0.2f);
         road_direction = road_direction.normalized;
