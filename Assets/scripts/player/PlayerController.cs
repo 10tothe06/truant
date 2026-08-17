@@ -73,6 +73,7 @@ public class PlayerController : MonoBehaviour
     // used for raycast checks with the ground
     public Transform t_foot;
     public float raycastDistanceFromFoot;
+    public FootstepController footstepController;
 
 
     // for now this applies to both the visual model and the collider, 
@@ -184,7 +185,7 @@ public class PlayerController : MonoBehaviour
                 }
                 if (walkingTime * cameraBounceFrequency > Mathf.PI * 3f/2f && lastWalkingTime * cameraBounceFrequency < Mathf.PI * 3f/2f)
                 {
-                    //footstepController.Step();
+                    footstepController.Step();
                 }
                 if (walkingTime * cameraBounceFrequency > Mathf.PI*2f)
                 {

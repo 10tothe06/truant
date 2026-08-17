@@ -11,25 +11,25 @@ using UnityEngine;
 
 public class FootstepController : MonoBehaviour
 {
-    // public LayerMask validHits;
-    // public audio_soundmaterial[] materials;
-    // public audio_soundset defaultStepSound;
+    public LayerMask validHits;
+    
+    public Transform ray_source;
+    public float ray_distance;
 
-    // private float rayDistance;
+    void Start()
+    {
+        if (GetComponent<PlayerController>() != null) {
+            ray_distance = GetComponent<PlayerController>().raycastDistanceFromFoot + 0.1f;
+            ray_source = GetComponent<PlayerController>().t_foot;
+        }
+    }
 
-    // void Start()
-    // {
-    //     if (GetComponent<PlayerController>() != null) {
-    //         rayDistance =GetComponent<PlayerController>().raycastDistanceFromFoot;
-    //     }
-    // }
+    // plays the step sound effect
+    public void Step()
+    {
+        Material steppingOn = util_audio.GetMaterialFromRay(ray_source.position, -Vector3.up, ray_distance, validHits);
 
-    // // plays the step sound effect
-    // public void Step()
-    // {
-    //     Material steppingOn = util_audio.GetMaterialFromRay(transform.position, -Vector3.up, rayDistance, validHits);
-
-    //     // stacking should be controlled alr so i dont rlly care
-    //     //AudioManager.Instance.PlaySound(util_audio.GetClipFromMaterial(steppingOn, materials, defaultStepSound));
-    // }
+        // stacking should be controlled alr so i dont rlly care
+        AudioManager.PlayAudioClip(util_audio.GetClipFromMaterial(steppingOn, AudioManager.Instance.materials, AudioManager.Instance.defaultStepSound));
+    }
 }

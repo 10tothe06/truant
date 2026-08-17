@@ -33,6 +33,13 @@ public class AudioManager : MonoBehaviour
     public audio_soundset[] variableSounds;
     public AudioClip[] staticSounds;
 
+    // for use with things like footsteps (player and mosnter)
+    [Space(15)]
+    public audio_soundmaterial[] materials;
+    public audio_soundset defaultStepSound;
+
+
+
     // making this its own function so if I ever want to change the sound index I can
     public void ButtonClick()
     {
@@ -43,6 +50,11 @@ public class AudioManager : MonoBehaviour
     public void ButtonSelect()
     {
         
+    }
+
+    public static void PlayAudioClip(AudioClip clip)
+    {
+        Instance.SpawnAudioTrack(clip);
     }
 
     public static void PlayStaticSound(int index, bool loop = false)
