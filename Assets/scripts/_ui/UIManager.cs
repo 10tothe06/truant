@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -96,6 +97,10 @@ public class UIManager : MonoBehaviour
 
     public GameObject g_debugMenu;
 
+    public Image i_blackScreen;
+    private float fade_percent;
+    public float fade_speed;
+
 
     
 
@@ -110,7 +115,43 @@ public class UIManager : MonoBehaviour
     }
 
 
+    void Update()
+    {
+        if (fade_percent != i_blackScreen.color.a)
+        {
+            float new_alpha = i_blackScreen.color.a + Mathf.Clamp(fade_percent - i_blackScreen.color.a , -fade_speed* Time.deltaTime, fade_speed* Time.deltaTime);
+
+            i_blackScreen.color = new Color(i_blackScreen.color.r, i_blackScreen.color.g, i_blackScreen.color.b, new_alpha);
+        }
+    }
+
+
+    #region FADING
+
+    public static void SetFadePercent(float value)
+    {
+        Instance.fade_percent = value;
+        Instance.i_blackScreen.color = new Color(
+            Instance.i_blackScreen.color.r,
+            Instance.i_blackScreen.color.g,
+            Instance.i_blackScreen.color.b,
+            value
+        );
+    }
     
+    public static void FadeOut()
+    {
+        Instance.fade_percent = 0;
+    }
+    public static void FadeIn()
+    {
+        Instance.fade_percent = 1;
+    }
+
+
+    #endregion
+
+
 
 
 

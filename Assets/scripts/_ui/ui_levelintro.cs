@@ -44,6 +44,9 @@ public class ui_levelintro : MonoBehaviour
 
         // fade back
         bg.gameObject.SetActive(false);
+
+        UIManager.SetFadePercent(1f);
+        UIManager.FadeOut();
     }
 
     private IEnumerator Intro(TextSequence data)
