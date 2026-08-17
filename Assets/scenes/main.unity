@@ -3806,7 +3806,7 @@ MonoBehaviour:
   ins_buildMode: 0
   ins_startMode: 2
   level_to_load: gregrun
-  ins_skip_loading_screens: 0
+  ins_skip_loading_screens: 1
   ins_force_flat_terrain: 1
   ins_ban_all_foliage: 1
 --- !u!114 &576746838

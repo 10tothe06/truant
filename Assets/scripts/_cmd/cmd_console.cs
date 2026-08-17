@@ -72,6 +72,9 @@ public class cmd_console : MonoBehaviour
         new cmd_consolecommand(new string[]{"give"}), // give item to player
 
         new cmd_consolecommand(new string[]{"tpcar"}), // go to the car, like, RIGHT NOW
+        new cmd_consolecommand(new string[]{"caritems"}), // spawn every car-relevant item
+
+        new cmd_consolecommand(new string[]{"help"}), // show every console command
     };
     
     public static cmd_consolecommand GetCommandData(string name)
@@ -159,6 +162,36 @@ public class cmd_console : MonoBehaviour
             {
                 Player.TeleportTo(g_car.transform.position + Vector3.forward * 4f);
             }
+        }
+
+        //caritems
+        else if (selectedCommand == possibleCommands[4])
+        {
+            ObjectManager.SpawnObject("gascan", Player.Instance.transform.position);
+
+
+            ObjectManager.SpawnObject("car_tire", Player.Instance.transform.position);
+            ObjectManager.SpawnObject("car_tire", Player.Instance.transform.position);
+            ObjectManager.SpawnObject("car_tire", Player.Instance.transform.position);
+            ObjectManager.SpawnObject("car_tire", Player.Instance.transform.position);
+
+            ObjectManager.SpawnObject("car_headlight", Player.Instance.transform.position);
+            ObjectManager.SpawnObject("car_headlight", Player.Instance.transform.position);
+
+            ObjectManager.SpawnObject("car_battery", Player.Instance.transform.position);
+        }
+
+        // help
+        else if (selectedCommand == possibleCommands[5])
+        {
+            PostToConsole("list of commands:", Color.yellow);
+
+            PostToConsole("tp", Color.yellow);
+            PostToConsole("summon {object_name}", Color.yellow);
+            PostToConsole("give {item_name} {item_count}", Color.yellow);
+
+            PostToConsole("tpcar", Color.yellow);
+            PostToConsole("caritems", Color.yellow);
         }
     }
 
