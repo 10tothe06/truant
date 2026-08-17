@@ -174,6 +174,19 @@ public class WorldManager : MonoBehaviour
         MapData.road_points = new Vector3[] {road_origin - road_direction * 1000f, road_origin + road_direction * 1000f};
 
         DebugManager.DrawLine(MapData.road_points[0], MapData.road_points[1], Color.purple, 10f);
+
+        // with all that out of the way, we still need an actual road mesh
+        GameObject g_road = ObjectManager.SpawnObject("road", Vector3.zero);
+
+        Mesh road_mesh = util_mesh.GenerateRectangularPrism(
+            MapData.road_points,
+            width: 3f,
+            height: 0.4f,
+            closed: false
+        );
+
+        g_road.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh = road_mesh;
+        g_road.transform.GetChild(0).GetComponent<MeshCollider>().sharedMesh = road_mesh;
     }
 
 

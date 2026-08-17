@@ -5,6 +5,240 @@ using UnityEngine;
 
 public class util_mesh : MonoBehaviour
 {
+    /// <summary>
+    /// Generates a rectangular prism mesh that follows a path.
+    /// Every face of every segment has its own independent 0-1 UV space.
+    /// </summary>
+    public static Mesh GenerateRectangularPrism(
+        Vector3[] points,
+        float width = 2f,
+        float height = 0.5f,
+        bool closed = false)
+    {
+        if (points == null || points.Length < 2)
+        {
+            Debug.LogError("Path must contain at least 2 points.");
+            return null;
+        }
+
+        int pathCount = points.Length;
+        int segmentCount = closed ? pathCount : pathCount - 1;
+
+        var vertices  = new List<Vector3>();
+        var normals   = new List<Vector3>();
+        var uvs       = new List<Vector2>();
+        var triangles = new List<int>();
+        var top_triangles = new List<int>();
+
+        // Pre-calculate forward directions
+        Vector3[] forwards = new Vector3[pathCount];
+        for (int i = 0; i < pathCount; i++)
+        {
+            if (closed)
+            {
+                Vector3 prev = points[(i - 1 + pathCount) % pathCount];
+                Vector3 next = points[(i + 1) % pathCount];
+                forwards[i] = (next - prev).normalized;
+            }
+            else
+            {
+                if (i == 0)
+                    forwards[i] = (points[1] - points[0]).normalized;
+                else if (i == pathCount - 1)
+                    forwards[i] = (points[pathCount - 1] - points[pathCount - 2]).normalized;
+                else
+                    forwards[i] = (points[i + 1] - points[i - 1]).normalized;
+            }
+        }
+
+        // ========== SIDE FACES (per segment, per face) ==========
+        for (int seg = 0; seg < segmentCount; seg++)
+        {
+            int i0 = seg;
+            int i1 = (seg + 1) % pathCount;
+
+            // Get the two cross-sections
+            GetCrossSection(points[i0], forwards[i0], width, height, out Vector3[] corners0, out Vector3[] _);
+            GetCrossSection(points[i1], forwards[i1], width, height, out Vector3[] corners1, out Vector3[] _);
+
+            // 4 faces per segment
+            // Face order: 0=bottom, 1=right, 2=top, 3=left
+            for (int face = 0; face < 4; face++)
+            {
+                int cA = face;
+                int cB = (face + 1) % 4;
+
+                // Four unique vertices for this single quad
+                int baseVert = vertices.Count;
+
+                Vector3 v0 = corners0[cA]; // start, side A
+                Vector3 v1 = corners0[cB]; // start, side B
+                Vector3 v2 = corners1[cB]; // end,   side B
+                Vector3 v3 = corners1[cA]; // end,   side A
+
+                vertices.Add(v0);
+                vertices.Add(v1);
+                vertices.Add(v2);
+                vertices.Add(v3);
+
+                // Face normal
+                Vector3 normal = Vector3.Cross(v1 - v0, v3 - v0).normalized;
+                // Ensure it points outward
+                Vector3 faceCenter = (v0 + v1 + v2 + v3) * 0.25f;
+                Vector3 pathCenter = (points[i0] + points[i1]) * 0.5f;
+                if (Vector3.Dot(normal, faceCenter - pathCenter) < 0f)
+                    normal = -normal;
+
+                normals.Add(normal);
+                normals.Add(normal);
+                normals.Add(normal);
+                normals.Add(normal);
+
+                // Each face gets its own 0-1 UV space
+                uvs.Add(new Vector2(0, 0)); // v0
+                uvs.Add(new Vector2(1, 0)); // v1
+                uvs.Add(new Vector2(1, 1)); // v2
+                uvs.Add(new Vector2(0, 1)); // v3
+
+                // Two triangles
+                if (face == 2)
+                {
+                    // top face gets its own submesh
+                    top_triangles.Add(baseVert + 0);
+                    top_triangles.Add(baseVert + 1);
+                    top_triangles.Add(baseVert + 2);
+
+                    top_triangles.Add(baseVert + 0);
+                    top_triangles.Add(baseVert + 2);
+                    top_triangles.Add(baseVert + 3);
+                } else
+                {
+                    // everything else is normal
+                    triangles.Add(baseVert + 0);
+                    triangles.Add(baseVert + 1);
+                    triangles.Add(baseVert + 2);
+
+                    triangles.Add(baseVert + 0);
+                    triangles.Add(baseVert + 2);
+                    triangles.Add(baseVert + 3);
+                }
+            }
+        }
+
+        // ========== END CAPS (only if open) ==========
+        if (!closed)
+        {
+            AddCap(points[0], forwards[0], width, height, true, vertices, normals, uvs, triangles);
+            AddCap(points[pathCount - 1], forwards[pathCount - 1], width, height, false, vertices, normals, uvs, triangles);
+        }
+
+        // Create mesh
+        Mesh mesh = new Mesh();
+        mesh.name = "RectangularPrismPath";
+        mesh.subMeshCount = 2;
+        mesh.SetVertices(vertices);
+        mesh.SetNormals(normals);
+        mesh.SetUVs(0, uvs);
+        mesh.SetTriangles(triangles, 0);
+        mesh.SetTriangles(top_triangles, 1);
+        mesh.RecalculateBounds();
+
+        return mesh;
+    }
+
+    private static void GetCrossSection(
+        Vector3 position,
+        Vector3 forward,
+        float width,
+        float height,
+        out Vector3[] corners,
+        out Vector3[] normals)
+    {
+        Vector3 up = Vector3.up;
+        if (Mathf.Abs(Vector3.Dot(forward, up)) > 0.99f)
+            up = Vector3.right;
+
+        Vector3 right = Vector3.Cross(up, forward).normalized;
+        up = Vector3.Cross(forward, right).normalized;
+
+        float halfW = width * 0.5f;
+        float halfH = height * 0.5f;
+
+        corners = new Vector3[4];
+        corners[0] = position - right * halfW - up * halfH; // bottom-left
+        corners[1] = position + right * halfW - up * halfH; // bottom-right
+        corners[2] = position + right * halfW + up * halfH; // top-right
+        corners[3] = position - right * halfW + up * halfH; // top-left
+
+        normals = null; // not needed here
+    }
+
+    private static void AddCap(
+        Vector3 position,
+        Vector3 forward,
+        float width,
+        float height,
+        bool isFront,
+        List<Vector3> vertices,
+        List<Vector3> normals,
+        List<Vector2> uvs,
+        List<int> triangles)
+    {
+        GetCrossSection(position, forward, width, height, out Vector3[] corners, out _);
+
+        int baseVert = vertices.Count;
+        Vector3 normal = isFront ? -forward : forward;
+
+        for (int i = 0; i < 4; i++)
+        {
+            vertices.Add(corners[i]);
+            normals.Add(normal);
+        }
+
+        // Own 0-1 UV island for the cap
+        uvs.Add(new Vector2(0, 0));
+        uvs.Add(new Vector2(1, 0));
+        uvs.Add(new Vector2(1, 1));
+        uvs.Add(new Vector2(0, 1));
+
+        if (isFront)
+        {
+            triangles.Add(baseVert + 0);
+            triangles.Add(baseVert + 2);
+            triangles.Add(baseVert + 1);
+
+            triangles.Add(baseVert + 0);
+            triangles.Add(baseVert + 3);
+            triangles.Add(baseVert + 2);
+        }
+        else
+        {
+            triangles.Add(baseVert + 0);
+            triangles.Add(baseVert + 1);
+            triangles.Add(baseVert + 2);
+
+            triangles.Add(baseVert + 0);
+            triangles.Add(baseVert + 2);
+            triangles.Add(baseVert + 3);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public static Vector3[] ToVector3(Vector2[] old)
     {
