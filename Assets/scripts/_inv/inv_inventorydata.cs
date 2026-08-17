@@ -225,7 +225,19 @@ public class inv_inventorydata
         {
             // someone wants us to figure out where to put the item
 
-            // TODO: this
+            bool can_fit_item = false;
+
+            for (int i = 0; i < cellsTaken.Length; i++)
+            {
+                data.cellIndex = i;
+                if (CanFitItem(data))
+                {
+                    can_fit_item = true;
+                    break;
+                }
+            }
+
+            if (!can_fit_item) {return;}
         }
 
         // there are two possibilities here, either we combine the stack with another of the same type or we add it

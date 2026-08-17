@@ -184,11 +184,15 @@ public class UIManager : MonoBehaviour
         {
             Instance.HideConsole();
             Cursor.lockState = CursorLockMode.Locked;
+
+            isTyping = false;
         }
         else
         {
             Instance.ShowConsole();
             Instance.consoleTabs.SetTabIndex(1);
+
+            isTyping = true;
 
             Cursor.lockState = CursorLockMode.None;
         }

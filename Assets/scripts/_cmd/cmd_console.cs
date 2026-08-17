@@ -136,7 +136,18 @@ public class cmd_console : MonoBehaviour
         // give (item)
         else if (selectedCommand == possibleCommands[2])
         {
-            
+            // the arguments for this command MUST be as follows:
+            // 1 - the command name itself "give"
+            // 2 - the ITEM NAME
+            // 3 - the item count
+
+            string item_name = items[1];
+            int parsed_item_count = 1;
+
+            if (int.TryParse(items[2], out parsed_item_count))
+            {
+                Player.GiveItem(new inv_itemstack(item_name, parsed_item_count, -1));
+            }
         }
 
         // tpcar

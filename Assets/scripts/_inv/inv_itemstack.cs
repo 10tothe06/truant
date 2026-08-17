@@ -32,6 +32,21 @@ public class inv_itemstack
         extendHorizontal = 1;
     }
 
+    public inv_itemstack(string item_name, int itemCount, int cellIndex)
+    {
+        this.itemIndex = ItemManager.GetItemIndexFromName(item_name);
+        this.itemCount = itemCount;
+
+        this.cellIndex = cellIndex;
+
+        // filling out the extend horizontal and vertical based on the item's static data
+        this.extendHorizontal = ItemManager.Instance.items[itemIndex].occupyWidth;
+        this.extendVertical = ItemManager.Instance.items[itemIndex].occupyHeight;
+
+        data_keys = new List<string>();
+        data_values = new List<string>();
+    }
+
 
     // assuming rotation is 0
     public inv_itemstack(int itemIndex, int itemCount, int cellIndex)

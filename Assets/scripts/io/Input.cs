@@ -59,6 +59,18 @@ public class Input : MonoBehaviour
     {
         UpdateValues(Time.deltaTime);
 
+        // the console/cheats menu
+        if (Keyboard.current.minusKey.wasPressedThisFrame && !Keyboard.current.shiftKey.isPressed)
+        {
+            // console
+            UIManager.ToggleConsole();
+        }
+        if (Keyboard.current.equalsKey.wasPressedThisFrame && !Keyboard.current.shiftKey.isPressed)
+        {
+            // cheats
+            UIManager.ToggleCheatMenu();
+        }
+
         // keyboard presses
         // TEMP until i can come up with a better input system
         if (!UIManager.isTyping)
@@ -75,19 +87,6 @@ public class Input : MonoBehaviour
             if (Keyboard.current.backquoteKey.wasPressedThisFrame)
             {
                 UIManager.Instance.ToggleDebugMenu();
-            }
-
-
-            // the console/cheats menu
-            if (Keyboard.current.minusKey.wasPressedThisFrame && !Keyboard.current.shiftKey.isPressed)
-            {
-                // console
-                UIManager.ToggleConsole();
-            }
-            if (Keyboard.current.equalsKey.wasPressedThisFrame && !Keyboard.current.shiftKey.isPressed)
-            {
-                // cheats
-                UIManager.ToggleCheatMenu();
             }
 
 
