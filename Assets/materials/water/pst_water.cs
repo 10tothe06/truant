@@ -48,7 +48,7 @@ public class pst_water : MonoBehaviour
 
     void Start()
     {
-        waveAngles = new float[] { -0.68f, 1.45f, -2.59f, 1, -2, 0.5f, 3, 5, 0.25f, -1.53f, 5, 9 };
+        waveAngles = new float[] { -0.68f, 1.45f, -2.59f };
     }
     
     void Update()
@@ -71,13 +71,13 @@ public class pst_water : MonoBehaviour
         //     isUnderwater = false;
         // }
 
-        // waterObj.sharedMaterial.SetFloatArray("waveAngles", waveAngles);
-        // waterObj.sharedMaterial.SetFloat("baseWaveFrequency", baseWaveFrequency);
+        waterObj.sharedMaterial.SetFloatArray("waveAngles", waveAngles);
+        waterObj.sharedMaterial.SetFloat("baseWaveFrequency", baseWaveFrequency);
         waterObj.sharedMaterial.SetVector("sunDir", -lightTransform.forward);
 
         waterObj.sharedMaterial.SetInt("isUnderWater", isUnderwater ? 1 : 0);
         
-        //waterObj.sharedMaterial.SetFloat("timeValue", Time.time);
+        waterObj.sharedMaterial.SetFloat("timeValue", Time.time);
     }
 
     void OnRenderImage(RenderTexture source, RenderTexture mod)

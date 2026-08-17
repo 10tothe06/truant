@@ -88,7 +88,7 @@
     
             float _Tess;
             float _MaxTessDistance;
-            float waveAngles[12];
+            float waveAngles[3];
             
 
             // foam settings
@@ -130,45 +130,45 @@
             };
 
             float getHeight(float3 pos) {
-                float a = 50;
-                float f = 0.05;
+                float a = 0.7;
+                float f = 2;
 
                 float sum = 0;
-                int iterations = 12;
+                int iterations = 3;
 
                 for (int i = 0; i < iterations; i++) {
                     float angle = waveAngles[i];
 
                     float x = cos(angle) * (pos.x * baseWaveFrequency) - sin(angle) * (pos.z * baseWaveFrequency);
-                    x += timeValue*4;
+                    x += timeValue;
                     
                     sum += pow(2.71828, sin(x*f) - 1) * a;
 
                     f *= 1.5;
-                    a = lerp(a, 1, 0.5);
+                    a = lerp(a, 0.2, 0.5);
                 }
 
                 return sum/iterations;
             }
 
             float3 getNormal(float3 pos) {
-                float a = 50;
-                float f = 0.05;
+                float a = 0.7;
+                float f = 2;
 
                 float3 sum = 0;
-                int iterations = 12;
+                int iterations = 3;
 
                 for (int i = 0; i < iterations; i++) {
                     float  angle = waveAngles[i];
 
                     float x = cos(angle) * (pos.x * baseWaveFrequency) - sin(angle) * (pos.z * baseWaveFrequency);
-                    x += timeValue*4;
+                    x += timeValue;
 
                     float slope = pow(2.71828, sin(x*f) - 1) * cos(x * f);
                     sum += normalize(float3(cos(-angle) * slope, 1, -sin(-angle) * slope)) * a;
 
                     f *= 1.5;
-                    a = lerp(a, 1, 0.5);
+                    a = lerp(a, 0.2, 0.5);
                 }
 
                 return normalize(sum);
