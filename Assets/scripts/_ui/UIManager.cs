@@ -97,24 +97,14 @@ public class UIManager : MonoBehaviour
 
     public ui_levelintro level_intro;
 
+    public ui_credits credits_controller;
+
     public GameObject g_debugMenu;
 
     public Image i_blackScreen;
     private float fade_percent;
     public float fade_speed;
 
-
-    
-
-    public static void PlayLevelIntro(TextSequence data)
-    {
-        if (Program.skip_loading_screens) {return;}
-
-        Debug.Log("📽 Playing level intro...");
-
-
-        Instance.level_intro.PlayIntro(data);
-    }
 
 
     void Update()
@@ -131,6 +121,35 @@ public class UIManager : MonoBehaviour
             i_blackScreen.gameObject.SetActive(false);
         }
     }
+
+
+
+
+    #region CUTSCENES
+
+
+    public static void PlayLevelIntro(TextSequence data)
+    {
+        if (Program.skip_loading_screens) {return;}
+
+        Debug.Log("📽 Playing level intro...");
+
+
+        Instance.level_intro.PlayIntro(data);
+    }
+
+
+    // plays once the player has completed the main level (of the demo)
+    public static void StartDemoEndingSequence()
+    {
+        Instance.credits_controller.RollCredits();
+    }
+
+
+    #endregion
+
+
+    
 
 
     #region FADING

@@ -48,7 +48,22 @@ public class poi_roadboundary : MonoBehaviour
         }
         
 
+        // for the "colliders" we aren't actually using trigger colliders
+        // both colliders face inwards, so that their detection can work properly
+
         collider_a.position = point_a;
+        collider_a.forward = road_midpoint - point_a;
+
         collider_b.position = point_b;
+        collider_b.forward = road_midpoint - point_b;
+
+        collider_a.GetComponent<int_dotdetector>().Activate();
+        collider_b.GetComponent<int_dotdetector>().Activate();
+
+        // TEMP:
+        // for now, since there is only one level in the demo,
+        // we'll just assign the events here directly
+        collider_a.GetComponent<int_dotdetector>().onValueFalse.AddListener(UIManager.StartDemoEndingSequence);
+        collider_b.GetComponent<int_dotdetector>().onValueFalse.AddListener(UIManager.StartDemoEndingSequence);
     }
 }
