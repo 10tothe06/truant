@@ -70,6 +70,8 @@ public class cmd_console : MonoBehaviour
         
         new cmd_consolecommand(new string[]{"summon"}), // spawns objects
         new cmd_consolecommand(new string[]{"give"}), // give item to player
+
+        new cmd_consolecommand(new string[]{"tpcar"}), // go to the car, like, RIGHT NOW
     };
     
     public static cmd_consolecommand GetCommandData(string name)
@@ -135,6 +137,17 @@ public class cmd_console : MonoBehaviour
         else if (selectedCommand == possibleCommands[2])
         {
             
+        }
+
+        // tpcar
+        else if (selectedCommand == possibleCommands[3])
+        {
+            GameObject g_car = GameObject.Find("car_1");
+
+            if (g_car != null)
+            {
+                Player.TeleportTo(g_car.transform.position + Vector3.forward * 4f);
+            }
         }
     }
 

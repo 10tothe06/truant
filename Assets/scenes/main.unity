@@ -9992,6 +9992,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ui_levelintro
   sequencer: {fileID: 1435159026}
   bg: {fileID: 1724521447}
+  skip_text: {fileID: 128241288}
 --- !u!1 &1593305311
 GameObject:
   m_ObjectHideFlags: 0

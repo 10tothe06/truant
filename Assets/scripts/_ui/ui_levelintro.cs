@@ -2,12 +2,14 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class ui_levelintro : MonoBehaviour
 {
     public TextSequencer sequencer; 
 
     public Image bg;
+    public TextMeshProUGUI skip_text;
 
     void Awake()
     {
@@ -25,7 +27,7 @@ public class ui_levelintro : MonoBehaviour
         // and don't really care what the intro has to say
         // (cuz they've seen it already)
 
-        if (Keyboard.current.leftCtrlKey.wasPressedThisFrame)
+        if (Keyboard.current.leftCtrlKey.wasPressedThisFrame && skip_text.gameObject.activeSelf)
         {
             sequencer.ForceStop();
             EndLevelIntro();
@@ -35,6 +37,8 @@ public class ui_levelintro : MonoBehaviour
 
     public void PlayIntro(TextSequence data)
     {
+        skip_text.gameObject.SetActive(true);
+        
         StartCoroutine(Intro(data));
     }
 
@@ -42,9 +46,11 @@ public class ui_levelintro : MonoBehaviour
     {
         sequencer.Clear();
 
-        // fade back
+        
         bg.gameObject.SetActive(false);
+        skip_text.gameObject.SetActive(false);
 
+        // fade back
         UIManager.SetFadePercent(1f);
         UIManager.FadeOut();
     }

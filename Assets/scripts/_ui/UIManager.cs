@@ -43,6 +43,8 @@ public class UIManager : MonoBehaviour
         if (level_intro != null) {level_intro.gameObject.SetActive(true);}
 
         if (g_console != null) {HideConsole();}
+
+        SetFadePercent(0f);
     }
 
     public static bool isTyping;
@@ -119,9 +121,14 @@ public class UIManager : MonoBehaviour
     {
         if (fade_percent != i_blackScreen.color.a)
         {
+            i_blackScreen.gameObject.SetActive(true);
+
             float new_alpha = i_blackScreen.color.a + Mathf.Clamp(fade_percent - i_blackScreen.color.a , -fade_speed* Time.deltaTime, fade_speed* Time.deltaTime);
 
             i_blackScreen.color = new Color(i_blackScreen.color.r, i_blackScreen.color.g, i_blackScreen.color.b, new_alpha);
+        } else if (fade_percent == 0)
+        {
+            i_blackScreen.gameObject.SetActive(false);
         }
     }
 
@@ -130,6 +137,8 @@ public class UIManager : MonoBehaviour
 
     public static void SetFadePercent(float value)
     {
+        Instance.i_blackScreen.gameObject.SetActive(true);
+
         Instance.fade_percent = value;
         Instance.i_blackScreen.color = new Color(
             Instance.i_blackScreen.color.r,
