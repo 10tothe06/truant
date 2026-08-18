@@ -75,6 +75,8 @@ public class cmd_console : MonoBehaviour
         new cmd_consolecommand(new string[]{"caritems"}), // spawn every car-relevant item
 
         new cmd_consolecommand(new string[]{"help"}), // show every console command
+
+        new cmd_consolecommand(new string[]{"rollcredits"}), // run the ending sequence
     };
     
     public static cmd_consolecommand GetCommandData(string name)
@@ -192,6 +194,12 @@ public class cmd_console : MonoBehaviour
 
             PostToConsole("tpcar", Color.yellow);
             PostToConsole("caritems", Color.yellow);
+        }
+
+        // rollcredits
+        else if (selectedCommand == possibleCommands[6])
+        {
+            UIManager.StartDemoEndingSequence();
         }
     }
 

@@ -123,6 +123,12 @@ public class UIManager : MonoBehaviour
     }
 
 
+    public void OpenURL(string url)
+    {
+        util_file.OpenUrl(url);
+    }
+
+
 
 
     #region CUTSCENES

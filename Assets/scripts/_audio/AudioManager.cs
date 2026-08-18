@@ -77,7 +77,7 @@ public class AudioManager : MonoBehaviour
         comp.Play();
     }
 
-    public static void PlayMusic(int index)
+    public static void PlayMusic(int index, float volume)
     {
         // cant just spawn an audio channel because we need a parent for organization purposes
 
@@ -96,7 +96,7 @@ public class AudioManager : MonoBehaviour
 
             AudioSource comp = g_newChannel.GetComponent<AudioSource>();
             comp.clip = Instance.musicTracks[index].layers[i];
-            comp.volume = Settings.GetFloat("vol_master") * Settings.GetFloat("vol_music");
+            comp.volume = Settings.GetFloat("vol_master") * Settings.GetFloat("vol_music") * volume;
 
             comp.Play();
         }

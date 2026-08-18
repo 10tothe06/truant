@@ -4,12 +4,15 @@ using UnityEngine.UI;
 
 public class ui_credits : MonoBehaviour
 {
-    public Image i_gameLogo;
+    public GameObject[] credits;
 
 
     void Awake()
     {
-        i_gameLogo.gameObject.SetActive(false);
+        for (int i = 0; i < credits.Length; i++)
+        {
+            credits[i].SetActive(false);
+        }
     }
 
     public void RollCredits()
@@ -17,12 +20,33 @@ public class ui_credits : MonoBehaviour
         StartCoroutine(Credits());
     }
 
+    public void CloseCredits()
+    {
+        credits[credits.Length-1].SetActive(false);
+        AudioManager.StopAllMusic();
+        UIManager.SetFadePercent(0f);
+    }
+
     public IEnumerator Credits()
     {
-        AudioManager.PlayMusic(0);
+        AudioManager.PlayMusic(0, 0.5f);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
+        
+        // show the truant logo
+        UIManager.SetFadePercent(1f);
+        
+        for (int i = 0; i < credits.Length; i++)
+        {
+            credits[i].SetActive(true);
 
-        i_gameLogo.gameObject.SetActive(true);
+            if (i < credits.Length - 1) // final credits object STAYS active
+            {
+                yield return new WaitForSeconds(2f);
+
+                credits[i].SetActive(false);
+            }
+        }
+
     }
 }

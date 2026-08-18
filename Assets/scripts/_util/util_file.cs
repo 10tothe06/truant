@@ -1,10 +1,24 @@
 using System;
 using System.IO;
 using UnityEngine;
+using System.Diagnostics;
 
 public class util_file : MonoBehaviour
 {
     public static string workingDir = Application.persistentDataPath;
+
+
+
+    public static void OpenUrl(string url)
+    {
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = url,
+            UseShellExecute = true
+        });
+    }
+    
+
 
     public static string GetWorkingDirectory()
     {
