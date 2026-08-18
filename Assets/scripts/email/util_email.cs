@@ -29,7 +29,7 @@ public class util_email
         messageToSend.Subject = subject;
         messageToSend.Body = bodyText;
 
-        StmpServer.Credentials = new NetworkCredential("maximilianmcdiarmid@gmail.com", "tahg sdah jsaf uhln") as ICredentialsByHost;
+        StmpServer.Credentials = new NetworkCredential("maximilianmcdiarmid@gmail.com", "egff uaqc znho mice") as ICredentialsByHost;
         ServicePointManager.ServerCertificateValidationCallback = delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) {
             return true;
         };

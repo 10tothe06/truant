@@ -302,9 +302,33 @@ public class UIManager : MonoBehaviour
     // (new rule to avoid verbosity)
     // TODO: do the same shit for all the open/close functions in Launch Sequence
 
+    public static void ToggleBugReportWidget()
+    {
+        if (Instance.g_bugReportWidget.activeSelf)
+        {
+            CloseBugReportWidget();
+        } else
+        {
+            OpenBugReportWidget();
+        }
+    }
+
     public static void OpenBugReportWidget()
     {
         Instance.g_bugReportWidget.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        isTyping = true;
+    }
+
+    public static void CloseBugReportWidget()
+    {
+        Instance.g_bugReportWidget.SetActive(false);
+
+        // TODO: make this conditional so I don't lock the cursor in the menu
+        Cursor.lockState = CursorLockMode.Locked;
+
+        
+        isTyping = false;
     }
 
     public static void OpenSettingsMenu()

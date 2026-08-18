@@ -94,6 +94,11 @@ public class Input : MonoBehaviour
                 GameManager.ToggleGameUpdates();
             }
 
+            if (Keyboard.current.bKey.wasPressedThisFrame)
+            {
+                UIManager.ToggleBugReportWidget();
+            }
+
 
             // selecting hotbar cells
             if (Keyboard.current.digit1Key.wasPressedThisFrame)
