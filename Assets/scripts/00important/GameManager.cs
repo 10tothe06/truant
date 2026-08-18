@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 // used so that very high-level scripts like the WorldManagr can only run certain logic when in-game
 // essentially the updated version of the inGame variable all the way back from Tempest
@@ -43,6 +44,14 @@ public class GameManager : MonoBehaviour
     [Header("vv READ ONLY vv")]
     public GameState ins_gameState;
     public static GameState gameState;
+
+
+
+    [Header("UNITY EVENTS")]
+    public UnityEvent onGamePaused;
+    public UnityEvent onGameResume;
+
+    
 
 
     void Awake()
@@ -137,11 +146,15 @@ public class GameManager : MonoBehaviour
     public static void PauseGameUpdates()
     {
         ui_debugmessager.PostMessage("updates paused");
+        is_game_paused = true;
+        Instance.onGamePaused.Invoke();
         SetUpdateSpeed(0f);
     }
     public static void ResumeGameUpdates()
     {
         ui_debugmessager.PostMessage("updates resumed");
+        is_game_paused = false;
+        Instance.onGameResume.Invoke();
         SetUpdateSpeed(last_game_update_speed);
     }
 

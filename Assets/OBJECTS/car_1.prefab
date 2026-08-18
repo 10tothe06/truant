@@ -1382,6 +1382,7 @@ GameObject:
   - component: {fileID: 4550057145678967606}
   - component: {fileID: 7303542044047568563}
   - component: {fileID: 486753490596969941}
+  - component: {fileID: 9073106528257130836}
   m_Layer: 0
   m_Name: car_1
   m_TagString: Untagged
@@ -1485,6 +1486,36 @@ MonoBehaviour:
   is_engine_started: 0
   fuel_tank: {fileID: 3470204238730061594}
   onEngineStart:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &9073106528257130836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5361951604180008226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb72d9494664291449da362dc3af3687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractableObject3D
+  momentOfInertia: 0
+  buoyancy_coefficient: 0
+  buoyancy_force_limit: 0
+  linearDamping: 0.99
+  angularDamping: 0.99
+  parent_slot: {fileID: 0}
+  can_be_interacted_with: 0
+  auto_colliders: 0
+  collider_list: []
+  has_physics: 1
+  isDraggable: 0
+  hoverPrompt: 
+  onInteract:
+    m_PersistentCalls:
+      m_Calls: []
+  onInteractByObject:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &5375610623282970244

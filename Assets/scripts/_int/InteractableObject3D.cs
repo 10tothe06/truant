@@ -27,6 +27,10 @@ public class InteractableObject3D : MonoBehaviour
     public float angularDamping = 0.99f;
 
 
+    private Vector3 stored_linear_velocity;
+    private Vector3 stored_angular_velocity;
+
+
 
     [Header("INFORMATION")]
     public bool is_in_water {get; private set;}
@@ -68,6 +72,12 @@ public class InteractableObject3D : MonoBehaviour
         }
 
         rb = GetComponent<Rigidbody>();
+    }
+
+    void Start()
+    {
+        GameManager.Instance.onGamePaused.AddListener(() => DisablePhysics());
+        GameManager.Instance.onGameResume.AddListener(() => EnablePhysics());
     }
 
     void Update()
@@ -132,11 +142,14 @@ public class InteractableObject3D : MonoBehaviour
         
         if (rb != null)
         {
+            stored_angular_velocity = rb.angularVelocity;
+            stored_linear_velocity = rb.linearVelocity;
+
             rb.useGravity = false;
             rb.isKinematic = true;
         }
     }
-    public void EnablePhysics()
+    public void EnablePhysics(bool apply_stored_velocities = true)
     {
         has_physics = true;
         
@@ -144,6 +157,12 @@ public class InteractableObject3D : MonoBehaviour
         {
             rb.useGravity = true;
             rb.isKinematic = false;
+
+            if (apply_stored_velocities)
+            {
+                rb.linearVelocity = stored_linear_velocity;
+                rb.angularVelocity = stored_angular_velocity;
+            }
         }
     }
 

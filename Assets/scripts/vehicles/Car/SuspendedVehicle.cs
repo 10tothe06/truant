@@ -33,6 +33,11 @@ public class SuspendedVehicle : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        
+    }
+
     void Update()
     {
         // gravity
