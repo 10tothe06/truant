@@ -89,13 +89,9 @@ public class Input : MonoBehaviour
                 UIManager.Instance.ToggleDebugMenu();
             }
 
-            // ctrl+p --> pause/unpause game (without the menu)
-            if (Keyboard.current.ctrlKey.isPressed)
+            if (Keyboard.current.pKey.wasPressedThisFrame)
             {
-                if (Keyboard.current.pKey.wasPressedThisFrame)
-                {
-                    GameManager.ToggleGameUpdates();
-                }
+                GameManager.ToggleGameUpdates();
             }
 
 
