@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class int_interactionsource : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class int_interactionsource : MonoBehaviour
                 Player.LockCamera();
             }
 
-            if (Input.mouseButtonRight)
+            if (Keyboard.current.leftAltKey.isPressed)
             {
                 // right-clicking to rotate the object
 

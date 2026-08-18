@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1890519104577960506}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.129, z: 0.122}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 1792735198715129915}
   - component: {fileID: 3516824907822895741}
   m_Layer: 6
-  m_Name: gascan
+  m_Name: note
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -200,11 +200,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb72d9494664291449da362dc3af3687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableObject3D
-  momentOfInertia: 0
-  buoyancy_coefficient: 0
-  buoyancy_force_limit: 0
-  linearDamping: 0.99
-  angularDamping: 0.99
   parent_slot: {fileID: 0}
   can_be_interacted_with: 1
   auto_colliders: 1
@@ -240,9 +235,6 @@ MonoBehaviour:
     extendHorizontal: 0
     extendVertical: 0
   onDataUpdate:
-    m_PersistentCalls:
-      m_Calls: []
-  onInitialize:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &3516824907822895741
