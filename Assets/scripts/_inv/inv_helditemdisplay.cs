@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 // why is this a separate script?
@@ -13,6 +14,10 @@ public class inv_helditemdisplay : MonoBehaviour
 
     public GameObject g_currentlyHeldObject {get; private set;}
     public bool is_inspecting_item {get; private set;}
+
+
+    // the latest entry in a LONG chain of item-related unity events
+    public UnityEvent onUpdateHeldObject;
 
     void Start()
     {
@@ -43,6 +48,8 @@ public class inv_helditemdisplay : MonoBehaviour
 
         g_itemDisplay.GetComponent<InteractableObject3D>().DisableAllColliders();
         g_itemDisplay.GetComponent<InteractableObject3D>().DisablePhysics();
+
+        onUpdateHeldObject.Invoke();
     }
 
     void Update()
@@ -51,6 +58,14 @@ public class inv_helditemdisplay : MonoBehaviour
         {
             if (Keyboard.current.leftAltKey.isPressed)
             {
+                if (Keyboard.current.leftAltKey.wasPressedThisFrame)
+                {
+                    if (g_currentlyHeldObject.GetComponent<InteractableObject3D>() != null)
+                    {
+                        g_currentlyHeldObject.GetComponent<InteractableObject3D>().onInspectObject.Invoke();
+                    }
+                }
+
                 // inspecting the item
 
                 g_currentlyHeldObject.transform.position = t_inspectingItemPosition.position;
@@ -65,6 +80,14 @@ public class inv_helditemdisplay : MonoBehaviour
             } else
             {
                 // just holding the item like normal
+
+                if (Keyboard.current.leftAltKey.wasReleasedThisFrame)
+                {
+                    if (g_currentlyHeldObject.GetComponent<InteractableObject3D>() != null)
+                    {
+                        g_currentlyHeldObject.GetComponent<InteractableObject3D>().onFinishInspecting.Invoke();
+                    }
+                }
 
                 g_currentlyHeldObject.transform.localPosition = Vector3.zero;
 

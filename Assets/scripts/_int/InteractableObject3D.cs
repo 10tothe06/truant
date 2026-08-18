@@ -61,6 +61,8 @@ public class InteractableObject3D : MonoBehaviour
     [Header("Events")]
     public UnityEvent onInteract;
     public UnityEvent<GameObject> onInteractByObject;
+    public UnityEvent onInspectObject;
+    public UnityEvent onFinishInspecting;
 
     void Awake()
     {
