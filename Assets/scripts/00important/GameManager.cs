@@ -36,6 +36,8 @@ public class GameManager : MonoBehaviour
     private float ins_last_game_update_speed; // just for show
     private static float last_game_update_speed; // stored to allow reverting
 
+    public static bool is_game_paused {get; private set;}
+
     // the static one is the one that scripts look for
     // the ins_ variable is just so that I can see
     [Header("vv READ ONLY vv")]
@@ -116,12 +118,54 @@ public class GameManager : MonoBehaviour
 
     #region PAUSING
 
+
+
+
+
+    // only the updates, not opening the menu
+    public static void ToggleGameUpdates()
+    {
+        if (is_game_paused)
+        {
+            ResumeGameUpdates();
+        } else
+        {
+            PauseGameUpdates();
+        }
+    }
+
+    public static void PauseGameUpdates()
+    {
+        ui_debugmessager.PostMessage("updates paused");
+        SetUpdateSpeed(0f);
+    }
+    public static void ResumeGameUpdates()
+    {
+        ui_debugmessager.PostMessage("updates resumed");
+        SetUpdateSpeed(last_game_update_speed);
+    }
+
+
+
+
+    // includes the menu
+    public static void TogglePause()
+    {
+        if (is_game_paused)
+        {
+            ResumeGame();
+        } else
+        {
+            PauseGame();
+        }
+    }
+
     // one-stop-shop:
     // * opens the pause menu
     // * stops physics
     public static void PauseGame()
     {
-        SetUpdateSpeed(0);
+        PauseGameUpdates();
 
         UIManager.OpenPauseMenu();
     }
@@ -129,7 +173,7 @@ public class GameManager : MonoBehaviour
     public static void ResumeGame()
     {
         // return the update speed to whatever we had it at before
-       SetUpdateSpeed(last_game_update_speed);
+       ResumeGameUpdates();
 
        UIManager.ClosePauseMenu();
     }
