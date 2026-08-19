@@ -38,6 +38,14 @@ public class CameraController : MonoBehaviour
         cam_main = ins_cam_main;
     }
 
+
+    void Start()
+    {
+        default_fov = Settings.GetFloat("fov");
+
+        target_fov = default_fov;
+    }
+
     public Transform ins_t_cam;
     public static Transform t_cam;
 
@@ -61,6 +69,9 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private float fov_lerp_speed;
 
+
+    // TODO: make use of settings
+    public static float default_fov = 60;
 
 
     public void UpdateCamera()

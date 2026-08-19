@@ -165,6 +165,34 @@ public class inv_itemstack
         return 0;
     }
 
+    public int GetInt(string key)
+    {
+        string raw = GetString(key);
+        int parsedValue = 0;
+        
+        if (int.TryParse(raw, out parsedValue))
+        {
+            return parsedValue;
+        }
+
+        // default
+        return 0;
+    }
+
+    public bool GetBool(string key)
+    {
+        string raw = GetString(key);
+        bool parsedValue = false;
+        
+        if (bool.TryParse(raw, out parsedValue))
+        {
+            return parsedValue;
+        }
+
+        // default
+        return false;
+    }
+
 
     #endregion
 

@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 4540712496507850893}
   - component: {fileID: 9060493668500253043}
   - component: {fileID: 1792735198715129915}
+  - component: {fileID: 962959913380918575}
   m_Layer: 6
   m_Name: revolver
   m_TagString: Interactable
@@ -251,3 +252,15 @@ MonoBehaviour:
   onInitialize:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &962959913380918575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6702777790825529560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd290822adc3934ba768c45ce869a08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::int_gun

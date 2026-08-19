@@ -64,11 +64,13 @@ public class inv_helditemdisplay : MonoBehaviour
                     {
                         g_currentlyHeldObject.GetComponent<InteractableObject3D>().onInspectObject.Invoke();
                     }
+
+                    is_inspecting_item = true;
                 }
 
-                // inspecting the item
-
+                // moving the item
                 g_currentlyHeldObject.transform.position = t_inspectingItemPosition.position;
+                
 
                 // rotating the item
                 Vector3 rot = CameraController.t_cam.right * Input.mouseMovement.y + Vector3.up * -Input.mouseMovement.x;
@@ -87,9 +89,13 @@ public class inv_helditemdisplay : MonoBehaviour
                     {
                         g_currentlyHeldObject.GetComponent<InteractableObject3D>().onFinishInspecting.Invoke();
                     }
-                }
 
-                g_currentlyHeldObject.transform.localPosition = Vector3.zero;
+                    is_inspecting_item = false;
+
+                    // some items handle their position on their own,
+                    // so we only want to move the item ONCE and not periodically
+                    g_currentlyHeldObject.transform.localPosition = Vector3.zero;
+                }
 
                 Player.UnlockAll();
             }
