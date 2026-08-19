@@ -48,6 +48,18 @@ public class int_flashlight : MonoBehaviour
 
     void Update()
     {
+        // handling where the flashlight is facing
+        RaycastHit hit;
+
+        if (util_physics.LookRaycast(out hit, 20f, LayerMask.GetMask(new string[] {"IsWalkable"})))
+        {
+            transform.up = hit.point - transform.position;
+        } else
+        {
+            transform.up = CameraController.t_cam.forward;
+        }
+
+
         if (battery_amount > 0)
         {
             // the actual flashlight turning on/off logic
