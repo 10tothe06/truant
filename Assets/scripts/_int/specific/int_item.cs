@@ -26,6 +26,7 @@ public class int_item : MonoBehaviour
             item_data.itemCount = 1;
             if (string.IsNullOrEmpty(item_type))
             {
+                item_type = gameObject.name;
                 item_data.SetItemIndex(ItemManager.GetItemIndexFromName(gameObject.name));
             } else
             {
@@ -40,6 +41,7 @@ public class int_item : MonoBehaviour
     public void SetItemData(inv_itemstack data)
     {
         item_data = data;
+        item_type = gameObject.name;
         item_data.cellIndex = 0;
         item_data.itemCount = 1;
 

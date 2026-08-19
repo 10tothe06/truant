@@ -28,13 +28,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1890519104577960506}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.075, y: 0.075, z: 0.075}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6597372535184340560}
-  m_LocalEulerAnglesHint: {x: -90, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &2313714408643226733
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -42,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1890519104577960506}
-  m_Mesh: {fileID: 2534964839176971238, guid: b53a75eb7cbc3ad4a89b06080e8bd8ce, type: 3}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &7828376522516511250
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -125,7 +125,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: 2534964839176971238, guid: b53a75eb7cbc3ad4a89b06080e8bd8ce, type: 3}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &6702777790825529560
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,9 +138,9 @@ GameObject:
   - component: {fileID: 4540712496507850893}
   - component: {fileID: 9060493668500253043}
   - component: {fileID: 1792735198715129915}
-  - component: {fileID: 962959913380918575}
+  - component: {fileID: 242765379824157216}
   m_Layer: 6
-  m_Name: revolver
+  m_Name: revolver_bullet
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -252,7 +252,7 @@ MonoBehaviour:
   onInitialize:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &962959913380918575
+--- !u!114 &242765379824157216
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -261,10 +261,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6702777790825529560}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fd290822adc3934ba768c45ce869a08, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ca3bbd32cf35ae4394de5ca15ab7d91, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::int_gun
-  bullet_name: revolver_bullet
-  time_between_shots: 0.8
-  muzzle_velocity: 100
-  ammo_count: 6
+  m_EditorClassIdentifier: Assembly-CSharp::int_bullet

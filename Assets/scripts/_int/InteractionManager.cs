@@ -23,6 +23,7 @@ public class InteractionManager : MonoBehaviour
     }
 
     public ui_prompt interactionPrompt;
+    public ui_prompt itemNamePrompt;
     public int_crosshair crosshair;
 
     void Update()
@@ -39,6 +40,15 @@ public class InteractionManager : MonoBehaviour
                 // show the prompt
                 interactionPrompt.DisplayPrompt(interactingWith.hoverPrompt);
 
+                int_item item_comp = interactingWith.GetComponent<int_item>();
+                if (item_comp != null)
+                {
+                    itemNamePrompt.DisplayPrompt(item_comp.item_type);
+                } else
+                {
+                    itemNamePrompt.DisplayPrompt("");
+                }
+
                 if (crosshair != null) {crosshair.SetInteractable();}
 
                 show_prompt = true;
@@ -48,6 +58,7 @@ public class InteractionManager : MonoBehaviour
         if (!show_prompt)
         {
             interactionPrompt.DisplayPrompt("");
+            itemNamePrompt.DisplayPrompt("");
 
             if (crosshair != null) {crosshair.SetDefault();}
         }
