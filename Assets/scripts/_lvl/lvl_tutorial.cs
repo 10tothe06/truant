@@ -14,7 +14,9 @@ public class lvl_tutorial : MonoBehaviour
 
     [Space(20)]
     [Header("CONFIG")]
-    public Transform player_spawn_position;
+
+    // the player spawns sitting at this chair, at a table
+    public int_chair player_spawn_chair;
     public CarController player_car;
 
     void Awake()
@@ -35,7 +37,7 @@ public class lvl_tutorial : MonoBehaviour
         UIManager.SwitchMenu("");
 
         // move the player to the starting point of the level
-        Player.TeleportTo(player_spawn_position.position);
+        player_spawn_chair.Sit();
 
 
         // set the camera mode

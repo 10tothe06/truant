@@ -25,9 +25,12 @@ public class int_flashlight : MonoBehaviour
             item_comp.onInitialize.AddListener(UpdateItemData);
         }
 
-        // checking IF the item is being held by the player,
-        // and IF SO, pass the note information to the note HUD
-        Player.item_holder.onUpdateHeldObject.AddListener(OnItemHeld);
+        if (Player.item_holder != null)
+        {
+            // checking IF the item is being held by the player,
+            // and IF SO, pass the note information to the note HUD
+            Player.item_holder.onUpdateHeldObject.AddListener(OnItemHeld);
+        }
     }
 
     void UpdateFromItemData()
@@ -48,39 +51,42 @@ public class int_flashlight : MonoBehaviour
 
     void Update()
     {
-        // handling where the flashlight is facing
-        RaycastHit hit;
-
-        if (util_physics.LookRaycast(out hit, 20f, LayerMask.GetMask(new string[] {"IsWalkable"})))
+        if (Player.GetHeldObject() == gameObject)
         {
-            transform.up = hit.point - transform.position;
-        } else
-        {
-            transform.up = CameraController.t_cam.forward;
-        }
+            // handling where the flashlight is facing
+            RaycastHit hit;
 
-
-        if (battery_amount > 0)
-        {
-            // the actual flashlight turning on/off logic
-            if (Input.mouseButtonDownLeft)
+            if (util_physics.LookRaycast(out hit, 20f, LayerMask.GetMask(new string[] {"IsWalkable"})))
             {
-                if (light_component.is_on)
-                {
-                    light_component.SwitchOff();
-                } else
-                {
-                    light_component.SwitchOn();
-                }
+                transform.up = hit.point - transform.position;
+            } else
+            {
+                transform.up = CameraController.t_cam.forward;
             }
 
-            battery_amount -= Time.deltaTime * battery_loss_per_second;
-        } else
-        {
-            // no battery, no light
-            if (light_component.is_on) // boolean check is here so we don't just keep calling this function over and over
+
+            if (battery_amount > 0)
             {
-                light_component.SwitchOff();
+                // the actual flashlight turning on/off logic
+                if (Input.mouseButtonDownLeft)
+                {
+                    if (light_component.is_on)
+                    {
+                        light_component.SwitchOff();
+                    } else
+                    {
+                        light_component.SwitchOn();
+                    }
+                }
+
+                battery_amount -= Time.deltaTime * battery_loss_per_second;
+            } else
+            {
+                // no battery, no light
+                if (light_component.is_on) // boolean check is here so we don't just keep calling this function over and over
+                {
+                    light_component.SwitchOff();
+                }
             }
         }
     }

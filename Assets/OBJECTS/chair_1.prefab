@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6597372535184340560}
@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 6597372535184340560}
   - component: {fileID: 4540712496507850893}
   - component: {fileID: 9060493668500253043}
+  - component: {fileID: 7312383741442078380}
   m_Layer: 6
   m_Name: chair_1
   m_TagString: Interactable
@@ -221,5 +222,28 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   onFinishInspecting:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &7312383741442078380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6702777790825529560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74856ec464461474daba3f867bce6a04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::int_chair
+  animate_inout: 0
+  animation_speed: 0
+  animation_curve_factor: 0
+  t_sitPoint: {fileID: 0}
+  isSitting: 0
+  onSit:
+    m_PersistentCalls:
+      m_Calls: []
+  onStand:
     m_PersistentCalls:
       m_Calls: []

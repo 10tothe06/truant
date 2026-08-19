@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2313714408643226733}
   - component: {fileID: 7828376522516511250}
   - component: {fileID: 2426810684006620440}
-  - component: {fileID: 8727345375374956750}
+  - component: {fileID: 7986968947191447167}
   m_Layer: 0
   m_Name: model
   m_TagString: Interactable
@@ -104,8 +104,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractCollider
   parentObject: {fileID: 9060493668500253043}
---- !u!64 &8727345375374956750
-MeshCollider:
+--- !u!65 &7986968947191447167
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -122,10 +122,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -7387706064836869012, guid: 86884f00460ded5498adf623d73e6092, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 1.6444672, y: 1.7290958, z: 8.747936}
+  m_Center: {x: -0.0074959397, y: 0.0011677744, z: 0.54012775}
 --- !u!1 &4041401415327077566
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,7 +307,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &9060493668500253043
 MonoBehaviour:
   m_ObjectHideFlags: 0

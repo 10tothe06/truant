@@ -38,6 +38,7 @@ public class ui_notehud : MonoBehaviour
 
     public void PassNoteText(GameObject note_object, string text)
     {
+        
         current_note_text = text;
         this.note_object = note_object;
         tx.text = text;
