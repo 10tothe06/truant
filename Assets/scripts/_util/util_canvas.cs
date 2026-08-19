@@ -47,6 +47,10 @@ public class util_canvas : MonoBehaviour
         }
     }
 
+    // wrapper for below
+    public static void DestroyChildren(Transform inputObject) {
+        DestroyChildren(inputObject.gameObject);
+    }
     public static void DestroyChildren(GameObject inputObject) {
         Transform[] toDestroy = inputObject.GetComponentsInChildren<Transform>(true);
         for (int i = toDestroy.Length - 1; i >= 0; i--) {

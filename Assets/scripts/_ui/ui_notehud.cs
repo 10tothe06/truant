@@ -32,7 +32,6 @@ public class ui_notehud : MonoBehaviour
     private GameObject note_object;
     public bool is_holding_note {get; private set;}
 
-    public GameObject g_prompt;
     public GameObject g_textContainer;
     public TextMeshProUGUI tx;
     
@@ -45,12 +44,19 @@ public class ui_notehud : MonoBehaviour
 
         is_holding_note = true;
 
-        g_prompt.SetActive(true);
+        // tell the player HUD to show the player the "press E to read" prompt
+        ui_playerhud.DrawItemPrompts(gameObject, new string[] {"press E to read"});
     }
 
     public void StopHoldingNote()
     {
-        g_prompt.SetActive(false);
+        // making sure we ONLY clear the interaction prompt
+        // IF the prompt that we were showing is ours
+        if (UIManager.Instance.player_hud.g_promptObject == gameObject)
+        {
+            ui_playerhud.ClearItemPrompt();
+        }
+
         is_holding_note = false;
 
         current_note_text = "";
