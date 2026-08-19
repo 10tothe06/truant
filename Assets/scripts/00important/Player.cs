@@ -154,6 +154,52 @@ public class Player : MonoBehaviour
     #region ITEMS
 
 
+
+    // drop, and give a velocity as well
+
+
+    // wrapper for below
+    public static GameObject ThrowSelectedItem(Vector3 throw_velocity)
+    {
+        return ThrowSelectedItem(throw_velocity, Vector3.zero);
+    }
+    public static GameObject ThrowSelectedItem(Vector3 throw_velocity, Vector3 angular_velocity)
+    {
+        if (GetSelectedItemData() == null) {return null;}
+
+        
+        GameObject g = null;
+
+        if (ObjectManager.GetObjectPrefabFromName(GetSelectedItemData().item_name) != null)
+        {
+            g = ObjectManager.SpawnObject(GetSelectedItemData().item_name, player_hotbar.GetComponent<inv_helditemdisplay>().t_heldItemContainer.position);
+
+            // all items should have this comp,
+            // but it IN THEORY might not so this is to prevent an error
+            if (g.GetComponent<int_item>())
+            {
+                g.GetComponent<int_item>().SetItemData(new inv_itemstack(GetSelectedItem()));
+            } else
+            {
+                Debug.LogWarning("item prefab does not have item component?");
+            }
+        }
+
+        player_inventory.RemoveItem(GetSelectedItem());
+
+        // the hotbar and the inventory will automatically rebuild themselves,
+        // to show the change (bc of the RemoveItem() call)
+
+        if (g.GetComponent<Rigidbody>() != null)
+        {
+            g.GetComponent<Rigidbody>().linearVelocity = throw_velocity;
+            g.GetComponent<Rigidbody>().angularVelocity = angular_velocity;
+        }
+
+        return g;
+    }
+
+
     // returns the object that was dropped
     public static GameObject DropSelectedItem()
     {
