@@ -6907,6 +6907,36 @@ MonoBehaviour:
     occupyWidth: 1
     occupyHeight: 1
     icon: {fileID: 21300000, guid: 65fa9cd7906e6da42932e16222ca8179, type: 3}
+  - item_name: bottle_1
+    item_tags: []
+    stackSize: 999
+    occupyWidth: 1
+    occupyHeight: 1
+    icon: {fileID: 21300000, guid: 13a8d56f18e9d9848b0f5c937485f5f1, type: 3}
+  - item_name: hammer
+    item_tags: []
+    stackSize: 999
+    occupyWidth: 1
+    occupyHeight: 1
+    icon: {fileID: 21300000, guid: d823f8d8a1788f545978eef0c291a973, type: 3}
+  - item_name: tin_can
+    item_tags: []
+    stackSize: 999
+    occupyWidth: 1
+    occupyHeight: 1
+    icon: {fileID: 21300000, guid: 707af0890d673bb45a2d57b9f788af8e, type: 3}
+  - item_name: flashlight
+    item_tags: []
+    stackSize: 999
+    occupyWidth: 1
+    occupyHeight: 1
+    icon: {fileID: 21300000, guid: 3df77a3ef21e11e4fa6703d93d606d39, type: 3}
+  - item_name: revolver
+    item_tags: []
+    stackSize: 999
+    occupyWidth: 1
+    occupyHeight: 1
+    icon: {fileID: 21300000, guid: df7de052d90e71c43a88a63c9817b46c, type: 3}
   item_bgs:
   - width: 1
     height: 1
@@ -6948,6 +6978,14 @@ MonoBehaviour:
   - {fileID: 5414149883367336487, guid: 7ad535d9fdb637e44a7fdb921faf5233, type: 3}
   - {fileID: 7901170461580289857, guid: 0ac3e42c53667bd46b3b400256a5ac98, type: 3}
   - {fileID: 6702777790825529560, guid: 795f4499959ceab4bbdd83d248cbc2ef, type: 3}
+  - {fileID: 6702777790825529560, guid: 136f79b0304c55143ad4f8b97b31c1e7, type: 3}
+  - {fileID: 6702777790825529560, guid: 42aca67696b58a64f8bdf98f9aa20ac1, type: 3}
+  - {fileID: 6702777790825529560, guid: 18ad1f9458013e94bbc0898cc877d501, type: 3}
+  - {fileID: 6702777790825529560, guid: d470e7073dfb723499ad61b85abdf1cf, type: 3}
+  - {fileID: 6702777790825529560, guid: 4db316d9245d57e4cbab1890d30903e7, type: 3}
+  - {fileID: 6702777790825529560, guid: ea2a0ec985798444eaf4fee1660b40f4, type: 3}
+  - {fileID: 6702777790825529560, guid: 6791acf2b0daf2b4ba81886034799756, type: 3}
+  - {fileID: 6702777790825529560, guid: 8c1b2041b4f23e54ca80481b9b2929ed, type: 3}
   t_currentObjectContainer: {fileID: 0}
 --- !u!1 &865919485
 GameObject:
