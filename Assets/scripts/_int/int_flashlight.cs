@@ -1,6 +1,92 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class int_flashlight : MonoBehaviour
 {
-    
+    private int_item item_comp;
+
+    // this is just a number, like batteries from Launch Sequence
+    public float battery_amount = 100f;
+    public float max_battery = 100f;
+
+
+    public float battery_loss_per_second = 0.1f;
+
+
+    public int_light light_component;
+
+    void Awake()
+    {
+        item_comp = GetComponent<int_item>();
+
+        if (item_comp != null)
+        {
+            item_comp.onDataUpdate.AddListener(UpdateFromItemData);
+            item_comp.onInitialize.AddListener(UpdateItemData);
+        }
+
+        // checking IF the item is being held by the player,
+        // and IF SO, pass the note information to the note HUD
+        Player.item_holder.onUpdateHeldObject.AddListener(OnItemHeld);
+    }
+
+    void UpdateFromItemData()
+    {
+        if (!item_comp.item_data.HasEntryAt("battery_amount"))
+        {
+            return; // we want to make sure we don't treat a non-existent entry as a reading of "no battery"
+        }
+
+        battery_amount = item_comp.item_data.GetFloat("battery_amount");
+    }
+
+    void UpdateItemData()
+    {
+        if (item_comp == null) {return;}
+        item_comp.item_data.SetData("battery_amount", battery_amount);
+    }
+
+    void Update()
+    {
+        if (battery_amount > 0)
+        {
+            // the actual flashlight turning on/off logic
+            if (Input.mouseButtonDownLeft)
+            {
+                if (light_component.is_on)
+                {
+                    light_component.SwitchOff();
+                } else
+                {
+                    light_component.SwitchOn();
+                }
+            }
+
+            battery_amount -= Time.deltaTime * battery_loss_per_second;
+        } else
+        {
+            // no battery, no light
+            if (light_component.is_on) // boolean check is here so we don't just keep calling this function over and over
+            {
+                light_component.SwitchOff();
+            }
+        }
+    }
+
+
+
+    void OnItemHeld()
+    {
+        if (Player.GetHeldObject() == gameObject)
+        {
+            // tell the player HUD to show the player the "press E to read" prompt
+            ui_playerhud.DrawItemPrompts(gameObject, new string[] {"press LMB to toggle on/off"});
+        } else
+        {
+            if (UIManager.Instance.player_hud.g_promptObject == gameObject)
+            {
+                ui_playerhud.ClearItemPrompt();
+            }
+        }
+    }
 }

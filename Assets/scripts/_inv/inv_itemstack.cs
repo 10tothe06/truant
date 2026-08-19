@@ -118,6 +118,24 @@ public class inv_itemstack
         }
     }
 
+
+
+    public bool HasEntryAt(string key)
+    {
+        for (int i = 0; i < data_keys.Count; i++)
+        {
+            if (data_keys[i] == key)
+            {
+                return true;
+            }
+        }
+
+        // default is empty
+        return false;
+    }
+
+
+
     // similar to how WPILib (the old comms protocol) has built-in parsing function
     public string GetString(string key)
     {
