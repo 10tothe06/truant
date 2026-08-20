@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +12,8 @@ public class int_flashlight : MonoBehaviour
 
 
     public float battery_loss_per_second = 0.1f;
+
+    public bool is_on;
 
 
     public int_light light_component;
@@ -31,6 +34,8 @@ public class int_flashlight : MonoBehaviour
             // and IF SO, pass the note information to the note HUD
             Player.item_holder.onUpdateHeldObject.AddListener(OnItemHeld);
         }
+
+        UpdateLight();
     }
 
     void UpdateFromItemData()
@@ -49,6 +54,28 @@ public class int_flashlight : MonoBehaviour
         item_comp.item_data.SetData("battery_amount", battery_amount);
     }
 
+    private void SwitchOff()
+    {
+        is_on = false;
+        AudioManager.PlaySound("flashlight_off");
+    }
+    private void SwitchOn()
+    {
+        is_on = true;
+        AudioManager.PlaySound("flashlight_on");
+    }
+
+    private void UpdateLight()
+    {
+        if (is_on && !light_component.is_on)
+        {
+            light_component.SwitchOn();
+        } else if (!is_on && light_component.is_on)
+        {
+            light_component.SwitchOff();
+        }
+    }
+
     void Update()
     {
         if (Player.GetHeldObject() == gameObject)
@@ -64,20 +91,22 @@ public class int_flashlight : MonoBehaviour
                 transform.up = CameraController.t_cam.forward;
             }
 
+            // the actual flashlight turning on/off logic
+            if (Input.mouseButtonDownLeft)
+            {
+                if (is_on)
+                {
+                    SwitchOff();
+                } else
+                {
+                    SwitchOn();
+                }
+            }
+
 
             if (battery_amount > 0)
             {
-                // the actual flashlight turning on/off logic
-                if (Input.mouseButtonDownLeft)
-                {
-                    if (light_component.is_on)
-                    {
-                        light_component.SwitchOff();
-                    } else
-                    {
-                        light_component.SwitchOn();
-                    }
-                }
+                UpdateLight();
 
                 battery_amount -= Time.deltaTime * battery_loss_per_second;
             } else

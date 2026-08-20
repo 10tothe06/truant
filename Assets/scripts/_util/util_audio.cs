@@ -6,14 +6,14 @@ using System.Linq;
 public class util_audio
 {
     // returns a default clip if no match is found
-    public static AudioClip GetClipFromMaterial(Material mat, audio_soundmaterial[] materials, AudioClip defaultSet)
+    public static string GetClipFromMaterial(Material mat, audio_soundmaterial[] materials, string defaultSet)
     {
         if (mat == null) { return defaultSet; }
         for (int i = 0; i < materials.Length; i++)
         {
             if (materials[i].applicableMaterials.Contains(mat))
             {
-                return AudioManager.GetSoundFromName(materials[i].sound_name);
+                return materials[i].sound_name;
             }
         }
 

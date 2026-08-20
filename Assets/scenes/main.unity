@@ -17101,6 +17101,10 @@ MonoBehaviour:
   staticSounds:
   - name: ping
     clip: {fileID: 8300000, guid: 4ea83376b7dbb5a4c9ab78f1a06a4673, type: 3}
+  - name: flashlight_on
+    clip: {fileID: 8300000, guid: 5dad2df9c9583bd458dd053295540c34, type: 3}
+  - name: flashlight_off
+    clip: {fileID: 8300000, guid: 2a376b82fc1f8344eb461c1ebea36fe0, type: 3}
   footstep_sounds: []
   defaultStepSound: footstep_wood
 --- !u!43 &1443301462

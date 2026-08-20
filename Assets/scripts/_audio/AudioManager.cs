@@ -64,12 +64,12 @@ public class AudioManager : MonoBehaviour
 
     #region SOUNDS
 
-    public static void PlayAudioClip(AudioClip clip, float volume = 1f)
+    public static void PlayAudioClip(AudioClip clip, float volume = 1f, float pitch = 1f)
     {
         if (clip == null) {return;}
-        Instance.SpawnAudioTrack(clip, volume);
+        Instance.SpawnAudioTrack(clip, volume, pitch);
     }
-    public void SpawnAudioTrack(AudioClip clip, float volume = 1f)
+    public void SpawnAudioTrack(AudioClip clip, float volume = 1f, float pitch = 1f)
     {
         if (clip == null) {return;}
         GameObject g_newChannel = Instantiate(p_audioChannel, transform);
@@ -78,13 +78,15 @@ public class AudioManager : MonoBehaviour
         comp.clip = clip;
         comp.loop = false;
         comp.volume = volume;
+        comp.pitch = pitch;
         comp.Play();
     }
 
 
-    public static void PlaySound(string sound_name, float volume = 1f)
+    public static void PlaySound(string sound_name, float volume = 1f, float min_pitch = 1f, float max_pitch = 1f)
     {
-        PlayAudioClip(GetSoundFromName(sound_name), volume);
+        float pitch = UnityEngine.Random.Range(min_pitch, max_pitch);
+        PlayAudioClip(GetSoundFromName(sound_name), volume, pitch);
     }
 
     public static AudioClip GetSoundFromName(string sound_name)
