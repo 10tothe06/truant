@@ -58,6 +58,11 @@ public class InteractableObject3D : MonoBehaviour
     private Vector3 stored_angular_velocity;
 
 
+    [Space(20)]
+    [Header("SOUNDS")]
+    public string impact_sound;
+
+
     [Header("Events")]
     // when the object is interacted with
     public UnityEvent onInteract;
@@ -75,7 +80,7 @@ public class InteractableObject3D : MonoBehaviour
     // when the object is hit by something,
     // OR HITS SOMETHING (both ways)
     // <float> var is the impact acceleration (delta-v)
-    public float impact_threshold = 5f; // what actually counts as an impact in the first place
+    public float impact_threshold = 0f; // what actually counts as an impact in the first place
     public UnityEvent<float> onImpact;
         
 
@@ -108,6 +113,11 @@ public class InteractableObject3D : MonoBehaviour
         if (collision.impulse.magnitude > impact_threshold)
         {
             onImpact.Invoke(collision.impulse.magnitude);
+
+            if (!string.IsNullOrEmpty(impact_sound))
+            {
+                AudioManager.PlaySound(impact_sound);
+            }
         }
     }
 

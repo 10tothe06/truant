@@ -149,7 +149,7 @@ public class int_board : MonoBehaviour
         AudioManager.PlaySound("board_break");
 
         transform.position += (Player.t.position - transform.position).normalized * 0.1f;
-        transform.Rotate(new Vector3(Random.Range(-0.05f, 0.05f), Random.Range(-0.05f, 0.05f), Random.Range(-0.05f, 0.05f)));
+        transform.Rotate(new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f)));
 
         yield return new WaitForSeconds(0.4f);
 

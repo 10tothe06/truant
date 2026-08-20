@@ -3,6 +3,7 @@ using UnityEngine;
 public class int_breakable : MonoBehaviour
 {
     public float break_threshold;
+    public string break_sound;
 
     void Awake()
     {
@@ -13,7 +14,7 @@ public class int_breakable : MonoBehaviour
     {
         if (force > break_threshold)
         {
-            AudioManager.PlaySound("ping");
+            AudioManager.PlaySound(break_sound);
 
             // spawn all of the broken pieces
             EffectManager.SpawnSlices(gameObject.name, transform.position, transform.GetChild(0).rotation, GetComponent<Rigidbody>().linearVelocity, transform.GetChild(0).localScale.x);

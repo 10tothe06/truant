@@ -213,6 +213,7 @@ MonoBehaviour:
   has_physics: 1
   isDraggable: 1
   hoverPrompt: press E to pick up
+  impact_sound: bottle_clink
   onInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -228,7 +229,7 @@ MonoBehaviour:
   onEnterWater:
     m_PersistentCalls:
       m_Calls: []
-  impact_threshold: 0.55
+  impact_threshold: 0
   onImpact:
     m_PersistentCalls:
       m_Calls: []
@@ -285,3 +286,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::int_breakable
   break_threshold: 0.55
+  break_sound: bottle_break
