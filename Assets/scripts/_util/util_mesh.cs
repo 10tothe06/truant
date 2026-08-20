@@ -5,6 +5,55 @@ using UnityEngine;
 
 public class util_mesh : MonoBehaviour
 {
+    public static Mesh[] DiceMesh(Mesh original, int num_iterations = 2)
+    {
+        List<Mesh> result = new List<Mesh>();
+        List<Mesh> queue = new List<Mesh>() {original};
+        List<Mesh> next_queue = new List<Mesh>() {};
+
+        for (int n = 0; n < num_iterations; n++)
+        {
+            for (int q = 0; q < queue.Count; q++)
+            {
+                Vector3 point = GetMidpoint(queue[q].vertices);
+                Vector3 normal = new Vector3(
+                    Random.Range(-1f, 1f),
+                    Random.Range(-1f, 1f),
+                    Random.Range(-1f, 1f)
+                ).normalized;
+
+                var(pos, neg) = util_grok.Cut(queue[q], normal, point, true);
+
+                if (n == num_iterations - 1)
+                {
+                    result.Add(pos);
+                    result.Add(neg);
+                } else
+                {
+                    next_queue.Add(pos);
+                    next_queue.Add(neg);
+                }
+            }
+
+            queue.Clear();
+            for (int i = 0; i < next_queue.Count; i++)
+            {
+                queue.Add(next_queue[i]);
+            }
+            next_queue.Clear();
+        }
+
+
+
+        return result.ToArray();
+    }
+
+
+
+
+
+
+
     /// <summary>
     /// Generates a rectangular prism mesh that follows a path.
     /// Every face of every segment has its own independent 0-1 UV space.
