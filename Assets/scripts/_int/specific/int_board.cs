@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class int_board : MonoBehaviour
@@ -139,13 +140,23 @@ public class int_board : MonoBehaviour
     // removing a placed board
     public void PopOff()
     {
-        transform.position += (Player.t.position - transform.position).normalized * 0.3f;
+        StartCoroutine(Pop());
+    }
+
+
+    public IEnumerator Pop()
+    {
+        AudioManager.PlaySound("board_break");
+
+        transform.position += (Player.t.position - transform.position).normalized * 0.1f;
+        transform.Rotate(new Vector3(Random.Range(-0.05f, 0.05f), Random.Range(-0.05f, 0.05f), Random.Range(-0.05f, 0.05f)));
+
+        yield return new WaitForSeconds(0.4f);
 
         GetComponent<InteractableObject3D>().EnablePhysics();
 
         GetComponent<Rigidbody>().linearVelocity += (Player.t.position - transform.position).normalized * 3f;
     }
-
 
 
     void OnItemHeld()

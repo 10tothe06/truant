@@ -17095,16 +17095,26 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 94ffcdaf1ebfbb54eab9ecc94fdec589, type: 3}
     - {fileID: 8300000, guid: 2e89b42dec52ccc4ea4f903fd67f500d, type: 3}
     - {fileID: 8300000, guid: 998b2d461b8304b49a6ccc684951a5c2, type: 3}
+    min_pitch: 0.5
+    max_pitch: 0.9
   - name: board_break
     versions:
     - {fileID: 8300000, guid: 91c3cc712875e3e48a75dcde62aafde2, type: 3}
+    min_pitch: 0.7
+    max_pitch: 1.1
   staticSounds:
   - name: ping
     clip: {fileID: 8300000, guid: 4ea83376b7dbb5a4c9ab78f1a06a4673, type: 3}
+    min_pitch: 1
+    max_pitch: 1
   - name: flashlight_on
     clip: {fileID: 8300000, guid: 5dad2df9c9583bd458dd053295540c34, type: 3}
+    min_pitch: 1
+    max_pitch: 1
   - name: flashlight_off
     clip: {fileID: 8300000, guid: 2a376b82fc1f8344eb461c1ebea36fe0, type: 3}
+    min_pitch: 1
+    max_pitch: 1
   footstep_sounds: []
   defaultStepSound: footstep_wood
 --- !u!43 &1443301462
@@ -21452,7 +21462,7 @@ MonoBehaviour:
   crouchPercentHeight: 0.5
   moveSpeed: 30
   sprintBoost: 2
-  strafeSpeed: 0.5
+  strafeSpeed: 25
   turnSpeed: 2
   flySpeed: 1
   jumpStrength: 4

@@ -17,6 +17,15 @@ public class audio_sound
         this.clip = clip;
     }
 
+    public audio_sound(string name, AudioClip clip, float pitch_range)
+    {
+        this.name = name;
+        this.clip = clip;
+
+        this.min_pitch = 1 - pitch_range;
+        this.max_pitch = 1 + pitch_range;
+    }
+
     public audio_sound(string name, AudioClip clip, float min_pitch, float max_pitch)
     {
         this.name = name;

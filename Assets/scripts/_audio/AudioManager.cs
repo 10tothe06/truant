@@ -82,10 +82,55 @@ public class AudioManager : MonoBehaviour
         comp.Play();
     }
 
-
-    public static void PlaySound(string sound_name, float volume = 1f, float min_pitch = 1f, float max_pitch = 1f)
+    private float GetMinPitch(string sound_name)
     {
-        float pitch = UnityEngine.Random.Range(min_pitch, max_pitch);
+        // first, check variable sounds
+        for (int i = 0; i < Instance.variableSounds.Length; i++)
+        {
+            if (Instance.variableSounds[i].name == sound_name)
+            {
+                return Instance.variableSounds[i].min_pitch;
+            }
+        }
+
+        // then, static sounds
+        for (int i = 0; i < Instance.staticSounds.Length; i++)
+        {
+            if (Instance.staticSounds[i].name == sound_name)
+            {
+                return Instance.staticSounds[i].min_pitch;
+            }
+        }
+
+        return 1f;
+    }
+    private float GetMaxPitch(string sound_name)
+    {
+        // first, check variable sounds
+        for (int i = 0; i < Instance.variableSounds.Length; i++)
+        {
+            if (Instance.variableSounds[i].name == sound_name)
+            {
+                return Instance.variableSounds[i].max_pitch;
+            }
+        }
+
+        // then, static sounds
+        for (int i = 0; i < Instance.staticSounds.Length; i++)
+        {
+            if (Instance.staticSounds[i].name == sound_name)
+            {
+                return Instance.staticSounds[i].max_pitch;
+            }
+        }
+
+        return 1f;
+    }
+
+
+    public static void PlaySound(string sound_name, float volume = 1f)
+    {
+        float pitch = UnityEngine.Random.Range(Instance.GetMinPitch(sound_name), Instance.GetMaxPitch(sound_name));
         PlayAudioClip(GetSoundFromName(sound_name), volume, pitch);
     }
 

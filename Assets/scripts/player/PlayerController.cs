@@ -223,14 +223,14 @@ public class PlayerController : MonoBehaviour
             }
             if (lastPacket.right)
             {
-                walkVector += transform.right * moveSpeed * Time.deltaTime;
+                walkVector += transform.right * strafeSpeed * Time.deltaTime;
                 cameraTiltTarget = -1;
 
             }
 
             if (lastPacket.left)
             {
-                walkVector -= transform.right * moveSpeed * Time.deltaTime;
+                walkVector -= transform.right * strafeSpeed * Time.deltaTime;
                 cameraTiltTarget = 1;
             }
 
