@@ -15516,7 +15516,7 @@ MonoBehaviour:
   draggingDistance: 1.5
   dragForce: 1
   min_drag_force: 0
-  max_drag_force: 7
+  max_drag_force: 15
   max_drag_distance: 1.5
   object_rotation_speed: 0.75
 --- !u!114 &1866586579

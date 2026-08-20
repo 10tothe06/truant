@@ -27,17 +27,6 @@ public class InteractableObject3D : MonoBehaviour
     public float angularDamping = 0.99f;
 
 
-    private Vector3 stored_linear_velocity;
-    private Vector3 stored_angular_velocity;
-
-
-
-    [Header("INFORMATION")]
-    public bool is_in_water {get; private set;}
-    
-
-
-
     [Space(30)]
     [HideInInspector]
     public int_itemslot parent_slot;
@@ -58,11 +47,38 @@ public class InteractableObject3D : MonoBehaviour
     //public bool logInteractionEvents;
     public string hoverPrompt; // might change this for a more robust system, but it certainly works for now
 
+
+
+
+    [Header("INFORMATION")]
+    public bool is_in_water {get; private set;}
+
+
+    private Vector3 stored_linear_velocity;
+    private Vector3 stored_angular_velocity;
+
+
     [Header("Events")]
+    // when the object is interacted with
     public UnityEvent onInteract;
+    // same, but provides the source of the interaction
     public UnityEvent<GameObject> onInteractByObject;
+
+
+    // when the object (must be an item) is inspected
     public UnityEvent onInspectObject;
+    // when the object is DONE inspecting
     public UnityEvent onFinishInspecting;
+
+    // exactly what it sounds like
+    public UnityEvent onEnterWater;
+    // when the object is hit by something,
+    // OR HITS SOMETHING (both ways)
+    // <float> var is the impact acceleration (delta-v)
+    public float impact_threshold = 5f; // what actually counts as an impact in the first place
+    public UnityEvent<float> onImpact;
+        
+
 
     void Awake()
     {
@@ -85,6 +101,14 @@ public class InteractableObject3D : MonoBehaviour
     void Update()
     {
         HandleBuoyancy();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.impulse.magnitude > impact_threshold)
+        {
+            onImpact.Invoke(collision.impulse.magnitude);
+        }
     }
 
     // also updates the is_in_water_variable
