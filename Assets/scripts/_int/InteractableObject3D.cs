@@ -173,16 +173,19 @@ public class InteractableObject3D : MonoBehaviour
 
             rb.useGravity = false;
             rb.isKinematic = true;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
         }
     }
     public void EnablePhysics(bool apply_stored_velocities = true)
     {
+        
         has_physics = true;
         
         if (rb != null)
         {
             rb.useGravity = true;
             rb.isKinematic = false;
+            rb.constraints = RigidbodyConstraints.None;
 
             if (apply_stored_velocities)
             {

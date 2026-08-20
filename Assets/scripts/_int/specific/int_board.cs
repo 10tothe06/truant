@@ -17,15 +17,6 @@ public class int_board : MonoBehaviour
     {
         item_comp = GetComponent<int_item>();
 
-        if (start_as_placed)
-        {
-            GetComponent<InteractableObject3D>().DisablePhysics();
-            
-            is_placing = true;
-            UpdateItemData();
-            UpdateFromItemData();
-        }
-
         if (item_comp != null)
         {
             item_comp.onDataUpdate.AddListener(UpdateFromItemData);
@@ -37,6 +28,18 @@ public class int_board : MonoBehaviour
             // checking IF the item is being held by the player,
             // and IF SO, pass the note information to the note HUD
             Player.item_holder.onUpdateHeldObject.AddListener(OnItemHeld);
+        }
+    }
+
+    void Start()
+    {
+        if (start_as_placed)
+        {
+            GetComponent<InteractableObject3D>().DisablePhysics();
+            
+            is_placing = true;
+            UpdateItemData();
+            UpdateFromItemData();
         }
     }
 
