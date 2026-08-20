@@ -40,7 +40,7 @@ public class int_physicslever : MonoBehaviour
         if (!isHeld)
         {
             Grab();
-        } else {Release();}
+        }
     }
 
     // called when the player grabs the lever
@@ -62,7 +62,7 @@ public class int_physicslever : MonoBehaviour
         {
             HandlePosition();
 
-            if (Keyboard.current.eKey.wasPressedThisFrame)
+            if (!Keyboard.current.eKey.isPressed)
             {
                 Release();
             }

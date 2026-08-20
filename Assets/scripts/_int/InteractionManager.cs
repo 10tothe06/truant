@@ -26,8 +26,33 @@ public class InteractionManager : MonoBehaviour
     public ui_prompt itemNamePrompt;
     public int_crosshair crosshair;
 
+
+    [Header("INFO")]
+    // stopping multiple interaction events from happening at once
+    public bool cooldown {get; private set;}
+    private float cooldown_time;
+    private float cooldown_interval = 0.1f;
+
+
+    public static void Cooldown()
+    {
+        Instance.cooldown = true;
+        Instance.cooldown_time = Time.time;
+    }
+
+
     void Update()
     {
+        if (cooldown)
+        {
+            if (Time.time > cooldown_time + cooldown_interval)
+            {
+                cooldown = false;
+            }
+        }
+
+
+
         // showing the prompt on the LOCAL device
         // ***
         InteractableObject3D interactingWith = CheckLocalPlayerForInteractableObject();
@@ -101,6 +126,7 @@ public class InteractionManager : MonoBehaviour
                             if (comp.mostRecentPacket.up && !comp.oldPacket.up)
                             {
                                 ioComp.HandleInteractByObject(comp.gameObject);
+                                Cooldown();
                             } else if (comp.mostRecentPacket.mouseLeft && !comp.mostRecentPacket.isTyping)
                             {
                                 // dragging is implemented separately from the rest of the interaction system,
