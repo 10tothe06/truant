@@ -16,7 +16,7 @@ public class int_breakable : MonoBehaviour
             AudioManager.PlaySound("ping");
 
             // spawn all of the broken pieces
-            
+            EffectManager.SpawnSlices(gameObject.name, transform.position, transform.GetChild(0).rotation, transform.GetChild(0).localScale.x);
 
 
             // destroy the main object
