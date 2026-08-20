@@ -17089,21 +17089,17 @@ MonoBehaviour:
     layers:
     - {fileID: 8300000, guid: 305b432664a7de648afebe632e95be50, type: 3}
   p_audioChannel: {fileID: 5936595737138377623, guid: 8d934f20d87177947a10c904b8fe98eb, type: 3}
-  variableSounds: []
+  variableSounds:
+  - name: footstep_wood
+    versions:
+    - {fileID: 8300000, guid: 94ffcdaf1ebfbb54eab9ecc94fdec589, type: 3}
+    - {fileID: 8300000, guid: 2e89b42dec52ccc4ea4f903fd67f500d, type: 3}
+    - {fileID: 8300000, guid: 998b2d461b8304b49a6ccc684951a5c2, type: 3}
   staticSounds:
   - name: ping
     clip: {fileID: 8300000, guid: 4ea83376b7dbb5a4c9ab78f1a06a4673, type: 3}
-  materials:
-  - applicableMaterials:
-    - {fileID: 2100000, guid: e0662c16c58f95644bdfb56cfd14010f, type: 2}
-    sound:
-      name: 
-      versions:
-      - {fileID: 8300000, guid: 4ea83376b7dbb5a4c9ab78f1a06a4673, type: 3}
-  defaultStepSound:
-    name: 
-    versions:
-    - {fileID: 8300000, guid: 3c711a1f29743564486b63ac458944f2, type: 3}
+  footstep_sounds: []
+  defaultStepSound: footstep_wood
 --- !u!43 &1443301462
 Mesh:
   m_ObjectHideFlags: 0
@@ -21453,8 +21449,8 @@ MonoBehaviour:
   turnSpeed: 2
   flySpeed: 1
   jumpStrength: 4
-  cameraBounceAmplitude: 0.05
-  cameraBounceFrequency: 20
+  cameraBounceAmplitude: 0.04
+  cameraBounceFrequency: 10
   maxSprint: 200
   sprintValue: 200
   whatIsGround:

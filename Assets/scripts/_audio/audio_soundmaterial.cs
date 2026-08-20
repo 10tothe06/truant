@@ -4,6 +4,16 @@ using UnityEngine;
 [System.Serializable]
 public class audio_soundmaterial
 {
+    public string name;
     public Material[] applicableMaterials;
-    public audio_soundgroup sound;
+    public string sound_name;
+
+    public audio_soundmaterial() {}
+
+    public audio_soundmaterial(string name, Material[] applicableMaterials, string sound_name)
+    {
+        this.name = name;
+        this.applicableMaterials = applicableMaterials;
+        this.sound_name = sound_name;
+    }
 }

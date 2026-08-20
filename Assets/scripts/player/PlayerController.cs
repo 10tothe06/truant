@@ -165,7 +165,7 @@ public class PlayerController : MonoBehaviour
             transform.up = -gravityDirection;
         }
 
-        // updating the entity position from the rigidbody is done by e_physicsbased
+        Vector3 walkVector = Vector3.zero;
 
         if (isCrouching)
         {
@@ -198,7 +198,7 @@ public class PlayerController : MonoBehaviour
                 {
                     isSprinting = true;
                     
-                    rb.linearVelocity += transform.forward * moveSpeed * sprintBoost * Time.deltaTime;
+                    walkVector += transform.forward * moveSpeed * sprintBoost * Time.deltaTime;
 
                     if (Time.time > sprintTimer + 0.05f)
                     {
@@ -210,7 +210,7 @@ public class PlayerController : MonoBehaviour
                 {
                     isSprinting = false;
                     
-                    rb.linearVelocity += transform.forward * moveSpeed * Time.deltaTime;
+                    walkVector += transform.forward * moveSpeed * Time.deltaTime;
                 }
             }
             else {
@@ -219,18 +219,18 @@ public class PlayerController : MonoBehaviour
 
             if (lastPacket.back)
             {
-                rb.linearVelocity -= transform.forward * moveSpeed * Time.deltaTime;
+                walkVector -= transform.forward * strafeSpeed * Time.deltaTime;
             }
             if (lastPacket.right)
             {
-                rb.linearVelocity += transform.right * moveSpeed * Time.deltaTime;
+                walkVector += transform.right * moveSpeed * Time.deltaTime;
                 cameraTiltTarget = -1;
 
             }
 
             if (lastPacket.left)
             {
-                rb.linearVelocity -= transform.right * moveSpeed * Time.deltaTime;
+                walkVector -= transform.right * moveSpeed * Time.deltaTime;
                 cameraTiltTarget = 1;
             }
 
@@ -238,6 +238,8 @@ public class PlayerController : MonoBehaviour
             {
                 cameraTiltTarget = 0;
             }
+
+            rb.linearVelocity += walkVector.normalized * Mathf.Min(walkVector.magnitude, moveSpeed);
         }
         else if (isFlying) {
             transform.position += (transform.right * Input.inputAxisHorizontal + transform.forward * Input.inputAxisForward + transform.up * Input.inputAxisVertical) * (lastPacket.sprint ? 2.5f : 1) * flySpeed;

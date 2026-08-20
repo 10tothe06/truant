@@ -6,18 +6,18 @@ using System.Linq;
 public class util_audio
 {
     // returns a default clip if no match is found
-    public static AudioClip GetClipFromMaterial(Material mat, audio_soundmaterial[] materials, audio_soundgroup defaultSet)
+    public static AudioClip GetClipFromMaterial(Material mat, audio_soundmaterial[] materials, AudioClip defaultSet)
     {
-        if (mat == null) { return defaultSet.Get(); }
+        if (mat == null) { return defaultSet; }
         for (int i = 0; i < materials.Length; i++)
         {
             if (materials[i].applicableMaterials.Contains(mat))
             {
-                return materials[i].sound.Get();
+                return AudioManager.GetSoundFromName(materials[i].sound_name);
             }
         }
 
-        return defaultSet.Get();
+        return defaultSet;
     }
 
     public static Material GetMaterialFromRay(Vector3 p, Vector3 r, float d, LayerMask mask)

@@ -36,8 +36,8 @@ public class AudioManager : MonoBehaviour
 
     // for use with things like footsteps (player and mosnter)
     [Space(15)]
-    public audio_soundmaterial[] materials;
-    public audio_soundgroup defaultStepSound;
+    public audio_soundmaterial[] footstep_sounds;
+    public string defaultStepSound;
 
     #region UI
 
@@ -77,7 +77,7 @@ public class AudioManager : MonoBehaviour
         AudioSource comp = g_newChannel.GetComponent<AudioSource>();
         comp.clip = clip;
         comp.loop = false;
-        comp.volume = Settings.GetFloat("vol_master") * Settings.GetFloat("vol_sfx") * volume;
+        comp.volume = volume;
         comp.Play();
     }
 
