@@ -14,29 +14,81 @@ using UnityEngine;
 
 public class util_texture 
 {
-    public static Texture2D ScaleTexture(Texture2D old_texture, float scale_factor)
+    public static Texture2D ScaleNearestNeighbour(Texture2D source, float scale)
     {
-        int new_size_x = Mathf.RoundToInt(old_texture.width * scale_factor);
-        int new_size_y  = Mathf.RoundToInt(old_texture.height * scale_factor);
+        int newWidth  = Mathf.Max(1, Mathf.RoundToInt(source.width  * scale));
+        int newHeight = Mathf.Max(1, Mathf.RoundToInt(source.height * scale));
+        return ScaleNearestNeighbour(source, newWidth, newHeight);
+    }
+    /// <summary>
+    /// Scales a Texture2D up or down using nearest-neighbour sampling.
+    /// Returns a new Texture2D (the original is left unchanged).
+    /// 
+    /// Requirements:
+    /// - The source texture must have Read/Write Enabled in its import settings.
+    /// </summary>
+    public static Texture2D ScaleNearestNeighbour(Texture2D source, int newWidth, int newHeight)
+    {
+        if (source == null)
+            throw new System.ArgumentNullException(nameof(source));
 
-        Texture2D result = new Texture2D(new_size_x, new_size_y, TextureFormat.RGBA32, false, true);
+        if (newWidth <= 0 || newHeight <= 0)
+            throw new System.ArgumentException("New dimensions must be greater than zero.");
 
-        Color[] colors = new Color[new_size_x * new_size_y];
+        // Preserve format and whether the original had mipmaps
+        Texture2D result = new Texture2D(newWidth, newHeight, source.format, source.mipmapCount > 1);
 
-        for (int y = 0, i = 0; y < new_size_x; y++)
+        Color32[] srcPixels = source.GetPixels32();
+        Color32[] dstPixels = new Color32[newWidth * newHeight];
+
+        float xRatio = (float)source.width  / newWidth;
+        float yRatio = (float)source.height / newHeight;
+
+        for (int y = 0; y < newHeight; y++)
         {
-            for (int x = 0; x < new_size_y; x++, i++)
+            // Nearest neighbour: floor the mapped coordinate
+            int srcY = Mathf.Clamp(Mathf.FloorToInt(y * yRatio), 0, source.height - 1);
+
+            for (int x = 0; x < newWidth; x++)
             {
-                colors[i] = Color.red;
+                int srcX = Mathf.Clamp(Mathf.FloorToInt(x * xRatio), 0, source.width - 1);
+                dstPixels[y * newWidth + x] = srcPixels[srcY * source.width + srcX];
             }
         }
 
-        result.SetPixels(colors);
-        result.Apply(false, false);
-        result.filterMode = FilterMode.Point;
-
+        result.SetPixels32(dstPixels);
+        result.Apply(true);          // regenerate mipmaps if the texture has them
         return result;
     }
+    
+
+    // ***
+    // my (old) attempt at a texture scaling function
+    // ****
+
+    // public static Texture2D ScaleTexture(Texture2D old_texture, float scale_factor)
+    // {
+    //     int new_size_x = Mathf.RoundToInt(old_texture.width * scale_factor);
+    //     int new_size_y  = Mathf.RoundToInt(old_texture.height * scale_factor);
+
+    //     Texture2D result = new Texture2D(new_size_x, new_size_y, TextureFormat.RGBA32, false, true);
+
+    //     Color[] colors = new Color[new_size_x * new_size_y];
+
+    //     for (int y = 0, i = 0; y < new_size_x; y++)
+    //     {
+    //         for (int x = 0; x < new_size_y; x++, i++)
+    //         {
+    //             colors[i] = Color.red;
+    //         }
+    //     }
+
+    //     result.SetPixels(colors);
+    //     result.Apply(false, false);
+    //     result.filterMode = FilterMode.Point;
+
+    //     return result;
+    // }
 
     public static Texture2D WriteTextureOnTop(Texture2D baseTexture, Vector2 pixelCoords, Texture2D overlayTexture, float overlay_scale = 1f)
     {
@@ -71,7 +123,7 @@ public class util_texture
             overlayPixels = overlayTexture.GetPixels32();
         } else
         {
-            overlayPixels  = ScaleTexture(overlayTexture, overlay_scale).GetPixels32();
+            overlayPixels  = ScaleNearestNeighbour(overlayTexture, overlay_scale).GetPixels32();
         }
 
         int startX = Mathf.RoundToInt(pixelCoords.x - overlayW / 2);

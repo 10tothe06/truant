@@ -64,6 +64,8 @@ public class int_gun : MonoBehaviour
         last_shot_time = Time.time;
         ammo_count--;
 
+        UpdateItemData();
+
         GameObject g_newBullet = ObjectManager.SpawnObject(bullet_name, transform.position);
         g_newBullet.transform.forward = transform.forward;
 
