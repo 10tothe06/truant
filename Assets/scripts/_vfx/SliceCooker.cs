@@ -1,6 +1,12 @@
 using NUnit.Framework;
 using UnityEngine;
 
+public enum vfx_meshslicemode
+{
+    Shards,
+    Parts,
+}
+
 // what an awesome name for a script, no?
 
 public class SliceCooker : MonoBehaviour
@@ -12,6 +18,8 @@ public class SliceCooker : MonoBehaviour
 
     [SerializeField]
     private bool is_active;
+
+    public vfx_meshslicemode slice_mode;
 
     [Header("Control Panel")]
     public string entry_name;
@@ -30,7 +38,15 @@ public class SliceCooker : MonoBehaviour
         {
             if (slice)
             {
-                Mesh[] new_slices = util_mesh.DiceMesh(original_mesh);
+                Mesh[] new_slices = new Mesh[] {};
+
+                if (slice_mode == vfx_meshslicemode.Shards)
+                {
+                    new_slices = util_mesh.DiceMesh(original_mesh);
+                } else if (slice_mode == vfx_meshslicemode.Parts)
+                {
+                    new_slices = util_mesh.DissasembleMesh(original_mesh);
+                }
 
                 effect_manager.SetSliceEntry(entry_name, new_slices);
 

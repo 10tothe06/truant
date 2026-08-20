@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class util_mesh : MonoBehaviour
 {
+    public static Mesh[] DissasembleMesh(Mesh original)
+    {
+        return util_grok.SplitByDisconnectedRegions(original);
+    }
+
     public static Mesh[] DiceMesh(Mesh original, int num_iterations = 2)
     {
         List<Mesh> result = new List<Mesh>();

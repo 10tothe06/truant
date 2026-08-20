@@ -4,6 +4,219 @@ using UnityEngine;
 public class util_grok
 {
     /// <summary>
+    /// Splits a mesh into separate meshes based on geometrically connected regions.
+    /// Vertices that lie at the same position (within epsilon) are considered the same
+    /// for connectivity, even if they have different indices.
+    /// The output meshes keep the original (unwelded) vertices / attributes.
+    /// </summary>
+    public static Mesh[] SplitByDisconnectedRegions(Mesh source, float weldEpsilon = 1e-5f)
+    {
+        if (source == null || source.vertexCount == 0)
+            return new Mesh[0];
+
+        Vector3[] vertices = source.vertices;
+        Vector3[] normals  = source.normals;
+        Vector4[] tangents = source.tangents;
+        Color[]   colors   = source.colors;
+        Vector2[] uv       = source.uv;
+        Vector2[] uv2      = source.uv2;
+        Vector2[] uv3      = source.uv3;
+        Vector2[] uv4      = source.uv4;
+
+        // Combine all submeshes
+        List<int> allTriangles = new List<int>();
+        for (int s = 0; s < source.subMeshCount; s++)
+            allTriangles.AddRange(source.GetTriangles(s));
+
+        int[] triangles = allTriangles.ToArray();
+        int triCount = triangles.Length / 3;
+        if (triCount == 0)
+            return new Mesh[0];
+
+        // -----------------------------------------------------------------
+        // 1. Weld vertices by position (only for connectivity)
+        // -----------------------------------------------------------------
+        float invEps = 1f / Mathf.Max(weldEpsilon, 1e-8f);
+
+        // Quantized position → representative original vertex index
+        var weldMap = new Dictionary<Vector3Int, int>();
+        int[] weldedIndex = new int[vertices.Length];   // original → welded representative
+
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            Vector3 p = vertices[i];
+            Vector3Int key = new Vector3Int(
+                Mathf.RoundToInt(p.x * invEps),
+                Mathf.RoundToInt(p.y * invEps),
+                Mathf.RoundToInt(p.z * invEps));
+
+            if (!weldMap.TryGetValue(key, out int rep))
+            {
+                rep = i;
+                weldMap[key] = rep;
+            }
+            weldedIndex[i] = rep;
+        }
+
+        // Remap triangles to welded indices
+        int[] weldedTris = new int[triangles.Length];
+        for (int i = 0; i < triangles.Length; i++)
+            weldedTris[i] = weldedIndex[triangles[i]];
+
+        // -----------------------------------------------------------------
+        // 2. Build edge → triangle adjacency using welded indices
+        // -----------------------------------------------------------------
+        var edgeToTris = new Dictionary<ulong, List<int>>();
+
+        for (int t = 0; t < triCount; t++)
+        {
+            int i0 = weldedTris[t * 3];
+            int i1 = weldedTris[t * 3 + 1];
+            int i2 = weldedTris[t * 3 + 2];
+
+            // Skip degenerate triangles
+            if (i0 == i1 || i1 == i2 || i2 == i0) continue;
+
+            AddEdge(edgeToTris, i0, i1, t);
+            AddEdge(edgeToTris, i1, i2, t);
+            AddEdge(edgeToTris, i2, i0, t);
+        }
+
+        // -----------------------------------------------------------------
+        // 3. Union-Find on triangles
+        // -----------------------------------------------------------------
+        int[] parent = new int[triCount];
+        for (int i = 0; i < triCount; i++) parent[i] = i;
+
+        int Find(int x)
+        {
+            while (parent[x] != x)
+            {
+                parent[x] = parent[parent[x]];
+                x = parent[x];
+            }
+            return x;
+        }
+
+        void Union(int a, int b)
+        {
+            a = Find(a);
+            b = Find(b);
+            if (a != b) parent[a] = b;
+        }
+
+        foreach (var kvp in edgeToTris)
+        {
+            List<int> tris = kvp.Value;
+            for (int i = 1; i < tris.Count; i++)
+                Union(tris[0], tris[i]);
+        }
+
+        // Group triangles by component
+        var components = new Dictionary<int, List<int>>();
+        for (int t = 0; t < triCount; t++)
+        {
+            int root = Find(t);
+            if (!components.TryGetValue(root, out var list))
+            {
+                list = new List<int>();
+                components[root] = list;
+            }
+            list.Add(t);
+        }
+
+        // -----------------------------------------------------------------
+        // 4. Build final meshes (using ORIGINAL vertices)
+        // -----------------------------------------------------------------
+        var result = new List<Mesh>(components.Count);
+
+        foreach (var kvp in components)
+        {
+            List<int> triList = kvp.Value;
+
+            // Collect original vertices used by this component
+            var usedVerts = new HashSet<int>();
+            foreach (int t in triList)
+            {
+                usedVerts.Add(triangles[t * 3]);
+                usedVerts.Add(triangles[t * 3 + 1]);
+                usedVerts.Add(triangles[t * 3 + 2]);
+            }
+
+            var remap = new Dictionary<int, int>(usedVerts.Count);
+            var newVerts    = new List<Vector3>(usedVerts.Count);
+            var newNormals  = normals  != null && normals.Length  == vertices.Length ? new List<Vector3>(usedVerts.Count) : null;
+            var newTangents = tangents != null && tangents.Length == vertices.Length ? new List<Vector4>(usedVerts.Count) : null;
+            var newColors   = colors   != null && colors.Length   == vertices.Length ? new List<Color>(usedVerts.Count)   : null;
+            var newUV       = uv       != null && uv.Length       == vertices.Length ? new List<Vector2>(usedVerts.Count) : null;
+            var newUV2      = uv2      != null && uv2.Length      == vertices.Length ? new List<Vector2>(usedVerts.Count) : null;
+            var newUV3      = uv3      != null && uv3.Length      == vertices.Length ? new List<Vector2>(usedVerts.Count) : null;
+            var newUV4      = uv4      != null && uv4.Length      == vertices.Length ? new List<Vector2>(usedVerts.Count) : null;
+
+            int newIdx = 0;
+            foreach (int oldIdx in usedVerts)
+            {
+                remap[oldIdx] = newIdx++;
+                newVerts.Add(vertices[oldIdx]);
+                if (newNormals  != null) newNormals.Add(normals[oldIdx]);
+                if (newTangents != null) newTangents.Add(tangents[oldIdx]);
+                if (newColors   != null) newColors.Add(colors[oldIdx]);
+                if (newUV       != null) newUV.Add(uv[oldIdx]);
+                if (newUV2      != null) newUV2.Add(uv2[oldIdx]);
+                if (newUV3      != null) newUV3.Add(uv3[oldIdx]);
+                if (newUV4      != null) newUV4.Add(uv4[oldIdx]);
+            }
+
+            // Remap triangles (still using original indices)
+            var newTris = new int[triList.Count * 3];
+            int write = 0;
+            foreach (int t in triList)
+            {
+                newTris[write++] = remap[triangles[t * 3]];
+                newTris[write++] = remap[triangles[t * 3 + 1]];
+                newTris[write++] = remap[triangles[t * 3 + 2]];
+            }
+
+            Mesh m = new Mesh();
+            m.name = source.name + "_part";
+            m.SetVertices(newVerts);
+            if (newNormals  != null) m.SetNormals(newNormals);
+            if (newTangents != null) m.SetTangents(newTangents);
+            if (newColors   != null) m.SetColors(newColors);
+            if (newUV       != null) m.SetUVs(0, newUV);
+            if (newUV2      != null) m.SetUVs(1, newUV2);
+            if (newUV3      != null) m.SetUVs(2, newUV3);
+            if (newUV4      != null) m.SetUVs(3, newUV4);
+            m.SetTriangles(newTris, 0);
+            m.RecalculateBounds();
+
+            result.Add(m);
+        }
+
+        return result.ToArray();
+    }
+
+    static void AddEdge(Dictionary<ulong, List<int>> dict, int a, int b, int tri)
+    {
+        if (a > b) { int tmp = a; a = b; b = tmp; }
+        ulong key = ((ulong)(uint)a << 32) | (uint)b;
+
+        if (!dict.TryGetValue(key, out var list))
+        {
+            list = new List<int>(2);
+            dict[key] = list;
+        }
+        list.Add(tri);
+    }
+
+
+
+
+
+
+
+
+    /// <summary>
     /// Cuts a mesh by a plane and returns two fully triangulated meshes.
     /// Positive side = side the normal points toward.
     /// </summary>

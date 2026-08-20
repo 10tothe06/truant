@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 4540712496507850893}
   - component: {fileID: 9060493668500253043}
   - component: {fileID: 7312383741442078380}
+  - component: {fileID: 5718148377377609112}
   m_Layer: 6
   m_Name: chair_1
   m_TagString: Interactable
@@ -224,6 +225,13 @@ MonoBehaviour:
   onFinishInspecting:
     m_PersistentCalls:
       m_Calls: []
+  onEnterWater:
+    m_PersistentCalls:
+      m_Calls: []
+  impact_threshold: 1.5
+  onImpact:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &7312383741442078380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,3 +255,16 @@ MonoBehaviour:
   onStand:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5718148377377609112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6702777790825529560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bde65efe9efce24cb59f9f4234762b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::int_breakable
+  break_threshold: 1.5

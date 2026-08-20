@@ -428,6 +428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92a60ed4bf49bff47bc24d31443a356a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::test_cutmesh
+  cut_mode: 1
   original_mesh: {fileID: 1944841976}
   p_slice: {fileID: 1613361288}
 --- !u!4 &1944841974

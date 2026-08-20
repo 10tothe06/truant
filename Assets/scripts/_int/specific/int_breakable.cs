@@ -19,6 +19,8 @@ public class int_breakable : MonoBehaviour
             EffectManager.SpawnSlices(gameObject.name, transform.position, transform.GetChild(0).rotation, transform.GetChild(0).localScale.x);
 
 
+            // TODO: maybe spawn a particle too? idk if that will hinder the realism
+
             // destroy the main object
             Destroy(gameObject);
         }
