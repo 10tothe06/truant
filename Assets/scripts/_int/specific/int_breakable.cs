@@ -16,7 +16,7 @@ public class int_breakable : MonoBehaviour
             AudioManager.PlaySound("ping");
 
             // spawn all of the broken pieces
-            EffectManager.SpawnSlices(gameObject.name, transform.position, transform.GetChild(0).rotation, transform.GetChild(0).localScale.x);
+            EffectManager.SpawnSlices(gameObject.name, transform.position, transform.GetChild(0).rotation, GetComponent<Rigidbody>().linearVelocity, transform.GetChild(0).localScale.x);
 
 
             // TODO: maybe spawn a particle too? idk if that will hinder the realism
