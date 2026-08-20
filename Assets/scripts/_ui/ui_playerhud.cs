@@ -33,13 +33,21 @@ public class ui_playerhud : MonoBehaviour
     [HideInInspector]
     public GameObject g_promptObject;
 
+    private string[] current_prompts;
+
 
     public GameObject p_itemPrompt;
     public float prompt_spacing;
 
     public static void DrawItemPrompts(GameObject obj, string[] prompts)
     {
+        if (obj == Instance.g_promptObject)
+        {
+            prompts = util_array.Combine(prompts, Instance.current_prompts);
+        }
+
         Instance.g_promptObject = obj;
+        Instance.current_prompts = prompts;
 
         // first, clear any existing prompts
         ClearItemPrompt();

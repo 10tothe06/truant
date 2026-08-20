@@ -59,12 +59,15 @@ public class cam_firstperson : MonoBehaviour
 
             // the zooming in can easily just be a local thing,
             // not network-relevant
-            if (Input.mouseButtonRight)
+            if (Player.GetHeldObject() == null)
             {
-                CameraController.SetCameraFov(20);
-            } else
-            {
-                CameraController.SetCameraFov(60);
+                if (Input.mouseButtonRight)
+                {
+                    CameraController.SetCameraFov(20);
+                } else
+                {
+                    CameraController.SetCameraFov(60);
+                }
             }
         }
     }

@@ -118,6 +118,19 @@ public class int_board : MonoBehaviour
         UpdateItemData();
     }
 
+
+    // removing a placed board
+    public void PopOff()
+    {
+        transform.position += (Player.t.position - transform.position).normalized * 0.3f;
+
+        GetComponent<InteractableObject3D>().EnablePhysics();
+
+        GetComponent<Rigidbody>().linearVelocity += (Player.t.position - transform.position).normalized * 3f;
+    }
+
+
+
     void OnItemHeld()
     {
         if (Player.GetHeldObject() == gameObject)
