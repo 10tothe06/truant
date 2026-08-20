@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 46b3d70f0f7235e4693e3851db2f6845, type: 2}
+  - {fileID: 2100000, guid: 21d40f94fb937cf40873399ceb330a1f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -223,6 +223,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   onFinishInspecting:
+    m_PersistentCalls:
+      m_Calls: []
+  onEnterWater:
+    m_PersistentCalls:
+      m_Calls: []
+  impact_threshold: 5
+  onImpact:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &1792735198715129915

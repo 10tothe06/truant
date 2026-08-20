@@ -35,9 +35,12 @@ public class int_gun : MonoBehaviour
             item_comp.onInitialize.AddListener(UpdateItemData);
         }
 
-        // checking IF the item is being held by the player,
-        // and IF SO, pass the note information to the note HUD
-        Player.item_holder.onUpdateHeldObject.AddListener(OnItemHeld);
+        if (Player.item_holder != null)
+        {
+            // checking IF the item is being held by the player,
+            // and IF SO, pass the note information to the note HUD
+            Player.item_holder.onUpdateHeldObject.AddListener(OnItemHeld);
+        }
     }
 
     private void Shoot()
@@ -92,42 +95,45 @@ public class int_gun : MonoBehaviour
 
     void Update()
     {
-        if (!Player.item_holder.is_inspecting_item)
+        if (Player.GetHeldObject() == gameObject)
         {
-            transform.position = Vector3.Lerp(transform.position, targetPosition, 0.7f);
-        }
+            if (!Player.item_holder.is_inspecting_item)
+            {
+                transform.position = Vector3.Lerp(transform.position, targetPosition, 0.7f);
+            }
 
-        // handling where the flashlight is facing
-        RaycastHit hit;
+            // handling where the flashlight is facing
+            RaycastHit hit;
 
-        if (util_physics.LookRaycast(out hit, 20f, LayerMask.GetMask(new string[] {"IsWalkable"})))
-        {
-            transform.forward = hit.point - transform.position;
-        } else
-        {
-            transform.forward = CameraController.t_cam.forward;
-        }
-
-
-        // the aiming logic
-        if (Input.mouseButtonRight)
-        {
-           CameraController.SetCameraFov(CameraController.default_fov/2f); 
-
-           targetPosition = CameraController.t_cam.position - CameraController.t_cam.up * 0.1f + CameraController.t_cam.forward * 0.3f;
-        } else
-        {
-            CameraController.SetCameraFov(CameraController.default_fov);
-
-            targetPosition = Player.item_holder.t_heldItemContainer.position;
-        }
+            if (util_physics.LookRaycast(out hit, 20f, LayerMask.GetMask(new string[] {"IsWalkable"})))
+            {
+                transform.forward = hit.point - transform.position;
+            } else
+            {
+                transform.forward = CameraController.t_cam.forward;
+            }
 
 
+            // the aiming logic
+            if (Input.mouseButtonRight)
+            {
+            CameraController.SetCameraFov(CameraController.default_fov/2f); 
 
-        // the shooting logic
-        if (Input.mouseButtonDownLeft)
-        {
-            Shoot();
+            targetPosition = CameraController.t_cam.position - CameraController.t_cam.up * 0.1f + CameraController.t_cam.forward * 0.3f;
+            } else
+            {
+                CameraController.SetCameraFov(CameraController.default_fov);
+
+                targetPosition = Player.item_holder.t_heldItemContainer.position;
+            }
+
+
+
+            // the shooting logic
+            if (Input.mouseButtonDownLeft)
+            {
+                Shoot();
+            }
         }
     }
 

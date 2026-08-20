@@ -126,6 +126,37 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5495902117074765545, guid: 82a9d19a517b57a4f8ebb0c8dc3f9de9, type: 3}
+--- !u!1 &5206149864066120062
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9020579950013680313}
+  m_Layer: 6
+  m_Name: sit point
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9020579950013680313
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5206149864066120062}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.851, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6597372535184340560}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6702777790825529560
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,6 +191,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6095860762039203958}
+  - {fileID: 9020579950013680313}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &4540712496507850893
@@ -212,7 +244,7 @@ MonoBehaviour:
   collider_list: []
   has_physics: 1
   isDraggable: 1
-  hoverPrompt: press E to grab
+  hoverPrompt: press E to sit
   onInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -244,11 +276,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74856ec464461474daba3f867bce6a04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::int_chair
-  animate_inout: 0
-  animation_speed: 0
-  animation_curve_factor: 0
-  t_sitPoint: {fileID: 0}
-  isSitting: 0
+  animate_inout: 1
+  animation_speed: 2
+  animation_curve_factor: 0.2
+  t_sitPoint: {fileID: 9020579950013680313}
   onSit:
     m_PersistentCalls:
       m_Calls: []

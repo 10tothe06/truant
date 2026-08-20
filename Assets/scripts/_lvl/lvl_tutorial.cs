@@ -16,6 +16,7 @@ public class lvl_tutorial : MonoBehaviour
     [Header("CONFIG")]
 
     // the player spawns sitting at this chair, at a table
+    public Transform t_playerSpawn;
     public int_chair player_spawn_chair;
     public CarController player_car;
 
@@ -24,6 +25,19 @@ public class lvl_tutorial : MonoBehaviour
         g =GetComponent<lvl_generic>();
 
         g.onLevelEnter.AddListener(OnLevelEnter);
+    }
+
+    void Update()
+    {
+        // once the player has picked up the note, we can let them go
+        if (Player.GetSelectedItemData()!= null)
+        {
+            if (Player.GetSelectedItemData().item_name == "note")
+            {
+                player_spawn_chair.Unlock();
+            }
+            
+        }
     }
 
     // called by the generic component
@@ -37,7 +51,9 @@ public class lvl_tutorial : MonoBehaviour
         UIManager.SwitchMenu("");
 
         // move the player to the starting point of the level
+        Player.TeleportTo(t_playerSpawn.position);
         player_spawn_chair.Sit();
+        player_spawn_chair.Lock();
 
 
         // set the camera mode

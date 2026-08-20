@@ -210,7 +210,7 @@ MonoBehaviour:
   collider_list: []
   has_physics: 1
   isDraggable: 1
-  hoverPrompt: press E to grab
+  hoverPrompt: 
   onInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -221,5 +221,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   onFinishInspecting:
+    m_PersistentCalls:
+      m_Calls: []
+  onEnterWater:
+    m_PersistentCalls:
+      m_Calls: []
+  impact_threshold: 5
+  onImpact:
     m_PersistentCalls:
       m_Calls: []

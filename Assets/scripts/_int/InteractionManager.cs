@@ -29,14 +29,14 @@ public class InteractionManager : MonoBehaviour
 
     [Header("INFO")]
     // stopping multiple interaction events from happening at once
-    public bool cooldown {get; private set;}
+    public static bool cooldown {get; private set;}
     private float cooldown_time;
     private float cooldown_interval = 0.1f;
 
 
     public static void Cooldown()
     {
-        Instance.cooldown = true;
+        cooldown = true;
         Instance.cooldown_time = Time.time;
     }
 

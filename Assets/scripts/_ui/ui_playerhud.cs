@@ -41,7 +41,7 @@ public class ui_playerhud : MonoBehaviour
 
     public static void DrawItemPrompts(GameObject obj, string[] prompts)
     {
-        if (obj == Instance.g_promptObject)
+        if (obj == Instance.g_promptObject && prompts[0] != Instance.current_prompts[0])
         {
             prompts = util_array.Combine(prompts, Instance.current_prompts);
         }

@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class int_board : MonoBehaviour
 {   
+    public bool start_as_placed;
+
     private int_item item_comp;
 
     public float max_length = 1.5f;
 
-    public Vector3 point_a;
-    public Vector3 point_b;
+    private Vector3 point_a;
+    private Vector3 point_b;
     private bool is_placing;
 
 
@@ -15,15 +17,27 @@ public class int_board : MonoBehaviour
     {
         item_comp = GetComponent<int_item>();
 
+        if (start_as_placed)
+        {
+            GetComponent<InteractableObject3D>().DisablePhysics();
+            
+            is_placing = true;
+            UpdateItemData();
+            UpdateFromItemData();
+        }
+
         if (item_comp != null)
         {
             item_comp.onDataUpdate.AddListener(UpdateFromItemData);
             item_comp.onInitialize.AddListener(UpdateItemData);
         }
 
-        // checking IF the item is being held by the player,
-        // and IF SO, pass the note information to the note HUD
-        Player.item_holder.onUpdateHeldObject.AddListener(OnItemHeld);
+        if (Player.item_holder != null)
+        {
+            // checking IF the item is being held by the player,
+            // and IF SO, pass the note information to the note HUD
+            Player.item_holder.onUpdateHeldObject.AddListener(OnItemHeld);
+        }
     }
 
     void UpdateFromItemData()

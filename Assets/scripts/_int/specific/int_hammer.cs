@@ -8,9 +8,12 @@ public class int_hammer : MonoBehaviour
 {
     void Awake()
     {
-        // checking IF the item is being held by the player,
-        // and IF SO, pass the note information to the note HUD
-        Player.item_holder.onUpdateHeldObject.AddListener(OnItemHeld);
+        if (Player.item_holder != null)
+        {
+            // checking IF the item is being held by the player,
+            // and IF SO, pass the note information to the note HUD
+            Player.item_holder.onUpdateHeldObject.AddListener(OnItemHeld);
+        }
     }
 
     void Update()

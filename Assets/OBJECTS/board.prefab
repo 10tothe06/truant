@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.075, y: 1, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6597372535184340560}
@@ -225,6 +225,13 @@ MonoBehaviour:
   onFinishInspecting:
     m_PersistentCalls:
       m_Calls: []
+  onEnterWater:
+    m_PersistentCalls:
+      m_Calls: []
+  impact_threshold: 5
+  onImpact:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1792735198715129915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,5 +271,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a470a132a50b404f9282938e27a022e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::int_board
-  point_a: {x: 0, y: 0, z: 0}
-  point_b: {x: 0, y: 0, z: 0}
+  start_as_placed: 0
+  max_length: 1.5

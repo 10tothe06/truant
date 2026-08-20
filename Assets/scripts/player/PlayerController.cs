@@ -134,6 +134,8 @@ public class PlayerController : MonoBehaviour
         sprintValue = maxSprint;
 
         defaultCameraHeight = t_camera.localPosition.y;
+
+        currentCameraHeight = defaultCameraHeight + Mathf.Sin(0 * cameraBounceFrequency) * cameraBounceAmplitude;
     }
 
     void SetupReferences()
@@ -366,12 +368,14 @@ public class PlayerController : MonoBehaviour
 
     public void DisableCollider()
     {
+        rb.constraints = RigidbodyConstraints.FreezeAll;
         col.enabled = false;
         rb.useGravity = false;
     }
 
     public void EnableCollider()
     {
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
         col.enabled = true;
         rb.useGravity = true;
     }

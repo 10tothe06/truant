@@ -25,13 +25,14 @@ public class int_chair : MonoBehaviour
 
 
     public Transform t_sitPoint;
-
-    public bool isSitting;
-    private bool satThisFrame;
     private Vector3 originalOffset;
 
     public UnityEvent onSit;
     public UnityEvent onStand;
+
+    [Header("INFO")]
+    public bool is_locked {get; private set;}
+    public bool isSitting {get; private set;}
 
     void Awake()
     {
@@ -47,12 +48,20 @@ public class int_chair : MonoBehaviour
         if (!isSitting)
         {
             Sit();
-        } else {Stand();}
+        }
+    }
+
+    public void Lock()
+    {
+        is_locked = true;
+    }
+    public void Unlock()
+    {
+        is_locked = false;
     }
 
     public void Sit()
     {
-        satThisFrame = true;
         onSit.Invoke();
         Player.LockAll();
 
@@ -90,13 +99,11 @@ public class int_chair : MonoBehaviour
         {
             HandleParenting();
 
-            if (!satThisFrame && Keyboard.current.eKey.wasPressedThisFrame)
+            if (!is_locked && !InteractionManager.cooldown && Keyboard.current.eKey.wasPressedThisFrame)
             {
                 Stand();
             }
         }
-
-        satThisFrame = false;
     }
 
     void HandleParenting()
