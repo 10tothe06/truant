@@ -77,6 +77,8 @@ public class cmd_console : MonoBehaviour
         new cmd_consolecommand(new string[]{"help"}), // show every console command
 
         new cmd_consolecommand(new string[]{"rollcredits"}), // run the ending sequence
+
+        new cmd_consolecommand(new string[]{"playsound"}), // exactly what it sounds like
     };
     
     public static cmd_consolecommand GetCommandData(string name)
@@ -200,6 +202,13 @@ public class cmd_console : MonoBehaviour
         else if (selectedCommand == possibleCommands[6])
         {
             UIManager.StartDemoEndingSequence();
+        }
+
+
+        // playsound
+        else if (selectedCommand == possibleCommands[7])
+        {
+            AudioManager.PlaySound(items[1]);
         }
     }
 

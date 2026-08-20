@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -30,14 +31,15 @@ public class AudioManager : MonoBehaviour
 
     public GameObject p_audioChannel;
 
-    public audio_soundset[] variableSounds;
-    public AudioClip[] staticSounds;
+    public audio_soundgroup[] variableSounds;
+    public audio_sound[] staticSounds;
 
     // for use with things like footsteps (player and mosnter)
     [Space(15)]
     public audio_soundmaterial[] materials;
-    public audio_soundset defaultStepSound;
+    public audio_soundgroup defaultStepSound;
 
+    #region UI
 
 
     // making this its own function so if I ever want to change the sound index I can
@@ -52,31 +54,105 @@ public class AudioManager : MonoBehaviour
         
     }
 
-    public static void PlayAudioClip(AudioClip clip)
-    {
-        Instance.SpawnAudioTrack(clip);
-    }
+    #endregion
 
-    public static void PlayStaticSound(int index, bool loop = false)
-    {
-        Instance.SpawnAudioTrack(Instance.staticSounds[index]);
-    }
-    public static void PlayVariableSound(int index, bool loop = false)
-    {
-        Instance.SpawnAudioTrack(Instance.variableSounds[index].Get());
-    }
 
-    public void SpawnAudioTrack(AudioClip clip)
+
+
+
+
+
+    #region SOUNDS
+
+    public static void PlayAudioClip(AudioClip clip, float volume = 1f)
     {
+        if (clip == null) {return;}
+        Instance.SpawnAudioTrack(clip, volume);
+    }
+    public void SpawnAudioTrack(AudioClip clip, float volume = 1f)
+    {
+        if (clip == null) {return;}
         GameObject g_newChannel = Instantiate(p_audioChannel, transform);
 
         AudioSource comp = g_newChannel.GetComponent<AudioSource>();
         comp.clip = clip;
         comp.loop = false;
-        comp.volume = Settings.GetFloat("vol_master") * Settings.GetFloat("vol_sfx");
+        comp.volume = Settings.GetFloat("vol_master") * Settings.GetFloat("vol_sfx") * volume;
         comp.Play();
     }
 
+
+    public static void PlaySound(string sound_name, float volume = 1f)
+    {
+        PlayAudioClip(GetSoundFromName(sound_name), volume);
+    }
+
+    public static AudioClip GetSoundFromName(string sound_name)
+    {
+        // first, check variable sounds
+        for (int i = 0; i < Instance.variableSounds.Length; i++)
+        {
+            if (Instance.variableSounds[i].name == sound_name)
+            {
+                return Instance.variableSounds[i].Get();
+            }
+        }
+
+        // then, static sounds
+        for (int i = 0; i < Instance.staticSounds.Length; i++)
+        {
+            if (Instance.staticSounds[i].name == sound_name)
+            {
+                return Instance.staticSounds[i].clip;
+            }
+        }
+
+        // if we dont find it,
+        // we have nothing to return
+        // (functions have built-in null checks to deal with this)
+        return null;
+    }
+
+
+    #endregion
+
+
+
+
+    #region MUSIC
+
+    public static void StopAllMusic()
+    {
+        for (int i = Instance.transform.childCount - 1; i>=0;i--)
+        {
+            if (Instance.transform.GetChild(i).gameObject.name.Contains("music"))
+            {
+                Destroy(Instance.transform.GetChild(i).gameObject);
+            }
+        }
+    }
+
+
+    #endregion
+
+
+
+    // basically everything below here is deprecated:
+
+    #region OLD FUNCTIONS
+
+    [Obsolete]
+    public static void PlayStaticSound(int index, bool loop = false)
+    {
+        Instance.SpawnAudioTrack(Instance.staticSounds[index].clip);
+    }
+    [Obsolete]
+    public static void PlayVariableSound(int index, bool loop = false)
+    {
+        Instance.SpawnAudioTrack(Instance.variableSounds[index].Get());
+    } 
+
+    [Obsolete]
     public static void PlayMusic(int index, float volume)
     {
         // cant just spawn an audio channel because we need a parent for organization purposes
@@ -102,14 +178,5 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public static void StopAllMusic()
-    {
-        for (int i = Instance.transform.childCount - 1; i>=0;i--)
-        {
-            if (Instance.transform.GetChild(i).gameObject.name.Contains("music"))
-            {
-                Destroy(Instance.transform.GetChild(i).gameObject);
-            }
-        }
-    }
+    #endregion
 }

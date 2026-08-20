@@ -4,14 +4,16 @@ using UnityEngine;
 // instead of just playing one over and over, we can store them in a pool and pick a random one
 
 [System.Serializable]
-public class audio_soundset
+public class audio_soundgroup
 {
+    public string name;
     public AudioClip[] versions;
 
-    public audio_soundset() {}
+    public audio_soundgroup() {}
 
-    public audio_soundset(AudioClip[] versions)
+    public audio_soundgroup(string name, AudioClip[] versions)
     {
+        this.name = name;
         this.versions = versions;
     }
 

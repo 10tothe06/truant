@@ -6,7 +6,7 @@ using System.Linq;
 public class util_audio
 {
     // returns a default clip if no match is found
-    public static AudioClip GetClipFromMaterial(Material mat, audio_soundmaterial[] materials, audio_soundset defaultSet)
+    public static AudioClip GetClipFromMaterial(Material mat, audio_soundmaterial[] materials, audio_soundgroup defaultSet)
     {
         if (mat == null) { return defaultSet.Get(); }
         for (int i = 0; i < materials.Length; i++)

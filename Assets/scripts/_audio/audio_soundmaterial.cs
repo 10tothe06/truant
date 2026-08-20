@@ -5,5 +5,5 @@ using UnityEngine;
 public class audio_soundmaterial
 {
     public Material[] applicableMaterials;
-    public audio_soundset sound;
+    public audio_soundgroup sound;
 }
