@@ -70,6 +70,11 @@ public class AudioManager : MonoBehaviour
         // updating the AudioSource components associated with dynamic sounds
         // ****
 
+        // this ONE loop may be the most complicated audio-related piece of code that I've ever written!
+        // it's so bad it's actually scary!
+        // am I going to comment it? fuck no!
+        // future me is going to probably just have to burn it!
+
 
         for (int i = 0; i < dynamic_sound_instances.Count; i++)
         {
