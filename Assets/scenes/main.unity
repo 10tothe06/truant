@@ -17236,6 +17236,11 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 88dcd68ea06c82547a01c6dfa036507b, type: 3}
     min_pitch: 0.8
     max_pitch: 1.25
+  - name: door_rattle
+    versions:
+    - {fileID: 8300000, guid: 3c711a1f29743564486b63ac458944f2, type: 3}
+    min_pitch: 0.8
+    max_pitch: 1.25
   staticSounds:
   - name: ping
     clip: {fileID: 8300000, guid: 4ea83376b7dbb5a4c9ab78f1a06a4673, type: 3}

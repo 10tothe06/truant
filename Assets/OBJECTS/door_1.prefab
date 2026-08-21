@@ -171,6 +171,7 @@ GameObject:
   - component: {fileID: 9060493668500253043}
   - component: {fileID: 8355469904721581919}
   - component: {fileID: 4466537309869396008}
+  - component: {fileID: 6356853592542239266}
   m_Layer: 6
   m_Name: door_1
   m_TagString: Interactable
@@ -294,6 +295,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 680ce4376de5412429c2b04022f78d87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::int_door
+  start_locked: 1
+--- !u!114 &6356853592542239266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6702777790825529560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1e28f1e14fb5ca4fa6d420d07faf1e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::int_jiggle
+  jiggle_fade_speed: 0.2
 --- !u!1 &6804936237988708037
 GameObject:
   m_ObjectHideFlags: 0

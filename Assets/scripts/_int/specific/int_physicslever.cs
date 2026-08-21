@@ -8,7 +8,9 @@ public class int_physicslever : MonoBehaviour
 {
     private Rigidbody rb;
     private InteractableObject3D interactComponent;
-
+    
+    
+    public bool isLocked {get; private set;}
     public bool isHeld {get; private set;}
 
     public float swing_force;
@@ -34,6 +36,27 @@ public class int_physicslever : MonoBehaviour
             interactComponent.onInteract.AddListener(Interact);
         }
     }
+
+
+    #region LOCKING
+
+    // render the lever immovable
+    public void Freeze()
+    {
+        isLocked = true;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+    }
+    // render it moveable again
+    public void UnFreeze()
+    {
+        isLocked = false;
+
+        rb.constraints = RigidbodyConstraints.FreezeRotation ^ RigidbodyConstraints.FreezeRotationY;
+    }
+
+
+    #endregion
+
 
     public void Interact()
     {
@@ -71,6 +94,9 @@ public class int_physicslever : MonoBehaviour
 
     public void HandlePosition()
     {
+        if (isLocked) {return;}
+
+
         if (isHeld)
         {
             Vector3 tipPosition = CameraController.t_cam.position + CameraController.t_cam.forward * grabDistance;

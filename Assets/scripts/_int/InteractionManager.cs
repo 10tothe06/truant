@@ -130,8 +130,8 @@ public class InteractionManager : MonoBehaviour
                             } else if (comp.mostRecentPacket.mouseLeft && !comp.mostRecentPacket.isTyping)
                             {
                                 // TODO: proper interaction "modes"
-                                // ioComp.HandleInteractByObject(comp.gameObject);
-                                // Cooldown();
+                                ioComp.HandleInteractByObject(comp.gameObject);
+                                Cooldown();
 
                                 // dragging is implemented separately from the rest of the interaction system,
                                 // because basically every interactable object can be dragged

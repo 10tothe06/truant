@@ -188,10 +188,14 @@ public class AudioManager : MonoBehaviour
 
     public static void DestroyChannel(audio_channel channel)
     {
+        if (channel == null) {return;}
+
         if (channel.dynamic_instance != null)
         {
             Instance.dynamic_sound_instances.Remove(channel.dynamic_instance);
         }
+
+        if (channel == null) {return;}
 
         if (channel.gameObject != null) // this null check is needed to stop a weird error when closing the game in the editor
         {
@@ -312,8 +316,11 @@ public class AudioManager : MonoBehaviour
     }
     public static void PlaySound(string sound_name, Vector3 position, float volume = 1f)
     {
+        AudioClip clip = GetSoundFromName(sound_name);
+        if (clip == null) {return;}
+
         float pitch = UnityEngine.Random.Range(Instance.GetMinPitch(sound_name), Instance.GetMaxPitch(sound_name));
-        PlayAudioClip(GetSoundFromName(sound_name), position, volume, pitch);
+        PlayAudioClip(clip, position, volume, pitch);
     }
 
     public static AudioClip GetSoundFromName(string sound_name)
