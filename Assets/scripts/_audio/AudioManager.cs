@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TreeEditor;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -27,7 +28,14 @@ public class AudioManager : MonoBehaviour
     {
         Instance = this;
         dynamic_sound_instances = new List<audio_dynamicsoundinstance>();
-    }
+    }   
+
+
+    [Header("CHANNEL UPDATES")]
+    public float channel_list_update_interval = 2f;
+    private float last_channel_list_update; // Time.time value
+
+
 
     public audio_musictrack[] musicTracks;
 
@@ -67,6 +75,31 @@ public class AudioManager : MonoBehaviour
 
     private void Update()
     {
+        // deleting channels that aren't playing anymore
+        // (if they're not dynamic)
+        // if one IS dynamic, then it'll have to be destroyed by the object that created it in the first place
+        // *****
+
+        if (Time.time > last_channel_list_update + channel_list_update_interval)
+        {
+            last_channel_list_update = Time.time;
+
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                if (!transform.GetChild(i).GetComponent<AudioSource>().isPlaying)
+                {
+                    if (!transform.GetChild(i).GetComponent<audio_channel>().is_dynamic)
+                    {
+                        DestroyChannel(transform.GetChild(i).GetComponent<audio_channel>());
+                    }
+                }
+            }
+        }
+
+        // *****
+
+
+
         // updating the AudioSource components associated with dynamic sounds
         // ****
 
@@ -152,6 +185,20 @@ public class AudioManager : MonoBehaviour
 
     #region SOUNDS
 
+
+    public static void DestroyChannel(audio_channel channel)
+    {
+        if (channel.dynamic_instance != null)
+        {
+            Instance.dynamic_sound_instances.Remove(channel.dynamic_instance);
+        }
+
+        if (channel.gameObject != null) // this null check is needed to stop a weird error when closing the game in the editor
+        {
+            Destroy(channel.gameObject);
+        }
+    }
+
     public static audio_dynamicsound GetDynamicSoundFromName(string name)
     {
         for (int i = 0; i < Instance.dynamic_sounds.Length; i++)
@@ -164,7 +211,9 @@ public class AudioManager : MonoBehaviour
 
         return null;
     }
-    public static void PlayDynamicSound(string sound_name, Func<float> progress_speed, Vector3 position)
+
+    
+    public static audio_channel PlayDynamicSound(string sound_name, Func<float> progress_speed, Vector3 position)
     {
         AudioSource src = Instantiate(Instance.p_audioChannel, Instance.transform).GetComponent<AudioSource>();
         src.transform.position = position;
@@ -172,7 +221,16 @@ public class AudioManager : MonoBehaviour
         src.volume = 1f; // TEMP
         src.loop = false;
 
+        src.GetComponent<audio_channel>().is_dynamic = true;
+
         Instance.dynamic_sound_instances.Add(new audio_dynamicsoundinstance(GetDynamicSoundFromName(sound_name), progress_speed, src));
+
+        src.GetComponent<audio_channel>().dynamic_instance = Instance.dynamic_sound_instances[Instance.dynamic_sound_instances.Count - 1];
+
+
+
+
+        return src.GetComponent<audio_channel>();
     }
 
 
