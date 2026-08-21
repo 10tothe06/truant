@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -25,6 +26,7 @@ public class AudioManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        dynamic_sound_instances = new List<audio_dynamicsoundinstance>();
     }
 
     public audio_musictrack[] musicTracks;
@@ -33,6 +35,11 @@ public class AudioManager : MonoBehaviour
 
     public audio_soundgroup[] variableSounds;
     public audio_sound[] staticSounds;
+
+    // these are special,
+    // and are not treated like other sounds (called by different functions, not playable via 'playsound')
+    public audio_dynamicsound[] dynamic_sounds;
+    private List<audio_dynamicsoundinstance> dynamic_sound_instances;
 
     // for use with things like footsteps (player and mosnter)
     [Space(15)]
@@ -58,11 +65,111 @@ public class AudioManager : MonoBehaviour
 
 
 
+    private void Update()
+    {
+        // updating the AudioSource components associated with dynamic sounds
+        // ****
 
+
+        for (int i = 0; i < dynamic_sound_instances.Count; i++)
+        {
+            float raw_progress_speed = dynamic_sound_instances[i].progress_speed.Invoke();
+            float processed_progress_speed = Mathf.Clamp(Mathf.Abs(raw_progress_speed) - 0.2f, 0.75f, 1.25f);
+
+            if (processed_progress_speed > dynamic_sound_instances[i].max_recorded_processed_speed)
+            {
+                dynamic_sound_instances[i].max_recorded_processed_speed = processed_progress_speed;
+
+                
+                dynamic_sound_instances[i].pitch_offset = UnityEngine.Random.Range(-0.25f, 0.25f);
+                dynamic_sound_instances[i].src.Play();
+            }
+
+            if (processed_progress_speed == 0)
+            {
+                dynamic_sound_instances[i].src.Stop();
+                dynamic_sound_instances[i].is_playing = false;
+                dynamic_sound_instances[i].max_recorded_processed_speed = 0;
+            } else
+            {
+                if (!dynamic_sound_instances[i].is_playing)
+                {
+                    if (raw_progress_speed > 0)
+                    {
+                        dynamic_sound_instances[i].src.clip = dynamic_sound_instances[i].sound_data.forwards;
+                    } else
+                    {
+                        dynamic_sound_instances[i].src.clip = dynamic_sound_instances[i].sound_data.backwards;
+                    }
+
+                    dynamic_sound_instances[i].pitch_offset = UnityEngine.Random.Range(-0.25f, 0.25f);
+
+                    dynamic_sound_instances[i].src.Play();
+                    dynamic_sound_instances[i].is_playing = true;
+                } else
+                {
+                    if (!dynamic_sound_instances[i].src.isPlaying)
+                    {
+                        if (Mathf.Abs(raw_progress_speed) < dynamic_sound_instances[i].max_recorded_processed_speed/2f)
+                        {
+                            dynamic_sound_instances[i].is_playing = false;
+                            dynamic_sound_instances[i].max_recorded_processed_speed = 0;
+                        }
+                    }
+
+                    if (dynamic_sound_instances[i].src.clip == dynamic_sound_instances[i].sound_data.forwards && raw_progress_speed < 0)
+                    {
+                        dynamic_sound_instances[i].src.Stop();
+                        dynamic_sound_instances[i].src.clip = dynamic_sound_instances[i].sound_data.backwards;
+
+                        dynamic_sound_instances[i].pitch_offset = UnityEngine.Random.Range(-0.25f, 0.25f);
+                        dynamic_sound_instances[i].src.Play();
+                    } else if (dynamic_sound_instances[i].src.clip == dynamic_sound_instances[i].sound_data.backwards && raw_progress_speed > 0)
+                    {
+                        dynamic_sound_instances[i].src.Stop();
+                        dynamic_sound_instances[i].src.clip = dynamic_sound_instances[i].sound_data.forwards;
+
+                        dynamic_sound_instances[i].pitch_offset = UnityEngine.Random.Range(-0.25f, 0.25f);
+                        dynamic_sound_instances[i].src.Play();
+                    }
+                }
+
+                dynamic_sound_instances[i].src.volume = Mathf.Abs(raw_progress_speed);
+                dynamic_sound_instances[i].src.pitch = processed_progress_speed + dynamic_sound_instances[i].pitch_offset;
+            }
+        }
+
+
+        // ****
+    }
 
 
 
     #region SOUNDS
+
+    public static audio_dynamicsound GetDynamicSoundFromName(string name)
+    {
+        for (int i = 0; i < Instance.dynamic_sounds.Length; i++)
+        {
+            if (Instance.dynamic_sounds[i].name == name)
+            {
+                return Instance.dynamic_sounds[i];
+            }
+        }
+
+        return null;
+    }
+    public static void PlayDynamicSound(string sound_name, Func<float> progress_speed, Vector3 position)
+    {
+        AudioSource src = Instantiate(Instance.p_audioChannel, Instance.transform).GetComponent<AudioSource>();
+        src.transform.position = position;
+        src.spatialBlend = 1f;
+        src.volume = 1f; // TEMP
+        src.loop = false;
+
+        Instance.dynamic_sound_instances.Add(new audio_dynamicsoundinstance(GetDynamicSoundFromName(sound_name), progress_speed, src));
+    }
+
 
     public static void PlayAudioClip(AudioClip clip, float volume = 1f, float pitch = 1f)
     {

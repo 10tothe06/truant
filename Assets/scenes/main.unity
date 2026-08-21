@@ -6862,7 +6862,7 @@ MonoBehaviour:
   version: demo-1.0-rc1
   ins_buildMode: 0
   ins_startMode: 2
-  level_to_load: tutorial
+  level_to_load: sandbox
   ins_skip_loading_screens: 1
   ins_force_flat_terrain: 1
   ins_ban_all_foliage: 1
@@ -10182,10 +10182,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 9181570141304236003, guid: 795f4499959ceab4bbdd83d248cbc2ef, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 795f4499959ceab4bbdd83d248cbc2ef, type: 3}
 --- !u!4 &899779627 stripped
 Transform:
@@ -11350,7 +11347,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &974281236
 Transform:
   m_ObjectHideFlags: 0
@@ -17188,6 +17185,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 2a376b82fc1f8344eb461c1ebea36fe0, type: 3}
     min_pitch: 1
     max_pitch: 1
+  dynamic_sounds:
+  - name: door_creak
+    forwards: {fileID: 8300000, guid: 76d837f8515251245b199924ffe64a52, type: 3}
+    backwards: {fileID: 8300000, guid: be311ce9c65842345902dd644be2d217, type: 3}
   footstep_sounds: []
   defaultStepSound: footstep_wood
 --- !u!43 &1443301462
