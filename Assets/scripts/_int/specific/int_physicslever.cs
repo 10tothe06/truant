@@ -62,7 +62,7 @@ public class int_physicslever : MonoBehaviour
         {
             HandlePosition();
 
-            if (!Keyboard.current.eKey.isPressed)
+            if (!Input.mouseButtonLeft)
             {
                 Release();
             }

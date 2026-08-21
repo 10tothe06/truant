@@ -245,7 +245,7 @@ MonoBehaviour:
   collider_list: []
   has_physics: 1
   isDraggable: 1
-  hoverPrompt: press E to grab
+  hoverPrompt: 
   impact_sound: 
   onInteract:
     m_PersistentCalls:
