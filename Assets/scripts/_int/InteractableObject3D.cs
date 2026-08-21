@@ -116,7 +116,7 @@ public class InteractableObject3D : MonoBehaviour
 
             if (!string.IsNullOrEmpty(impact_sound))
             {
-                AudioManager.PlaySound(impact_sound);
+                AudioManager.PlaySound(impact_sound, transform.position);
             }
         }
     }

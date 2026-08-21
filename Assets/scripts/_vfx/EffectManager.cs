@@ -52,7 +52,7 @@ public class EffectManager : MonoBehaviour
         }
     }
 
-    public static void SpawnSlices(string object_name, Vector3 object_position, Quaternion object_rotation, Vector3 linear_velocity, float scale = 1f)
+    public static void SpawnSlices(string object_name, Material m, Vector3 object_position, Quaternion object_rotation, Vector3 linear_velocity, float scale = 1f, float explode_factor = 0f)
     {
         vfx_slicedmesh toSpawn = null;
         for (int i = 0; i < Instance.slice_database.Count; i++)
@@ -72,9 +72,15 @@ public class EffectManager : MonoBehaviour
             GameObject g_newSlice = Instantiate(Instance.p_meshSlice);
 
             g_newSlice.GetComponent<MeshFilter>().sharedMesh = toSpawn.slices[i];
+            g_newSlice.GetComponent<MeshRenderer>().sharedMaterial = m;
             g_newSlice.GetComponent<MeshCollider>().sharedMesh = toSpawn.slices[i];
 
             g_newSlice.GetComponent<Rigidbody>().linearVelocity = linear_velocity;
+
+            if (explode_factor > 0)
+            {
+                g_newSlice.GetComponent<Rigidbody>().linearVelocity += toSpawn.slices[i].bounds.center.normalized * explode_factor;
+            }
 
             g_newSlice.transform.position = object_position;
             g_newSlice.transform.rotation = object_rotation;

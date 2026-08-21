@@ -14,10 +14,10 @@ public class int_breakable : MonoBehaviour
     {
         if (force > break_threshold)
         {
-            AudioManager.PlaySound(break_sound);
+            AudioManager.PlaySound(break_sound, transform.position);
 
             // spawn all of the broken pieces
-            EffectManager.SpawnSlices(gameObject.name, transform.position, transform.GetChild(0).rotation, GetComponent<Rigidbody>().linearVelocity, transform.GetChild(0).localScale.x);
+            EffectManager.SpawnSlices(gameObject.name, GetComponentInChildren<MeshRenderer>().sharedMaterial, transform.position, transform.GetChild(0).rotation, GetComponent<Rigidbody>().linearVelocity, transform.GetChild(0).localScale.x, 2f);
 
 
             // TODO: maybe spawn a particle too? idk if that will hinder the realism

@@ -176,17 +176,25 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    public static void PlayAudioClip(AudioClip clip, float volume = 1f, float pitch = 1f)
+    public static void PlayAudioClip(AudioClip clip, Vector3 position, float volume = 1f, float pitch = 1f)
     {
         if (clip == null) {return;}
-        Instance.SpawnAudioTrack(clip, volume, pitch);
+        Instance.SpawnAudioTrack(clip, position, volume, pitch);
     }
-    public void SpawnAudioTrack(AudioClip clip, float volume = 1f, float pitch = 1f)
+    public void SpawnAudioTrack(AudioClip clip, Vector3 position, float volume = 1f, float pitch = 1f)
     {
         if (clip == null) {return;}
         GameObject g_newChannel = Instantiate(p_audioChannel, transform);
 
         AudioSource comp = g_newChannel.GetComponent<AudioSource>();
+        comp.transform.position = position;
+        if (position != Vector3.zero)
+        {
+            comp.spatialBlend = 1f;
+        } else
+        {
+            comp.spatialBlend = 0f;
+        }
         comp.clip = clip;
         comp.loop = false;
         comp.volume = volume;
@@ -242,8 +250,12 @@ public class AudioManager : MonoBehaviour
 
     public static void PlaySound(string sound_name, float volume = 1f)
     {
+        PlaySound(sound_name, Vector3.zero, volume);
+    }
+    public static void PlaySound(string sound_name, Vector3 position, float volume = 1f)
+    {
         float pitch = UnityEngine.Random.Range(Instance.GetMinPitch(sound_name), Instance.GetMaxPitch(sound_name));
-        PlayAudioClip(GetSoundFromName(sound_name), volume, pitch);
+        PlayAudioClip(GetSoundFromName(sound_name), position, volume, pitch);
     }
 
     public static AudioClip GetSoundFromName(string sound_name)
@@ -303,12 +315,12 @@ public class AudioManager : MonoBehaviour
     [Obsolete]
     public static void PlayStaticSound(int index, bool loop = false)
     {
-        Instance.SpawnAudioTrack(Instance.staticSounds[index].clip);
+        Instance.SpawnAudioTrack(Instance.staticSounds[index].clip, Vector3.zero);
     }
     [Obsolete]
     public static void PlayVariableSound(int index, bool loop = false)
     {
-        Instance.SpawnAudioTrack(Instance.variableSounds[index].Get());
+        Instance.SpawnAudioTrack(Instance.variableSounds[index].Get(), Vector3.zero);
     } 
 
     [Obsolete]
